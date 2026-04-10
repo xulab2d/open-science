@@ -23,7 +23,6 @@ import {
   resolveAppServerRuntimeConfig,
 } from '../server/appServerRuntimeConfig.js'
 import { createServer as createApp } from '../server/httpServer.js'
-import { generatePassword } from '../server/password.js'
 import { spawnSyncCommand } from '../utils/commandInvocation.js'
 
 const program = new Command().name('codexui').description('Web interface for Codex app-server')
@@ -252,14 +251,11 @@ function ensureCodexInstalled(): string | null {
   return codexCommand
 }
 
-function resolvePassword(input: string | boolean): string | undefined {
-  if (input === false) {
-    return undefined
+function resolvePassword(input: string | undefined): string | undefined {
+  if (typeof input === 'string' && input.trim().length > 0) {
+    return input.trim()
   }
-  if (typeof input === 'string') {
-    return input
-  }
-  return generatePassword()
+  return undefined
 }
 
 function printTermuxKeepAlive(lines: string[]): void {
@@ -478,7 +474,7 @@ async function addProjectOnly(projectPath: string): Promise<void> {
 
 async function startServer(options: {
   port: string
-  password: string | boolean
+  password?: string
   tunnel: boolean
   open: boolean
   login: boolean
@@ -537,9 +533,9 @@ async function startServer(options: {
 
   const lines = [
     '',
-    'Codex Web Local is running!',
+    'Xu Lab Codex UI is running!',
     `  Version:  ${version}`,
-    '  GitHub:   https://github.com/friuns2/codexui',
+    '  Upstream: https://github.com/friuns2/codexui',
     '',
     `  Bind:     http://0.0.0.0:${String(port)}`,
     `  Codex sandbox: ${runtimeConfig.sandboxMode}`,
@@ -559,6 +555,8 @@ async function startServer(options: {
 
   if (password) {
     lines.push(`  Password: ${password}`)
+  } else {
+    lines.push('  Access:   no app-level password gate (expected to sit behind external auth/proxy)')
   }
   const tunnelQrUrl = tunnelUrl ? buildTunnelAutologinUrl(tunnelUrl, password) : null
   if (tunnelUrl) {
@@ -606,8 +604,7 @@ program
   .argument('[projectPath]', 'project directory to open on launch')
   .option('--open-project <path>', 'open project directory on launch (Codex desktop parity)')
   .option('-p, --port <port>', 'port to listen on', '5900')
-  .option('--password <pass>', 'set a specific password')
-  .option('--no-password', 'disable password protection')
+  .option('--password <pass>', 'enable the built-in password gate with a specific password')
   .option('--tunnel', 'start cloudflared tunnel (default is auto by Tailscale detection)', true)
   .option('--no-tunnel', 'disable cloudflared tunnel startup')
   .option('--open', 'open browser on startup', true)
@@ -620,7 +617,7 @@ program
     projectPath: string | undefined,
     opts: {
       port: string
-      password: string | boolean
+      password?: string
       tunnel: boolean
       open: boolean
       login: boolean

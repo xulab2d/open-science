@@ -1,7 +1,7 @@
 {
-  "name": "codexapp",
+  "name": "xulab-codexui",
   "version": "0.1.78",
-  "description": "A lightweight web interface for Codex that runs on top of the Codex app-server, allowing remote access from any browser",
+  "description": "Xu Lab's Codex web UI fork for browser-based remote access behind external auth",
   "type": "module",
   "license": "MIT",
   "author": "Pavel Voronin, Igor Levochkin",
@@ -27,7 +27,7 @@
     "node": ">=18"
   },
   "bin": {
-    "codexapp": "dist-cli/index.js",
+    "xulab-codexui": "dist-cli/index.js",
     "codexui": "dist-cli/index.js"
   },
   "files": [
@@ -35,13 +35,13 @@
     "dist-cli/"
   ],
   "scripts": {
-    "dev": "pnpm install && CODEXUI_SANDBOX_MODE=danger-full-access CODEXUI_APPROVAL_POLICY=never vite",
-    "dev:open": "pnpm run build:cli && sh -c 'pnpm run dev & VPID=$!; node dist-cli/index.js --open-project \"${1:-.}\"; wait $VPID' --",
+    "dev": "npm install && CODEXUI_SANDBOX_MODE=danger-full-access CODEXUI_APPROVAL_POLICY=never vite",
+    "dev:open": "npm run build:cli && sh -c 'npm run dev & VPID=$!; node dist-cli/index.js --open-project \"${1:-.}\"; wait $VPID' --",
     "build:frontend": "vue-tsc --noEmit && vite build",
     "build:cli": "tsup",
-    "build": "pnpm run build:frontend && pnpm run build:cli",
+    "build": "npm run build:frontend && npm run build:cli",
     "preview": "vite preview",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "commander": "^13.1.0",
