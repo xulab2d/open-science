@@ -611,17 +611,6 @@
                   <span class="message-rollback-label">Rollback</span>
                 </button>
                 <button
-                  v-if="showForkResponseButton(message)"
-                  type="button"
-                  class="message-fork-button"
-                  aria-label="Fork thread from this response"
-                  title="Fork thread from this response"
-                  @click="forkResponse(message.id)"
-                >
-                  <IconTablerGitFork class="icon-svg message-fork-icon" />
-                  <span class="message-fork-label">Fork</span>
-                </button>
-                <button
                   v-if="showCopyResponseButton(message)"
                   type="button"
                   class="message-copy-button"
@@ -828,7 +817,6 @@ import { useMobile } from '../../composables/useMobile'
 import IconTablerArrowBackUp from '../icons/IconTablerArrowBackUp.vue'
 import IconTablerArrowUp from '../icons/IconTablerArrowUp.vue'
 import IconTablerCopy from '../icons/IconTablerCopy.vue'
-import IconTablerGitFork from '../icons/IconTablerGitFork.vue'
 import IconTablerX from '../icons/IconTablerX.vue'
 
 type HighlightJsModule = (typeof import('highlight.js/lib/common'))['default']
@@ -1171,7 +1159,6 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   updateScrollState: [payload: { threadId: string; state: ThreadScrollState }]
-  forkThread: [payload: { threadId: string; turnIndex: number }]
   rollback: [payload: { turnId: string }]
   respondServerRequest: [payload: { id: number; result?: unknown; error?: { code?: number; message: string } }]
 }>()
@@ -1566,39 +1553,8 @@ const copyableResponseContentByAnchorId = computed<Record<string, string>>(() =>
   return next
 })
 
-const forkableTurnIndexByAnchorId = computed<Record<string, number>>(() => {
-  const groupedTurns = new Map<string, { anchorMessageId: string; turnIndex: number }>()
-
-  for (const message of props.messages) {
-    if (!isCopyableAssistantMessage(message) || typeof message.turnIndex !== 'number') continue
-
-    const responseKey = `turn:${message.turnIndex}`
-    const existing = groupedTurns.get(responseKey)
-    if (existing) {
-      existing.anchorMessageId = message.id
-      existing.turnIndex = message.turnIndex
-      continue
-    }
-
-    groupedTurns.set(responseKey, {
-      anchorMessageId: message.id,
-      turnIndex: message.turnIndex,
-    })
-  }
-
-  const next: Record<string, number> = {}
-  for (const groupedTurn of groupedTurns.values()) {
-    next[groupedTurn.anchorMessageId] = groupedTurn.turnIndex
-  }
-  return next
-})
-
 function showCopyResponseButton(message: UiMessage): boolean {
   return typeof copyableResponseContentByAnchorId.value[message.id] === 'string'
-}
-
-function showForkResponseButton(message: UiMessage): boolean {
-  return typeof forkableTurnIndexByAnchorId.value[message.id] === 'number'
 }
 
 function mergeFileChangeDiff(first: string, second: string): string {
@@ -2036,16 +1992,6 @@ async function copyResponse(anchorMessageId: string): Promise<void> {
     }
     copiedMessageResetTimer = null
   }, 1800)
-}
-
-function forkResponse(anchorMessageId: string): void {
-  const turnIndex = forkableTurnIndexByAnchorId.value[anchorMessageId]
-  if (typeof turnIndex !== 'number') return
-  if (!props.activeThreadId) return
-  emit('forkThread', {
-    threadId: props.activeThreadId,
-    turnIndex,
-  })
 }
 
 const rollbackTurnIdByAnchorId = computed<Record<string, string>>(() => {

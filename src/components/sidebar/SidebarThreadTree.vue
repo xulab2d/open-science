@@ -29,7 +29,6 @@
               <span class="thread-row-title-wrap">
                 <span class="thread-row-title-line">
                   <span class="thread-row-title">{{ thread.title }}</span>
-                  <IconTablerGitFork v-if="thread.hasWorktree" class="thread-row-worktree-icon" title="Worktree thread" />
                   <span
                     v-if="thread.pendingRequestState"
                     class="thread-row-request-chip"
@@ -136,7 +135,6 @@
             <span class="thread-row-title-wrap">
               <span class="thread-row-title-line">
                 <span class="thread-row-title">{{ thread.title }}</span>
-                <IconTablerGitFork v-if="thread.hasWorktree" class="thread-row-worktree-icon" title="Worktree thread" />
                 <span
                   v-if="thread.pendingRequestState"
                   class="thread-row-request-chip"
@@ -293,7 +291,6 @@
                   <span class="thread-row-title-wrap">
                     <span class="thread-row-title-line">
                       <span class="thread-row-title">{{ thread.title }}</span>
-                      <IconTablerGitFork v-if="thread.hasWorktree" class="thread-row-worktree-icon" title="Worktree thread" />
                       <span
                         v-if="thread.pendingRequestState"
                         class="thread-row-request-chip"
@@ -350,14 +347,8 @@
         :data-open-direction="getThreadMenuDirection(openThreadMenuThread.id)"
         @click.stop
       >
-        <button class="thread-menu-item" type="button" @click="onBrowseThreadFiles(openThreadMenuThread.id)">
-          Browse files
-        </button>
         <button class="thread-menu-item" type="button" @click="onExportThread(openThreadMenuThread.id)">
           Export chat
-        </button>
-        <button class="thread-menu-item" type="button" @click="onForkThread(openThreadMenuThread.id)">
-          Create chat fork
         </button>
         <button class="thread-menu-item" type="button" @click="openRenameThreadDialog(openThreadMenuThread.id, openThreadMenuThread.title)">
           Rename thread
@@ -418,7 +409,6 @@ import IconTablerDots from '../icons/IconTablerDots.vue'
 import IconTablerFilePencil from '../icons/IconTablerFilePencil.vue'
 import IconTablerFolder from '../icons/IconTablerFolder.vue'
 import IconTablerFolderOpen from '../icons/IconTablerFolderOpen.vue'
-import IconTablerGitFork from '../icons/IconTablerGitFork.vue'
 import IconTablerPin from '../icons/IconTablerPin.vue'
 import SidebarMenuRow from './SidebarMenuRow.vue'
 
@@ -435,13 +425,11 @@ const emit = defineEmits<{
   select: [threadId: string]
   archive: [threadId: string]
   'start-new-thread': [projectName: string]
-  'browse-thread-files': [threadId: string]
   'rename-project': [payload: { projectName: string; displayName: string }]
   'rename-thread': [payload: { threadId: string; title: string }]
   'remove-project': [projectName: string]
   'reorder-project': [payload: { projectName: string; toIndex: number }]
   'export-thread': [threadId: string]
-  'fork-thread': [threadId: string]
 }>()
 
 type PendingProjectDrag = {
@@ -788,22 +776,12 @@ function onExportThread(threadId: string): void {
   closeThreadMenu()
 }
 
-function onForkThread(threadId: string): void {
-  emit('fork-thread', threadId)
-  closeThreadMenu()
-}
-
 function getNewThreadButtonAriaLabel(projectName: string): string {
   return `start new thread ${getProjectDisplayName(projectName)}`
 }
 
 function onStartNewThread(projectName: string): void {
   emit('start-new-thread', projectName)
-}
-
-function onBrowseThreadFiles(threadId: string): void {
-  emit('browse-thread-files', threadId)
-  closeThreadMenu()
 }
 
 function onThreadRowLeave(threadId: string, event?: MouseEvent): void {
@@ -1785,10 +1763,6 @@ onBeforeUnmount(() => {
 
 .thread-row-title {
   @apply min-w-0 block flex-1 text-sm leading-5 font-normal text-zinc-800 truncate whitespace-nowrap;
-}
-
-.thread-row-worktree-icon {
-  @apply w-3 h-3 text-zinc-500 shrink-0;
 }
 
 .thread-row-request-chip {

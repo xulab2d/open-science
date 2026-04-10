@@ -61,9 +61,7 @@
             :search-matched-thread-ids="serverMatchedThreadIds"
             @select="onSelectThread"
             @archive="onArchiveThread" @start-new-thread="onStartNewThread" @rename-project="onRenameProject"
-            @browse-thread-files="onBrowseThreadFiles"
             @rename-thread="onRenameThread"
-            @fork-thread="onForkThread"
             @remove-project="onRemoveProject" @reorder-project="onReorderProject"
             @export-thread="onExportThread" />
         </div>
@@ -210,8 +208,8 @@
               <div class="sidebar-settings-rate-limits">
                 <RateLimitStatus :snapshots="accountRateLimitSnapshots" />
               </div>
-              <div class="sidebar-settings-build-label" aria-label="Worktree name and version">
-                WT {{ worktreeName }} · v{{ appVersion }}
+              <div class="sidebar-settings-build-label" aria-label="Application version">
+                OpenScience · v{{ appVersion }}
               </div>
             </div>
           </Transition>
@@ -219,7 +217,7 @@
             <IconTablerSettings class="sidebar-settings-icon" />
             <span>Settings</span>
             <span class="sidebar-settings-button-version">
-              {{ worktreeName }} · v{{ appVersion }}
+              OpenScience · v{{ appVersion }}
             </span>
           </button>
         </div>
@@ -237,19 +235,6 @@
               :show-new-thread-button="true"
               @toggle-sidebar="setSidebarCollapsed(!isSidebarCollapsed)"
               @start-new-thread="onStartNewThreadFromToolbar"
-            />
-          </template>
-          <template #actions>
-            <ComposerDropdown
-              v-if="route.name === 'thread' && selectedThreadId"
-              class="content-header-branch-dropdown"
-              :class="{ 'is-review-open': isReviewPaneOpen }"
-              :model-value="contentHeaderBranchDropdownValue"
-              :options="contentHeaderBranchDropdownOptions"
-              :disabled="isLoadingThreadBranches || isSwitchingThreadBranch"
-              :enable-search="true"
-              search-placeholder="Search branches..."
-              @update:model-value="onSelectContentHeaderBranch"
             />
           </template>
         </ContentHeader>
@@ -296,64 +281,53 @@
           </template>
           <template v-else>
             <div class="content-grid">
-              <ReviewPane
-                v-if="isReviewPaneOpen && selectedThreadId && composerCwd"
-                :thread-id="selectedThreadId"
-                :cwd="composerCwd"
-                :is-thread-in-progress="isSelectedThreadInProgress"
-                @close="isReviewPaneOpen = false"
-              />
+              <div class="content-thread">
+                <ThreadConversation ref="threadConversationRef" :messages="filteredMessages" :is-loading="isLoadingMessages"
+                  :active-thread-id="composerThreadContextId" :cwd="composerCwd" :scroll-state="selectedThreadScrollState"
+                  :live-overlay="liveOverlay"
+                  :pending-requests="selectedThreadServerRequests"
+                  @update-scroll-state="onUpdateThreadScrollState"
+                  @rollback="onRollback"
+                  @respond-server-request="onRespondServerRequest" />
+              </div>
 
-              <template v-else>
-                <div class="content-thread">
-                  <ThreadConversation ref="threadConversationRef" :messages="filteredMessages" :is-loading="isLoadingMessages"
-                    :active-thread-id="composerThreadContextId" :cwd="composerCwd" :scroll-state="selectedThreadScrollState"
-                    :live-overlay="liveOverlay"
-                    :pending-requests="selectedThreadServerRequests"
-                    @update-scroll-state="onUpdateThreadScrollState"
-                    @fork-thread="onForkThreadFromMessage"
-                    @rollback="onRollback"
-                    @respond-server-request="onRespondServerRequest" />
-                </div>
-
-                <div class="composer-with-queue">
-                  <QueuedMessages
-                    :messages="selectedThreadQueuedMessages"
-                    @edit="onEditQueuedMessage"
-                    @steer="steerQueuedMessage"
-                    @delete="removeQueuedMessage"
-                  />
-                  <ThreadPendingRequestPanel
-                    v-if="selectedThreadPendingRequest"
-                    :request="selectedThreadPendingRequest"
-                    :request-count="selectedThreadServerRequests.length"
-                    :has-queue-above="selectedThreadQueuedMessages.length > 0"
-                    @respond-server-request="onRespondServerRequest"
-                  />
-                  <ThreadComposer v-else ref="threadComposerRef" :active-thread-id="composerThreadContextId"
-                    :cwd="composerCwd"
-                    :collaboration-modes="availableCollaborationModes"
-                    :selected-collaboration-mode="selectedCollaborationMode"
-                    :models="availableModelIds"
-                    :selected-model="selectedModelId"
-                    :selected-reasoning-effort="selectedReasoningEffort"
-                    :selected-speed-mode="selectedSpeedMode"
-                    :is-updating-speed-mode="isUpdatingSpeedMode"
-                    :skills="installedSkills"
-                    :thread-token-usage="selectedThreadTokenUsage"
-                    :codex-quota="codexQuota"
-                    :is-turn-in-progress="isSelectedThreadInProgress" :is-interrupting-turn="isInterruptingTurn"
-                    :has-queue-above="selectedThreadQueuedMessages.length > 0"
-                    :send-with-enter="sendWithEnter" :in-progress-submit-mode="inProgressSendMode"
-                    :dictation-click-to-toggle="dictationClickToToggle" :dictation-auto-send="dictationAutoSend"
-                    :dictation-language="dictationLanguage"
-                    @update:selected-collaboration-mode="onSelectCollaborationMode"
-                    @submit="onSubmitThreadMessage" @update:selected-model="onSelectModel"
-                    @update:selected-reasoning-effort="onSelectReasoningEffort"
-                    @update:selected-speed-mode="onSelectSpeedMode"
-                    @interrupt="onInterruptTurn" />
-                </div>
-              </template>
+              <div class="composer-with-queue">
+                <QueuedMessages
+                  :messages="selectedThreadQueuedMessages"
+                  @edit="onEditQueuedMessage"
+                  @steer="steerQueuedMessage"
+                  @delete="removeQueuedMessage"
+                />
+                <ThreadPendingRequestPanel
+                  v-if="selectedThreadPendingRequest"
+                  :request="selectedThreadPendingRequest"
+                  :request-count="selectedThreadServerRequests.length"
+                  :has-queue-above="selectedThreadQueuedMessages.length > 0"
+                  @respond-server-request="onRespondServerRequest"
+                />
+                <ThreadComposer v-else ref="threadComposerRef" :active-thread-id="composerThreadContextId"
+                  :cwd="composerCwd"
+                  :collaboration-modes="availableCollaborationModes"
+                  :selected-collaboration-mode="selectedCollaborationMode"
+                  :models="availableModelIds"
+                  :selected-model="selectedModelId"
+                  :selected-reasoning-effort="selectedReasoningEffort"
+                  :selected-speed-mode="selectedSpeedMode"
+                  :is-updating-speed-mode="isUpdatingSpeedMode"
+                  :skills="installedSkills"
+                  :thread-token-usage="selectedThreadTokenUsage"
+                  :codex-quota="codexQuota"
+                  :is-turn-in-progress="isSelectedThreadInProgress" :is-interrupting-turn="isInterruptingTurn"
+                  :has-queue-above="selectedThreadQueuedMessages.length > 0"
+                  :send-with-enter="sendWithEnter" :in-progress-submit-mode="inProgressSendMode"
+                  :dictation-click-to-toggle="dictationClickToToggle" :dictation-auto-send="dictationAutoSend"
+                  :dictation-language="dictationLanguage"
+                  @update:selected-collaboration-mode="onSelectCollaborationMode"
+                  @submit="onSubmitThreadMessage" @update:selected-model="onSelectModel"
+                  @update:selected-reasoning-effort="onSelectReasoningEffort"
+                  @update:selected-speed-mode="onSelectSpeedMode"
+                  @interrupt="onInterruptTurn" />
+              </div>
             </div>
           </template>
         </section>
@@ -380,9 +354,7 @@ import IconTablerX from './components/icons/IconTablerX.vue'
 import { useDesktopState } from './composables/useDesktopState'
 import { useMobile } from './composables/useMobile'
 import {
-  checkoutGitBranch,
   configureTelegramBot,
-  getGitBranchState,
   getAccounts,
   getTelegramStatus,
   removeAccount,
@@ -392,15 +364,13 @@ import {
 } from './api/codexGateway'
 import type { ReasoningEffort, SpeedMode, ThreadScrollState, UiAccountEntry, UiRateLimitWindow, UiServerRequest, UiServerRequestReply, UiThreadTokenUsage } from './types/codex'
 import type { ComposerDraftPayload, ThreadComposerExposed } from './components/content/ThreadComposer.vue'
-import type { TelegramStatus, WorktreeBranchOption } from './api/codexGateway'
+import type { TelegramStatus } from './api/codexGateway'
 
 const ThreadConversation = defineAsyncComponent(() => import('./components/content/ThreadConversation.vue'))
-const ReviewPane = defineAsyncComponent(() => import('./components/content/ReviewPane.vue'))
 const SkillsHub = defineAsyncComponent(() => import('./components/content/SkillsHub.vue'))
 
 const SIDEBAR_COLLAPSED_STORAGE_KEY = 'codex-web-local.sidebar-collapsed.v1'
 const ACCOUNTS_SECTION_COLLAPSED_STORAGE_KEY = 'codex-web-local.accounts-section-collapsed.v1'
-const worktreeName = import.meta.env.VITE_WORKTREE_NAME ?? 'unknown'
 const appVersion = import.meta.env.VITE_APP_VERSION ?? 'unknown'
 const DEFAULT_OPENSCIENCE_WORKSPACE = import.meta.env.VITE_DEFAULT_WORKSPACE_PATH?.trim() || '/Users/xulab/openscience/lab_assistant'
 const SETTINGS_HELP = {
@@ -572,9 +542,7 @@ const {
   ensureThreadMessagesLoaded,
   setThreadScrollState,
   archiveThreadById,
-  forkThreadById,
   renameThreadById,
-  forkThreadFromTurn,
   sendMessageToSelectedThread,
   sendMessageToNewThread,
   interruptSelectedThreadTurn,
@@ -616,12 +584,6 @@ const serverMatchedThreadIds = ref<string[] | null>(null)
 let threadSearchTimer: ReturnType<typeof setTimeout> | null = null
 const isSettingsOpen = ref(false)
 const isAccountsSectionCollapsed = ref(loadAccountsSectionCollapsed())
-const isReviewPaneOpen = ref(false)
-const threadBranchOptions = ref<WorktreeBranchOption[]>([])
-const currentThreadBranch = ref<string | null>(null)
-const isLoadingThreadBranches = ref(false)
-const isSwitchingThreadBranch = ref(false)
-const createFolderInputRef = ref<HTMLInputElement | null>(null)
 const accounts = ref<UiAccountEntry[]>([])
 const isRefreshingAccounts = ref(false)
 const isSwitchingAccounts = ref(false)
@@ -780,30 +742,6 @@ const threadContextSecondaryText = computed(() => {
 })
 
 const threadContextTooltip = computed(() => buildThreadContextTooltip(selectedThreadTokenUsage.value))
-const contentHeaderBranchDropdownValue = computed(() => currentThreadBranch.value ?? '__detached_head__')
-const contentHeaderBranchDropdownOptions = computed<Array<{ value: string; label: string }>>(() => {
-  const options: Array<{ value: string; label: string }> = [
-    {
-      value: '__review__',
-      label: isReviewPaneOpen.value ? 'Review (Open)' : 'Review',
-    },
-  ]
-  const seen = new Set<string>()
-  const currentBranch = currentThreadBranch.value?.trim() ?? ''
-  if (currentBranch) {
-    options.push({ value: currentBranch, label: currentBranch })
-    seen.add(currentBranch)
-  } else {
-    options.push({ value: '__detached_head__', label: 'Detached HEAD' })
-    seen.add('__detached_head__')
-  }
-  for (const option of threadBranchOptions.value) {
-    if (!option.value || seen.has(option.value)) continue
-    seen.add(option.value)
-    options.push(option)
-  }
-  return options
-})
 const darkModeMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null
 const chatWidthLabel = computed(() => CHAT_WIDTH_PRESETS[chatWidth.value].label)
 const contentStyle = computed(() => {
@@ -1184,40 +1122,10 @@ function onArchiveThread(threadId: string): void {
   void archiveThreadById(threadId)
 }
 
-async function onForkThread(threadId: string): Promise<void> {
-  const nextThreadId = await forkThreadById(threadId)
-  if (!nextThreadId) return
-  if (!isHomeRoute.value) {
-    await router.push({ name: 'thread', params: { threadId: nextThreadId } })
-  } else {
-    await router.replace({ name: 'thread', params: { threadId: nextThreadId } })
-  }
-  if (isMobile.value) setSidebarCollapsed(true)
-}
-
-function isWorktreePath(cwdRaw: string): boolean {
-  const cwd = cwdRaw.trim().replace(/\\/gu, '/')
-  if (!cwd) return false
-  return cwd.includes('/.codex/worktrees/') || cwd.includes('/.git/worktrees/')
-}
-
 function onStartNewThread(projectName: string): void {
   if (isMobile.value) setSidebarCollapsed(true)
   if (isHomeRoute.value) return
   void router.push({ name: 'home' })
-}
-
-function onBrowseThreadFiles(threadId: string): void {
-  let targetCwd = ''
-  for (const group of projectGroups.value) {
-    const thread = group.threads.find((row) => row.id === threadId)
-    if (thread?.cwd?.trim()) {
-      targetCwd = thread.cwd.trim()
-      break
-    }
-  }
-  if (!targetCwd || typeof window === 'undefined') return
-  window.open(`/codex-local-browse${encodeURI(targetCwd)}`, '_blank', 'noopener,noreferrer')
 }
 
 function onStartNewThreadFromToolbar(): void {
@@ -1260,16 +1168,6 @@ async function handleServerRequestResponse(payload: UiServerRequestReply): Promi
   } catch {
     // sendMessageToSelectedThread already surfaces the error through shared state.
   }
-}
-
-async function onForkThreadFromMessage(payload: { threadId: string; turnIndex: number }): Promise<void> {
-  const forkedThreadId = await forkThreadFromTurn(payload.threadId, payload.turnIndex)
-  if (!forkedThreadId) return
-  await router.push({ name: 'thread', params: { threadId: forkedThreadId } })
-  if (selectedThreadId.value !== forkedThreadId) {
-    await selectThread(forkedThreadId)
-  }
-  if (isMobile.value) setSidebarCollapsed(true)
 }
 
 function setSidebarCollapsed(nextValue: boolean): void {
@@ -1415,54 +1313,6 @@ function scheduleMobileConversationJumpToLatest(): void {
       window.requestAnimationFrame(jumpToLatest)
     })
   })
-}
-
-async function loadThreadBranches(cwd: string): Promise<void> {
-  const targetCwd = cwd.trim()
-  if (!targetCwd || route.name !== 'thread') {
-    threadBranchOptions.value = []
-    currentThreadBranch.value = null
-    return
-  }
-  isLoadingThreadBranches.value = true
-  try {
-    const state = await getGitBranchState(targetCwd)
-    threadBranchOptions.value = state.options
-    currentThreadBranch.value = state.currentBranch
-  } catch {
-    threadBranchOptions.value = []
-    currentThreadBranch.value = null
-  } finally {
-    isLoadingThreadBranches.value = false
-  }
-}
-
-function onSelectContentHeaderBranch(value: string): void {
-  if (value === '__review__') {
-    isReviewPaneOpen.value = !isReviewPaneOpen.value
-    return
-  }
-  if (value === '__detached_head__') return
-  if (isSwitchingThreadBranch.value) return
-  const targetBranch = value.trim()
-  if (!targetBranch || targetBranch === (currentThreadBranch.value ?? '')) return
-  const cwd = composerCwd.value.trim()
-  if (!cwd) return
-
-  isSwitchingThreadBranch.value = true
-  void checkoutGitBranch(cwd, targetBranch)
-    .then((branch) => {
-      currentThreadBranch.value = branch || targetBranch
-      isReviewPaneOpen.value = false
-      return loadThreadBranches(cwd)
-    })
-    .catch((error: unknown) => {
-      const message = error instanceof Error ? error.message : 'Failed to switch branch'
-      window.alert(message)
-    })
-    .finally(() => {
-      isSwitchingThreadBranch.value = false
-    })
 }
 
 function onSelectModel(modelId: string): void {
@@ -1860,28 +1710,6 @@ watch(
 )
 
 watch(
-  () => route.name,
-  (name) => {
-    if (name !== 'thread') {
-      isReviewPaneOpen.value = false
-    }
-  },
-)
-
-watch(
-  () => [route.name, composerCwd.value] as const,
-  ([routeName, cwd]) => {
-    if (routeName !== 'thread') {
-      threadBranchOptions.value = []
-      currentThreadBranch.value = null
-      return
-    }
-    void loadThreadBranches(cwd)
-  },
-  { immediate: true },
-)
-
-watch(
   pageTitle,
   (value) => {
     if (typeof document === 'undefined') return
@@ -2007,27 +1835,6 @@ async function submitFirstMessageForNewThread(
 
 .composer-with-queue {
   @apply w-full shrink-0 px-2 sm:px-6;
-}
-
-.content-header-branch-dropdown :deep(.composer-dropdown-trigger) {
-  @apply rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs text-zinc-700 transition hover:bg-zinc-50;
-}
-
-.content-header-branch-dropdown :deep(.composer-dropdown-value) {
-  @apply max-w-40 truncate;
-}
-
-.content-header-branch-dropdown :deep(.composer-dropdown-menu-wrap) {
-  left: auto;
-  right: 0;
-}
-
-.content-header-branch-dropdown.is-review-open :deep(.composer-dropdown-trigger) {
-  @apply border-zinc-900 bg-zinc-900 text-white hover:bg-zinc-800;
-}
-
-.content-header-branch-dropdown.is-review-open :deep(.composer-dropdown-chevron) {
-  @apply text-white;
 }
 
 .new-thread-empty {
