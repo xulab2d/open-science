@@ -251,13 +251,6 @@ function ensureCodexInstalled(): string | null {
   return codexCommand
 }
 
-function resolvePassword(input: string | undefined): string | undefined {
-  if (typeof input === 'string' && input.trim().length > 0) {
-    return input.trim()
-  }
-  return undefined
-}
-
 function printTermuxKeepAlive(lines: string[]): void {
   if (!isTermuxRuntime()) {
     return
@@ -279,11 +272,6 @@ function openBrowser(url: string): void {
   const child = spawn(command.cmd, command.args, { detached: true, stdio: 'ignore' })
   child.on('error', () => {})
   child.unref()
-}
-
-function buildTunnelAutologinUrl(tunnelUrl: string, password: string | undefined): string {
-  if (!password) return tunnelUrl
-  return `${tunnelUrl}/password=${encodeURIComponent(password)}`
 }
 
 function parseCloudflaredUrl(chunk: string): string | null {
@@ -474,7 +462,6 @@ async function addProjectOnly(projectPath: string): Promise<void> {
 
 async function startServer(options: {
   port: string
-  password?: string
   tunnel: boolean
   open: boolean
   login: boolean
@@ -508,8 +495,7 @@ async function startServer(options: {
     runOrFail(codexCommand, ['login'], 'Codex login')
   }
   const requestedPort = parseInt(options.port, 10)
-  const password = resolvePassword(options.password)
-  const { app, dispose, attachWebSocket } = createApp({ password })
+  const { app, dispose, attachWebSocket } = createApp()
   const server = createServer(app)
   attachWebSocket(server)
   const port = await listenWithFallback(server, requestedPort)
@@ -553,22 +539,17 @@ async function startServer(options: {
     lines.push(`  Requested port ${String(requestedPort)} was unavailable; using ${String(port)}.`)
   }
 
-  if (password) {
-    lines.push(`  Password: ${password}`)
-  } else {
-    lines.push('  Access:   no app-level password gate (expected to sit behind external auth/proxy)')
-  }
-  const tunnelQrUrl = tunnelUrl ? buildTunnelAutologinUrl(tunnelUrl, password) : null
+  lines.push('  Access:   expected to sit behind external auth/proxy')
   if (tunnelUrl) {
-    lines.push(`  Tunnel:   ${tunnelQrUrl ?? tunnelUrl}`)
+    lines.push(`  Tunnel:   ${tunnelUrl}`)
     lines.push('  Tunnel QR code below')
   }
 
   printTermuxKeepAlive(lines)
   lines.push('')
   console.log(lines.join('\n'))
-  if (tunnelQrUrl) {
-    qrcode.generate(tunnelQrUrl, { small: true })
+  if (tunnelUrl) {
+    qrcode.generate(tunnelUrl, { small: true })
     console.log('')
   }
   if (options.open) openBrowser(`http://localhost:${String(port)}`)
@@ -604,7 +585,6 @@ program
   .argument('[projectPath]', 'project directory to open on launch')
   .option('--open-project <path>', 'open project directory on launch (Codex desktop parity)')
   .option('-p, --port <port>', 'port to listen on', '5900')
-  .option('--password <pass>', 'enable the built-in password gate with a specific password')
   .option('--tunnel', 'start cloudflared tunnel (default is auto by Tailscale detection)', true)
   .option('--no-tunnel', 'disable cloudflared tunnel startup')
   .option('--open', 'open browser on startup', true)
@@ -617,7 +597,6 @@ program
     projectPath: string | undefined,
     opts: {
       port: string
-      password?: string
       tunnel: boolean
       open: boolean
       login: boolean

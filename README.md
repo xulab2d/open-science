@@ -38,7 +38,6 @@ This fork is intended to run behind external auth.
 
 Default behavior:
 - no app-level password gate
-- optional explicit `--password <pass>` fallback if ever needed
 - Codex account management remains available inside the UI
 
 ## Quick Start
@@ -53,11 +52,6 @@ node dist-cli/index.js --port 5901
 # http://localhost:18923
 ```
 
-If you explicitly want the built-in password gate, start with:
-
-```bash
-node dist-cli/index.js --port 5901 --password your-password
-```
 If you do not want automatic `codex login` bootstrap:
 
 ```bash

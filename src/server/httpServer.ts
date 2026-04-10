@@ -5,17 +5,12 @@ import { existsSync } from 'node:fs'
 import { writeFile, stat } from 'node:fs/promises'
 import express, { type Express } from 'express'
 import { createCodexBridgeMiddleware } from './codexAppServerBridge.js'
-import { createAuthSession } from './authMiddleware.js'
 import { createDirectoryListingHtml, createTextEditorHtml, decodeBrowsePath, getLocalDirectoryListing, isTextEditableFile, normalizeLocalPath } from './localBrowseUi.js'
 import { WebSocketServer, type WebSocket } from 'ws'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const distDir = join(__dirname, '..', 'dist')
 const spaEntryFile = join(distDir, 'index.html')
-
-export type ServerOptions = {
-  password?: string
-}
 
 export type ServerInstance = {
   app: Express
@@ -72,20 +67,14 @@ function readWildcardPathParam(value: unknown): string {
   return ''
 }
 
-export function createServer(options: ServerOptions = {}): ServerInstance {
+export function createServer(): ServerInstance {
   const app = express()
   const bridge = createCodexBridgeMiddleware()
-  const authSession = options.password ? createAuthSession(options.password) : null
 
-  // 1. Auth middleware (if password is set)
-  if (authSession) {
-    app.use(authSession.middleware)
-  }
-
-  // 2. Bridge middleware for /codex-api/*
+  // 1. Bridge middleware for /codex-api/*
   app.use(bridge)
 
-  // 3. Serve local images referenced in markdown (desktop parity for absolute image paths)
+  // 2. Serve local images referenced in markdown (desktop parity for absolute image paths)
   app.get('/codex-local-image', (req, res) => {
     const rawPath = typeof req.query.path === 'string' ? req.query.path : ''
     const localPath = normalizeLocalImagePath(rawPath)
@@ -108,7 +97,7 @@ export function createServer(options: ServerOptions = {}): ServerInstance {
     })
   })
 
-  // 4. Serve local files inline for direct file open.
+  // 3. Serve local files inline for direct file open.
   app.get('/codex-local-file', (req, res) => {
     const rawPath = typeof req.query.path === 'string' ? req.query.path : ''
     const localPath = normalizeLocalPath(rawPath)
@@ -125,7 +114,7 @@ export function createServer(options: ServerOptions = {}): ServerInstance {
     })
   })
 
-  // 5. Return JSON directory listings for the integrated folder picker.
+  // 4. Return JSON directory listings for the integrated folder picker.
   app.get('/codex-local-directories', async (req, res) => {
     const rawPath = typeof req.query.path === 'string' ? req.query.path : ''
     const showHidden = typeof req.query.showHidden === 'string'
@@ -149,7 +138,7 @@ export function createServer(options: ServerOptions = {}): ServerInstance {
     }
   })
 
-  // 6. Serve local files by path to preserve relative asset loading for HTML.
+  // 5. Serve local files by path to preserve relative asset loading for HTML.
   app.get('/codex-local-browse/*path', async (req, res) => {
     const rawPath = readWildcardPathParam(req.params.path)
     const localPath = decodeBrowsePath(`/${rawPath}`)
@@ -177,7 +166,7 @@ export function createServer(options: ServerOptions = {}): ServerInstance {
     }
   })
 
-  // 7. Edit text-like local files.
+  // 6. Edit text-like local files.
   app.get('/codex-local-edit/*path', async (req, res) => {
     const rawPath = readWildcardPathParam(req.params.path)
     const localPath = decodeBrowsePath(`/${rawPath}`)
@@ -220,12 +209,12 @@ export function createServer(options: ServerOptions = {}): ServerInstance {
 
   const hasFrontendAssets = existsSync(spaEntryFile)
 
-  // 8. Static files from Vue build
+  // 7. Static files from Vue build
   if (hasFrontendAssets) {
     app.use(express.static(distDir))
   }
 
-  // 9. SPA fallback
+  // 8. SPA fallback
   app.use((_req, res) => {
     if (!hasFrontendAssets) {
       res
@@ -258,12 +247,6 @@ export function createServer(options: ServerOptions = {}): ServerInstance {
       server.on('upgrade', (req: IncomingMessage, socket, head) => {
         const url = new URL(req.url ?? '', 'http://localhost')
         if (url.pathname !== '/codex-api/ws') {
-          return
-        }
-
-        if (authSession && !authSession.isRequestAuthorized(req)) {
-          socket.write('HTTP/1.1 401 Unauthorized\r\nConnection: close\r\n\r\n')
-          socket.destroy()
           return
         }
 
