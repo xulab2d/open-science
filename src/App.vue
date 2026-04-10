@@ -261,172 +261,13 @@
           <template v-else-if="isHomeRoute">
             <div class="content-grid content-grid-home">
               <div class="new-thread-empty">
-                <p class="new-thread-hero">Lab assistant</p>
-                <ComposerDropdown class="new-thread-folder-dropdown" :model-value="newThreadCwd"
-                  :options="newThreadFolderOptions" placeholder="Choose workspace"
-                  :enable-search="true"
-                  search-placeholder="Search projects"
-                  :show-add-action="true"
-                  add-action-mode="event"
-                  add-action-label="+ Add workspace"
-                  :disabled="false" @update:model-value="onSelectNewThreadFolder"
-                  @add-action="onStartAddNewProject" />
-                <p v-if="newThreadCwd" class="new-thread-folder-selected" :title="newThreadCwd">
-                  Selected workspace: {{ newThreadCwd }}
+                <p class="new-thread-hero">OpenScience</p>
+                <p class="new-thread-folder-selected" :title="newThreadCwd">
+                  Default workspace: {{ newThreadCwd }}
                 </p>
-                <div class="new-thread-folder-actions">
-                  <button class="new-thread-folder-action new-thread-folder-action-primary" type="button" @click="onOpenExistingFolder">
-                    Choose workspace
-                  </button>
-                </div>
-                <div v-if="isExistingFolderPickerOpen" class="new-thread-open-folder">
-                  <div class="new-thread-open-folder-header">
-                    <p class="new-thread-open-folder-title">Choose workspace</p>
-                    <button class="new-thread-open-folder-close" type="button" @click="onCloseExistingFolderPanel">
-                      Cancel
-                    </button>
-                  </div>
-                  <p class="new-thread-open-folder-label">Current location</p>
-                  <div class="new-thread-open-folder-current">
-                    <p class="new-thread-open-folder-path" :title="existingFolderBrowsePath || 'Unavailable'">
-                      {{ existingFolderBrowsePath || 'Unavailable' }}
-                    </p>
-                    <button
-                      class="new-thread-folder-action new-thread-folder-action-primary"
-                      type="button"
-                      :disabled="!existingFolderBrowsePath || !!existingFolderError || isExistingFolderLoading || isOpeningExistingFolder"
-                      @click="onConfirmExistingFolder()"
-                    >
-                      {{ isOpeningExistingFolder ? 'Opening…' : 'Use this workspace' }}
-                    </button>
-                  </div>
-                  <div class="new-thread-open-folder-actions">
-                    <label class="new-thread-open-folder-toggle">
-                      <input
-                        v-model="showHiddenFolders"
-                        class="new-thread-open-folder-toggle-input"
-                        type="checkbox"
-                        @change="onToggleHiddenFolders"
-                      />
-                      <span>Show hidden folders</span>
-                    </label>
-                    <button
-                      class="new-thread-folder-action"
-                      :class="{ 'new-thread-folder-action-primary': isCreateFolderOpen }"
-                      type="button"
-                      :aria-pressed="isCreateFolderOpen"
-                      :disabled="!existingFolderBrowsePath || isExistingFolderLoading || isOpeningExistingFolder || isCreatingFolder || (!!existingFolderError && !isCreateFolderOpen)"
-                      @click="onOpenCreateFolderPanel"
-                    >
-                      New workspace folder
-                    </button>
-                  </div>
-                  <div v-if="isCreateFolderOpen" class="new-thread-open-folder-create">
-                    <div class="new-thread-open-folder-create-composer">
-                      <input
-                        ref="createFolderInputRef"
-                        v-model="createFolderDraft"
-                        class="new-thread-open-folder-create-input"
-                        type="text"
-                        placeholder="Workspace folder name"
-                        @keydown.enter.prevent="onCreateFolder"
-                        @keydown.esc.prevent="onCloseCreateFolderPanel"
-                      />
-                      <button
-                        class="new-thread-folder-action new-thread-folder-action-primary new-thread-open-folder-create-submit"
-                        type="button"
-                        :disabled="!canCreateFolder || isCreatingFolder"
-                        @click="onCreateFolder"
-                      >
-                        {{ createFolderSubmitLabel }}
-                      </button>
-                    </div>
-                    <p v-if="createFolderError" class="new-thread-open-folder-error">{{ createFolderError }}</p>
-                  </div>
-                  <input
-                    v-model="existingFolderFilter"
-                    class="new-thread-open-folder-filter"
-                    type="text"
-                    placeholder="Filter folders..."
-                  />
-                  <div v-if="existingFolderError" class="new-thread-open-folder-error-actions">
-                    <p class="new-thread-open-folder-error">{{ existingFolderError }}</p>
-                    <button
-                      class="new-thread-folder-action"
-                      type="button"
-                      :disabled="isExistingFolderLoading || isOpeningExistingFolder"
-                      @click="onRetryExistingFolderBrowse"
-                    >
-                      Retry
-                    </button>
-                  </div>
-                  <p v-if="isExistingFolderLoading" class="new-thread-open-folder-status">Loading folders…</p>
-                  <p v-else-if="!existingFolderError && existingFolderFilteredEntries.length === 0" class="new-thread-open-folder-status">
-                    {{ existingFolderFilter.trim() ? 'No folders match this filter.' : 'No subfolders found here.' }}
-                  </p>
-                  <ul v-else-if="existingFolderFilteredEntries.length > 0" class="new-thread-open-folder-list">
-                    <li v-for="entry in existingFolderFilteredEntries" :key="entry.key" class="new-thread-open-folder-item">
-                      <button
-                        class="new-thread-open-folder-item-main"
-                        type="button"
-                        :title="entry.path"
-                        :disabled="isExistingFolderLoading || isOpeningExistingFolder"
-                        @click="onBrowseExistingFolder(entry.path)"
-                      >
-                        <span class="new-thread-open-folder-item-name">{{ entry.name }}</span>
-                      </button>
-                      <button
-                        v-if="entry.kind === 'directory'"
-                        class="new-thread-open-folder-item-open"
-                        type="button"
-                        :disabled="isExistingFolderLoading || isOpeningExistingFolder"
-                        @click="onConfirmExistingFolder(entry.path)"
-                      >
-                        Open
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <ComposerRuntimeDropdown
-                  class="new-thread-runtime-dropdown"
-                  v-model="newThreadRuntime"
-                />
-                <div v-if="newThreadRuntime === 'worktree'" class="new-thread-branch-select">
-                  <p class="new-thread-branch-select-label">Base branch</p>
-                  <ComposerDropdown
-                    class="new-thread-branch-dropdown"
-                    :model-value="newWorktreeBaseBranch"
-                    :options="newWorktreeBranchDropdownOptions"
-                    placeholder="Select branch"
-                    :enable-search="true"
-                    search-placeholder="Search branches..."
-                    :disabled="isLoadingWorktreeBranches || newWorktreeBranchDropdownOptions.length === 0"
-                    @update:model-value="onSelectNewWorktreeBranch"
-                  />
-                  <p class="new-thread-branch-select-help">
-                    {{
-                      isLoadingWorktreeBranches
-                        ? 'Loading branches…'
-                        : selectedWorktreeBranchLabel
-                          ? `The isolated workspace will start from ${selectedWorktreeBranchLabel}.`
-                          : 'No Git branches found for this workspace.'
-                    }}
-                  </p>
-                </div>
                 <p class="new-thread-runtime-help">
-                  <code>Current workspace</code> uses the selected folder directly. <code>Isolated workspace</code> creates a separate Git workspace before the first request.
+                  OpenScience always starts in the shared OpenScience workspace.
                 </p>
-                <div
-                  v-if="worktreeInitStatus.phase !== 'idle'"
-                  class="worktree-init-status"
-                  :class="{
-                    'is-running': worktreeInitStatus.phase === 'running',
-                    'is-error': worktreeInitStatus.phase === 'error',
-                  }"
-                >
-                  <strong class="worktree-init-status-title">{{ worktreeInitStatus.title }}</strong>
-                  <span class="worktree-init-status-message">{{ worktreeInitStatus.message }}</span>
-                </div>
               </div>
 
               <div class="composer-with-queue">
@@ -532,7 +373,6 @@ import ThreadPendingRequestPanel from './components/content/ThreadPendingRequest
 import QueuedMessages from './components/content/QueuedMessages.vue'
 import RateLimitStatus from './components/content/RateLimitStatus.vue'
 import ComposerDropdown from './components/content/ComposerDropdown.vue'
-import ComposerRuntimeDropdown from './components/content/ComposerRuntimeDropdown.vue'
 import SidebarThreadControls from './components/sidebar/SidebarThreadControls.vue'
 import IconTablerSearch from './components/icons/IconTablerSearch.vue'
 import IconTablerSettings from './components/icons/IconTablerSettings.vue'
@@ -542,17 +382,9 @@ import { useMobile } from './composables/useMobile'
 import {
   checkoutGitBranch,
   configureTelegramBot,
-  createWorktree,
   getGitBranchState,
-  getWorktreeBranchOptions,
   getAccounts,
-  createLocalDirectory,
-  getHomeDirectory,
-  getProjectRootSuggestion,
   getTelegramStatus,
-  getWorkspaceRootsState,
-  listLocalDirectories,
-  openProjectRoot,
   removeAccount,
   refreshAccountsFromAuth,
   searchThreads,
@@ -560,8 +392,7 @@ import {
 } from './api/codexGateway'
 import type { ReasoningEffort, SpeedMode, ThreadScrollState, UiAccountEntry, UiRateLimitWindow, UiServerRequest, UiServerRequestReply, UiThreadTokenUsage } from './types/codex'
 import type { ComposerDraftPayload, ThreadComposerExposed } from './components/content/ThreadComposer.vue'
-import type { LocalDirectoryEntry, TelegramStatus, WorktreeBranchOption } from './api/codexGateway'
-import { getPathLeafName, getPathParent, normalizePathForUi } from './pathUtils.js'
+import type { TelegramStatus, WorktreeBranchOption } from './api/codexGateway'
 
 const ThreadConversation = defineAsyncComponent(() => import('./components/content/ThreadConversation.vue'))
 const ReviewPane = defineAsyncComponent(() => import('./components/content/ReviewPane.vue'))
@@ -571,6 +402,7 @@ const SIDEBAR_COLLAPSED_STORAGE_KEY = 'codex-web-local.sidebar-collapsed.v1'
 const ACCOUNTS_SECTION_COLLAPSED_STORAGE_KEY = 'codex-web-local.accounts-section-collapsed.v1'
 const worktreeName = import.meta.env.VITE_WORKTREE_NAME ?? 'unknown'
 const appVersion = import.meta.env.VITE_APP_VERSION ?? 'unknown'
+const DEFAULT_OPENSCIENCE_WORKSPACE = import.meta.env.VITE_DEFAULT_WORKSPACE_PATH?.trim() || '/Users/xulab/openscience/lab_assistant'
 const SETTINGS_HELP = {
   sendWithEnter: 'When enabled, press Enter to send. When disabled, use Command+Enter to send.',
   inProgressSendMode: 'If the assistant is still working, choose whether a new message redirects the current task or waits in line.',
@@ -775,25 +607,13 @@ const editingQueuedMessageState = ref<{ threadId: string; queueIndex: number } |
 const isRouteSyncInProgress = ref(false)
 let hasPendingRouteSync = false
 const hasInitialized = ref(false)
-const newThreadCwd = ref('')
-const newThreadRuntime = ref<'local' | 'worktree'>('local')
-const newWorktreeBaseBranch = ref('')
-const worktreeBranchOptions = ref<WorktreeBranchOption[]>([])
-const isLoadingWorktreeBranches = ref(false)
-const workspaceRootOptionsState = ref<{ order: string[]; labels: Record<string, string> }>({ order: [], labels: {} })
-const worktreeInitStatus = ref<{ phase: 'idle' | 'running' | 'error'; title: string; message: string }>({
-  phase: 'idle',
-  title: '',
-  message: '',
-})
+const newThreadCwd = ref(DEFAULT_OPENSCIENCE_WORKSPACE)
 const isSidebarCollapsed = ref(loadSidebarCollapsed())
 const sidebarSearchQuery = ref('')
 const isSidebarSearchVisible = ref(false)
 const sidebarSearchInputRef = ref<HTMLInputElement | null>(null)
 const serverMatchedThreadIds = ref<string[] | null>(null)
 let threadSearchTimer: ReturnType<typeof setTimeout> | null = null
-const defaultNewProjectName = ref('New Project (1)')
-const homeDirectory = ref('')
 const isSettingsOpen = ref(false)
 const isAccountsSectionCollapsed = ref(loadAccountsSectionCollapsed())
 const isReviewPaneOpen = ref(false)
@@ -826,20 +646,6 @@ const dictationClickToToggle = ref(loadBoolPref(DICTATION_CLICK_TO_TOGGLE_KEY, f
 const dictationAutoSend = ref(loadBoolPref(DICTATION_AUTO_SEND_KEY, true))
 const dictationLanguage = ref(loadDictationLanguagePref())
 const dictationLanguageOptions = computed(() => buildDictationLanguageOptions())
-
-const isCreateFolderOpen = ref(false)
-const createFolderDraft = ref('')
-const createFolderError = ref('')
-const isCreatingFolder = ref(false)
-const isExistingFolderPickerOpen = ref(false)
-const existingFolderBrowsePath = ref('')
-const existingFolderParentPath = ref('')
-const existingFolderEntries = ref<LocalDirectoryEntry[]>([])
-const existingFolderError = ref('')
-const isExistingFolderLoading = ref(false)
-const isOpeningExistingFolder = ref(false)
-const showHiddenFolders = ref(false)
-const existingFolderFilter = ref('')
 const telegramStatus = ref<TelegramStatus>({
   configured: false,
   active: false,
@@ -852,7 +658,6 @@ const mobileResumeReloadTriggered = ref(false)
 const mobileResumeSyncInProgress = ref(false)
 let accountStatePollTimer: number | null = null
 let isAccountStatePollInFlight = false
-let existingFolderBrowseRequestId = 0
 
 const routeThreadId = computed(() => {
   const rawThreadId = route.params.threadId
@@ -975,54 +780,6 @@ const threadContextSecondaryText = computed(() => {
 })
 
 const threadContextTooltip = computed(() => buildThreadContextTooltip(selectedThreadTokenUsage.value))
-const newThreadFolderOptions = computed(() => {
-  const options: Array<{ value: string; label: string }> = []
-  const seenCwds = new Set<string>()
-
-  for (const cwdRaw of workspaceRootOptionsState.value.order) {
-    const cwd = cwdRaw.trim()
-    if (!cwd || seenCwds.has(cwd)) continue
-    seenCwds.add(cwd)
-    options.push({
-      value: cwd,
-      label: workspaceRootOptionsState.value.labels[cwd] || getPathLeafName(cwd),
-    })
-  }
-
-  for (const group of projectGroups.value) {
-    const cwd = group.threads[0]?.cwd?.trim() ?? ''
-    if (!cwd || seenCwds.has(cwd)) continue
-    seenCwds.add(cwd)
-    options.push({
-      value: cwd,
-      label: projectDisplayNameById.value[group.projectName] ?? group.projectName,
-    })
-  }
-
-  const selectedCwd = newThreadCwd.value.trim()
-  if (selectedCwd && !seenCwds.has(selectedCwd)) {
-    options.unshift({
-      value: selectedCwd,
-      label: getPathLeafName(selectedCwd),
-    })
-  }
-
-  return options
-})
-const newWorktreeBranchDropdownOptions = computed<Array<{ value: string; label: string }>>(() => {
-  const selectedBranch = newWorktreeBaseBranch.value.trim()
-  const options = [...worktreeBranchOptions.value]
-  if (selectedBranch && !options.some((option) => option.value === selectedBranch)) {
-    options.unshift({ value: selectedBranch, label: selectedBranch })
-  }
-  return options
-})
-const selectedWorktreeBranchLabel = computed(() => {
-  const selectedBranch = newWorktreeBaseBranch.value.trim()
-  if (!selectedBranch) return ''
-  const selected = newWorktreeBranchDropdownOptions.value.find((option) => option.value === selectedBranch)
-  return selected?.label ?? selectedBranch
-})
 const contentHeaderBranchDropdownValue = computed(() => currentThreadBranch.value ?? '__detached_head__')
 const contentHeaderBranchDropdownOptions = computed<Array<{ value: string; label: string }>>(() => {
   const options: Array<{ value: string; label: string }> = [
@@ -1046,52 +803,6 @@ const contentHeaderBranchDropdownOptions = computed<Array<{ value: string; label
     options.push(option)
   }
   return options
-})
-const createFolderParentPath = computed(() => existingFolderBrowsePath.value.trim())
-const isCreateFolderNameValid = computed(() => {
-  const draft = createFolderDraft.value.trim()
-  if (!draft) return false
-  if (draft === '.' || draft === '..') return false
-  return !/[\\/]/u.test(draft)
-})
-const canCreateFolder = computed(() => {
-  return isCreateFolderNameValid.value && createFolderParentPath.value.trim().length > 0 && !existingFolderError.value
-})
-const createFolderSubmitLabel = computed(() => {
-  if (isCreatingFolder.value) return 'Creating…'
-  return 'Create'
-})
-const canBrowseExistingFolderParent = computed(() => {
-  const current = existingFolderBrowsePath.value.trim()
-  const parent = existingFolderParentPath.value.trim()
-  return Boolean(current && parent && current !== parent)
-})
-const existingFolderDisplayEntries = computed(() => {
-  const entries: Array<{ key: string; name: string; path: string; kind: 'parent' | 'directory' }> = []
-  if (canBrowseExistingFolderParent.value) {
-    entries.push({
-      key: `parent:${existingFolderParentPath.value}`,
-      name: '..',
-      path: existingFolderParentPath.value,
-      kind: 'parent',
-    })
-  }
-  for (const entry of existingFolderEntries.value) {
-    entries.push({
-      key: `directory:${entry.path}`,
-      name: entry.name,
-      path: entry.path,
-      kind: 'directory',
-    })
-  }
-  return entries
-})
-const existingFolderFilteredEntries = computed(() => {
-  const filter = existingFolderFilter.value.trim().toLowerCase()
-  if (!filter) return existingFolderDisplayEntries.value
-  return existingFolderDisplayEntries.value.filter((entry) =>
-    entry.kind === 'parent' || entry.name.toLowerCase().includes(filter),
-  )
 })
 const darkModeMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null
 const chatWidthLabel = computed(() => CHAT_WIDTH_PRESETS[chatWidth.value].label)
@@ -1118,9 +829,6 @@ onMounted(() => {
   applyDarkMode()
   darkModeMediaQuery?.addEventListener('change', applyDarkMode)
   void initialize()
-  void loadHomeDirectory()
-  void loadWorkspaceRootOptionsState()
-  void refreshDefaultProjectName()
   void refreshTelegramStatus()
 })
 
@@ -1493,20 +1201,7 @@ function isWorktreePath(cwdRaw: string): boolean {
   return cwd.includes('/.codex/worktrees/') || cwd.includes('/.git/worktrees/')
 }
 
-function resolvePreferredLocalCwd(projectName: string, fallbackCwd = ''): string {
-  const group = projectGroups.value.find((row) => row.projectName === projectName)
-  if (!group) return fallbackCwd.trim()
-  const nonWorktreeThread = group.threads.find((thread) => !isWorktreePath(thread.cwd))
-  const candidate = nonWorktreeThread?.cwd?.trim() ?? group.threads[0]?.cwd?.trim() ?? ''
-  return candidate || fallbackCwd.trim()
-}
-
 function onStartNewThread(projectName: string): void {
-  const projectGroup = projectGroups.value.find((group) => group.projectName === projectName)
-  const projectCwd = resolvePreferredLocalCwd(projectName, projectGroup?.threads[0]?.cwd?.trim() ?? '')
-  if (projectCwd) {
-    newThreadCwd.value = projectCwd
-  }
   if (isMobile.value) setSidebarCollapsed(true)
   if (isHomeRoute.value) return
   void router.push({ name: 'home' })
@@ -1526,13 +1221,6 @@ function onBrowseThreadFiles(threadId: string): void {
 }
 
 function onStartNewThreadFromToolbar(): void {
-  const selected = selectedThread.value
-  const cwd = selected
-    ? resolvePreferredLocalCwd(selected.projectName, selected.cwd?.trim() ?? '')
-    : ''
-  if (cwd) {
-    newThreadCwd.value = cwd
-  }
   if (isMobile.value) setSidebarCollapsed(true)
   if (isHomeRoute.value) return
   void router.push({ name: 'home' })
@@ -1548,8 +1236,6 @@ function onRenameThread(payload: { threadId: string; title: string }): void {
 
 async function onRemoveProject(projectName: string): Promise<void> {
   await removeProject(projectName)
-  await loadWorkspaceRootOptionsState()
-  void refreshDefaultProjectName()
 }
 
 function onReorderProject(payload: { projectName: string; toIndex: number }): void {
@@ -1620,10 +1306,6 @@ function onWindowPageShow(event: PageTransitionEvent): void {
 }
 
 function onWindowFocus(): void {
-  if (route.name === 'home') {
-    void loadWorkspaceRootOptionsState()
-    void refreshDefaultProjectName()
-  }
   maybeSyncAfterMobileResume()
 }
 
@@ -1735,15 +1417,6 @@ function scheduleMobileConversationJumpToLatest(): void {
   })
 }
 
-function onSelectNewThreadFolder(cwd: string): void {
-  newThreadCwd.value = cwd.trim()
-  createFolderError.value = ''
-}
-
-function onSelectNewWorktreeBranch(branch: string): void {
-  newWorktreeBaseBranch.value = branch.trim()
-}
-
 async function loadThreadBranches(cwd: string): Promise<void> {
   const targetCwd = cwd.trim()
   if (!targetCwd || route.name !== 'thread') {
@@ -1790,320 +1463,6 @@ function onSelectContentHeaderBranch(value: string): void {
     .finally(() => {
       isSwitchingThreadBranch.value = false
     })
-}
-
-async function onStartAddNewProject(): Promise<void> {
-  const baseDir = await resolveProjectBaseDirectory()
-  const browseRoot = baseDir || homeDirectory.value.trim() || '/'
-  const search = new URLSearchParams()
-  const suggestedName = defaultNewProjectName.value.trim()
-  if (suggestedName) {
-    search.set('newProjectName', suggestedName)
-  }
-  const query = search.toString()
-  window.location.assign(`/codex-local-browse${encodeURI(browseRoot)}${query ? `?${query}` : ''}`)
-}
-
-async function onOpenExistingFolder(): Promise<void> {
-  const startPath = newThreadCwd.value.trim() || await resolveProjectBaseDirectory()
-  if (!startPath) return
-  isCreateFolderOpen.value = false
-  isExistingFolderPickerOpen.value = true
-  existingFolderFilter.value = ''
-  await loadExistingFolderListing(startPath)
-}
-
-function onCloseExistingFolderPanel(): void {
-  existingFolderBrowseRequestId += 1
-  isExistingFolderPickerOpen.value = false
-  isExistingFolderLoading.value = false
-  existingFolderError.value = ''
-  existingFolderFilter.value = ''
-  onCloseCreateFolderPanel()
-}
-
-async function onBrowseExistingFolder(path: string): Promise<void> {
-  if (!path || isExistingFolderLoading.value) return
-  existingFolderFilter.value = ''
-  await loadExistingFolderListing(path)
-}
-
-function onToggleHiddenFolders(): void {
-  const currentPath = existingFolderBrowsePath.value.trim()
-  if (!isExistingFolderPickerOpen.value || !currentPath) return
-  void loadExistingFolderListing(currentPath)
-}
-
-function onRetryExistingFolderBrowse(): void {
-  const currentPath = existingFolderBrowsePath.value.trim()
-  if (!isExistingFolderPickerOpen.value || !currentPath || isExistingFolderLoading.value) return
-  void loadExistingFolderListing(currentPath)
-}
-
-async function onConfirmExistingFolder(path = existingFolderBrowsePath.value): Promise<void> {
-  const targetPath = path.trim()
-  if (!targetPath) return
-
-  existingFolderError.value = ''
-  isOpeningExistingFolder.value = true
-  try {
-    const normalizedPath = await openProjectRoot(targetPath, {
-      createIfMissing: false,
-      label: '',
-    })
-    if (!normalizedPath) {
-      existingFolderError.value = 'Failed to open the selected folder.'
-      return
-    }
-
-    newThreadCwd.value = normalizedPath
-    pinProjectToTop(getPathLeafName(normalizedPath))
-    await loadWorkspaceRootOptionsState()
-    await refreshDefaultProjectName()
-    onCloseExistingFolderPanel()
-  } catch (error) {
-    existingFolderError.value = error instanceof Error ? error.message : 'Failed to open the selected folder.'
-  } finally {
-    isOpeningExistingFolder.value = false
-  }
-}
-
-async function onOpenCreateFolderPanel(): Promise<void> {
-  createFolderError.value = ''
-  if (isCreateFolderOpen.value) {
-    onCloseCreateFolderPanel()
-    return
-  }
-  if (!isExistingFolderPickerOpen.value) {
-    const startPath = newThreadCwd.value.trim() || await resolveProjectBaseDirectory()
-    if (!startPath) return
-    isExistingFolderPickerOpen.value = true
-    existingFolderFilter.value = ''
-    await loadExistingFolderListing(startPath)
-    if (existingFolderError.value) return
-  }
-  if (existingFolderError.value) return
-  createFolderDraft.value = defaultNewProjectName.value
-  isCreateFolderOpen.value = true
-  void nextTick(() => createFolderInputRef.value?.focus())
-}
-
-function onCloseCreateFolderPanel(): void {
-  createFolderError.value = ''
-  createFolderDraft.value = ''
-  isCreateFolderOpen.value = false
-}
-
-async function onCreateFolder(): Promise<void> {
-  const normalizedInput = createFolderDraft.value.trim()
-  if (!normalizedInput) return
-
-  createFolderError.value = ''
-  if (existingFolderError.value) {
-    createFolderError.value = 'Reload the current folder before creating a new one.'
-    return
-  }
-  isCreatingFolder.value = true
-
-  const baseDir = createFolderParentPath.value.trim()
-  const targetPath = normalizeAbsolutePath(joinPath(baseDir, normalizedInput))
-
-  if (!targetPath) {
-    createFolderError.value = 'Unable to determine where the new folder should be created.'
-    isCreatingFolder.value = false
-    return
-  }
-
-  if (!isCreateFolderNameValid.value) {
-    createFolderError.value = 'Enter a single folder name.'
-    isCreatingFolder.value = false
-    return
-  }
-
-  try {
-    const normalizedPath = await createLocalDirectory(targetPath)
-    if (!normalizedPath) {
-      createFolderError.value = 'Failed to create the folder.'
-      return
-    }
-
-    createFolderError.value = ''
-    existingFolderFilter.value = ''
-    await loadExistingFolderListing(normalizedPath)
-    onCloseCreateFolderPanel()
-  } catch (error) {
-    createFolderError.value = error instanceof Error ? error.message : 'Failed to create folder.'
-  } finally {
-    isCreatingFolder.value = false
-  }
-}
-
-async function applyLaunchProjectPathFromUrl(): Promise<boolean> {
-  if (typeof window === 'undefined') return false
-  const launchProjectPath = new URLSearchParams(window.location.search).get('openProjectPath')?.trim() ?? ''
-  if (!launchProjectPath) return false
-  try {
-    const normalizedPath = await openProjectRoot(launchProjectPath, {
-      createIfMissing: false,
-      label: '',
-    })
-    if (!normalizedPath) return false
-    newThreadCwd.value = normalizedPath
-    pinProjectToTop(getPathLeafName(normalizedPath))
-    await router.replace({ name: 'home' })
-    await loadWorkspaceRootOptionsState()
-    const nextUrl = new URL(window.location.href)
-    nextUrl.searchParams.delete('openProjectPath')
-    window.history.replaceState({}, '', nextUrl.toString())
-    return true
-  } catch {
-    // If launch path is invalid, keep normal startup behavior.
-    return false
-  }
-}
-
-async function resolveProjectBaseDirectory(): Promise<string> {
-  const baseDir = getProjectBaseDirectory()
-  if (baseDir) return baseDir
-  try {
-    const loadedHomeDirectory = await getHomeDirectory()
-    if (loadedHomeDirectory) {
-      homeDirectory.value = loadedHomeDirectory
-      return loadedHomeDirectory
-    }
-  } catch {
-    // Fallback handled by empty return.
-  }
-  return ''
-}
-
-async function refreshDefaultProjectName(): Promise<void> {
-  const baseDir = getProjectBaseDirectory()
-  if (!baseDir) {
-    defaultNewProjectName.value = 'New Project (1)'
-    return
-  }
-
-  try {
-    const suggestion = await getProjectRootSuggestion(baseDir)
-    defaultNewProjectName.value = suggestion.name || 'New Project (1)'
-  } catch {
-    defaultNewProjectName.value = 'New Project (1)'
-  }
-}
-
-function getProjectBaseDirectory(): string {
-  const selected = newThreadCwd.value.trim()
-  if (selected) return getPathParent(selected)
-  const first = newThreadFolderOptions.value[0]?.value?.trim() ?? ''
-  if (first) return getPathParent(first)
-  return homeDirectory.value.trim()
-}
-
-async function loadHomeDirectory(): Promise<void> {
-  try {
-    homeDirectory.value = await getHomeDirectory()
-  } catch {
-    homeDirectory.value = ''
-  }
-}
-
-async function loadWorkspaceRootOptionsState(): Promise<void> {
-  try {
-    const state = await getWorkspaceRootsState()
-    workspaceRootOptionsState.value = {
-      order: [...state.order],
-      labels: { ...state.labels },
-    }
-  } catch {
-    workspaceRootOptionsState.value = { order: [], labels: {} }
-  }
-}
-
-async function loadExistingFolderListing(path: string): Promise<void> {
-  const requestId = ++existingFolderBrowseRequestId
-  existingFolderBrowsePath.value = normalizePathForUi(path).trim()
-  existingFolderError.value = ''
-  isExistingFolderLoading.value = true
-
-  try {
-    const listing = await listLocalDirectories(path, { showHidden: showHiddenFolders.value })
-    if (requestId !== existingFolderBrowseRequestId) return
-    existingFolderBrowsePath.value = listing.path
-    existingFolderParentPath.value = listing.parentPath
-    existingFolderEntries.value = listing.entries
-  } catch (error) {
-    if (requestId !== existingFolderBrowseRequestId) return
-    existingFolderError.value = error instanceof Error ? error.message : 'Failed to load local folders.'
-    existingFolderParentPath.value = getPathParent(existingFolderBrowsePath.value)
-    existingFolderEntries.value = []
-    onCloseCreateFolderPanel()
-  } finally {
-    if (requestId === existingFolderBrowseRequestId) {
-      isExistingFolderLoading.value = false
-    }
-  }
-}
-
-function joinPath(parent: string, child: string): string {
-  const rawParent = normalizePathForUi(parent).trim()
-  const normalizedChild = normalizePathForUi(child).trim().replace(/^[\\/]+/u, '')
-  if (!rawParent || !normalizedChild) return ''
-  const separator = rawParent.includes('\\') && !rawParent.includes('/') ? '\\' : '/'
-  if (/^[a-zA-Z]:[\\/]?$/u.test(rawParent)) {
-    return `${rawParent.slice(0, 2)}${separator}${normalizedChild}`
-  }
-  if (/^\/+$/u.test(rawParent)) {
-    return `/${normalizedChild}`
-  }
-  const normalizedParent = rawParent.replace(/[\\/]+$/u, '')
-  if (!normalizedParent) return ''
-  return `${normalizedParent}${separator}${normalizedChild}`
-}
-
-function normalizeAbsolutePath(value: string): string {
-  const normalizedValue = normalizePathForUi(value).trim()
-  if (!normalizedValue) return ''
-
-  const uncMatch = normalizedValue.match(/^\\\\([^\\/]+)[\\/]+([^\\/]+)([\\/].*)?$/u)
-  if (uncMatch) {
-    const [, server, share, suffix = ''] = uncMatch
-    const segments = collapsePathSegments(suffix.split(/[\\/]+/u))
-    return segments.length > 0
-      ? `\\\\${server}\\${share}\\${segments.join('\\')}`
-      : `\\\\${server}\\${share}`
-  }
-
-  const driveMatch = normalizedValue.match(/^([a-zA-Z]:)([\\/].*)?$/u)
-  if (driveMatch) {
-    const [, drive, suffix = ''] = driveMatch
-    const separator = normalizedValue.includes('\\') && !normalizedValue.includes('/') ? '\\' : '/'
-    const segments = collapsePathSegments(suffix.split(/[\\/]+/u))
-    return segments.length > 0 ? `${drive}${separator}${segments.join(separator)}` : `${drive}${separator}`
-  }
-
-  if (normalizedValue.startsWith('/')) {
-    const segments = collapsePathSegments(normalizedValue.split('/'))
-    return segments.length > 0 ? `/${segments.join('/')}` : '/'
-  }
-
-  return normalizedValue
-}
-
-function collapsePathSegments(rawSegments: readonly string[]): string[] {
-  const segments: string[] = []
-  for (const rawSegment of rawSegments) {
-    const segment = rawSegment.trim()
-    if (!segment || segment === '.') continue
-    if (segment === '..') {
-      if (segments.length > 0) {
-        segments.pop()
-      }
-      continue
-    }
-    segments.push(segment)
-  }
-  return segments
 }
 
 function onSelectModel(modelId: string): void {
@@ -2412,7 +1771,6 @@ async function initialize(): Promise<void> {
     includeSelectedThreadMessages: true,
   })
   void loadAccountsState({ silent: true })
-  await applyLaunchProjectPathFromUrl()
   hasInitialized.value = true
   await syncThreadSelectionWithRoute()
 }
@@ -2502,73 +1860,11 @@ watch(
 )
 
 watch(
-  () => newThreadFolderOptions.value,
-  (options) => {
-    if (options.length === 0) {
-      newThreadCwd.value = ''
-      return
-    }
-    const hasSelected = options.some((option) => option.value === newThreadCwd.value)
-    if (!hasSelected) {
-      newThreadCwd.value = options[0].value
-    }
-    void refreshDefaultProjectName()
-  },
-  { immediate: true },
-)
-
-watch(
-  () => newThreadCwd.value,
-  () => {
-    worktreeInitStatus.value = { phase: 'idle', title: '', message: '' }
-    void refreshDefaultProjectName()
-  },
-)
-
-watch(
-  () => [newThreadRuntime.value, newThreadCwd.value] as const,
-  ([runtime, cwd]) => {
-    if (runtime !== 'worktree') return
-    void loadWorktreeBranches(cwd)
-  },
-  { immediate: true },
-)
-
-watch(
-  () => newThreadRuntime.value,
-  (runtime) => {
-    if (runtime === 'local') {
-      worktreeInitStatus.value = { phase: 'idle', title: '', message: '' }
-      const current = newThreadCwd.value.trim()
-      if (current && isWorktreePath(current)) {
-        const fallbackProjectName = selectedThread.value?.projectName ?? getPathLeafName(current)
-        const localCwd = resolvePreferredLocalCwd(fallbackProjectName, '')
-        if (localCwd) {
-          newThreadCwd.value = localCwd
-        }
-      }
-      return
-    }
-    void loadWorktreeBranches(newThreadCwd.value)
-  },
-)
-
-watch(
   () => route.name,
   (name) => {
-    if (name !== 'home') {
-      worktreeInitStatus.value = { phase: 'idle', title: '', message: '' }
-    }
     if (name !== 'thread') {
       isReviewPaneOpen.value = false
     }
-  },
-)
-
-watch(
-  () => selectedThreadId.value,
-  () => {
-    worktreeInitStatus.value = { phase: 'idle', title: '', message: '' }
   },
 )
 
@@ -2608,60 +1904,13 @@ async function submitFirstMessageForNewThread(
   fileAttachments: Array<{ label: string; path: string; fsPath: string }> = [],
 ): Promise<void> {
   try {
-    worktreeInitStatus.value = { phase: 'idle', title: '', message: '' }
-    let targetCwd = newThreadCwd.value
-    if (newThreadRuntime.value === 'worktree') {
-      worktreeInitStatus.value = {
-        phase: 'running',
-        title: 'Preparing isolated workspace',
-        message: 'Creating a separate workspace and running setup.',
-      }
-      try {
-        const created = await createWorktree(newThreadCwd.value, newWorktreeBaseBranch.value)
-        targetCwd = created.cwd
-        newThreadCwd.value = created.cwd
-        worktreeInitStatus.value = { phase: 'idle', title: '', message: '' }
-      } catch {
-        worktreeInitStatus.value = {
-          phase: 'error',
-          title: 'Workspace setup failed',
-          message: 'Unable to create the isolated workspace. Try again or switch to Current workspace.',
-        }
-        return
-      }
-    }
+    const targetCwd = newThreadCwd.value.trim() || DEFAULT_OPENSCIENCE_WORKSPACE
     const threadId = await sendMessageToNewThread(text, targetCwd, imageUrls, skills, fileAttachments)
     if (!threadId) return
     await router.replace({ name: 'thread', params: { threadId } })
     scheduleMobileConversationJumpToLatest()
   } catch {
     // Error is already reflected in state.
-  }
-}
-
-async function loadWorktreeBranches(sourceCwd: string): Promise<void> {
-  const normalizedSourceCwd = sourceCwd.trim()
-  if (!normalizedSourceCwd) {
-    worktreeBranchOptions.value = []
-    newWorktreeBaseBranch.value = ''
-    return
-  }
-
-  isLoadingWorktreeBranches.value = true
-  try {
-    const options = await getWorktreeBranchOptions(normalizedSourceCwd)
-    worktreeBranchOptions.value = options
-    const currentSelection = newWorktreeBaseBranch.value.trim()
-    const hasCurrentSelection = currentSelection.length > 0 && options.some((option) => option.value === currentSelection)
-    if (!hasCurrentSelection) {
-      const preferredMainOption = options.find((option) => option.value.trim() === 'main')
-      newWorktreeBaseBranch.value = preferredMainOption?.value ?? options[0]?.value ?? ''
-    }
-  } catch {
-    worktreeBranchOptions.value = []
-    newWorktreeBaseBranch.value = ''
-  } finally {
-    isLoadingWorktreeBranches.value = false
   }
 }
 </script>

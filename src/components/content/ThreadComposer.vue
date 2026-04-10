@@ -655,7 +655,7 @@ const placeholderText = computed(() =>
     ? 'Choose a conversation to start working'
     : isPlanModeWaitingForModel.value
       ? 'Loading models for planning pass...'
-      : 'Ask the lab assistant anything... (@ for files, / for skills)',
+      : 'Ask OpenScience anything... (@ for files, / for skills)',
 )
 const hasSubmitContent = computed(() =>
   draft.value.trim().length > 0 || selectedImages.value.length > 0 || fileAttachments.value.length > 0,
