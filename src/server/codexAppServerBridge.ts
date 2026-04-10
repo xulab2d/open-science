@@ -92,7 +92,25 @@ type ProviderModelsResponse = {
   source: 'provider'
 }
 
+type OpenScienceContextFileSpec = {
+  path: string
+  label: string
+  max_chars?: number
+}
+
+type OpenScienceContextManifest = {
+  always_include?: OpenScienceContextFileSpec[]
+  max_total_chars?: number
+}
+
 const PROVIDER_MODELS_FETCH_TIMEOUT_MS = 5_000
+const OPENSCIENCE_CONTEXT_MANIFEST_ENV = 'OPENSCIENCE_CONTEXT_MANIFEST_PATH'
+const OPENSCIENCE_CONTEXT_MANIFEST_CANDIDATES = [
+  resolve(process.cwd(), '../lab_assistant/integrations/context_files.json'),
+  resolve(process.cwd(), 'lab_assistant/integrations/context_files.json'),
+  resolve(homedir(), 'openscience/lab_assistant/integrations/context_files.json'),
+  resolve(process.cwd(), '../lab_assistant/integrations/slack/context_files.json'),
+]
 
 const THREAD_RESPONSE_TURN_LIMIT = 10
 const THREAD_METHODS_WITH_TURNS = new Set(['thread/read', 'thread/resume', 'thread/fork', 'thread/rollback'])
@@ -378,6 +396,71 @@ function setJson(res: ServerResponse, statusCode: number, payload: unknown): voi
   res.statusCode = statusCode
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
   res.end(JSON.stringify(payload))
+}
+
+async function findOpenScienceContextManifestPath(): Promise<string> {
+  const overridePath = process.env[OPENSCIENCE_CONTEXT_MANIFEST_ENV]?.trim()
+  const candidates = overridePath
+    ? [overridePath, ...OPENSCIENCE_CONTEXT_MANIFEST_CANDIDATES]
+    : OPENSCIENCE_CONTEXT_MANIFEST_CANDIDATES
+
+  for (const candidate of candidates) {
+    if (!candidate) continue
+    try {
+      const fileStat = await stat(candidate)
+      if (fileStat.isFile()) return candidate
+    } catch {
+      // Try the next candidate.
+    }
+  }
+
+  throw new Error(`Could not locate OpenScience context manifest. Checked: ${candidates.join(', ')}`)
+}
+
+function clipOpenScienceContextText(value: string, maxChars: number): string {
+  const text = value.replace(/\r/gu, '').trim()
+  if (text.length <= maxChars) return text
+  return `${text.slice(0, Math.max(0, maxChars - 15)).trimEnd()}\n[truncated]`
+}
+
+async function buildOpenScienceContextBundle(): Promise<{ bundle: string; manifestPath: string }> {
+  const manifestPath = await findOpenScienceContextManifestPath()
+  const manifestRaw = await readFile(manifestPath, 'utf8')
+  const manifest = JSON.parse(manifestRaw) as OpenScienceContextManifest
+  const sections: string[] = []
+  const maxTotalChars = Math.max(1000, Number(manifest.max_total_chars ?? 12000))
+  let used = 0
+
+  for (const item of manifest.always_include ?? []) {
+    const relativePath = typeof item.path === 'string' ? item.path.trim() : ''
+    const label = typeof item.label === 'string' ? item.label.trim() : ''
+    const maxChars = Math.max(200, Number(item.max_chars ?? 1600))
+    if (!relativePath || !label) continue
+
+    const absolutePath = resolve(process.cwd(), '..', relativePath)
+    try {
+      const contentRaw = await readFile(absolutePath, 'utf8')
+      const content = clipOpenScienceContextText(contentRaw, maxChars)
+      const section = `[${label} | ${relativePath}]\n${content}`
+      const projected = used + section.length + 2
+      if (projected > maxTotalChars) break
+      sections.push(section)
+      used = projected
+    } catch {
+      // Keep the bundle usable if one referenced file is temporarily unavailable.
+    }
+  }
+
+  const body = sections.length > 0 ? sections.join('\n\n') : '(no OpenScience context bundle loaded)'
+  return {
+    manifestPath,
+    bundle: [
+      'Use the following OpenScience workspace context as primary standing guidance for this turn.',
+      'If it conflicts with generic habits, follow this bundle.',
+      '',
+      body,
+    ].join('\n'),
+  }
 }
 
 function logProviderModelDiscoveryWarning(message: string, details: Record<string, unknown>): void {
@@ -3129,6 +3212,16 @@ export function createCodexBridgeMiddleware(): CodexBridgeMiddleware {
       if (req.method === 'GET' && url.pathname === '/codex-api/provider-models') {
         const data = await readProviderBackedModelIds(appServer)
         setJson(res, 200, data)
+        return
+      }
+
+      if (req.method === 'GET' && url.pathname === '/codex-api/openscience/context-bundle') {
+        try {
+          const data = await buildOpenScienceContextBundle()
+          setJson(res, 200, { data })
+        } catch (error) {
+          setJson(res, 500, { error: getErrorMessage(error, 'Failed to load OpenScience context bundle') })
+        }
         return
       }
 

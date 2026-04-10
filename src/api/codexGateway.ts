@@ -93,6 +93,8 @@ const DEFAULT_COLLABORATION_MODE_OPTIONS: CollaborationModeOption[] = [
   { value: 'plan', label: 'Plan' },
 ]
 
+let openScienceDeveloperInstructionsPromise: Promise<string> | null = null
+
 export type WorktreeCreateResult = {
   cwd: string
   branch: string | null
@@ -107,6 +109,14 @@ export type WorktreeBranchOption = {
 export type GitBranchState = {
   currentBranch: string | null
   options: WorktreeBranchOption[]
+}
+
+type OpenScienceContextBundleResponse = {
+  data?: {
+    bundle?: string
+    manifestPath?: string
+  }
+  error?: string
 }
 
 
@@ -1095,6 +1105,31 @@ async function resolveCollaborationModeSettings(
   throw new Error(`${mode === 'plan' ? 'Plan' : 'Default'} mode requires an available model. Wait for models to load and try again.`)
 }
 
+async function fetchOpenScienceDeveloperInstructions(): Promise<string> {
+  const response = await fetch('/codex-api/openscience/context-bundle')
+  let payload: OpenScienceContextBundleResponse | null = null
+  try {
+    payload = await response.json() as OpenScienceContextBundleResponse
+  } catch {
+    payload = null
+  }
+
+  if (!response.ok) {
+    throw new Error(payload?.error || `HTTP ${response.status}`)
+  }
+
+  const bundle = payload?.data?.bundle
+  return typeof bundle === 'string' ? bundle.trim() : ''
+}
+
+async function getOpenScienceDeveloperInstructions(): Promise<string> {
+  if (!openScienceDeveloperInstructionsPromise) {
+    openScienceDeveloperInstructionsPromise = fetchOpenScienceDeveloperInstructions()
+      .catch(() => '')
+  }
+  return openScienceDeveloperInstructionsPromise
+}
+
 export async function startThreadTurn(
   threadId: string,
   text: string,
@@ -1107,6 +1142,7 @@ export async function startThreadTurn(
 ): Promise<string> {
   try {
     const normalizedModel = model?.trim() ?? ''
+    const developerInstructions = await getOpenScienceDeveloperInstructions()
     const finalText = buildTextWithAttachments(text, fileAttachments)
     const input: Array<Record<string, unknown>> = [{ type: 'text', text: finalText }]
     for (const imageUrl of imageUrls) {
@@ -1142,7 +1178,7 @@ export async function startThreadTurn(
         settings: {
           model: collaborationModeSettings.model,
           reasoning_effort: collaborationModeSettings.reasoningEffort,
-          developer_instructions: null,
+          developer_instructions: developerInstructions || null,
         },
       }
     }
