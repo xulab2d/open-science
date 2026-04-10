@@ -174,7 +174,7 @@
             </button>
             <div class="thread-composer-attach-separator" />
             <div class="thread-composer-attach-mode">
-              <span class="thread-composer-attach-mode-label">In-progress send</span>
+              <span class="thread-composer-attach-mode-label">When the assistant is already working</span>
               <div class="thread-composer-attach-mode-buttons">
                 <button
                   class="thread-composer-attach-mode-button"
@@ -183,7 +183,7 @@
                   :disabled="isInteractionDisabled"
                   @click="setActiveInProgressMode('steer')"
                 >
-                  Steer
+                  Redirect
                 </button>
                 <button
                   class="thread-composer-attach-mode-button"
@@ -192,7 +192,7 @@
                   :disabled="isInteractionDisabled"
                   @click="setActiveInProgressMode('queue')"
                 >
-                  Queue
+                  Hold
                 </button>
               </div>
             </div>
@@ -203,12 +203,12 @@
               type="button"
               role="switch"
               :aria-checked="selectedSpeedMode === 'fast'"
-              :aria-label="`Fast mode ${selectedSpeedMode === 'fast' ? 'enabled' : 'disabled'}`"
+              :aria-label="`Quick replies ${selectedSpeedMode === 'fast' ? 'enabled' : 'disabled'}`"
               :disabled="isSpeedToggleDisabled"
               @click="onToggleSpeedMode"
             >
               <span class="thread-composer-attach-setting-copy">
-                <span class="thread-composer-attach-setting-label">Fast mode</span>
+                <span class="thread-composer-attach-setting-label">Quick replies</span>
                 <span class="thread-composer-attach-setting-description">{{ speedModeDescription }}</span>
               </span>
               <span
@@ -225,13 +225,13 @@
               type="button"
               role="switch"
               :aria-checked="isPlanModeSelected"
-              :aria-label="isPlanModeSelected ? 'Disable plan mode' : 'Enable plan mode'"
+              :aria-label="isPlanModeSelected ? 'Disable planning pass' : 'Enable planning pass'"
               :disabled="disabled || !activeThreadId || isTurnInProgress"
               @click="toggleCollaborationMode"
             >
               <span class="thread-composer-attach-setting-copy">
-                <span class="thread-composer-attach-setting-label">Plan mode</span>
-                <span class="thread-composer-attach-setting-description">Agent proposes a plan before acting</span>
+                <span class="thread-composer-attach-setting-label">Planning pass</span>
+                <span class="thread-composer-attach-setting-description">Assistant outlines an approach before taking action</span>
               </span>
               <span
                 class="thread-composer-attach-switch"
@@ -268,7 +268,7 @@
             class="thread-composer-control"
             :model-value="selectedReasoningEffort"
             :options="reasoningOptions"
-            placeholder="Thinking"
+            placeholder="Reasoning depth"
             open-direction="up"
             :disabled="disabled || !activeThreadId || isTurnInProgress"
             @update:model-value="onReasoningEffortSelect"
@@ -324,8 +324,8 @@
             class="thread-composer-submit"
             :class="{ 'thread-composer-submit--queue': isTurnInProgress && activeInProgressMode === 'queue' }"
             type="button"
-            :aria-label="isTurnInProgress && activeInProgressMode === 'queue' ? 'Queue message' : 'Send message'"
-            :title="isTurnInProgress ? `Send as ${activeInProgressMode}` : 'Send'"
+            :aria-label="isTurnInProgress && activeInProgressMode === 'queue' ? 'Hold message' : 'Send message'"
+            :title="isTurnInProgress ? `Send as ${activeInProgressMode === 'steer' ? 'redirect' : 'hold'}` : 'Send'"
             :disabled="!canSubmit"
             @click="onSubmit(isTurnInProgress ? activeInProgressMode : 'steer')"
           >
@@ -540,12 +540,12 @@ const DRAFT_STORAGE_PREFIX = 'codex-web-local.thread-draft.v1.'
 let lastActiveThreadId = ''
 
 const reasoningOptions: Array<{ value: ReasoningEffort; label: string }> = [
-  { value: 'none', label: 'None' },
-  { value: 'minimal', label: 'Minimal' },
-  { value: 'low', label: 'Low' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'high', label: 'High' },
-  { value: 'xhigh', label: 'Extra high' },
+  { value: 'none', label: 'Direct answer' },
+  { value: 'minimal', label: 'Very light reasoning' },
+  { value: 'low', label: 'Light reasoning' },
+  { value: 'medium', label: 'Balanced reasoning' },
+  { value: 'high', label: 'Deep reasoning' },
+  { value: 'xhigh', label: 'Maximum reasoning' },
 ]
 function formatModelLabel(modelId: string): string {
   return modelId.trim().replace(/^gpt/i, 'GPT')
@@ -605,8 +605,8 @@ const speedModeDescription = computed(() => {
     return 'Saving speed setting...'
   }
   return props.selectedSpeedMode === 'fast'
-    ? 'About 1.5x faster, with credits used at 2x'
-    : 'Default speed with normal credit usage'
+    ? 'Faster responses, with higher credit usage'
+    : 'Standard response speed'
 })
 const inProgressMode = computed<'steer' | 'queue'>(() =>
   props.inProgressSubmitMode === 'steer' ? 'steer' : 'queue',
@@ -652,10 +652,10 @@ const dictationDurationLabel = computed(() => {
 
 const placeholderText = computed(() =>
   !props.activeThreadId
-    ? 'Select a thread to send a message'
+    ? 'Choose a conversation to start working'
     : isPlanModeWaitingForModel.value
-      ? 'Loading models for plan mode...'
-      : 'Type a message... (@ for files, / for skills)',
+      ? 'Loading models for planning pass...'
+      : 'Ask the lab assistant anything... (@ for files, / for skills)',
 )
 const hasSubmitContent = computed(() =>
   draft.value.trim().length > 0 || selectedImages.value.length > 0 || fileAttachments.value.length > 0,

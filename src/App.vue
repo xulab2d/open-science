@@ -51,7 +51,7 @@
             type="button"
             @click="router.push({ name: 'skills' }); isMobile && setSidebarCollapsed(true)"
           >
-            Skills Hub
+            Capabilities
           </button>
 
           <SidebarThreadTree :groups="projectGroups" :project-display-name-by-id="projectDisplayNameById"
@@ -158,8 +158,8 @@
                 <span class="sidebar-settings-toggle" :class="{ 'is-on': !sendWithEnter }" />
               </button>
               <button class="sidebar-settings-row" type="button" :title="SETTINGS_HELP.inProgressSendMode" @click="cycleInProgressSendMode">
-                <span class="sidebar-settings-label">When busy, send as</span>
-                <span class="sidebar-settings-value">{{ inProgressSendMode === 'steer' ? 'Steer' : 'Queue' }}</span>
+                <span class="sidebar-settings-label">When busy, new messages</span>
+                <span class="sidebar-settings-value">{{ inProgressSendMode === 'steer' ? 'Redirect' : 'Hold' }}</span>
               </button>
               <button class="sidebar-settings-row" type="button" :title="SETTINGS_HELP.appearance" @click="cycleDarkMode">
                 <span class="sidebar-settings-label">Appearance</span>
@@ -261,32 +261,32 @@
           <template v-else-if="isHomeRoute">
             <div class="content-grid content-grid-home">
               <div class="new-thread-empty">
-                <p class="new-thread-hero">Let's build</p>
+                <p class="new-thread-hero">Lab assistant</p>
                 <ComposerDropdown class="new-thread-folder-dropdown" :model-value="newThreadCwd"
-                  :options="newThreadFolderOptions" placeholder="Choose folder"
+                  :options="newThreadFolderOptions" placeholder="Choose workspace"
                   :enable-search="true"
-                  search-placeholder="Quick search project"
+                  search-placeholder="Search projects"
                   :show-add-action="true"
                   add-action-mode="event"
-                  add-action-label="+ Add new project"
+                  add-action-label="+ Add workspace"
                   :disabled="false" @update:model-value="onSelectNewThreadFolder"
                   @add-action="onStartAddNewProject" />
                 <p v-if="newThreadCwd" class="new-thread-folder-selected" :title="newThreadCwd">
-                  Selected folder: {{ newThreadCwd }}
+                  Selected workspace: {{ newThreadCwd }}
                 </p>
                 <div class="new-thread-folder-actions">
                   <button class="new-thread-folder-action new-thread-folder-action-primary" type="button" @click="onOpenExistingFolder">
-                    Select folder
+                    Choose workspace
                   </button>
                 </div>
                 <div v-if="isExistingFolderPickerOpen" class="new-thread-open-folder">
                   <div class="new-thread-open-folder-header">
-                    <p class="new-thread-open-folder-title">Select folder</p>
+                    <p class="new-thread-open-folder-title">Choose workspace</p>
                     <button class="new-thread-open-folder-close" type="button" @click="onCloseExistingFolderPanel">
                       Cancel
                     </button>
                   </div>
-                  <p class="new-thread-open-folder-label">Current folder</p>
+                  <p class="new-thread-open-folder-label">Current location</p>
                   <div class="new-thread-open-folder-current">
                     <p class="new-thread-open-folder-path" :title="existingFolderBrowsePath || 'Unavailable'">
                       {{ existingFolderBrowsePath || 'Unavailable' }}
@@ -297,7 +297,7 @@
                       :disabled="!existingFolderBrowsePath || !!existingFolderError || isExistingFolderLoading || isOpeningExistingFolder"
                       @click="onConfirmExistingFolder()"
                     >
-                      {{ isOpeningExistingFolder ? 'Opening…' : 'Open' }}
+                      {{ isOpeningExistingFolder ? 'Opening…' : 'Use this workspace' }}
                     </button>
                   </div>
                   <div class="new-thread-open-folder-actions">
@@ -318,7 +318,7 @@
                       :disabled="!existingFolderBrowsePath || isExistingFolderLoading || isOpeningExistingFolder || isCreatingFolder || (!!existingFolderError && !isCreateFolderOpen)"
                       @click="onOpenCreateFolderPanel"
                     >
-                      New folder
+                      New workspace folder
                     </button>
                   </div>
                   <div v-if="isCreateFolderOpen" class="new-thread-open-folder-create">
@@ -328,7 +328,7 @@
                         v-model="createFolderDraft"
                         class="new-thread-open-folder-create-input"
                         type="text"
-                        placeholder="Folder name"
+                        placeholder="Workspace folder name"
                         @keydown.enter.prevent="onCreateFolder"
                         @keydown.esc.prevent="onCloseCreateFolderPanel"
                       />
@@ -408,13 +408,13 @@
                       isLoadingWorktreeBranches
                         ? 'Loading branches…'
                         : selectedWorktreeBranchLabel
-                          ? `New worktree branch will start from ${selectedWorktreeBranchLabel}.`
-                          : 'No Git branches found for this folder.'
+                          ? `The isolated workspace will start from ${selectedWorktreeBranchLabel}.`
+                          : 'No Git branches found for this workspace.'
                     }}
                   </p>
                 </div>
                 <p class="new-thread-runtime-help">
-                  <code>Local project</code> uses the selected folder directly. <code>New worktree</code> creates an isolated Git worktree before the first prompt.
+                  <code>Current workspace</code> uses the selected folder directly. <code>Isolated workspace</code> creates a separate Git workspace before the first request.
                 </p>
                 <div
                   v-if="worktreeInitStatus.phase !== 'idle'"
@@ -573,7 +573,7 @@ const worktreeName = import.meta.env.VITE_WORKTREE_NAME ?? 'unknown'
 const appVersion = import.meta.env.VITE_APP_VERSION ?? 'unknown'
 const SETTINGS_HELP = {
   sendWithEnter: 'When enabled, press Enter to send. When disabled, use Command+Enter to send.',
-  inProgressSendMode: 'If a turn is still running, choose whether a new prompt should steer the current turn or be queued.',
+  inProgressSendMode: 'If the assistant is still working, choose whether a new message redirects the current task or waits in line.',
   appearance: 'Switch between system theme, light mode, and dark mode.',
   chatWidth: 'Choose how wide the conversation column and composer can grow on desktop screens.',
   dictationClickToToggle: 'Use click-to-start and click-to-stop dictation instead of hold-to-talk.',
@@ -872,9 +872,9 @@ const knownThreadIdSet = computed(() => {
 const isHomeRoute = computed(() => route.name === 'home')
 const isSkillsRoute = computed(() => route.name === 'skills')
 const contentTitle = computed(() => {
-  if (isSkillsRoute.value) return 'Skills'
-  if (isHomeRoute.value) return 'New thread'
-  return selectedThread.value?.title ?? 'Choose a thread'
+  if (isSkillsRoute.value) return 'Capabilities'
+  if (isHomeRoute.value) return 'New request'
+  return selectedThread.value?.title ?? 'Choose a conversation'
 })
 const browserHostName =
   typeof window !== 'undefined'
@@ -2613,8 +2613,8 @@ async function submitFirstMessageForNewThread(
     if (newThreadRuntime.value === 'worktree') {
       worktreeInitStatus.value = {
         phase: 'running',
-        title: 'Creating worktree',
-        message: 'Creating a worktree and running setup.',
+        title: 'Preparing isolated workspace',
+        message: 'Creating a separate workspace and running setup.',
       }
       try {
         const created = await createWorktree(newThreadCwd.value, newWorktreeBaseBranch.value)
@@ -2624,8 +2624,8 @@ async function submitFirstMessageForNewThread(
       } catch {
         worktreeInitStatus.value = {
           phase: 'error',
-          title: 'Worktree setup failed',
-          message: 'Unable to create worktree. Try again or switch to Local project.',
+          title: 'Workspace setup failed',
+          message: 'Unable to create the isolated workspace. Try again or switch to Current workspace.',
         }
         return
       }

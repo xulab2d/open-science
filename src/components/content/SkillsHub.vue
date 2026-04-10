@@ -1,13 +1,13 @@
 <template>
   <div class="skills-hub">
     <div class="skills-hub-header">
-      <h2 class="skills-hub-title">Skills Hub</h2>
-      <p class="skills-hub-subtitle">Browse and discover skills from the OpenClaw community</p>
+      <h2 class="skills-hub-title">Capabilities</h2>
+      <p class="skills-hub-subtitle">Browse, install, and manage reusable assistant skills</p>
     </div>
 
     <div class="skills-sync-panel">
       <div class="skills-sync-header">
-        <strong>Skills Sync (GitHub)</strong>
+        <strong>Skill sync (GitHub)</strong>
         <a
           v-if="syncStatus.configured && githubRepoUrl"
           class="skills-sync-badge skills-sync-badge-link"
@@ -22,8 +22,8 @@
       </div>
       <div class="skills-sync-meta">
         <span>Startup: {{ syncStatus.startup.mode }}</span>
-        <span>Branch: {{ syncStatus.startup.branch }}</span>
-        <span>Action: {{ syncStatus.startup.lastAction }}</span>
+        <span>Version line: {{ syncStatus.startup.branch }}</span>
+        <span>Last action: {{ syncStatus.startup.lastAction }}</span>
       </div>
       <div v-if="syncStatus.startup.lastError" class="skills-sync-error">
         {{ syncStatus.startup.lastError }}
@@ -39,9 +39,9 @@
         <code>{{ deviceLogin.user_code }}</code>
       </div>
       <div class="skills-sync-actions">
-        <button v-if="!syncStatus.loggedIn" class="skills-hub-sort" type="button" @click="startGithubFirebaseLogin">Login with GitHub</button>
-        <button v-if="!syncStatus.loggedIn" class="skills-hub-sort" type="button" @click="startGithubLogin">Device Login</button>
-        <button v-if="syncStatus.loggedIn" class="skills-hub-sort" type="button" @click="logoutGithub" :disabled="isSyncActionInFlight">Logout GitHub</button>
+        <button v-if="!syncStatus.loggedIn" class="skills-hub-sort" type="button" @click="startGithubFirebaseLogin">Sign in with GitHub</button>
+        <button v-if="!syncStatus.loggedIn" class="skills-hub-sort" type="button" @click="startGithubLogin">Device sign-in</button>
+        <button v-if="syncStatus.loggedIn" class="skills-hub-sort" type="button" @click="logoutGithub" :disabled="isSyncActionInFlight">Sign out of GitHub</button>
         <button class="skills-hub-sort" type="button" @click="startupSkillsSync" :disabled="isSyncActionInFlight">{{ isStartupSyncInFlight ? 'Syncing...' : 'Startup Sync' }}</button>
         <button class="skills-hub-sort" type="button" @click="pullSkillsSync" :disabled="isSyncActionInFlight">{{ isPullInFlight ? 'Pulling...' : 'Pull' }}</button>
         <button v-if="syncStatus.loggedIn" class="skills-hub-sort" type="button" @click="pushSkillsSync" :disabled="!syncStatus.configured || isSyncActionInFlight">{{ isPushInFlight ? 'Pushing...' : 'Push' }}</button>
@@ -73,7 +73,7 @@
           v-model="query"
           class="skills-hub-search"
           type="text"
-          placeholder="Search skills... (e.g. flight, docker, react)"
+          placeholder="Search skills... (e.g. plotting, summaries, Slack)"
           @keyup.enter.prevent="onSearchSubmit"
         />
         <button class="skills-hub-search-btn" type="button" @click="onSearchSubmit">Search</button>
