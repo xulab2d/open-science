@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dist-cli/
+output/
+.playwright-cli/
+*.tsbuildinfo
+
+package-lock.json
+pnpm-lock.yaml
+.codex/
+.env.local
+
+package.json

@@ -1,0 +1,71 @@
+{
+  "name": "xulab-codexui",
+  "version": "0.1.78",
+  "description": "Xu Lab's Codex web UI fork for browser-based remote access behind external auth",
+  "type": "module",
+  "license": "MIT",
+  "author": "Pavel Voronin, Igor Levochkin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/friuns2/codexui.git"
+  },
+  "homepage": "https://github.com/friuns2/codexui#readme",
+  "bugs": {
+    "url": "https://github.com/friuns2/codexui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "codex",
+    "openai",
+    "web-ui",
+    "remote",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "xulab-codexui": "dist-cli/index.js",
+    "codexui": "dist-cli/index.js"
+  },
+  "files": [
+    "dist/",
+    "dist-cli/"
+  ],
+  "scripts": {
+    "dev": "npm install && CODEXUI_SANDBOX_MODE=danger-full-access CODEXUI_APPROVAL_POLICY=never vite",
+    "dev:open": "npm run build:cli && sh -c 'npm run dev & VPID=$!; node dist-cli/index.js --open-project \"${1:-.}\"; wait $VPID' --",
+    "build:frontend": "vue-tsc --noEmit && vite build",
+    "build:cli": "tsup",
+    "build": "npm run build:frontend && npm run build:cli",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "express": "^5.1.0",
+    "firebase": "^12.2.1",
+    "highlight.js": "^11.11.1",
+    "qrcode-terminal": "^0.12.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.2",
+    "@types/qrcode-terminal": "^0.12.2",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "playwright": "^1.59.1",
+    "tailwindcss": "^4.1.18",
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.6.4",
+    "vue-tsc": "^2.2.0"
+  }
+}
