@@ -1,0 +1,1212 @@
+{
+  "date": "2026-04-11",
+  "purpose": "Promote high-value arXiv and deck leads into explicit provenance-backed graph facts.",
+  "node_updates": [
+    {
+      "id": "paper:arxiv_2304_08470v2",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; also has Nature journal reference on arXiv page."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2304.08470",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2402_03294v2",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2402.03294",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2501_02525v3",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2501.02525",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2502_21153v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2504_07082v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; arXiv page lists PRL 2025 journal reference."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2511_16641v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.16641",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2512_03622v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2601_18508v3",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2602_04561v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; arXiv page lists PRL 2026 journal reference."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "concept:quantum_geometry",
+      "type": "Concept",
+      "label": "quantum geometry",
+      "aliases": [
+        "Berry curvature",
+        "quantum metric"
+      ],
+      "summary": "Band-wavefunction geometry, including Berry curvature and quantum metric, that can tune stability of fractional Chern and competing crystalline phases.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "mechanism:multiband_correlations",
+      "type": "Mechanism",
+      "label": "multiband correlations",
+      "aliases": [
+        "higher-band correlations",
+        "interband interactions"
+      ],
+      "summary": "Correlations involving higher moire bands that can renormalize or stabilize fractional Chern states beyond one-band exact diagonalization.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.16641",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "observable:transient_optical_spectroscopy",
+      "type": "Observable",
+      "label": "transient optical spectroscopy",
+      "aliases": [
+        "pump-probe optical spectroscopy",
+        "ultrafast optical spectroscopy"
+      ],
+      "summary": "Nonequilibrium optical probe that can reveal fractional states and dynamics not visible in static sensing or transport.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "observable:pump_probe_circular_dichroism",
+      "type": "Observable",
+      "label": "pump-probe circular dichroism",
+      "aliases": [
+        "pump-probe CD",
+        "transient circular dichroism"
+      ],
+      "summary": "Time-resolved magnetic/valley optical probe used to infer hidden or weak magnetic signatures in twisted MoTe2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "phenomenon:chiral_superconductivity",
+      "type": "Phenomenon",
+      "label": "chiral superconductivity",
+      "aliases": [
+        "p+ip superconductivity",
+        "topological superconductivity"
+      ],
+      "summary": "Superconducting phase with broken time-reversal/chiral topology, proposed near anomalous Hall and fractional Chern phases in twisted MoTe2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "phenomenon:fti",
+      "type": "Phenomenon",
+      "label": "fractional topological insulator candidate",
+      "aliases": [
+        "FTI",
+        "fractional topological insulator",
+        "putative FTI"
+      ],
+      "summary": "Time-reversal-related fractional topological phase candidate, currently requiring careful distinction between magnetic signatures and helical-edge transport confirmation.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "phenomenon:topological_electronic_crystal",
+      "type": "Phenomenon",
+      "label": "topological electronic crystal",
+      "aliases": [
+        "TEC",
+        "QAHC",
+        "topological charge crystal"
+      ],
+      "summary": "Competing correlated topological crystalline phase reported as a remote-layer-tuned alternative to FQAH/CFL behavior in moire MoTe2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2304_fqah_streda_optical_mcd",
+      "type": "Claim",
+      "label": "MCD and trion PL support zero-field FQAH states in 3.7 degree twisted MoTe2 at nu=-2/3 and -3/5.",
+      "aliases": [
+        "Cai 2023 FQAH optical signatures",
+        "FQAH Streda PL"
+      ],
+      "summary": "The arXiv/Nature report states that MCD reveals robust ferromagnetic fractional states and trion PL Landau-fan shifts at nu=-2/3 and -3/5 matching Streda dispersions for fractionally quantized Hall conductance; nu=-1 behaves as a C=-1 QAH state.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2304.08470",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "type": "Claim",
+      "label": "2.1 degree twisted MoTe2 shows transport evidence for a fractional QSH insulator at nu=3.",
+      "aliases": [
+        "nu=3 FQSH",
+        "fractional QSH edge conductance"
+      ],
+      "summary": "The arXiv report describes a fractional QSH state at nu=3 with zero anomalous Hall response and edge conductance 3/2 G0 per edge, alongside integer QSH states at nu=2, 4, and 6.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2402.03294",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2501_fqsh_low_field_trsb",
+      "type": "Claim",
+      "label": "The reported nu=3 FQSH regime can show low-field time-reversal-symmetry breaking despite zero Hall response above about 20 mT.",
+      "aliases": [
+        "TRSB FQSH nuance",
+        "low-field anomalous Hall at nu=3"
+      ],
+      "summary": "The 2025 arXiv report frames the nu=3 state as a phase with zero Hall resistance above roughly 20 mT but finite anomalous Hall response and hysteresis at very low fields, implying spontaneous time-reversal-symmetry breaking in part of the FQSH phenomenology.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2501.02525",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2502_hidden_fractional_states_transient_optics",
+      "type": "Claim",
+      "label": "Transient optical spectroscopy can reveal many hidden fractional states in tMoTe2 that static optical sensing or transport misses.",
+      "aliases": [
+        "hidden fractional states",
+        "pump-probe hidden states"
+      ],
+      "summary": "The arXiv report says pump-probe optical spectroscopy reveals nearly 20 hidden fractional states between nu=-1 and -3, including candidate non-Abelian and time-reversal-symmetric topological states that are absent in static optical sensing or transport.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2502_hidden_state_melting_timescales",
+      "type": "Claim",
+      "label": "Hidden tMoTe2 fractional states can have distinct fast and slow melting/recovery timescales.",
+      "aliases": [
+        "hidden state dynamics",
+        "2-4 ps and 180-270 ps melting"
+      ],
+      "summary": "The hidden-state arXiv report identifies fast 2-4 ps electronic thermalization and slower 180-270 ps phonon heating timescales in the recovery dynamics.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2504_chiral_superconductivity_signatures",
+      "type": "Claim",
+      "label": "Twisted MoTe2 superconductivity near an anomalous Hall metal and FCI regime is argued to be chiral.",
+      "aliases": [
+        "chiral superconductivity indicators",
+        "SC near FCI"
+      ],
+      "summary": "The 2025 arXiv/PRL report argues that spin/valley polarization, anomalous Hall hysteresis, adjacency to a fractional Chern insulator, and a narrow zero-gate-field dome together indicate chiral superconductivity.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2504_pip_intravalley_pairing",
+      "type": "Claim",
+      "label": "A Kohn-Luttinger/RPA treatment finds dominant p+ip intravalley pairing at zero gate field in twisted MoTe2.",
+      "aliases": [
+        "p+ip intravalley pairing",
+        "Kohn-Luttinger twisted MoTe2"
+      ],
+      "summary": "The theory identifies a dominant intravalley p+ip pairing dome at zero gate field, contrasting with weaker time-reversal-symmetric intervalley pairing at finite gate field.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2511_multiband_correlations_mote2_fci",
+      "type": "Claim",
+      "label": "Higher moire bands can materially change FCI stability in twisted MoTe2.",
+      "aliases": [
+        "multiband FCI stability",
+        "DSRG MoTe2"
+      ],
+      "summary": "The DSRG arXiv report argues that higher-band effects cannot be ignored: at nu=1/3 they reduce the FCI gap, while at nu=2/3 dynamic multiband correlations can stabilize the FCI at larger twist angles.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.16641",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2512_remote_layer_topological_crystals",
+      "type": "Claim",
+      "label": "A remote layer can tune moire MoTe2 from FQAH/CFL behavior toward topological electronic crystals.",
+      "aliases": [
+        "remote layer quantum geometry tuning",
+        "TEC versus FQAH"
+      ],
+      "summary": "The 2025 arXiv report compares A-A and A-AB trilayer regions and says the remote B layer changes quantum geometry before charge transfer, replacing A-A CFL/FQAH behavior with topological electronic crystal and quantum anomalous Hall crystal states at selected fractional fillings.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2601_putative_fti_magnetic_signature",
+      "type": "Claim",
+      "label": "A putative FTI signature in twisted MoTe2 is reported as an Ising-antiferromagnetic nu=-4/3 state with millitesla first-order transitions.",
+      "aliases": [
+        "nu=-4/3 putative FTI",
+        "Ising AFM FTI signature"
+      ],
+      "summary": "The 2026 arXiv report uses pump-probe circular dichroism to identify a nu=-4/3 state at 3.7 and 3.9 degrees with no net magnetization and first-order transitions around 2-6 mT to partially valley-polarized states, while noting absence in 4.0 and 3.3 degree samples.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "question:promoted_2601_fti_needs_edge_confirmation",
+      "type": "OpenQuestion",
+      "label": "Does the putative nu=-4/3 FTI show helical edge quantization or direct spatial structure?",
+      "aliases": [
+        "FTI edge confirmation",
+        "putative FTI unresolved evidence"
+      ],
+      "summary": "The magnetic signature is suggestive but not equivalent to direct helical-edge transport or imaging confirmation; future interpretation should keep the state labeled putative unless stronger evidence is available.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2602_optical_minus_one_third_fqah",
+      "type": "Claim",
+      "label": "PL and RMCD optically detect a fragile nu=-1/3 FQAH state in twisted MoTe2.",
+      "aliases": [
+        "optical -1/3 FQAH",
+        "nu=-1/3 RMCD PL"
+      ],
+      "summary": "The 2026 arXiv/PRL report says PL and RMCD identify ferromagnetic states at nu=-1, -2/3, and -1/3, with Curie temperatures about 11 K, 3.5 K, and 2.4 K; the nu=-1/3 state has a narrower electric-field range and lower temperature scale.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_2602_minus_one_third_topological_pl_dispersion",
+      "type": "Claim",
+      "label": "The nu=-1/3 PL spectrum disperses with out-of-plane magnetic field, supporting a nontrivial topological interpretation.",
+      "aliases": [
+        "nu=-1/3 PL dispersion",
+        "topological origin of -1/3"
+      ],
+      "summary": "The optical -1/3 FQAH report states that PL spectra at nu=-1/3 disperse with increasing out-of-plane magnetic field and that exact-diagonalization calculations support a topologically nontrivial interpretation.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "type": "Claim",
+      "label": "D93 Run2 deck reports a near-nu=-2 RMCD magnetic/saturation feature that strengthens with displacement field but lacks clear hysteresis.",
+      "aliases": [
+        "D93 nu=-2 RMCD feature",
+        "D93 D-field magnetic transition"
+      ],
+      "summary": "Slides 18-22 of the D93 Run2 deck report a possible magnetic feature near nu=-2 and n=-9.8, increasing distinctness with D field and saturation-like diagonal structure, while still noting no clear hysteresis at nu=-2 after signal optimization.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+          "method": "Codex curation pass over extracted deck text"
+        },
+        {
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_Yifan_D93_Run2_attodry522/CWB_Yifan_D93_Run2_attodry522.pptx",
+          "method": "original deck path"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "question:promoted_d93_vminus2_rmcd_no_hysteresis",
+      "type": "OpenQuestion",
+      "label": "Why does D93 show near-nu=-2 magnetic/saturation contrast without robust hysteresis?",
+      "aliases": [
+        "D93 nu=-2 no hysteresis",
+        "D93 saturation versus hysteresis"
+      ],
+      "summary": "The deck suggests checking wavelength sensitivity, spot selection outside contacts, and closer phase-diagram mapping before interpreting the feature as a robust hysteretic magnetic state.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+          "method": "Codex curation inference from extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_deck_d6_vminus23_fractional_state_dfield_sensitive",
+      "type": "Claim",
+      "label": "D6 deck reports a nu=-2/3 fractional optical feature near true D=0 that is strongly displacement-field sensitive.",
+      "aliases": [
+        "D6 nu=-2/3 fractional state",
+        "D6 D-field sensitivity"
+      ],
+      "summary": "Slides 14-16 of the D6 Attodry911 deck report a potential trion fractional state, then a clearer nu=-2/3 state at a new spot; the clearest signal is near D=0 and the cuts show a large transition between positive and negative D.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slides-14-16",
+          "method": "Codex curation pass over extracted deck text"
+        },
+        {
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D6_Attodry911/CWB_D6_Attodry911.pptx",
+          "method": "original deck path"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "claim:promoted_deck_c5_fractional_features_and_dots",
+      "type": "Claim",
+      "label": "C5 deck treats bilayer trion fractional features and hBN-hole dot staircases as actionable optical signals.",
+      "aliases": [
+        "C5 fractional PL features",
+        "C5 dot staircase"
+      ],
+      "summary": "The C5 deck reports clear bilayer trion emission with visible fractional features, many fractions below -1/2, dot-like spectra in hBN holes, a staircase at B=1.2 T, and dispersion that needs better data near 3.1 degrees.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/933634713410bb59.json#slides-5-18",
+          "method": "Codex curation pass over extracted deck text"
+        },
+        {
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB&WJL_C5_Attodry911/WJL&CWB_C5_Attodry911.pptx",
+          "method": "original deck path"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:paper_arxiv_2304_08470v2_supports_promoted_2304_fqah_streda_optical_mcd",
+      "source": "paper:arxiv_2304_08470v2",
+      "target": "claim:promoted_2304_fqah_streda_optical_mcd",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted optical/MCD/Streda FQAH claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2304.08470",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_2304_fqah_claim_mentions_fqah",
+      "source": "claim:promoted_2304_fqah_streda_optical_mcd",
+      "target": "phenomenon:fqah",
+      "relation": "mentions",
+      "claim": "The claim is a foundational optical/MCD FQAH result.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2304.08470",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_2304_fqah_claim_mentions_rmcd",
+      "source": "claim:promoted_2304_fqah_streda_optical_mcd",
+      "target": "observable:rmcd",
+      "relation": "mentions",
+      "claim": "MCD/RMCD-type magneto-optics are part of the evidence chain.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2304.08470",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_2304_fqah_claim_mentions_pl",
+      "source": "claim:promoted_2304_fqah_streda_optical_mcd",
+      "target": "observable:pl",
+      "relation": "mentions",
+      "claim": "Trion PL is the filling-sensitive Landau-fan probe in the claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2304.08470",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2402_03294v2_supports_promoted_2402_fqsh_nu3_edge_conductance",
+      "source": "paper:arxiv_2402_03294v2",
+      "target": "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted nu=3 fractional QSH transport claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2402.03294",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_2402_fqsh_claim_mentions_fqsh",
+      "source": "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "target": "phenomenon:fqsh",
+      "relation": "mentions",
+      "claim": "The claim is about fractional QSH physics in twisted MoTe2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2402.03294",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2501_02525v3_supports_promoted_2501_fqsh_low_field_trsb",
+      "source": "paper:arxiv_2501_02525v3",
+      "target": "claim:promoted_2501_fqsh_low_field_trsb",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted low-field TRSB nuance for the nu=3 FQSH regime.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2501.02525",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_2501_fqsh_trsb_qualifies_2402_fqsh",
+      "source": "claim:promoted_2501_fqsh_low_field_trsb",
+      "target": "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "relation": "qualifies_claim",
+      "claim": "The TRSB report qualifies the simpler time-reversal-symmetric FQSH framing.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2501.02525",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2502_21153v1_supports_promoted_hidden_fractional_states",
+      "source": "paper:arxiv_2502_21153v1",
+      "target": "claim:promoted_2502_hidden_fractional_states_transient_optics",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted hidden fractional states claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2502_21153v1_supports_promoted_hidden_state_timescales",
+      "source": "paper:arxiv_2502_21153v1",
+      "target": "claim:promoted_2502_hidden_state_melting_timescales",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted hidden-state dynamics timescale claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:hidden_fractional_states_measured_by_transient_optics",
+      "source": "claim:promoted_2502_hidden_fractional_states_transient_optics",
+      "target": "observable:transient_optical_spectroscopy",
+      "relation": "measured_by",
+      "claim": "The hidden-state claim depends on transient optical spectroscopy.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:hidden_fractional_states_mentions_fqah_fqsh",
+      "source": "claim:promoted_2502_hidden_fractional_states_transient_optics",
+      "target": "phenomenon:fqsh",
+      "relation": "mentions",
+      "claim": "The hidden-state claim includes candidate FQSH/FTI physics between known FQAH fillings.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2502.21153",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2504_07082v1_supports_promoted_chiral_sc_signatures",
+      "source": "paper:arxiv_2504_07082v1",
+      "target": "claim:promoted_2504_chiral_superconductivity_signatures",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted chiral superconductivity signatures claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2504_07082v1_supports_promoted_pip_pairing",
+      "source": "paper:arxiv_2504_07082v1",
+      "target": "claim:promoted_2504_pip_intravalley_pairing",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted p+ip intravalley pairing claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_chiral_sc_mentions_chiral_superconductivity",
+      "source": "claim:promoted_2504_chiral_superconductivity_signatures",
+      "target": "phenomenon:chiral_superconductivity",
+      "relation": "mentions",
+      "claim": "The claim concerns chiral superconductivity in twisted MoTe2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:chiral_sc_similar_to_fqah_neighborhood",
+      "source": "phenomenon:chiral_superconductivity",
+      "target": "phenomenon:fqah",
+      "relation": "similar_to",
+      "claim": "The superconducting regime is discussed as proximate to anomalous Hall and FCI/FQAH physics rather than as an isolated superconducting dome.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2504.07082",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2511_16641v1_supports_promoted_multiband_correlations",
+      "source": "paper:arxiv_2511_16641v1",
+      "target": "claim:promoted_2511_multiband_correlations_mote2_fci",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted multiband correlation claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.16641",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_multiband_claim_explains_fci_stability",
+      "source": "mechanism:multiband_correlations",
+      "target": "claim:promoted_2511_multiband_correlations_mote2_fci",
+      "relation": "explains",
+      "claim": "The mechanism explains why one-band FCI stability estimates may fail.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.16641",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2512_03622v1_supports_promoted_remote_layer_tecs",
+      "source": "paper:arxiv_2512_03622v1",
+      "target": "claim:promoted_2512_remote_layer_topological_crystals",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted remote-layer topological crystal claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:remote_layer_tecs_mentions_quantum_geometry",
+      "source": "claim:promoted_2512_remote_layer_topological_crystals",
+      "target": "concept:quantum_geometry",
+      "relation": "mentions",
+      "claim": "The remote-layer claim is framed as quantum-geometry tuning.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:remote_layer_tecs_mentions_topological_electronic_crystal",
+      "source": "claim:promoted_2512_remote_layer_topological_crystals",
+      "target": "phenomenon:topological_electronic_crystal",
+      "relation": "mentions",
+      "claim": "The remote-layer claim introduces topological electronic crystals as competing phases.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:topological_electronic_crystal_analogous_to_fqah",
+      "source": "phenomenon:topological_electronic_crystal",
+      "target": "phenomenon:fqah",
+      "relation": "analogous_to",
+      "claim": "Both are correlated topological outcomes in moire MoTe2, but the electronic crystal competes with or replaces FQAH/CFL behavior in the remote-layer-tuned regime.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2512.03622",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2601_18508v3_supports_promoted_fti_magnetic_signature",
+      "source": "paper:arxiv_2601_18508v3",
+      "target": "claim:promoted_2601_putative_fti_magnetic_signature",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted putative FTI magnetic-signature claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_fti_signature_measured_by_pump_probe_cd",
+      "source": "claim:promoted_2601_putative_fti_magnetic_signature",
+      "target": "observable:pump_probe_circular_dichroism",
+      "relation": "measured_by",
+      "claim": "The magnetic signature is inferred with pump-probe circular dichroism.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_fti_signature_mentions_fti",
+      "source": "claim:promoted_2601_putative_fti_magnetic_signature",
+      "target": "phenomenon:fti",
+      "relation": "mentions",
+      "claim": "The claim is a putative FTI signature, not a settled direct FTI proof.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_fti_signature_needs_edge_confirmation",
+      "source": "claim:promoted_2601_putative_fti_magnetic_signature",
+      "target": "question:promoted_2601_fti_needs_edge_confirmation",
+      "relation": "needs_followup",
+      "claim": "The magnetic signature should be followed by edge-transport or imaging confirmation before treating it as a settled FTI.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2601.18508",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2602_04561v1_supports_promoted_minus_one_third_fqah",
+      "source": "paper:arxiv_2602_04561v1",
+      "target": "claim:promoted_2602_optical_minus_one_third_fqah",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted optical nu=-1/3 FQAH claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:paper_arxiv_2602_04561v1_supports_promoted_minus_one_third_pl_dispersion",
+      "source": "paper:arxiv_2602_04561v1",
+      "target": "claim:promoted_2602_minus_one_third_topological_pl_dispersion",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted nu=-1/3 PL-dispersion/topology claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_minus_one_third_claim_mentions_fqah",
+      "source": "claim:promoted_2602_optical_minus_one_third_fqah",
+      "target": "phenomenon:fqah",
+      "relation": "mentions",
+      "claim": "The claim concerns a nu=-1/3 FQAH state.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_minus_one_third_claim_measured_by_pl",
+      "source": "claim:promoted_2602_optical_minus_one_third_fqah",
+      "target": "observable:pl",
+      "relation": "measured_by",
+      "claim": "PL is one of the optical probes used to identify the nu=-1/3 state.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_minus_one_third_claim_measured_by_rmcd",
+      "source": "claim:promoted_2602_optical_minus_one_third_fqah",
+      "target": "observable:rmcd",
+      "relation": "measured_by",
+      "claim": "RMCD is one of the optical probes used to identify the nu=-1/3 state.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_minus_one_third_pl_dispersion_qualifies_minus_one_third_fqah",
+      "source": "claim:promoted_2602_minus_one_third_topological_pl_dispersion",
+      "target": "claim:promoted_2602_optical_minus_one_third_fqah",
+      "relation": "qualifies_claim",
+      "claim": "The field-dispersing PL spectrum is one of the arguments for topological origin rather than only ferromagnetic order.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.04561",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:evidence_deck_408a3288187090a8_supports_promoted_d93_vminus2_feature",
+      "source": "evidence:deck_408a3288187090a8",
+      "target": "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "relation": "supports_claim",
+      "claim": "The D93 Run2 deck supports the promoted nu=-2 magnetic/saturation feature claim.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_d93_vminus2_feature_needs_followup_no_hysteresis",
+      "source": "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "target": "question:promoted_d93_vminus2_rmcd_no_hysteresis",
+      "relation": "needs_followup",
+      "claim": "The D93 feature is scientifically interesting but unresolved because hysteresis was not robust.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+          "method": "Codex curation inference from extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_d93_vminus2_feature_mentions_d93_project",
+      "source": "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "target": "project:d93_run2",
+      "relation": "mentions",
+      "claim": "The promoted deck fact belongs to D93 Run2.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_d93_vminus2_feature_mentions_rmcd",
+      "source": "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "target": "observable:rmcd",
+      "relation": "mentions",
+      "claim": "The D93 claim is based on RMCD contrast and saturation/hysteresis checks.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:evidence_deck_8d3f501aa323b164_supports_promoted_d6_vminus23",
+      "source": "evidence:deck_8d3f501aa323b164",
+      "target": "claim:promoted_deck_d6_vminus23_fractional_state_dfield_sensitive",
+      "relation": "supports_claim",
+      "claim": "The D6 deck supports the promoted nu=-2/3 D-field-sensitive fractional feature claim.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slides-14-16",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_d6_vminus23_mentions_pl",
+      "source": "claim:promoted_deck_d6_vminus23_fractional_state_dfield_sensitive",
+      "target": "observable:pl",
+      "relation": "mentions",
+      "claim": "The D6 deck fact is an optical PL/trion fractional feature.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slides-14-16",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_d6_vminus23_mentions_displacement_field",
+      "source": "claim:promoted_deck_d6_vminus23_fractional_state_dfield_sensitive",
+      "target": "concept:displacement_field",
+      "relation": "mentions",
+      "claim": "The D6 deck fact emphasizes strong displacement-field sensitivity.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slides-14-16",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:evidence_deck_933634713410bb59_supports_promoted_c5_fractional_dots",
+      "source": "evidence:deck_933634713410bb59",
+      "target": "claim:promoted_deck_c5_fractional_features_and_dots",
+      "relation": "supports_claim",
+      "claim": "The C5 deck supports the promoted fractional-feature and dot-staircase claim.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/933634713410bb59.json#slides-5-18",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_c5_fractional_dots_mentions_pl",
+      "source": "claim:promoted_deck_c5_fractional_features_and_dots",
+      "target": "observable:pl",
+      "relation": "mentions",
+      "claim": "The C5 deck fact is based on PL/trion and dot-like optical spectra.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/933634713410bb59.json#slides-5-18",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    },
+    {
+      "id": "edge:promoted_c5_fractional_dots_mentions_moire_filling",
+      "source": "claim:promoted_deck_c5_fractional_features_and_dots",
+      "target": "concept:moire_filling",
+      "relation": "mentions",
+      "claim": "The C5 deck fact includes fractional filling structure below -1/2.",
+      "provenance": [
+        {
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/933634713410bb59.json#slides-5-18",
+          "method": "Codex curation pass over extracted deck text"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-11"
+    }
+  ]
+}

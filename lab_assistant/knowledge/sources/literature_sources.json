@@ -1,0 +1,25 @@
+{
+  "collections": [
+    {
+      "id": "two_d_magnets_papers",
+      "label": "2D magnets paper/manuscript reservoir",
+      "kind": "literature",
+      "root": "/Volumes/Xu Lab/2D Magnets - Papers and Summaries/Papers",
+      "include_extensions": [".pdf", ".pptx", ".docx"]
+    },
+    {
+      "id": "two_d_magnets_theory",
+      "label": "2D magnets theory notes and summaries",
+      "kind": "literature",
+      "root": "/Volumes/Xu Lab/2D Magnets - Papers and Summaries/Theory",
+      "include_extensions": [".pdf", ".pptx", ".docx", ".tex"]
+    },
+    {
+      "id": "journal_club_papers",
+      "label": "2D Materials Journal Club paper PDFs",
+      "kind": "literature",
+      "root": "/Volumes/Xu Lab/2D Materials Journal Club",
+      "include_extensions": [".pdf"]
+    }
+  ]
+}

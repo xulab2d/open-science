@@ -3682,6 +3682,7 @@ export function useDesktopState() {
     imageUrls: string[] = [],
     skills: Array<{ name: string; path: string }> = [],
     fileAttachments: FileAttachment[] = [],
+    projectId = '',
   ): Promise<string> {
     if (isUpdatingSpeedMode.value) return ''
 
@@ -3735,7 +3736,7 @@ export function useDesktopState() {
       const capturedThreadId = threadId
       const capturedCwd = targetCwd || null
       const capturedPrompt = nextText
-      void startTurnForThread(threadId, nextText, imageUrls, skills, fileAttachments)
+      void startTurnForThread(threadId, nextText, imageUrls, skills, fileAttachments, projectId)
         .catch((unknownError) => {
           shouldAutoScrollOnNextAgentEvent = false
           setThreadInProgress(threadId, false)
@@ -3771,6 +3772,7 @@ export function useDesktopState() {
     imageUrls: string[] = [],
     skills: Array<{ name: string; path: string }> = [],
     fileAttachments: FileAttachment[] = [],
+    projectId = '',
   ): Promise<void> {
     const reasoningEffort = selectedReasoningEffort.value
     const collaborationMode = selectedCollaborationMode.value
@@ -3806,6 +3808,7 @@ export function useDesktopState() {
           skills.length > 0 ? skills : undefined,
           fileAttachments,
           collaborationMode,
+          projectId,
         )
       } catch (unknownError) {
         if (modelId && modelId !== MODEL_FALLBACK_ID && isUnsupportedChatGptModelError(unknownError)) {
@@ -3828,6 +3831,7 @@ export function useDesktopState() {
             skills.length > 0 ? skills : undefined,
             fileAttachments,
             collaborationMode,
+            projectId,
           )
         } else {
           throw unknownError

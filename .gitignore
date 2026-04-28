@@ -37,4 +37,7 @@ lab_assistant/tests/__pycache__/
 old_openclaw/_scratch/
 old_openclaw/out/
 old_openclaw/agents/
+old_openclaw/index/
+old_openclaw/state/
+old_openclaw/reports/
 old_openclaw/**/__pycache__/

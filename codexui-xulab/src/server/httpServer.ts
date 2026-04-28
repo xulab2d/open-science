@@ -211,7 +211,16 @@ export function createServer(): ServerInstance {
 
   // 7. Static files from Vue build
   if (hasFrontendAssets) {
-    app.use(express.static(distDir))
+    app.use(express.static(distDir, {
+      setHeaders: (res, servedPath) => {
+        const lowerPath = servedPath.toLowerCase()
+        if (lowerPath.endsWith('.html') || lowerPath.endsWith('.webmanifest') || lowerPath.endsWith('/sw.js')) {
+          res.setHeader('Cache-Control', 'private, no-store')
+          return
+        }
+        res.setHeader('Cache-Control', 'private, no-store')
+      },
+    }))
   }
 
   // 8. SPA fallback
@@ -230,6 +239,7 @@ export function createServer(): ServerInstance {
       return
     }
 
+    res.setHeader('Cache-Control', 'private, no-store')
     res.sendFile(spaEntryFile, (error) => {
       if (!error) return
       if (!res.headersSent) {

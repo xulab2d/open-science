@@ -110,18 +110,20 @@ function onResizeHandleMouseDown(event: MouseEvent): void {
 @reference "tailwindcss";
 
 .desktop-layout {
-  @apply grid bg-slate-100 text-slate-900 overflow-hidden;
+  @apply grid text-slate-900 overflow-hidden;
+  background: rgb(244 246 245);
   height: 100vh;
   height: 100dvh;
   grid-template-columns: var(--layout-columns);
 }
 
 .desktop-sidebar {
-  @apply bg-slate-100 min-h-0 overflow-hidden;
+  @apply min-h-0 overflow-hidden;
+  background: transparent;
 }
 
 .desktop-resize-handle {
-  @apply relative w-px cursor-col-resize bg-slate-300 hover:bg-slate-400 transition;
+  @apply relative w-px cursor-col-resize bg-teal-200/70 hover:bg-teal-400 transition;
 }
 
 .desktop-resize-handle::before {
@@ -130,7 +132,8 @@ function onResizeHandleMouseDown(event: MouseEvent): void {
 }
 
 .desktop-main {
-  @apply bg-white min-h-0 overflow-y-hidden overflow-x-visible;
+  @apply min-h-0 overflow-y-hidden overflow-x-visible;
+  background: transparent;
 }
 
 .mobile-drawer-backdrop {
@@ -138,7 +141,8 @@ function onResizeHandleMouseDown(event: MouseEvent): void {
 }
 
 .mobile-drawer {
-  @apply absolute top-0 left-0 bottom-0 w-[85vw] max-w-80 bg-slate-100 overflow-hidden shadow-2xl;
+  @apply absolute top-0 left-0 bottom-0 w-[85vw] max-w-80 overflow-hidden shadow-2xl;
+  background: rgb(244 246 245);
 }
 
 .drawer-enter-active,

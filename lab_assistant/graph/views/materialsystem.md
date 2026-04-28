@@ -1,0 +1,112 @@
+# MaterialSystem
+
+## angle-aligned MoTe2/WSe2 moire heterobilayer
+- ID: `material:mote2_wse2_moire_heterobilayer`
+- Confidence: medium
+- Summary: Moire heterobilayer platform where displacement field tunes Mott, QAH, and antiferromagnetic valley-coherent states at fixed filling.
+- Aliases: MoTe2/WSe2 heterobilayer, moire MoTe2/WSe2
+- Provenance: https://arxiv.org/abs/2602.15466 (Codex curation pass from arXiv abstract)
+
+Related edges:
+- `claim:promoted_2602_mote2_wse2_consecutive_tpts` -mentions-> `material:mote2_wse2_moire_heterobilayer`: The consecutive phase transitions are reported in angle-aligned MoTe2/WSe2 moire heterobilayers.
+
+## twisted MoTe2
+- ID: `material:twisted_mote2`
+- Confidence: high
+- Summary: Moiré MoTe2 platform where topology, magnetism, displacement-field control, and optical response are tightly coupled.
+- Aliases: moire MoTe2, tMoTe2
+- Provenance: lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md (Codex seed from existing synthesis)
+
+Related edges:
+- `claim:deck_933634713410bb59_slide_9_single_gate_effect_on_this_peak_probably_gating_is_not_e` -mentions-> `material:twisted_mote2`: Deck-derived claim is relevant to material:twisted_mote2.
+- `claim:deck_edcc1b74e2ccde78_slide_6_it_seems_at_high_single_gate_voltage_will_cause_the_tmot` -mentions-> `material:twisted_mote2`: Deck-derived claim is relevant to material:twisted_mote2.
+- `evidence:deck_071d34b95706f3e4` -mentions-> `material:twisted_mote2`: 2021.09.01 PL MoTe2 D3 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_149c064dca67cc61` -mentions-> `material:twisted_mote2`: CWB D6 ScanningPL (Christiano Wang Beach's conflicted copy 2024-10-05) contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_2849b4641bf5b9c8` -mentions-> `material:twisted_mote2`: CWB D18 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_28f5b56b9cad75dd` -mentions-> `material:twisted_mote2`: CWB courtney D129 1+1+1 2deg tMoTe2 attodry911 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_2b5f7e9d8fc8270e` -mentions-> `material:twisted_mote2`: CWB D4 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_3591cb4c4eb7a450` -mentions-> `material:twisted_mote2`: D21 tMoTe2 AB Scanning PL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_36399af69c16c643` -mentions-> `material:twisted_mote2`: CWB&REU D1 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_39eb60717bbbbe38` -mentions-> `material:twisted_mote2`: D18 tMoTe2 AB contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_408a3288187090a8` -mentions-> `material:twisted_mote2`: CWB Yifan D93 Run2 attodry522 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_41aae1c0e09716cc` -mentions-> `material:twisted_mote2`: Chaowei tMoTe2 scanningPL PdDev7 withTopGate contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_45c2e79c30256326` -mentions-> `material:twisted_mote2`: D14 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_465ac44073a8273f` -mentions-> `material:twisted_mote2`: Chaowei tMoTe2 scanningPL PdDev7 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_4a63cc42aaa1cbc5` -mentions-> `material:twisted_mote2`: CWB D16 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_615874a16b783868` -mentions-> `material:twisted_mote2`: CWB D4 newattodry911 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_729dfc2ccc8f6ff7` -mentions-> `material:twisted_mote2`: D17 tMoTe2 AB Scanning PL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_7a6d68216da59e08` -mentions-> `material:twisted_mote2`: CWB D7 3p5 ScanningPL2 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_87841f52e5823d7a` -mentions-> `material:twisted_mote2`: CWB D6 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_933634713410bb59` -mentions-> `material:twisted_mote2`: WJL&CWB C5 Attodry911 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_936e23ee5de3feee` -mentions-> `material:twisted_mote2`: CWB D12 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_9bd7a398708e7b66` -mentions-> `material:twisted_mote2`: CWB D16 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_bdca61e0257cbaba` -mentions-> `material:twisted_mote2`: CWB&WJL C3 NewAttodry911 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_d23b037f89883cae` -mentions-> `material:twisted_mote2`: CWB Yifan D93 attodry911 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_d6568f72573117f7` -mentions-> `material:twisted_mote2`: CWB D2 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_da0726772225a12e` -mentions-> `material:twisted_mote2`: CWB D16 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_e90dc2a40ba94c2c` -mentions-> `material:twisted_mote2`: courtney D129 1+1+1 2deg tMoTe2 scanningpl contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_edcc1b74e2ccde78` -mentions-> `material:twisted_mote2`: CWB D16 attodry911 contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_f03acf0ca142976a` -mentions-> `material:twisted_mote2`: CWB D7 3p5 ScanningPL contains deck text relevant to material:twisted_mote2.
+- `evidence:deck_fcb0c08d9f201344` -mentions-> `material:twisted_mote2`: CWB&WJL B45 Attodry911 measuring contains deck text relevant to material:twisted_mote2.
+- `paper:absence_of_weyl_nodes_in_eucd2as2_revealed_by_the_carrier_density_dependence_of` -mentions-> `material:twisted_mote2`: Absence of Weyl nodes in EuCd2As2 revealed by the carrier density dependence of the anomalous Hall effect is relevant to material:twisted_mote2.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2402_03294v2` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2403_03964v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:interplay_between_topology_and_correlations_in_the_second_moire_band_of_twisted` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2406_19310v2` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2406_20036v2` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:observation_of_ferromagnetic_phase_in_the_second_moire_band_of_twisted_mote2` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2409_04594v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2501_02525v3` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2502_21153v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2504_06972v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2504_07082v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2506_00110v2` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2507_03287v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2508_17673v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2508_19063v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2508_19602v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2511_16641v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2511_19782v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2512_03622v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2601_18508v3` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2602_04561v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2602_15466v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2603_16374v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:arxiv_2603_16412v1` -mentions-> `material:twisted_mote2`: arXiv metadata suggests this paper is relevant to material:twisted_mote2.
+- `paper:correlated_electronic_phases_in_twisted_bilayer_transition_metal_dichalcogenides` -mentions-> `material:twisted_mote2`: Correlated electronic phases in twisted bilayer transition metal dichalcogenides is relevant to material:twisted_mote2.
+- `paper:direct_magnetic_imaging_of_fractional_chern_insulators_in_twisted_mote2` -mentions-> `material:twisted_mote2`: Direct magnetic imaging of fractional Chern insulators in twisted MoTe2 is relevant to material:twisted_mote2.
+- `paper:direct_magnetic_imaging_of_fractional_chern_insulators_in_twisted_mote2_with_a_s` -mentions-> `material:twisted_mote2`: Direct magnetic imaging of fractional Chern insulators in twisted MoTe2 with a superconducting sensor is relevant to material:twisted_mote2.
+- `paper:even_odd_layer_dependent_anomalous_hall_effect_in_topological_magnet_mnbi2te4_th` -mentions-> `material:twisted_mote2`: Even-Odd Layer-Dependent Anomalous Hall Effect in Topological Magnet MnBi2Te4 Thin Films， Yi-Fan Zhao is relevant to material:twisted_mote2.
+- `paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif` -mentions-> `material:twisted_mote2`: Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2 is relevant to material:twisted_mote2.
+- `paper:evidence_of_the_fractional_quantum_spin_hall_effect_in_moire_mote2` -mentions-> `material:twisted_mote2`: Evidence of the fractional quantum spin Hall effect in moire MoTe2 is relevant to material:twisted_mote2.
+- `paper:ferromagnetism_and_topology_of_the_higher_flat_band_in_a_fractional_chern_insula` -mentions-> `material:twisted_mote2`: Ferromagnetism and Topology of the Higher Flat Band in a Fractional Chern Insulator is relevant to material:twisted_mote2.
+- `paper:hidden_states_and_dynamics_of_fractional_fillings_in_tmote2_moire_superlattices` -mentions-> `material:twisted_mote2`: Hidden States and Dynamics of Fractional Fillings in tMoTe2 Moire Superlattices is relevant to material:twisted_mote2.
+- `paper:hidden_states_and_dynamics_of_fractional_fillings_in_twisted_mote2_bilayers` -mentions-> `material:twisted_mote2`: Hidden states and dynamics of fractional fillings in twisted MoTe2 bilayers is relevant to material:twisted_mote2.
+- `paper:interplay_between_topology_and_correlations_in_the_second_moire_band_of_twisted` -mentions-> `material:twisted_mote2`: Interplay between topology and correlations in the second moiré band of twisted bilayer MoTe2 is relevant to material:twisted_mote2.
+- `paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator` -mentions-> `material:twisted_mote2`: Local probe of bulk and edge states in a fractional Chern insulator is relevant to material:twisted_mote2.
+- `paper:magnetoelectric_control_of_helical_light_emission_in_a_moire_chern_magnet` -mentions-> `material:twisted_mote2`: Magnetoelectric Control of Helical Light Emission in a Moiré Chern Magnet is relevant to material:twisted_mote2.
+- `paper:microscopic_signatures_of_topology_in_twisted_mote2` -mentions-> `material:twisted_mote2`: Microscopic signatures of topology in twisted MoTe2 is relevant to material:twisted_mote2.
+- `paper:moire_flat_chern_bands_and_correlated_quantum_anomalous_hall_states_generated_by` -mentions-> `material:twisted_mote2`: Moiré flat Chern bands and correlated quantum anomalous Hall states generated by spin-orbit couplings in twisted homobilayer MoS2 is relevant to material:twisted_mote2.
+- `paper:nonmonotonic_band_flattening_near_the_magic_angle_of_twisted_bilayer_mote2` -mentions-> `material:twisted_mote2`: Nonmonotonic Band Flattening near the Magic Angle of Twisted Bilayer MoTe2 is relevant to material:twisted_mote2.
+- `paper:observation_of_dissipationless_fractional_chern_insulator` -mentions-> `material:twisted_mote2`: Observation of dissipationless fractional Chern insulator is relevant to material:twisted_mote2.
+- `paper:observation_of_ferromagnetic_phase_in_the_second_moire_band_of_twisted_mote2` -mentions-> `material:twisted_mote2`: Observation of ferromagnetic phase in the second moiré band of twisted MoTe2 is relevant to material:twisted_mote2.
+- `paper:observation_of_fractionally_quantized_anomalous_hall_effect` -mentions-> `material:twisted_mote2`: Observation of Fractionally Quantized Anomalous Hall Effect is relevant to material:twisted_mote2.
+- `paper:observation_of_integer_and_fractional_quantum_anomalous_hall_effects_in_twisted` -mentions-> `material:twisted_mote2`: Observation of Integer and Fractional Quantum Anomalous Hall Effects in Twisted Bilayer MoTe2 is relevant to material:twisted_mote2.
+- `paper:optical_control_of_integer_and_fractional_chern_insulators` -mentions-> `material:twisted_mote2`: Optical control of integer and fractional Chern insulators is relevant to material:twisted_mote2.
+- `paper:regarding_the_existence_of_abelian_fractional_topological_insulators_in_twisted` -mentions-> `material:twisted_mote2`: Regarding the existence of abelian fractional topological insulators in twisted MoTe2 and related systems is relevant to material:twisted_mote2.
+- `paper:robust_non_abelian_even_denominator_fractional_chern_insulator_in_twisted_bilaye` -mentions-> `material:twisted_mote2`: Robust non-Abelian even-denominator fractional Chern insulator in twisted bilayer MoTe2 is relevant to material:twisted_mote2.
+- `paper:signatures_of_fractional_charges_via_anyon_trions_in_twisted_mote2` -mentions-> `material:twisted_mote2`: Signatures of fractional charges via anyon-trions in twisted MoTe2 is relevant to material:twisted_mote2.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `material:twisted_mote2`: Signatures of Fractional Quantum Anomalous Hall States in Twisted MoTe2 Bilayer is relevant to material:twisted_mote2.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2` -mentions-> `material:twisted_mote2`: Signatures of fractional quantum anomalous Hall states in twisted MoTe2 is relevant to material:twisted_mote2.
+- `paper:simulation_of_hubbard_model_physics_in_wse2_ws2_moire_superlattices` -mentions-> `material:twisted_mote2`: Simulation of Hubbard model physics in WSe2/WS2 moiré superlattices is relevant to material:twisted_mote2.
+- `paper:spontaneous_fractional_chern_insulators_in_transition_metal_dichalcogenide_moire` -mentions-> `material:twisted_mote2`: Spontaneous fractional Chern insulators in transition metal dichalcogenide moiré superlattices is relevant to material:twisted_mote2.
+- `paper:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2` -mentions-> `material:twisted_mote2`: Thermodynamic evidence of fractional Chern insulator in moire MoTe2 is relevant to material:twisted_mote2.
+- `paper:topological_insulators_in_twisted_transition_metal_dichalcogenide_homobilayers` -mentions-> `material:twisted_mote2`: Topological Insulators in Twisted Transition Metal Dichalcogenide Homobilayers is relevant to material:twisted_mote2.
+- `paper:trion_sensing_of_a_zero_field_composite_fermi_liquid` -mentions-> `material:twisted_mote2`: Trion Sensing of a Zero-Field Composite Fermi Liquid is relevant to material:twisted_mote2.
+- `paper:universal_magnetic_phases_in_twisted_bilayer_mote2` -mentions-> `material:twisted_mote2`: Universal Magnetic Phases in Twisted Bilayer MoTe2 is relevant to material:twisted_mote2.
+- `paper:visualizing_electronic_structure_of_twisted_bilayer_mote2_in_devices` -mentions-> `material:twisted_mote2`: Visualizing electronic structure of twisted bilayer MoTe2 in devices is relevant to material:twisted_mote2.
+- `paper:visualizing_the_microscopic_origins_of_topology_in_twisted_molybdenum_ditellurid` -mentions-> `material:twisted_mote2`: Visualizing the microscopic origins of topology in twisted molybdenum ditelluride is relevant to material:twisted_mote2.
+- `material:twisted_mote2` -has_condition-> `concept:displacement_field`: Displacement field is a primary control axis for reshaping the band and interaction landscape in twisted MoTe2.
+- `material:twisted_mote2` -has_condition-> `concept:moire_filling`: Moiré filling is a primary condition/axis for interpreting twisted MoTe2 correlated states.
+- `material:twisted_mote2` -has_observable-> `phenomenon:moire_magnetism`: Moiré MoTe2 supports magnetic phenomena that are central to interpretation of correlated phases.

@@ -103,6 +103,31 @@ type OpenScienceContextManifest = {
   max_total_chars?: number
 }
 
+type OpenScienceProjectSummary = {
+  id: string
+  name: string
+  path: string
+  active: boolean
+  summaryPath: string
+}
+
+type OpenScienceSurfaceDocument = {
+  id: string
+  title: string
+  kind: 'running-project' | 'past-project' | 'daily-summary'
+  path: string
+  updatedAtIso: string | null
+  markdown: string
+}
+
+type OpenScienceSurfacesPayload = {
+  runningProjects: OpenScienceProjectSummary[]
+  runningProjectDocs: OpenScienceSurfaceDocument[]
+  pastProjects: OpenScienceSurfaceDocument[]
+  dailySummaries: OpenScienceSurfaceDocument[]
+  dailySummary: OpenScienceSurfaceDocument | null
+}
+
 const PROVIDER_MODELS_FETCH_TIMEOUT_MS = 5_000
 const OPENSCIENCE_CONTEXT_MANIFEST_ENV = 'OPENSCIENCE_CONTEXT_MANIFEST_PATH'
 const OPENSCIENCE_CONTEXT_MANIFEST_CANDIDATES = [
@@ -110,6 +135,11 @@ const OPENSCIENCE_CONTEXT_MANIFEST_CANDIDATES = [
   resolve(process.cwd(), 'lab_assistant/integrations/context_files.json'),
   resolve(homedir(), 'openscience/lab_assistant/integrations/context_files.json'),
   resolve(process.cwd(), '../lab_assistant/integrations/slack/context_files.json'),
+]
+const OPENSCIENCE_WORKSPACE_ROOT_CANDIDATES = [
+  resolve(process.cwd(), '..'),
+  process.cwd(),
+  resolve(homedir(), 'openscience'),
 ]
 
 const THREAD_RESPONSE_TURN_LIMIT = 10
@@ -423,7 +453,201 @@ function clipOpenScienceContextText(value: string, maxChars: number): string {
   return `${text.slice(0, Math.max(0, maxChars - 15)).trimEnd()}\n[truncated]`
 }
 
-async function buildOpenScienceContextBundle(): Promise<{ bundle: string; manifestPath: string }> {
+async function findOpenScienceWorkspaceRoot(): Promise<string> {
+  for (const candidate of OPENSCIENCE_WORKSPACE_ROOT_CANDIDATES) {
+    try {
+      const fileStat = await stat(join(candidate, 'lab_assistant'))
+      if (fileStat.isDirectory()) return candidate
+    } catch {
+      // Try the next candidate.
+    }
+  }
+  return resolve(process.cwd(), '..')
+}
+
+async function readOptionalMarkdownDocument(
+  root: string,
+  relativePath: string,
+  kind: OpenScienceSurfaceDocument['kind'],
+  title: string,
+  id: string,
+): Promise<OpenScienceSurfaceDocument | null> {
+  const absolutePath = resolve(root, relativePath)
+  try {
+    const fileStat = await stat(absolutePath)
+    if (!fileStat.isFile()) return null
+    const markdown = await readFile(absolutePath, 'utf8')
+    return {
+      id,
+      title,
+      kind,
+      path: absolutePath,
+      updatedAtIso: fileStat.mtime.toISOString(),
+      markdown,
+    }
+  } catch {
+    return null
+  }
+}
+
+function parseDailyOverviewName(name: string): {
+  dateKey: string
+  title: string
+  timestampMs: number
+} | null {
+  const match = name.match(/^daily_overview_(\d{4})-(\d{2})-(\d{2})_(\d{2})(\d{2})(\d{2})_([A-Za-z_]+)\.md$/u)
+  if (!match) return null
+  const [, year, month, day, hour, minute, second] = match
+  const dateKey = `${year}-${month}-${day}`
+  const timestampMs = Date.parse(`${dateKey}T${hour}:${minute}:${second}`)
+  const title = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(new Date(`${dateKey}T12:00:00`))
+  return {
+    dateKey,
+    title,
+    timestampMs: Number.isFinite(timestampMs) ? timestampMs : 0,
+  }
+}
+
+async function readDailyOverviews(root: string): Promise<OpenScienceSurfaceDocument[]> {
+  type DailyOverviewCandidate = OpenScienceSurfaceDocument & {
+    kind: 'daily-summary'
+    updatedAtIso: string
+    dateKey: string
+    timestampMs: number
+    mtimeMs: number
+  }
+  const overviewDir = join(root, 'lab_assistant/daemon/overviews')
+  try {
+    const entries = await readdir(overviewDir)
+    const candidates = await Promise.all(
+      entries
+        .filter((name) => /^daily_overview_.*\.md$/u.test(name))
+        .map(async (name) => {
+          const parsedName = parseDailyOverviewName(name)
+          if (!parsedName) return null
+          const path = join(overviewDir, name)
+          try {
+            const fileStat = await stat(path)
+            if (!fileStat.isFile()) return null
+            return {
+              id: name.replace(/\.md$/u, ''),
+              title: parsedName.title,
+              kind: 'daily-summary' as const,
+              path,
+              updatedAtIso: fileStat.mtime.toISOString(),
+              markdown: await readFile(path, 'utf8'),
+              dateKey: parsedName.dateKey,
+              timestampMs: parsedName.timestampMs,
+              mtimeMs: fileStat.mtimeMs,
+            }
+          } catch {
+            return null
+          }
+        }),
+    )
+    const canonicalByDate = new Map<string, DailyOverviewCandidate>()
+    for (const entry of candidates.filter((entry): entry is DailyOverviewCandidate => entry !== null)) {
+      const existing = canonicalByDate.get(entry.dateKey)
+      if (!existing || entry.timestampMs > existing.timestampMs || (entry.timestampMs === existing.timestampMs && entry.mtimeMs > existing.mtimeMs)) {
+        canonicalByDate.set(entry.dateKey, entry)
+      }
+    }
+    return Array.from(canonicalByDate.values())
+      .sort((first, second) => second.timestampMs - first.timestampMs)
+      .map(({ dateKey: _dateKey, timestampMs: _timestampMs, mtimeMs: _mtimeMs, ...document }) => document)
+  } catch {
+    return []
+  }
+}
+
+function normalizeOpenScienceProjectRoot(value: unknown): OpenScienceProjectSummary | null {
+  if (!value || typeof value !== 'object') return null
+  const record = value as Record<string, unknown>
+  const id = typeof record.project_id === 'string' ? record.project_id.trim() : ''
+  const name = typeof record.name === 'string' ? record.name.trim() : ''
+  const path = typeof record.path === 'string' ? record.path.trim() : ''
+  if (!id || !name) return null
+  return {
+    id,
+    name,
+    path,
+    active: record.active !== false,
+    summaryPath: '',
+  }
+}
+
+async function readOpenScienceSurfaces(): Promise<OpenScienceSurfacesPayload> {
+  const root = await findOpenScienceWorkspaceRoot()
+  const configPath = join(root, 'lab_assistant/daemon/config.json')
+  const configRaw = await readFile(configPath, 'utf8')
+  const config = JSON.parse(configRaw) as { roots?: unknown[] }
+
+  const runningProjects = (config.roots ?? [])
+    .map(normalizeOpenScienceProjectRoot)
+    .filter((project): project is OpenScienceProjectSummary => project !== null)
+    .map((project) => ({
+      ...project,
+      summaryPath: join(root, `lab_assistant/knowledge/projects/${project.id}.md`),
+    }))
+  const runningProjectDocs = (
+    await Promise.all(
+      runningProjects.map((project) => readOptionalMarkdownDocument(
+        root,
+        `lab_assistant/knowledge/projects/${project.id}.md`,
+        'running-project',
+        project.name,
+        project.id,
+      )),
+    )
+  ).filter((document): document is OpenScienceSurfaceDocument => document !== null)
+
+  const pastIndex = await readOptionalMarkdownDocument(
+    root,
+    'lab_assistant/knowledge/past_projects/README.md',
+    'past-project',
+    'Past projects',
+    'past-projects',
+  )
+
+  const dailySummaries = await readDailyOverviews(root)
+
+  return {
+    runningProjects,
+    runningProjectDocs,
+    pastProjects: pastIndex ? [pastIndex] : [],
+    dailySummaries,
+    dailySummary: dailySummaries[0] ?? null,
+  }
+}
+
+async function readOpenScienceProjectContext(projectId: string): Promise<string> {
+  const normalizedProjectId = projectId.trim()
+  if (!/^[a-z0-9_-]+$/u.test(normalizedProjectId)) return ''
+  const root = await findOpenScienceWorkspaceRoot()
+  const sections: string[] = []
+  const projectFiles = [
+    `lab_assistant/context/projects/${normalizedProjectId}.md`,
+    `lab_assistant/knowledge/projects/${normalizedProjectId}.md`,
+  ]
+
+  for (const relativePath of projectFiles) {
+    const absolutePath = join(root, relativePath)
+    try {
+      const content = clipOpenScienceContextText(await readFile(absolutePath, 'utf8'), 3600)
+      sections.push(`[selected project context | ${relativePath}]\n${content}`)
+    } catch {
+      // Missing project context should not block a conversation.
+    }
+  }
+
+  return sections.join('\n\n')
+}
+
+async function buildOpenScienceContextBundle(projectId = ''): Promise<{ bundle: string; manifestPath: string }> {
   const manifestPath = await findOpenScienceContextManifestPath()
   const manifestRaw = await readFile(manifestPath, 'utf8')
   const manifest = JSON.parse(manifestRaw) as OpenScienceContextManifest
@@ -448,6 +672,14 @@ async function buildOpenScienceContextBundle(): Promise<{ bundle: string; manife
       used = projected
     } catch {
       // Keep the bundle usable if one referenced file is temporarily unavailable.
+    }
+  }
+
+  const projectContext = projectId ? await readOpenScienceProjectContext(projectId) : ''
+  if (projectContext) {
+    const projected = used + projectContext.length + 2
+    if (projected <= maxTotalChars + 5000) {
+      sections.push(projectContext)
     }
   }
 
@@ -3217,10 +3449,20 @@ export function createCodexBridgeMiddleware(): CodexBridgeMiddleware {
 
       if (req.method === 'GET' && url.pathname === '/codex-api/openscience/context-bundle') {
         try {
-          const data = await buildOpenScienceContextBundle()
+          const data = await buildOpenScienceContextBundle(url.searchParams.get('projectId') ?? '')
           setJson(res, 200, { data })
         } catch (error) {
           setJson(res, 500, { error: getErrorMessage(error, 'Failed to load OpenScience context bundle') })
+        }
+        return
+      }
+
+      if (req.method === 'GET' && url.pathname === '/codex-api/openscience/surfaces') {
+        try {
+          const data = await readOpenScienceSurfaces()
+          setJson(res, 200, { data })
+        } catch (error) {
+          setJson(res, 500, { error: getErrorMessage(error, 'Failed to load OpenScience summary surfaces') })
         }
         return
       }

@@ -1,0 +1,85 @@
+{
+  "always_include": [
+    {
+      "path": "lab_assistant/core/identity.md",
+      "label": "core identity",
+      "max_chars": 1800
+    },
+    {
+      "path": "lab_assistant/core/directives.md",
+      "label": "core directives",
+      "max_chars": 2200
+    },
+    {
+      "path": "lab_assistant/core/preferences.md",
+      "label": "core preferences",
+      "max_chars": 2200
+    },
+    {
+      "path": "lab_assistant/core/workflow.md",
+      "label": "core workflow",
+      "max_chars": 2200
+    },
+    {
+      "path": "lab_assistant/context/plot_preferences.md",
+      "label": "plot preferences",
+      "max_chars": 1800
+    },
+    {
+      "path": "lab_assistant/context/plotting_practices.md",
+      "label": "plotting practices",
+      "max_chars": 3600
+    },
+    {
+      "path": "lab_assistant/context/interesting_features.md",
+      "label": "interesting features",
+      "max_chars": 1800
+    },
+    {
+      "path": "lab_assistant/context/interaction_capabilities.md",
+      "label": "interaction capabilities",
+      "max_chars": 1600
+    },
+    {
+      "path": "lab_assistant/skills/plot-generation.md",
+      "label": "plot generation skill",
+      "max_chars": 2200
+    },
+    {
+      "path": "lab_assistant/skills/fact-graph.md",
+      "label": "fact graph skill",
+      "max_chars": 2600
+    },
+    {
+      "path": "lab_assistant/graph/README.md",
+      "label": "fact graph interface",
+      "max_chars": 3000
+    },
+    {
+      "path": "lab_assistant/skills/background-cataloguing.md",
+      "label": "background cataloguing skill",
+      "max_chars": 1800
+    },
+    {
+      "path": "lab_assistant/memory/project_pulse.md",
+      "label": "project pulse memory",
+      "max_chars": 1400
+    },
+    {
+      "path": "lab_assistant/context/routing.md",
+      "label": "routing context",
+      "max_chars": 1800
+    },
+    {
+      "path": "lab_assistant/context/projects/active_projects.md",
+      "label": "active projects",
+      "max_chars": 1800
+    },
+    {
+      "path": "lab_assistant/knowledge/INDEX.md",
+      "label": "knowledge navigation",
+      "max_chars": 1600
+    }
+  ],
+  "max_total_chars": 26000
+}

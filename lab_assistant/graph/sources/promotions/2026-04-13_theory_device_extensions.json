@@ -1,0 +1,310 @@
+{
+  "date": "2026-04-13",
+  "purpose": "Promote additional theory and device-facing MoTe2 papers that sharpen higher-band, multilayer, and superconducting-junction context.",
+  "node_updates": [
+    {
+      "id": "paper:arxiv_2508_17673v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; useful model paper for second flat Chern band and twist-angle transferability."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.17673",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2511_19782v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; useful multilayer structural/electronic context for band reordering and weak gating effects."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.19782",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2409_04594v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; relevant engineered-junction superconductivity paper adjacent to the MoTe2 topological/superconducting story."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2409.04594",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "concept:second_flat_chern_band",
+      "type": "Concept",
+      "label": "second flat Chern band",
+      "aliases": [
+        "second flat band",
+        "higher Chern band"
+      ],
+      "summary": "A second topological flat-band regime that can emerge at lower twist angle and broaden the range of correlated phases available in twisted TMD homobilayers.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.17673",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "mechanism:interface_bulk_stratification",
+      "type": "Mechanism",
+      "label": "interface-bulk stratification",
+      "aliases": [
+        "layerwise stratification",
+        "moire-interface isolation"
+      ],
+      "summary": "In multilayer twisted MoTe2, moire-interface layers can remain strongly reconstructed while outer layers relax toward bulk-like behavior, causing electronic isolation and band reordering.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.19782",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2508_second_flat_chern_band",
+      "type": "Claim",
+      "label": "A transferable continuum model predicts a second flat Chern band near 2 degrees in twisted MoTe2.",
+      "aliases": [
+        "second flat Chern band near 2 degrees",
+        "transferable continuum model for tMoTe2"
+      ],
+      "summary": "The 2025 arXiv theory says a twist-angle-transferable continuum model captures tMoTe2 and tWSe2 across angles and predicts a second flat Chern band near 2 degrees when interlayer potential difference becomes comparable to interlayer tunneling.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.17673",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2511_multilayer_stratification_band_reordering",
+      "type": "Claim",
+      "label": "Twisted multilayer MoTe2 can separate moire-interface and bulk-like layers, producing band reordering and weak-gate-tunable Chern motifs.",
+      "aliases": [
+        "multilayer stratification and band reordering",
+        "twisted double-bilayer MoTe2 motifs"
+      ],
+      "summary": "The 2025 arXiv paper reports strongest interface-bulk stratification at intermediate angles around 2 to 5 degrees, suppressed interface-bulk hybridization, and in twisted double bilayer MoTe2 a coexistence of honeycomb and triangular frontier-band motifs whose relative ordering can be shifted by twist angle and weak gating.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.19782",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2409_nanojunction_anomalous_superconductivity",
+      "type": "Claim",
+      "label": "Pd-metalized twisted MoTe2 nanojunctions show anomalous superconducting behavior that may involve mixed even- and odd-parity pairing.",
+      "aliases": [
+        "anomalous twisted MoTe2 nanojunction superconductivity",
+        "V-shaped Ic minimum at zero field"
+      ],
+      "summary": "The 2024 arXiv device paper reports robust superconducting nanojunctions across about 20 moire cells with a higher-than-expected critical-field scale and a V-shaped zero-field critical-current minimum, arguing these features are absent in natural bilayer junctions and may reflect mixed-parity superconductivity.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2409.04594",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "question:promoted_2409_engineered_junctions_probe_fci_sc",
+      "type": "OpenQuestion",
+      "label": "Can engineered twisted MoTe2 nanojunctions become a controlled probe of FCI-adjacent superconductivity?",
+      "aliases": [
+        "engineered-junction route to FCI superconductivity",
+        "nanojunction follow-up question"
+      ],
+      "summary": "The device paper presents a pathway to engineer and investigate superconductivity in fractional Chern insulator settings, but the relation between the observed junction anomalies and intrinsic moire superconductivity remains unresolved.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2409.04594",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:paper_arxiv_2508_17673v1_supports_promoted_2508_second_flat_band",
+      "source": "paper:arxiv_2508_17673v1",
+      "target": "claim:promoted_2508_second_flat_chern_band",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted second-flat-Chern-band claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.17673",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2508_second_flat_band_mentions_second_flat_chern_band",
+      "source": "claim:promoted_2508_second_flat_chern_band",
+      "target": "concept:second_flat_chern_band",
+      "relation": "mentions",
+      "claim": "The claim explicitly introduces a second flat Chern band as a design target.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.17673",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:second_flat_chern_band_similar_to_topological_flat_band",
+      "source": "concept:second_flat_chern_band",
+      "target": "concept:topological_flat_band",
+      "relation": "similar_to",
+      "claim": "The second flat Chern band extends the topological-flat-band idea to a higher-energy regime rather than replacing the first-band story.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.17673",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2511_19782v1_supports_promoted_2511_multilayer_stratification",
+      "source": "paper:arxiv_2511_19782v1",
+      "target": "claim:promoted_2511_multilayer_stratification_band_reordering",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted multilayer stratification and band-reordering claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.19782",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:interface_bulk_stratification_explains_2511_claim",
+      "source": "mechanism:interface_bulk_stratification",
+      "target": "claim:promoted_2511_multilayer_stratification_band_reordering",
+      "relation": "explains",
+      "claim": "Interface-bulk stratification explains why multilayer structures can host electronically isolated motifs and reordered Chern bands.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.19782",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2511_multilayer_mentions_displacement_field",
+      "source": "claim:promoted_2511_multilayer_stratification_band_reordering",
+      "target": "concept:displacement_field",
+      "relation": "mentions",
+      "claim": "The multilayer claim includes weak-gating control of band ordering and polarization.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2511.19782",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2409_04594v1_supports_promoted_2409_nanojunction_sc",
+      "source": "paper:arxiv_2409_04594v1",
+      "target": "claim:promoted_2409_nanojunction_anomalous_superconductivity",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted anomalous nanojunction superconductivity claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2409.04594",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2409_nanojunction_mentions_chiral_superconductivity",
+      "source": "claim:promoted_2409_nanojunction_anomalous_superconductivity",
+      "target": "phenomenon:chiral_superconductivity",
+      "relation": "mentions",
+      "claim": "The nanojunction result is relevant to the broader chiral-superconductivity discussion, while introducing a distinct engineered mixed-parity possibility.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2409.04594",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:question_2409_open_for_2409_nanojunction_claim",
+      "source": "question:promoted_2409_engineered_junctions_probe_fci_sc",
+      "target": "claim:promoted_2409_nanojunction_anomalous_superconductivity",
+      "relation": "open_question_for",
+      "claim": "The device anomalies motivate a follow-up question about how engineered junction superconductivity connects to intrinsic FCI-adjacent superconductivity.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2409.04594",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:question_2409_open_for_2504_chiral_sc_claim",
+      "source": "question:promoted_2409_engineered_junctions_probe_fci_sc",
+      "target": "claim:promoted_2504_chiral_superconductivity_signatures",
+      "relation": "open_question_for",
+      "claim": "The nanojunction paper raises a device-facing route to test and refine the current interpretation of superconductivity near the tMoTe2 topological regime.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2409.04594",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    }
+  ]
+}

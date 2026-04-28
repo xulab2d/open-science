@@ -1,0 +1,102 @@
+# Lab assistant scientific Python environment.
+# Keep package names mostly unpinned so pip can choose wheels compatible with
+# the local Python version and Apple Silicon build.
+
+# Core numerical/data stack
+numpy
+scipy
+pandas
+polars
+pyarrow
+xarray
+dask
+zarr
+netCDF4
+h5py
+hdf5storage
+mat73
+pymatreader
+openpyxl
+xlsxwriter
+tables
+
+# Plotting and publication/deck figures
+matplotlib
+seaborn
+plotly
+kaleido
+bokeh
+altair
+holoviews
+hvplot
+datashader
+colorcet
+cmocean
+cmcrameri
+scienceplots
+adjustText
+mplcursors
+ipympl
+
+# Fitting, statistics, uncertainty, and signal processing
+lmfit
+iminuit
+statsmodels
+scikit-learn
+scikit-image
+opencv-python
+imageio
+tifffile
+Pillow
+pybaselines
+peakutils
+findpeaks
+uncertainties
+sympy
+numba
+
+# Spectroscopy, imaging, and domain-adjacent tools
+astropy
+specutils
+hyperspy
+qutip
+pint
+
+# Instrument/control and experiment metadata helpers
+pyvisa
+pyvisa-py
+pyserial
+qcodes
+ruamel.yaml
+tomlkit
+
+# Jupyter/interactive analysis
+jupyterlab
+notebook
+ipykernel
+ipywidgets
+tqdm
+rich
+
+# PowerPoint, PDF, SVG, and document/report generation
+python-pptx
+pypdf
+pymupdf
+pdf2image
+reportlab
+cairosvg
+markdown
+beautifulsoup4
+lxml
+
+# Development/test helpers for analysis scripts
+pytest
+black
+ruff
+
+# MATLAB integration helpers.
+# The MATLAB Engine API itself is installed from the local MATLAB bundle:
+#   python -m pip install /Applications/MATLAB_R2025b.app/extern/engines/python
+# R2025b on this machine installs matlabengine==25.2.
+matlab_kernel
+jupyter-matlab-proxy

@@ -10,11 +10,11 @@
 }
 
 :root.dark .desktop-layout {
-  @apply bg-zinc-900 text-zinc-100;
+  @apply bg-neutral-950 text-zinc-100;
 }
 
 :root.dark .desktop-sidebar {
-  @apply bg-zinc-900;
+  @apply bg-neutral-950;
 }
 
 :root.dark .desktop-resize-handle {
@@ -22,23 +22,29 @@
 }
 
 :root.dark .desktop-main {
-  @apply bg-zinc-950;
+  @apply bg-neutral-950;
 }
 
 :root.dark .mobile-drawer {
-  @apply bg-zinc-900;
+  @apply bg-neutral-950;
 }
 
 :root.dark .sidebar-root {
-  @apply bg-zinc-900;
+  background:
+    linear-gradient(180deg, rgba(20, 184, 166, 0.09), transparent 18rem),
+    linear-gradient(90deg, rgba(244, 244, 245, 0.05), transparent 55%),
+    rgb(10 10 10);
 }
 
 :root.dark .content-root {
-  @apply bg-zinc-950;
+  background:
+    radial-gradient(circle at 20% 12%, rgba(20, 184, 166, 0.13), transparent 23rem),
+    radial-gradient(circle at 85% 18%, rgba(225, 29, 72, 0.10), transparent 19rem),
+    linear-gradient(180deg, rgb(10 10 10), rgb(24 24 27) 50%);
 }
 
 :root.dark .sidebar-scrollable {
-  @apply bg-zinc-900;
+  @apply bg-transparent;
 }
 
 :root.dark .sidebar-settings-area {
@@ -171,11 +177,11 @@
 }
 
 :root.dark .sidebar-skills-link {
-  @apply text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200;
+  @apply text-zinc-400 hover:border-teal-500/30 hover:bg-teal-500/10 hover:text-zinc-100;
 }
 
 :root.dark .sidebar-skills-link.is-active {
-  @apply bg-zinc-800 text-zinc-100;
+  @apply border-teal-500/30 bg-teal-500/10 text-zinc-100;
 }
 
 :root.dark .sidebar-search-toggle {
@@ -223,7 +229,8 @@
 }
 
 :root.dark .thread-composer-shell {
-  @apply border-zinc-700 bg-zinc-800;
+  @apply border-zinc-700 bg-zinc-900/92;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
 }
 
 :root.dark .thread-composer-shell--drag-active {
@@ -288,7 +295,7 @@
 }
 
 :root.dark .content-header {
-  @apply border-zinc-800 bg-zinc-950;
+  @apply border-zinc-800 bg-neutral-950/88;
 }
 
 :root.dark .content-header .content-title,
@@ -302,6 +309,106 @@
 
 :root.dark .new-thread-hero {
   @apply text-zinc-100;
+}
+
+:root.dark .new-thread-kicker {
+  @apply text-teal-300;
+}
+
+:root.dark .new-thread-subtitle,
+:root.dark .new-thread-runtime-help {
+  @apply text-zinc-400;
+}
+
+:root.dark .lab-home-panel,
+:root.dark .lab-reader {
+  @apply border-zinc-700 bg-zinc-900/82 shadow-none;
+}
+
+:root.dark .lab-panel-heading,
+:root.dark .lab-home-controls,
+:root.dark .lab-tabs-row,
+:root.dark .lab-summary-list,
+:root.dark .lab-summary-document-header,
+:root.dark .lab-reader-header {
+  @apply border-zinc-700;
+}
+
+:root.dark .lab-panel-title,
+:root.dark .lab-summary-document-header span,
+:root.dark .lab-reader-header h2 {
+  @apply text-zinc-100;
+}
+
+:root.dark .lab-panel-description,
+:root.dark .lab-project-select-help,
+:root.dark .lab-tabs-label,
+:root.dark .lab-summary-document-header small {
+  @apply text-zinc-500;
+}
+
+:root.dark .lab-panel-open,
+:root.dark .lab-reader-close {
+  @apply border-zinc-600 bg-zinc-900 text-zinc-200 hover:border-zinc-500 hover:bg-zinc-800;
+}
+
+:root.dark .lab-project-select-label,
+:root.dark .lab-summary-list-item small {
+  @apply text-zinc-500;
+}
+
+:root.dark .lab-project-select {
+  @apply border-zinc-600 bg-zinc-900 text-zinc-100 focus:border-teal-400;
+}
+
+:root.dark .lab-home-tab {
+  @apply text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100;
+}
+
+:root.dark .lab-home-tab.is-active,
+:root.dark .lab-summary-list-item.is-active {
+  @apply border-teal-500/30 bg-teal-500/10 text-teal-200;
+}
+
+:root.dark .lab-summary-list-item {
+  @apply text-zinc-300 hover:bg-zinc-800;
+}
+
+:root.dark .lab-summary-empty,
+:root.dark .lab-markdown {
+  @apply text-zinc-400;
+}
+
+:root.dark .lab-markdown h1,
+:root.dark .lab-markdown h2,
+:root.dark .lab-markdown h3,
+:root.dark .lab-markdown h4 {
+  @apply text-zinc-100;
+}
+
+:root.dark .lab-markdown a {
+  @apply text-teal-300;
+}
+
+:root.dark .lab-markdown code,
+:root.dark .lab-markdown .lab-markdown-math {
+  @apply border-zinc-700 bg-zinc-800 text-zinc-100;
+}
+
+:root.dark .lab-markdown .lab-markdown-image {
+  @apply border-zinc-700;
+}
+
+:root.dark .new-thread-project-context {
+  @apply border-teal-500/30 bg-teal-500/10 text-teal-200;
+}
+
+:root.dark .lab-reader-backdrop {
+  @apply bg-black/65;
+}
+
+:root.dark .lab-reader-kicker {
+  @apply text-teal-300;
 }
 
 :root.dark .build-badge {
@@ -513,7 +620,8 @@
 }
 
 :root.dark .message-card[data-role='user'] {
-  @apply bg-zinc-700;
+  @apply bg-teal-950/55;
+  box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.16);
 }
 
 :root.dark .message-copy-button {

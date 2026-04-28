@@ -1,0 +1,26 @@
+{
+  "collections": [
+    {
+      "id": "tmote2_project_decks",
+      "label": "tMoTe2 project folders with embedded summary decks",
+      "kind": "lab_summaries",
+      "root": "/Volumes/Xu Lab/tMoTe2_Measuring",
+      "include_extensions": [".pptx", ".pdf"],
+      "path_patterns": ["pptx", "summary", "Summary", "slides", "Slides", "measuring"]
+    },
+    {
+      "id": "two_d_magnets_data_summaries",
+      "label": "2D magnets historical data-summary decks",
+      "kind": "lab_summaries",
+      "root": "/Volumes/Xu Lab/2D Magnets - Papers and Summaries/Data Summaries",
+      "include_extensions": [".pptx", ".pdf"]
+    },
+    {
+      "id": "journal_club_decks",
+      "label": "2D Materials Journal Club decks",
+      "kind": "lab_summaries",
+      "root": "/Volumes/Xu Lab/2D Materials Journal Club",
+      "include_extensions": [".pptx"]
+    }
+  ]
+}

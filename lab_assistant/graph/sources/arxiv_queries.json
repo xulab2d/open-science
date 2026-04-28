@@ -1,0 +1,39 @@
+{
+  "queries": [
+    {
+      "name": "twisted_mote2_fractional_topology",
+      "query": "all:\"twisted MoTe2\" AND (\"fractional Chern\" OR \"fractional quantum anomalous Hall\" OR FQAH OR \"fractional quantum spin Hall\" OR FQSH OR \"fractional topological insulator\" OR FTI)",
+      "max_results": 8,
+      "exclude_terms": ["kondo breakdown", "kondo lattice", "graphene", "vse2", "inas/gasb", "exciton-exciton entanglement", "confined two-dimensional hexagonal crystals"]
+    },
+    {
+      "name": "twisted_mote2_optics_magnetooptics",
+      "query": "all:\"twisted MoTe2\" AND (optical OR photoluminescence OR RMCD OR MCD OR dichroism OR trion OR \"pump-probe\" OR \"optical switching\")",
+      "max_results": 8,
+      "exclude_terms": ["chemical potential of two-dimensional electrons", "graphene", "vse2", "inas/gasb", "exciton-exciton entanglement", "confined two-dimensional hexagonal crystals"]
+    },
+    {
+      "name": "twisted_bilayer_mote2_phase_evolution",
+      "query": "all:\"twisted bilayer MoTe2\" AND (\"twist-angle\" OR superconductivity OR \"Chern insulator\" OR \"phase diagram\" OR \"composite Fermi liquid\")",
+      "max_results": 8,
+      "exclude_terms": ["kondo breakdown", "kondo lattice"]
+    },
+    {
+      "name": "mote2_wse2_phase_transitions",
+      "query": "all:\"MoTe2/WSe2\" AND (QAH OR MCD OR compressibility OR \"phase transition\" OR topological)",
+      "max_results": 6,
+      "exclude_terms": ["kondo breakdown", "kondo lattice", "chemical potential of two-dimensional electrons"]
+    },
+    {
+      "name": "twisted_mote2_multiband_and_multilayer",
+      "query": "all:\"twisted MoTe2\" AND (multiband OR multilayer OR \"second flat Chern band\" OR \"band reordering\" OR DSRG)",
+      "max_results": 6
+    },
+    {
+      "name": "twisted_mote2_superconducting_neighborhood",
+      "query": "all:\"twisted MoTe2\" AND (superconductivity OR \"holon metal\" OR \"chiral superconductor\" OR \"normal state\")",
+      "max_results": 6,
+      "exclude_terms": ["kondo breakdown", "kondo lattice"]
+    }
+  ]
+}

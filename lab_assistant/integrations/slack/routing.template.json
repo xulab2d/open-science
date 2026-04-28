@@ -1,0 +1,76 @@
+{
+  "project_data_root": "/Volumes/Xu Lab/tMoTe2_Measuring",
+  "summary_root": "/Volumes/Xu Lab/OpenScience/Summaries/PPT",
+  "fallback_channel": "C0AH4A1A2JZ",
+  "people": {
+    "isaac_van_orman": {
+      "display_name": "Isaac Van Orman",
+      "slack_user_id": "U09FKNMGK2S",
+      "role": "maintainer"
+    },
+    "christiano_wang_beach": {
+      "display_name": "Christiano Wang Beach",
+      "slack_user_id": "U07BGKZ6ZC2",
+      "role": "project_owner"
+    },
+    "courtney": {
+      "display_name": "Courtney",
+      "slack_user_id": "U02P05PDS6Q",
+      "role": "project_owner"
+    },
+    "yi_fan_zhao": {
+      "display_name": "Yi-Fan Zhao",
+      "slack_user_id": "U07R010M1DL",
+      "role": "project_owner"
+    },
+    "shuai_yuan": {
+      "display_name": "Shuai Yuan",
+      "slack_user_id": "U07PCM52JDT",
+      "role": "project_owner"
+    },
+    "weijie_li": {
+      "display_name": "Weijie Li",
+      "slack_user_id": "U05DLUMMDST",
+      "role": "project_owner"
+    },
+    "zengde_she": {
+      "display_name": "Zengde She",
+      "slack_user_id": "U09CPJBHCUA",
+      "role": "project_owner"
+    }
+  },
+  "routing_rules": {
+    "tooling_questions": [
+      "isaac_van_orman"
+    ],
+    "project_roots": {
+      "CWB_Yifan_D93_Run2_attodry522": [
+        "christiano_wang_beach",
+        "yi_fan_zhao"
+      ],
+      "Shuai-MT43-DR911": [
+        "shuai_yuan"
+      ],
+      "Zengde_Weijie_A5_AAtA_dot_oldattodry": [
+        "zengde_she",
+        "weijie_li"
+      ],
+      "WJL_Zengde_B79_Attodry911": [
+        "weijie_li",
+        "zengde_she"
+      ],
+      "Zengde_WJL_C7_Attodry911": [
+        "zengde_she",
+        "weijie_li"
+      ],
+      "courtney_christiano_D88_1+1+1_AAA_4deg_attodry911": [
+        "courtney",
+        "christiano_wang_beach"
+      ],
+      "courtney_christiano_D88_run2_AAA_attodry522": [
+        "courtney",
+        "christiano_wang_beach"
+      ]
+    }
+  }
+}

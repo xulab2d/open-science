@@ -1,0 +1,381 @@
+# Observable
+
+## compressibility
+- ID: `observable:compressibility`
+- Confidence: medium
+- Summary: Thermodynamic/local probe for incompressible correlated states.
+- Aliases: local compressibility
+- Provenance: lab_assistant/knowledge/papers (deterministic paper-shelf ingest); arXiv metadata queries (arxiv metadata ingest); lab summary deck extraction (deterministic deck ingest); https://sites.google.com/uw.edu/xulab/publications (official xu group publications ingest)
+
+Related edges:
+- `paper:arxiv_2507_03287v1` -mentions-> `observable:compressibility`: arXiv metadata suggests this paper is relevant to observable:compressibility.
+- `paper:arxiv_2602_15466v1` -mentions-> `observable:compressibility`: arXiv metadata suggests this paper is relevant to observable:compressibility.
+- `paper:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2` -mentions-> `observable:compressibility`: Thermodynamic evidence of fractional Chern insulator in moire MoTe2 is relevant to observable:compressibility.
+- `paper:trion_sensing_of_a_zero_field_composite_fermi_liquid` -mentions-> `observable:compressibility`: Trion Sensing of a Zero-Field Composite Fermi Liquid is relevant to observable:compressibility.
+- `claim:promoted_2602_mote2_wse2_consecutive_tpts` -measured_by-> `observable:compressibility`: Compressibility is part of the joint evidence for the field-driven phase sequence.
+
+## photoluminescence
+- ID: `observable:pl`
+- Confidence: high
+- Summary: Optical observable sensitive to moiré potential, filling, local environment, and correlated states in TMD moiré systems.
+- Aliases: PL, trion PL
+- Provenance: lab_assistant/knowledge/syntheses/optical_readout_of_correlated_states.md (Codex seed from existing synthesis)
+
+Related edges:
+- `claim:deck_071d34b95706f3e4_slide_16_pl_obviously_changes_with_v_applied_to_pin_4_top_gate_bu` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_071d34b95706f3e4_slide_18_feature_at_1_11ev_seems_to_correspond_to_overlap_region` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_071d34b95706f3e4_slide_26_does_seem_to_be_a_gate_dependence_on_trion_feature_shift` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_071d34b95706f3e4_slide_36_no_feature_at_intralayer_exciton_energy_was_probably_str` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_071d34b95706f3e4_slide_85_clear_gate_dependence_switch_between_exciton_and_trion` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_071d34b95706f3e4_slide_87_transition_at_10v_state_1_15ev_at_around_this_value_mayb` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_149c064dca67cc61_slide_14_splitting_of_the_monolayer_trion_peak_also_seems_to_only` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_149c064dca67cc61_slide_18_can_see_large_enhancement_of_the_bilayer_exciton_peak_wi` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_149c064dca67cc61_slide_25_monolayer_trion_seems_to_exist_alongside_monolayer_excit` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_149c064dca67cc61_slide_5_these_peaks_only_appear_on_the_back_gate_scan_and_seem_t` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_3591cb4c4eb7a450_slide_11_also_the_feature_with_the_dashed_line_increases_with_dfi` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_3591cb4c4eb7a450_slide_11_the_excitonic_feature_has_a_slope_that_is_consistently_d` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_4a63cc42aaa1cbc5_slide_10_weijie_originally_attributed_the_features_to_bad_contact` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_4a63cc42aaa1cbc5_slide_13_consistent_features_with_the_other_spot_gating_looks_bet` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_4a63cc42aaa1cbc5_slide_20_slightly_atypical_dual_gate_at_this_spot_exciton_bright` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_4a63cc42aaa1cbc5_slide_23_bright_spot_in_trion_peak_disperses_with_d_field_exciton` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_615874a16b783868_slide_6_n_0_seems_to_shift_according_to_applied_d_field` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_790b56b980e6d8be_slide_10_seems_like_exciton_might_not_be_gated_properly` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_790b56b980e6d8be_slide_10_these_last_2_high_energy_peaks_are_strange_they_have_exc` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_790b56b980e6d8be_slide_4_scanning_pl_temperature_is_very_high_15k_makes_it_diffic` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_87841f52e5823d7a_slide_14_splitting_of_the_monolayer_trion_peak_also_seems_to_only` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_87841f52e5823d7a_slide_18_can_see_large_enhancement_of_the_bilayer_exciton_peak_wi` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_87841f52e5823d7a_slide_25_monolayer_trion_seems_to_exist_alongside_monolayer_excit` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_87841f52e5823d7a_slide_5_these_peaks_only_appear_on_the_back_gate_scan_and_seem_t` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_8d3f501aa323b164_slide_12_it_seems_like_we_can_almost_continuously_extend_the_exci` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_8d3f501aa323b164_slide_14_we_see_a_potential_fractional_state_in_one_of_the_trion` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_8d3f501aa323b164_slide_41_hysteresis_loop_seems_to_switch_directions_sharply_aroun` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_933634713410bb59_slide_5_clear_bilayer_trion_emission_fractional_features_visible` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_936e23ee5de3feee_slide_5_faint_v_1_feature_completely_disappear` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_936e23ee5de3feee_slide_6_electron_side_trion_almost_completely_dark_no_visible_co` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_9bd7a398708e7b66_slide_10_weijie_originally_attributed_the_features_to_bad_contact` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_9bd7a398708e7b66_slide_13_consistent_features_with_the_other_spot_gating_looks_bet` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_9bd7a398708e7b66_slide_20_slightly_atypical_dual_gate_at_this_spot_exciton_bright` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_9bd7a398708e7b66_slide_23_bright_spot_in_trion_peak_disperses_with_d_field_exciton` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_d6568f72573117f7_slide_14_again_similar_d_field_spectrum_for_the_trions_however_th` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_d6568f72573117f7_slide_16_at_negative_doping_you_can_see_that_there_are_3_exciton` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_d6568f72573117f7_slide_17_at_positive_doping_you_can_very_clearly_see_a_hybridized` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_d6568f72573117f7_slide_17_however_the_multiple_peaks_of_the_exciton_seem_to_disapp` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_d6568f72573117f7_slide_6_we_see_various_edges_in_trion_intensity_these_correspond` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_d6568f72573117f7_slide_9_it_also_seems_that_at_higher_doping_the_trion_spectra_co` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_da0726772225a12e_slide_10_weijie_originally_attributed_the_features_to_bad_contact` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_da0726772225a12e_slide_13_consistent_features_with_the_other_spot_gating_looks_bet` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_da0726772225a12e_slide_20_slightly_atypical_dual_gate_at_this_spot_exciton_bright` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_da0726772225a12e_slide_23_bright_spot_in_trion_peak_disperses_with_d_field_exciton` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_edcc1b74e2ccde78_slide_6_this_is_why_we_see_diagonal_features_in_the_n_d_plot` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_fcb0c08d9f201344_slide_19_a_couple_clear_states_at_this_spot_looks_promising` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `claim:deck_fcb0c08d9f201344_slide_20_no_clear_signatures_of_correlated_states_on_2s_exciton` -mentions-> `observable:pl`: Deck-derived claim is relevant to observable:pl.
+- `evidence:deck_071d34b95706f3e4` -mentions-> `observable:pl`: 2021.09.01 PL MoTe2 D3 contains deck text relevant to observable:pl.
+- `evidence:deck_09cf40d55c50ea74` -mentions-> `observable:pl`: CWB D22 ScanningPL1 contains deck text relevant to observable:pl.
+- `evidence:deck_149c064dca67cc61` -mentions-> `observable:pl`: CWB D6 ScanningPL (Christiano Wang Beach's conflicted copy 2024-10-05) contains deck text relevant to observable:pl.
+- `evidence:deck_2849b4641bf5b9c8` -mentions-> `observable:pl`: CWB D18 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_28f5b56b9cad75dd` -mentions-> `observable:pl`: CWB courtney D129 1+1+1 2deg tMoTe2 attodry911 contains deck text relevant to observable:pl.
+- `evidence:deck_28f6c7cefc40198e` -mentions-> `observable:pl`: CWB D15 Attodry522 contains deck text relevant to observable:pl.
+- `evidence:deck_2b5f7e9d8fc8270e` -mentions-> `observable:pl`: CWB D4 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_2f723b6f52ecf18a` -mentions-> `observable:pl`: CWB D22 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_3591cb4c4eb7a450` -mentions-> `observable:pl`: D21 tMoTe2 AB Scanning PL contains deck text relevant to observable:pl.
+- `evidence:deck_36399af69c16c643` -mentions-> `observable:pl`: CWB&REU D1 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_408a3288187090a8` -mentions-> `observable:pl`: CWB Yifan D93 Run2 attodry522 contains deck text relevant to observable:pl.
+- `evidence:deck_41aae1c0e09716cc` -mentions-> `observable:pl`: Chaowei tMoTe2 scanningPL PdDev7 withTopGate contains deck text relevant to observable:pl.
+- `evidence:deck_465ac44073a8273f` -mentions-> `observable:pl`: Chaowei tMoTe2 scanningPL PdDev7 contains deck text relevant to observable:pl.
+- `evidence:deck_480a541d44da6061` -mentions-> `observable:pl`: D123 1+1+1 helical 4 scanning pl contains deck text relevant to observable:pl.
+- `evidence:deck_4a63cc42aaa1cbc5` -mentions-> `observable:pl`: CWB D16 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_615874a16b783868` -mentions-> `observable:pl`: CWB D4 newattodry911 contains deck text relevant to observable:pl.
+- `evidence:deck_729dfc2ccc8f6ff7` -mentions-> `observable:pl`: D17 tMoTe2 AB Scanning PL contains deck text relevant to observable:pl.
+- `evidence:deck_790b56b980e6d8be` -mentions-> `observable:pl`: CWB D11 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_7a6d68216da59e08` -mentions-> `observable:pl`: CWB D7 3p5 ScanningPL2 contains deck text relevant to observable:pl.
+- `evidence:deck_87841f52e5823d7a` -mentions-> `observable:pl`: CWB D6 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_8b4b9b6c2057dd23` -mentions-> `observable:pl`: CWB&WJL C3 NewAttodry911 (Xu Lab's conflicted copy 2025-06-09) contains deck text relevant to observable:pl.
+- `evidence:deck_8d3f501aa323b164` -mentions-> `observable:pl`: CWB D6 Attodry911 contains deck text relevant to observable:pl.
+- `evidence:deck_933634713410bb59` -mentions-> `observable:pl`: WJL&CWB C5 Attodry911 contains deck text relevant to observable:pl.
+- `evidence:deck_936e23ee5de3feee` -mentions-> `observable:pl`: CWB D12 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_9bd7a398708e7b66` -mentions-> `observable:pl`: CWB D16 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_bdca61e0257cbaba` -mentions-> `observable:pl`: CWB&WJL C3 NewAttodry911 contains deck text relevant to observable:pl.
+- `evidence:deck_cc6688621d85704b` -mentions-> `observable:pl`: D122 1+1+1 theta-2theta 4 scanning pl contains deck text relevant to observable:pl.
+- `evidence:deck_cd07f5ed4dd499fe` -mentions-> `observable:pl`: CWB D10 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_d23b037f89883cae` -mentions-> `observable:pl`: CWB Yifan D93 attodry911 contains deck text relevant to observable:pl.
+- `evidence:deck_d6568f72573117f7` -mentions-> `observable:pl`: CWB D2 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_da0726772225a12e` -mentions-> `observable:pl`: CWB D16 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_e90dc2a40ba94c2c` -mentions-> `observable:pl`: courtney D129 1+1+1 2deg tMoTe2 scanningpl contains deck text relevant to observable:pl.
+- `evidence:deck_edcc1b74e2ccde78` -mentions-> `observable:pl`: CWB D16 attodry911 contains deck text relevant to observable:pl.
+- `evidence:deck_f03acf0ca142976a` -mentions-> `observable:pl`: CWB D7 3p5 ScanningPL contains deck text relevant to observable:pl.
+- `evidence:deck_fcb0c08d9f201344` -mentions-> `observable:pl`: CWB&WJL B45 Attodry911 measuring contains deck text relevant to observable:pl.
+- `paper:2d_van_der_waals_nanoplatelets_with_robust_ferromagnetism` -mentions-> `observable:pl`: 2D van der Waals Nanoplatelets with Robust Ferromagnetism is relevant to observable:pl.
+- `paper:a_tunable_bilayer_hubbard_model_in_twisted_wse2` -mentions-> `observable:pl`: A tunable bilayer Hubbard model in twisted WSe2 is relevant to observable:pl.
+- `paper:ambipolar_charge_transfer_graphene_plasmonic_cavities` -mentions-> `observable:pl`: Ambipolar charge-transfer graphene plasmonic cavities is relevant to observable:pl.
+- `paper:anomalous_light_cones_and_valley_optical_selection_rules_of_interlayer_excitons` -mentions-> `observable:pl`: Anomalous light cones and valley optical selection rules of interlayer excitons in twisted heterobilayers is relevant to observable:pl.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2402_03294v2` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2403_03964v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:interplay_between_topology_and_correlations_in_the_second_moire_band_of_twisted` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2406_19310v2` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2406_20036v2` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:observation_of_ferromagnetic_phase_in_the_second_moire_band_of_twisted_mote2` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2409_04594v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2501_02525v3` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2502_21153v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2504_06972v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2504_07082v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2507_03287v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2508_17673v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2511_16641v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2511_19782v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2512_03622v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2601_18508v3` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2602_04561v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2602_15466v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2603_16374v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2603_16412v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:arxiv_2603_20370v1` -mentions-> `observable:pl`: arXiv metadata suggests this paper is relevant to observable:pl.
+- `paper:atomically_thin_crcl3_an_in_plane_layered_antiferromagnetic_insulator` -mentions-> `observable:pl`: Atomically Thin CrCl3: An In-Plane Layered Antiferromagnetic Insulator is relevant to observable:pl.
+- `paper:band_topology_hubbard_model_heisenberg_model_and_dzyaloshinskii_moriya_interacti` -mentions-> `observable:pl`: Band topology, Hubbard model, Heisenberg model, and Dzyaloshinskii-Moriya interaction in twisted bilayer WSe2 is relevant to observable:pl.
+- `paper:bright_excitons_in_monolayer_transition_metal_dichalcogenides_from_dirac_cones_t` -mentions-> `observable:pl`: Bright excitons in monolayer transition metal dichalcogenides: from Dirac cones to Dirac saddle points is relevant to observable:pl.
+- `paper:coherent_electronic_coupling_in_atomic_thin_mose2` -mentions-> `observable:pl`: Coherent Electronic Coupling in Atomic Thin MoSe2 is relevant to observable:pl.
+- `paper:coherent_exciton_exciton_interactions_and_exciton_dynamics_in_a_mose2_wse2_heter` -mentions-> `observable:pl`: Coherent exciton-exciton interactions and exciton dynamics in a MoSe2-WSe2 heterostructure is relevant to observable:pl.
+- `paper:coherent_strong_coupling_of_terahertz_magnons_and_phonons_in_a_van_der_waals_ant` -mentions-> `observable:pl`: Coherent strong-coupling of terahertz magnons and phonons in a Van der Waals antiferromagnetic insulator is relevant to observable:pl.
+- `paper:conduction_band_replicas_in_a_2d_moire_semiconductor_heterobilayer` -mentions-> `observable:pl`: Conduction Band Replicas in a 2D Moiré Semiconductor Heterobilayer is relevant to observable:pl.
+- `paper:continuously_tunable_uniaxial_strain_control_of_van_der_waals_heterostructure_de` -mentions-> `observable:pl`: Continuously tunable uniaxial strain control of van der Waals heterostructure devices is relevant to observable:pl.
+- `paper:control_of_two_dimensional_excitonic_light_emission_via_photonic_crystal` -mentions-> `observable:pl`: Control of Two-Dimensional Excitonic Light Emission via Photonic Crystal is relevant to observable:pl.
+- `paper:correlated_interlayer_exciton_insulator_in_heterostructures_of_monolayer_wse2_an` -mentions-> `observable:pl`: Correlated interlayer exciton insulator in heterostructures of monolayer WSe2 and moiré WS2/WSe2 is relevant to observable:pl.
+- `paper:coupled_spin_and_valley_physics_in_monolayers_of_mos2_and_other_group_vi_dichalc` -mentions-> `observable:pl`: Coupled Spin and Valley Physics in Monolayers of MoS2 and Other Group-VI Dichalcogenides is relevant to observable:pl.
+- `paper:deep_moire_potentials_in_twisted_transition_metal_dichalcogenide_bilayers` -mentions-> `observable:pl`: Deep moiré potentials in twisted transition metal dichalcogenide bilayers is relevant to observable:pl.
+- `paper:detection_of_thermodynamic_valley_noise_in_monolayer_semiconductors_access_to_in` -mentions-> `observable:pl`: Detection of thermodynamic "valley noise" in monolayer semiconductors: access to intrinsic valley relaxation timescales is relevant to observable:pl.
+- `paper:determination_of_band_offsets` -mentions-> `observable:pl`: Determination of band offsets is relevant to observable:pl.
+- `paper:dipole_ladders_with_large_hubbard_interaction_in_a_moire_exciton_lattice` -mentions-> `observable:pl`: Dipole ladders with large Hubbard interaction in a moiré exciton lattice is relevant to observable:pl.
+- `paper:direct_observation_of_2d_magnons_in_atomically_thin_cri3` -mentions-> `observable:pl`: Direct observation of 2D magnons in atomically thin CrI3 is relevant to observable:pl.
+- `paper:direct_observation_of_van_der_waals_stacking_dependent_interlayer_magnetism` -mentions-> `observable:pl`: Direct observation of van der Waals stacking dependent interlayer magnetism is relevant to observable:pl.
+- `paper:directional_interlayer_spin_valley_transfer_in_2d_heterostructures` -mentions-> `observable:pl`: Directional Interlayer Spin-Valley Transfer in 2D Heterostructures is relevant to observable:pl.
+- `paper:dynamical_criticality_of_spin_shear_coupling_in_van_der_waals_antiferromagnets` -mentions-> `observable:pl`: Dynamical criticality of spin-shear coupling in van der Waals antiferromagnets is relevant to observable:pl.
+- `paper:dynamically_tunable_moire_excitons_rydberg_states_in_a_monolayer_semiconductor_o` -mentions-> `observable:pl`: Dynamically tunable moiré excitons Rydberg states in a monolayer semiconductor on twisted bilayer graphene is relevant to observable:pl.
+- `paper:edge_conduction_in_monolayer_wte2` -mentions-> `observable:pl`: Edge conduction in monolayer WTe2 is relevant to observable:pl.
+- `paper:electrical_control_of_neutral_and_charged_excitons_in_a_monolayer_semiconductor` -mentions-> `observable:pl`: Electrical Control of Neutral and Charged Excitons in a Monolayer Semiconductor is relevant to observable:pl.
+- `paper:electrical_tuning_of_valley_magnetic_moment_via_symmetry_control_in_bilayer_mos2` -mentions-> `observable:pl`: Electrical Tuning of Valley Magnetic Moment via Symmetry Control in Bilayer MoS2 is relevant to observable:pl.
+- `paper:electrically_tunable_excitonic_light_emitting_diodes_based_on_monolayer_wse2_p_n` -mentions-> `observable:pl`: Electrically Tunable Excitonic Light Emitting Diodes based on Monolayer WSe2 p-n Junctions is relevant to observable:pl.
+- `paper:every_other_layer_dipolar_excitons_in_a_spin_valley_locked_superlattice` -mentions-> `observable:pl`: Every-other-layer Dipolar Excitons in a Spin-Valley locked Superlattice is relevant to observable:pl.
+- `paper:evidence_for_equilibrium_excitons_and_exciton_condensation_in_monolayer_wte2` -mentions-> `observable:pl`: Evidence for equilibrium excitons and exciton condensation in monolayer WTe2 is relevant to observable:pl.
+- `paper:evidence_for_moire_excitons_in_van_der_waals_heterostructures` -mentions-> `observable:pl`: Evidence for moiré excitons in van der Waals heterostructures is relevant to observable:pl.
+- `paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif` -mentions-> `observable:pl`: Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2 is relevant to observable:pl.
+- `paper:evidence_of_the_fractional_quantum_spin_hall_effect_in_moire_mote2` -mentions-> `observable:pl`: Evidence of the fractional quantum spin Hall effect in moire MoTe2 is relevant to observable:pl.
+- `paper:evolution_of_the_valley_position_in_bulk_transition_metal_chalcogenides_and_thei` -mentions-> `observable:pl`: Evolution of the Valley Position in Bulk Transition-Metal Chalcogenides and their Mono-Layer Limit is relevant to observable:pl.
+- `paper:exciton_coupled_coherent_magnons_in_a_2d_semiconductor` -mentions-> `observable:pl`: Exciton-coupled coherent magnons in a 2D semiconductor is relevant to observable:pl.
+- `paper:exciton_dressing_by_extreme_nonlinear_magnons_in_a_layered_semiconductor` -mentions-> `observable:pl`: Exciton Dressing by Extreme Nonlinear Magnons in a Layered Semiconductor is relevant to observable:pl.
+- `paper:excitonic_insulator_in_a_heterojunction_moire_superlattice` -mentions-> `observable:pl`: Excitonic insulator in a heterojunction moiré superlattice is relevant to observable:pl.
+- `paper:excitonic_luminescence_up_conversion_in_a_2d_semiconductor` -mentions-> `observable:pl`: Excitonic Luminescence Up-Conversion in a 2D Semiconductor is relevant to observable:pl.
+- `paper:excitons_and_emergent_quantum_phenomena_in_stacked_2d_semiconductors` -mentions-> `observable:pl`: Excitons and emergent quantum phenomena in stacked 2D semiconductors is relevant to observable:pl.
+- `paper:excitons_in_semiconductor_moire_superlattices` -mentions-> `observable:pl`: Excitons in semiconductor moiré superlattices is relevant to observable:pl.
+- `paper:excitons_in_the_fractional_quantum_hall_effect` -mentions-> `observable:pl`: Excitons in the fractional quantum Hall effect is relevant to observable:pl.
+- `paper:flat_bands_in_twisted_bilayer_transition_metal_dichalcogenides` -mentions-> `observable:pl`: Flat bands in twisted bilayer transition metal dichalcogenides is relevant to observable:pl.
+- `paper:frozen_non_equilibrium_dynamics_of_exciton_mott_insulators_in_moire_superlattice` -mentions-> `observable:pl`: Frozen Non-Equilibrium Dynamics of Exciton Mott Insulators in Moiré Superlattices is relevant to observable:pl.
+- `paper:gate_induced_superconductivity_in_a_monolayer_topological_insulator` -mentions-> `observable:pl`: Gate-induced superconductivity in a monolayer topological insulator is relevant to observable:pl.
+- `paper:highly_anisotropic_and_robust_excitons_in_monolayer_black_phosphorus` -mentions-> `observable:pl`: Highly Anisotropic and Robust Excitons in Monolayer Black Phosphorus is relevant to observable:pl.
+- `paper:highly_anisotropic_excitons_and_multiple_phonon_bound_states_in_a_van_der_waals` -mentions-> `observable:pl`: Highly Anisotropic Excitons and Multiple Phonon Bound States in a Van der Waals Antiferromagnetic Insulator is relevant to observable:pl.
+- `paper:hubbard_model_physics_in_transition_metal_dichalcogenide_moire_bands` -mentions-> `observable:pl`: Hubbard Model Physics in Transition Metal Dichalcogenide Moiré Bands is relevant to observable:pl.
+- `paper:imaging_dynamic_exciton_interactions_and_coupling_in_transition_metal_dichalcoge` -mentions-> `observable:pl`: Imaging dynamic exciton interactions and coupling in transition metal dichalcogenides is relevant to observable:pl.
+- `paper:intercell_moire_exciton_complexes_in_electronic_lattices` -mentions-> `observable:pl`: Intercell moiré exciton complexes in electronic lattices is relevant to observable:pl.
+- `paper:interlayer_electronic_coupling_on_demand_in_a_2d_magnetic_semiconductor` -mentions-> `observable:pl`: Interlayer Electronic Coupling on Demand in a 2D Magnetic Semiconductor is relevant to observable:pl.
+- `paper:interlayer_exciton_optoelectronics_in_a_2d_heterostructure_p_n_junction` -mentions-> `observable:pl`: Interlayer Exciton Optoelectronics in a 2D Heterostructure p-n Junction is relevant to observable:pl.
+- `paper:interlayer_valley_excitons_in_heterobilayers_of_transition_metal_dichalcogenides` -mentions-> `observable:pl`: Interlayer valley excitons in heterobilayers of transition metal dichalcogenides is relevant to observable:pl.
+- `paper:interplay_between_topology_and_correlations_in_the_second_moire_band_of_twisted` -mentions-> `observable:pl`: Interplay between topology and correlations in the second moiré band of twisted bilayer MoTe2 is relevant to observable:pl.
+- `paper:intrinsic_donor_bound_excitons_in_ultraclean_monolayer_semiconductors` -mentions-> `observable:pl`: Intrinsic Donor-Bound Excitons in Ultraclean Monolayer Semiconductors is relevant to observable:pl.
+- `paper:intrinsic_exciton_linewidth_in_monolayer_transition_metal_dichalcogenides` -mentions-> `observable:pl`: Intrinsic Exciton Linewidth in Monolayer Transition Metal Dichalcogenides is relevant to observable:pl.
+- `paper:lattice_reconstruction_induced_multiple_ultra_flat_bands_in_twisted_bilayer_wse2` -mentions-> `observable:pl`: Lattice reconstruction induced multiple ultra-flat bands in twisted bilayer WSe2 is relevant to observable:pl.
+- `paper:layer_dependent_ferromagnetism_in_a_van_der_waals_crystal_down_to_the_monolayer` -mentions-> `observable:pl`: Layer-dependent Ferromagnetism in a van der Waals Crystal down to the Monolayer Limit is relevant to observable:pl.
+- `paper:long_range_transport_of_2d_excitons_with_acoustic_waves` -mentions-> `observable:pl`: Long-range transport of 2D excitons with acoustic waves is relevant to observable:pl.
+- `paper:magnetic_behavior_and_spin_lattice_coupling_in_cleavable_van_der_waals_layered_c` -mentions-> `observable:pl`: Magnetic behavior and spin-lattice coupling in cleavable van der Waals layered CrCl3 crystals is relevant to observable:pl.
+- `paper:magnetic_control_of_valley_pseudospin_in_monolayer_wse2` -mentions-> `observable:pl`: Magnetic Control of Valley Pseudospin in Monolayer WSe2 is relevant to observable:pl.
+- `paper:magnetic_proximity_and_nonreciprocal_current_switching_in_a_monolayer_wte2_helic` -mentions-> `observable:pl`: Magnetic proximity and nonreciprocal current switching in a monolayer WTe2 helical edge is relevant to observable:pl.
+- `paper:magnetism_and_its_structural_coupling_effects_in_2d_ising_ferromagnetic_insulato` -mentions-> `observable:pl`: Magnetism and Its Structural Coupling Effects in 2D Ising Ferromagnetic Insulator VI3 is relevant to observable:pl.
+- `paper:magneto_optics_in_a_van_der_waals_magnet_tuned_by_self_hybridized_polaritons` -mentions-> `observable:pl`: Magneto-optics in a van der Waals magnet tuned by self-hybridized polaritons is relevant to observable:pl.
+- `paper:magneto_optics_of_exciton_rydberg_states_in_a_monolayer_semiconductor` -mentions-> `observable:pl`: Magneto-Optics of Exciton Rydberg States in a Monolayer Semiconductor is relevant to observable:pl.
+- `paper:magnetoelectric_effects_and_valley_controlled_spin_quantum_gates_in_transition_m` -mentions-> `observable:pl`: Magnetoelectric effects and valley controlled spin quantum gates in transition metal dichalcogenide bilayers is relevant to observable:pl.
+- `paper:many_body_exciton_and_intervalley_correlations_in_heavily_electron_doped_wse2_mo` -mentions-> `observable:pl`: Many-Body Exciton and Intervalley Correlations in Heavily Electron-Doped WSe2 Monolayers is relevant to observable:pl.
+- `paper:measurement_of_the_conduction_band_spin_orbit_splitting_in_wse2_and_ws2_monolaye` -mentions-> `observable:pl`: Measurement of the conduction band spin-orbit splitting in WSe2 and WS2 monolayers is relevant to observable:pl.
+- `paper:metasurface_integrated_monolayer_exciton_polariton` -mentions-> `observable:pl`: Metasurface Integrated Monolayer Exciton Polariton is relevant to observable:pl.
+- `paper:moire_excitons_from_programmable_quantum_emitter_arrays_to_spin_orbit_coupled_ar` -mentions-> `observable:pl`: Moire excitons: from programmable quantum emitter arrays to spin-orbit coupled artificial lattices is relevant to observable:pl.
+- `paper:moire_flat_bands_in_twisted_2d_hexagonal_vdw_materials` -mentions-> `observable:pl`: Moiré flat bands in twisted 2D hexagonal vdW materials is relevant to observable:pl.
+- `paper:moire_flat_chern_bands_and_correlated_quantum_anomalous_hall_states_generated_by` -mentions-> `observable:pl`: Moiré flat Chern bands and correlated quantum anomalous Hall states generated by spin-orbit couplings in twisted homobilayer MoS2 is relevant to observable:pl.
+- `paper:moire_heterostructures_as_a_condensed_matter_quantum_simulator` -mentions-> `observable:pl`: Moiré heterostructures as a condensed-matter quantum simulator is relevant to observable:pl.
+- `paper:moire_trions_in_mose2_wse2_heterobilayers` -mentions-> `observable:pl`: Moiré trions in MoSe2/WSe2 heterobilayers is relevant to observable:pl.
+- `paper:multiple_hot_carrier_collection_in_photo_excited_graphene_moire_superlattices` -mentions-> `observable:pl`: Multiple Hot-Carrier Collection in Photo-Excited Graphene Moire Superlattices is relevant to observable:pl.
+- `paper:nano_optical_imaging_of_exciton_polaritons_inside_wse2_waveguides` -mentions-> `observable:pl`: Nano-optical imaging of exciton polaritons inside WSe2 waveguides is relevant to observable:pl.
+- `paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu` -mentions-> `observable:pl`: Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides is relevant to observable:pl.
+- `paper:nanocavity_clock_spectroscopy_resolving_competing_exciton_dynamics_in_wse2_mose2` -mentions-> `observable:pl`: Nanocavity Clock Spectroscopy: Resolving Competing Exciton Dynamics in WSe2/MoSe2 Heterobilayers is relevant to observable:pl.
+- `paper:nonlinear_valley_and_spin_currents_from_fermi_pocket_anisotropy_in_2d_crystals` -mentions-> `observable:pl`: Nonlinear valley and spin currents from Fermi pocket anisotropy in 2D crystals is relevant to observable:pl.
+- `paper:observation_of_ferromagnetic_phase_in_the_second_moire_band_of_twisted_mote2` -mentions-> `observable:pl`: Observation of ferromagnetic phase in the second moiré band of twisted MoTe2 is relevant to observable:pl.
+- `paper:observation_of_fractionally_quantized_anomalous_hall_effect` -mentions-> `observable:pl`: Observation of Fractionally Quantized Anomalous Hall Effect is relevant to observable:pl.
+- `paper:observation_of_intravalley_phonon_scattering_of_2s_excitons_in_mose2_and_wse2_mo` -mentions-> `observable:pl`: Observation of Intravalley Phonon Scattering of 2s Excitons in MoSe2 and WSe2 Monolayers is relevant to observable:pl.
+- `paper:observation_of_long_lived_interlayer_excitons_in_monolayer_mose2_wse2_heterostru` -mentions-> `observable:pl`: Observation of Long-Lived Interlayer Excitons in Monolayer MoSe2-WSe2 Heterostructures is relevant to observable:pl.
+- `paper:observation_of_moire_excitons_in_wse2_ws2_heterostructure_superlattices` -mentions-> `observable:pl`: Observation of moiré excitons in WSe2/WS2 heterostructure superlattices is relevant to observable:pl.
+- `paper:one_dimensional_moire_excitons_in_transition_metal_dichalcogenide_heterobilayer` -mentions-> `observable:pl`: One-Dimensional Moiré Excitons in Transition-Metal Dichalcogenide Heterobilayer is relevant to observable:pl.
+- `paper:optical_control_of_integer_and_fractional_chern_insulators` -mentions-> `observable:pl`: Optical control of integer and fractional Chern insulators is relevant to observable:pl.
+- `paper:optical_generation_of_excitonic_valley_coherence_in_monolayer_wse2` -mentions-> `observable:pl`: Optical Generation of Excitonic Valley Coherence in Monolayer WSe2 is relevant to observable:pl.
+- `paper:phonon_assisted_oscillatory_exciton_dynamics_in_monolayer_mose2` -mentions-> `observable:pl`: Phonon-assisted oscillatory exciton dynamics in monolayer MoSe2 is relevant to observable:pl.
+- `paper:plasmon_enhanced_resonance_in_individual_nanogap_electrodes_studied_using_graphe` -mentions-> `observable:pl`: Plasmon Enhanced Resonance in Individual Nanogap Electrodes Studied Using Graphene Nanoconstrictions as Photodetectors is relevant to observable:pl.
+- `paper:plasmonic_polarization_sensing_of_electrostatic_superlattice_potentials` -mentions-> `observable:pl`: Plasmonic polarization sensing of electrostatic superlattice potentials is relevant to observable:pl.
+- `paper:population_pulsation_resonances_of_excitons_in_monolayer_mose2_with_sub_1_ev_lin` -mentions-> `observable:pl`: Population pulsation resonances of excitons in monolayer MoSe2 with sub 1 µeV linewidth is relevant to observable:pl.
+- `paper:probing_the_influence_of_dielectric_environment_on_excitons_in_monolayer_wse2_in` -mentions-> `observable:pl`: Probing the Influence of Dielectric Environment on Excitons in Monolayer WSe2: Insight from High Magnetic Fields is relevant to observable:pl.
+- `paper:probing_transconductance_spatial_variations_in_graphene_nanoribbon_field_effect` -mentions-> `observable:pl`: Probing transconductance spatial variations in graphene nanoribbon field-effect transistors using scanning gate microscopy is relevant to observable:pl.
+- `paper:programmable_hyperbolic_polaritons_in_van_der_waals_semiconductors` -mentions-> `observable:pl`: Programmable hyperbolic polaritons in van der Waals semiconductors is relevant to observable:pl.
+- `paper:programming_correlated_magnetic_states_via_gate_controlled_moire_geometry` -mentions-> `observable:pl`: Programming Correlated Magnetic States via Gate Controlled Moire Geometry is relevant to observable:pl.
+- `paper:programming_correlated_magnetic_states_with_gate_controlled_moire_geometry` -mentions-> `observable:pl`: Programming correlated magnetic states with gate-controlled moiré geometry is relevant to observable:pl.
+- `paper:quantum_criticality_in_twisted_transition_metal_dichalcogenides` -mentions-> `observable:pl`: Quantum criticality in twisted transition metal dichalcogenides is relevant to observable:pl.
+- `paper:quenched_excitons_in_wse2_alpha_rucl3_heterostructures_revealed_by_multimessenge` -mentions-> `observable:pl`: Quenched Excitons in WSe2/alpha-RuCl3 Heterostructures Revealed by Multimessenger Nanoscopy is relevant to observable:pl.
+- `paper:radiative_control_of_dark_excitons_at_room_temperature_by_nano_optical_antenna_t` -mentions-> `observable:pl`: Radiative control of dark excitons at room temperature by nano-optical antenna-tip induced Purcell effect is relevant to observable:pl.
+- `paper:resonantly_hybridized_excitons_in_moire_superlattices_in_van_der_waals_heterostr` -mentions-> `observable:pl`: Resonantly hybridized excitons in moiré superlattices in van der Waals heterostructures is relevant to observable:pl.
+- `paper:robust_non_abelian_even_denominator_fractional_chern_insulator_in_twisted_bilaye` -mentions-> `observable:pl`: Robust non-Abelian even-denominator fractional Chern insulator in twisted bilayer MoTe2 is relevant to observable:pl.
+- `paper:semiconductor_moire_materials` -mentions-> `observable:pl`: Semiconductor moiré materials is relevant to observable:pl.
+- `paper:separation_of_the_valley_exciton_polariton_in_two_dimensional_semiconductors_wit` -mentions-> `observable:pl`: Separation of the valley exciton-polariton in two-dimensional semiconductors with an anisotropic photonic crystal is relevant to observable:pl.
+- `paper:signatures_of_fractional_charges_via_anyon_trions_in_twisted_mote2` -mentions-> `observable:pl`: Signatures of fractional charges via anyon-trions in twisted MoTe2 is relevant to observable:pl.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `observable:pl`: Signatures of Fractional Quantum Anomalous Hall States in Twisted MoTe2 Bilayer is relevant to observable:pl.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2` -mentions-> `observable:pl`: Signatures of fractional quantum anomalous Hall states in twisted MoTe2 is relevant to observable:pl.
+- `paper:signatures_of_moire_trapped_valley_excitons_in_mose2_wse2_heterobilayers` -mentions-> `observable:pl`: Signatures of moiré-trapped valley excitons in MoSe2/WSe2 heterobilayers is relevant to observable:pl.
+- `paper:six_body_and_eight_body_exciton_states_in_monolayer_wse2` -mentions-> `observable:pl`: Six-Body and Eight-Body Exciton States in Monolayer WSe2 is relevant to observable:pl.
+- `paper:spin_layer_locking_effects_in_optical_orientation_of_exciton_spin_in_bilayer_wse` -mentions-> `observable:pl`: Spin-Layer Locking Effects in Optical Orientation of Exciton Spin in Bilayer WSe2 is relevant to observable:pl.
+- `paper:spontaneous_valley_polarization_of_interacting_carriers_in_a_monolayer_semicondu` -mentions-> `observable:pl`: Spontaneous valley polarization of interacting carriers in a monolayer semiconductor is relevant to observable:pl.
+- `paper:strong_interaction_between_interlayer_excitons_and_correlated_electrons_in_wse2` -mentions-> `observable:pl`: Strong interaction between interlayer excitons and correlated electrons in WSe2/WS2 moiré superlattice is relevant to observable:pl.
+- `paper:strongly_correlated_electrons_and_hybrid_excitons_in_a_moire_heterostructure` -mentions-> `observable:pl`: Strongly correlated electrons and hybrid excitons in a moiré heterostructure is relevant to observable:pl.
+- `paper:superposition_of_intra_and_inter_layer_excitons_in_twistronic_mose2_wse2_bilayer` -mentions-> `observable:pl`: Superposition of intra- and inter-layer excitons in twistronic MoSe2/WSe2 bilayers probed by resonant Raman scattering，Liam P. McDonnell is relevant to observable:pl.
+- `paper:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2` -mentions-> `observable:pl`: Thermodynamic evidence of fractional Chern insulator in moire MoTe2 is relevant to observable:pl.
+- `paper:trion_formation_dynamics_in_monolayer_transition_metal_dichalcogenides` -mentions-> `observable:pl`: Trion Formation Dynamics in Monolayer Transition Metal Dichalcogenides is relevant to observable:pl.
+- `paper:trion_sensing_of_a_zero_field_composite_fermi_liquid` -mentions-> `observable:pl`: Trion Sensing of a Zero-Field Composite Fermi Liquid is relevant to observable:pl.
+- `paper:tuanble_exciton_hybridized_magnon_interacitons_in_a_layered_semiconductor` -mentions-> `observable:pl`: Tuanble exciton-hybridized magnon interacitons in a layered semiconductor is relevant to observable:pl.
+- `paper:tunable_phononic_coupling_in_excitonic_quantum_emitters` -mentions-> `observable:pl`: Tunable phononic coupling in excitonic quantum emitters is relevant to observable:pl.
+- `paper:tuning_ising_superconductivity_with_layer_and_spin_orbit_coupling_in_two_dimensi` -mentions-> `observable:pl`: Tuning Ising superconductivity with layer and spin-orbit coupling in two-dimensional transition-metal dichalcogenides is relevant to observable:pl.
+- `paper:universal_magnetic_phases_in_twisted_bilayer_mote2` -mentions-> `observable:pl`: Universal Magnetic Phases in Twisted Bilayer MoTe2 is relevant to observable:pl.
+- `paper:unusual_exciton_phonon_interactions_at_van_der_waals_engineered_interfaces` -mentions-> `observable:pl`: Unusual Exciton-Phonon Interactions at van der Waals Engineered Interfaces is relevant to observable:pl.
+- `paper:valley_manipulation_by_optically_tuning_the_magnetic_proximity_effect_in_wse2_cr` -mentions-> `observable:pl`: Valley Manipulation by Optically Tuning the Magnetic Proximity Effect in WSe2/CrI3 Heterostructures is relevant to observable:pl.
+- `paper:valley_phonons_and_exciton_complexes_in_a_monolayer_semiconductor` -mentions-> `observable:pl`: Valley Phonons and Exciton Complexes in a Monolayer Semiconductor is relevant to observable:pl.
+- `paper:valley_polarized_exciton_dynamics_in_a_2d_semicondcutor_heterostructure` -mentions-> `observable:pl`: Valley-Polarized Exciton Dynamics in a 2D Semicondcutor Heterostructure is relevant to observable:pl.
+- `paper:valley_splitting_and_valley_dependent_inter_landau_level_optical_transitions_in` -mentions-> `observable:pl`: Valley-splitting and valley-dependent inter-Landau-level optical transitions in monolayer MoS2 quantum Hall systems is relevant to observable:pl.
+- `paper:valleytronics_in_2d_materials` -mentions-> `observable:pl`: Valleytronics in 2D materials is relevant to observable:pl.
+- `paper:van_der_waals_engineering_of_ferromagnetic_semiconductor_heterostructures_for_sp` -mentions-> `observable:pl`: Van der Waals Engineering of Ferromagnetic Semiconductor Heterostructures for Spin and Valleytronics is relevant to observable:pl.
+- `paper:vapor_solid_growth_of_high_quality_mos2_monolayers_with_near_unity_valley_polari` -mentions-> `observable:pl`: Vapor-Solid Growth of High Quality MoS2 Monolayers With Near-Unity Valley Polarization is relevant to observable:pl.
+- `paper:vapor_transport_growth_of_high_optical_quality_wse2_monolayers` -mentions-> `observable:pl`: Vapor Transport Growth of High Optical Quality WSe2 Monolayers is relevant to observable:pl.
+- `paper:virtual_trions_in_the_photoluminescence_of_monolayer_transition_metal_dichalcoge` -mentions-> `observable:pl`: Virtual trions in the photoluminescence of monolayer transition-metal dichalcogenides is relevant to observable:pl.
+- `paper:visualizing_moire_ferroelectricity_via_plasmons_and_nano_photocurrent_in_graphen` -mentions-> `observable:pl`: Visualizing moiré ferroelectricity via plasmons and nano-photocurrent in graphene/twisted-WSe2 structures is relevant to observable:pl.
+- `paper:visualizing_the_microscopic_origins_of_topology_in_twisted_molybdenum_ditellurid` -mentions-> `observable:pl`: Visualizing the microscopic origins of topology in twisted molybdenum ditelluride is relevant to observable:pl.
+- `paper:zeeman_type_spin_splitting_controlled_by_an_electric_field` -mentions-> `observable:pl`: Zeeman-type Spin Splitting Controlled by an Electric Field is relevant to observable:pl.
+- `observable:pl` -supports_claim-> `claim:optical_probes_primary_evidence`: PL can track filling and correlated-state behavior in modern TMD moiré systems.
+- `claim:promoted_2304_fqah_streda_optical_mcd` -mentions-> `observable:pl`: Trion PL is the filling-sensitive Landau-fan probe in the claim.
+- `claim:promoted_deck_c5_fractional_features_and_dots` -mentions-> `observable:pl`: The C5 deck fact is based on PL/trion and dot-like optical spectra.
+- `claim:promoted_deck_d6_vminus23_fractional_state_dfield_sensitive` -mentions-> `observable:pl`: The D6 deck fact is an optical PL/trion fractional feature.
+- `claim:promoted_2602_optical_minus_one_third_fqah` -measured_by-> `observable:pl`: PL is one of the optical probes used to identify the nu=-1/3 state.
+
+## pump-probe circular dichroism
+- ID: `observable:pump_probe_circular_dichroism`
+- Confidence: medium
+- Summary: Time-resolved magnetic/valley optical probe used to infer hidden or weak magnetic signatures in twisted MoTe2.
+- Aliases: pump-probe CD, transient circular dichroism
+- Provenance: https://arxiv.org/abs/2601.18508 (Codex curation pass from arXiv abstract)
+
+Related edges:
+- `claim:promoted_2601_putative_fti_magnetic_signature` -measured_by-> `observable:pump_probe_circular_dichroism`: The magnetic signature is inferred with pump-probe circular dichroism.
+
+## RMCD
+- ID: `observable:rmcd`
+- Confidence: high
+- Summary: Magneto-optical observable often used to track magnetic contrast, hysteresis, and correlated-state signatures.
+- Aliases: reflective magnetic circular dichroism, MCD
+- Provenance: lab_assistant/knowledge/syntheses/optical_magnetism_and_probes.md (Codex seed from existing synthesis); lab_assistant/knowledge/projects/d93_run2.md (Codex seed from project note)
+
+Related edges:
+- `claim:deck_8d3f501aa323b164_slide_45_trilayer_region_rmcd_scan_seems_to_be_some_instability_a` -mentions-> `observable:rmcd`: Deck-derived claim is relevant to observable:rmcd.
+- `project:d93_run2` -mentions-> `observable:rmcd`: D93 Run2 is centered on RMCD and magnetic comparison logic.
+- `evidence:deck_408a3288187090a8` -mentions-> `observable:rmcd`: CWB Yifan D93 Run2 attodry522 contains deck text relevant to observable:rmcd.
+- `evidence:deck_8d3f501aa323b164` -mentions-> `observable:rmcd`: CWB D6 Attodry911 contains deck text relevant to observable:rmcd.
+- `evidence:deck_d23b037f89883cae` -mentions-> `observable:rmcd`: CWB Yifan D93 attodry911 contains deck text relevant to observable:rmcd.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `observable:rmcd`: arXiv metadata suggests this paper is relevant to observable:rmcd.
+- `paper:arxiv_2602_04561v1` -mentions-> `observable:rmcd`: arXiv metadata suggests this paper is relevant to observable:rmcd.
+- `paper:arxiv_2602_15466v1` -mentions-> `observable:rmcd`: arXiv metadata suggests this paper is relevant to observable:rmcd.
+- `paper:direct_magnetic_imaging_of_fractional_chern_insulators_in_twisted_mote2` -mentions-> `observable:rmcd`: Direct magnetic imaging of fractional Chern insulators in twisted MoTe2 is relevant to observable:rmcd.
+- `paper:excited_rydberg_states_in_mose2_wse2_heterostructures` -mentions-> `observable:rmcd`: Excited Rydberg States in MoSe2/WSe2 Heterostructures is relevant to observable:rmcd.
+- `paper:observation_of_intravalley_phonon_scattering_of_2s_excitons_in_mose2_and_wse2_mo` -mentions-> `observable:rmcd`: Observation of Intravalley Phonon Scattering of 2s Excitons in MoSe2 and WSe2 Monolayers is relevant to observable:rmcd.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `observable:rmcd`: Signatures of Fractional Quantum Anomalous Hall States in Twisted MoTe2 Bilayer is relevant to observable:rmcd.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2` -mentions-> `observable:rmcd`: Signatures of fractional quantum anomalous Hall states in twisted MoTe2 is relevant to observable:rmcd.
+- `paper:superposition_of_intra_and_inter_layer_excitons_in_twistronic_mose2_wse2_bilayer` -mentions-> `observable:rmcd`: Superposition of intra- and inter-layer excitons in twistronic MoSe2/WSe2 bilayers probed by resonant Raman scattering，Liam P. McDonnell is relevant to observable:rmcd.
+- `claim:promoted_2304_fqah_streda_optical_mcd` -mentions-> `observable:rmcd`: MCD/RMCD-type magneto-optics are part of the evidence chain.
+- `claim:promoted_2602_mote2_wse2_consecutive_tpts` -measured_by-> `observable:rmcd`: Layer-resolved MCD/RMCD-type magneto-optics are part of the phase-diagram evidence chain.
+- `claim:promoted_deck_d93_vminus2_magnetic_feature_dfield` -mentions-> `observable:rmcd`: The D93 claim is based on RMCD contrast and saturation/hysteresis checks.
+- `claim:promoted_2602_optical_minus_one_third_fqah` -measured_by-> `observable:rmcd`: RMCD is one of the optical probes used to identify the nu=-1/3 state.
+- `observable:rmcd` -measured_by-> `phenomenon:moire_magnetism`: RMCD is a magneto-optical probe used to track magnetic contrast and hysteresis in relevant projects.
+
+## transient optical spectroscopy
+- ID: `observable:transient_optical_spectroscopy`
+- Confidence: medium
+- Summary: Nonequilibrium optical probe that can reveal fractional states and dynamics not visible in static sensing or transport.
+- Aliases: pump-probe optical spectroscopy, ultrafast optical spectroscopy
+- Provenance: https://arxiv.org/abs/2502.21153 (Codex curation pass from arXiv abstract)
+
+Related edges:
+- `claim:promoted_2502_hidden_fractional_states_transient_optics` -measured_by-> `observable:transient_optical_spectroscopy`: The hidden-state claim depends on transient optical spectroscopy.
+
+## transport
+- ID: `observable:transport`
+- Confidence: medium
+- Summary: Electronic transport observables used to identify integer/fractional anomalous Hall and related states.
+- Aliases: Hall transport, longitudinal resistance, Hall plateau
+- Provenance: lab_assistant/knowledge/papers (deterministic paper-shelf ingest); arXiv metadata queries (arxiv metadata ingest); lab summary deck extraction (deterministic deck ingest); https://sites.google.com/uw.edu/xulab/publications (official xu group publications ingest)
+
+Related edges:
+- `claim:deck_408a3288187090a8_slide_16_no_clear_v_2_state_this_is_close_to_where_the_transport` -mentions-> `observable:transport`: Deck-derived claim is relevant to observable:transport.
+- `claim:deck_d23b037f89883cae_slide_16_perhaps_need_to_find_the_region_with_the_contacts_where` -mentions-> `observable:transport`: Deck-derived claim is relevant to observable:transport.
+- `evidence:deck_408a3288187090a8` -mentions-> `observable:transport`: CWB Yifan D93 Run2 attodry522 contains deck text relevant to observable:transport.
+- `evidence:deck_d23b037f89883cae` -mentions-> `observable:transport`: CWB Yifan D93 attodry911 contains deck text relevant to observable:transport.
+- `paper:absence_of_weyl_nodes_in_eucd2as2_revealed_by_the_carrier_density_dependence_of` -mentions-> `observable:transport`: Absence of Weyl nodes in EuCd2As2 revealed by the carrier density dependence of the anomalous Hall effect is relevant to observable:transport.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2402_03294v2` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2403_03964v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:interplay_between_topology_and_correlations_in_the_second_moire_band_of_twisted` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2406_19310v2` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:observation_of_ferromagnetic_phase_in_the_second_moire_band_of_twisted_mote2` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2501_02525v3` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2502_21153v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2504_06972v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2504_07082v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2506_00110v2` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2507_03287v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2511_16641v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2512_03622v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2601_18508v3` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2602_04561v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2602_15466v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2603_16374v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2603_16412v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:arxiv_2603_20370v1` -mentions-> `observable:transport`: arXiv metadata suggests this paper is relevant to observable:transport.
+- `paper:creation_of_chiral_interface_channels_for_quantized_transport_in_magnetic_topolo` -mentions-> `observable:transport`: Creation of Chiral Interface Channels for Quantized Transport in Magnetic Topological Insulator Multilayer Heterostructures is relevant to observable:transport.
+- `paper:direct_magnetic_imaging_of_fractional_chern_insulators_in_twisted_mote2` -mentions-> `observable:transport`: Direct magnetic imaging of fractional Chern insulators in twisted MoTe2 is relevant to observable:transport.
+- `paper:direct_magnetic_imaging_of_fractional_chern_insulators_in_twisted_mote2_with_a_s` -mentions-> `observable:transport`: Direct magnetic imaging of fractional Chern insulators in twisted MoTe2 with a superconducting sensor is relevant to observable:transport.
+- `paper:dynamical_criticality_of_spin_shear_coupling_in_van_der_waals_antiferromagnets` -mentions-> `observable:transport`: Dynamical criticality of spin-shear coupling in van der Waals antiferromagnets is relevant to observable:transport.
+- `paper:even_odd_layer_dependent_anomalous_hall_effect_in_topological_magnet_mnbi2te4_th` -mentions-> `observable:transport`: Even-Odd Layer-Dependent Anomalous Hall Effect in Topological Magnet MnBi2Te4 Thin Films， Yi-Fan Zhao is relevant to observable:transport.
+- `paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif` -mentions-> `observable:transport`: Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2 is relevant to observable:transport.
+- `paper:evidence_of_the_fractional_quantum_spin_hall_effect_in_moire_mote2` -mentions-> `observable:transport`: Evidence of the fractional quantum spin Hall effect in moire MoTe2 is relevant to observable:transport.
+- `paper:excitons_in_the_fractional_quantum_hall_effect` -mentions-> `observable:transport`: Excitons in the fractional quantum Hall effect is relevant to observable:transport.
+- `paper:gate_induced_superconductivity_in_a_monolayer_topological_insulator` -mentions-> `observable:transport`: Gate-induced superconductivity in a monolayer topological insulator is relevant to observable:transport.
+- `paper:giant_tunneling_magnetoresistance_in_spin_filter_van_der_waals_heterostructures` -mentions-> `observable:transport`: Giant Tunneling Magnetoresistance in Spin-Filter van der Waals Heterostructures is relevant to observable:transport.
+- `paper:hidden_states_and_dynamics_of_fractional_fillings_in_twisted_mote2_bilayers` -mentions-> `observable:transport`: Hidden states and dynamics of fractional fillings in twisted MoTe2 bilayers is relevant to observable:transport.
+- `paper:imaging_quantum_spin_hall_edges_in_monolayer_wte2` -mentions-> `observable:transport`: Imaging Quantum Spin Hall Edges in Monolayer WTe2 is relevant to observable:transport.
+- `paper:interplay_between_topology_and_correlations_in_the_second_moire_band_of_twisted` -mentions-> `observable:transport`: Interplay between topology and correlations in the second moiré band of twisted bilayer MoTe2 is relevant to observable:transport.
+- `paper:layered_antiferromagnetism_induces_large_negative_magnetoresistance_in_the_van_d` -mentions-> `observable:transport`: Layered Antiferromagnetism Induces Large Negative Magnetoresistance in the van der Waals Semiconductor CrSBr is relevant to observable:transport.
+- `paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator` -mentions-> `observable:transport`: Local probe of bulk and edge states in a fractional Chern insulator is relevant to observable:transport.
+- `paper:long_range_transport_of_2d_excitons_with_acoustic_waves` -mentions-> `observable:transport`: Long-range transport of 2D excitons with acoustic waves is relevant to observable:transport.
+- `paper:magnetic_proximity_and_nonreciprocal_current_switching_in_a_monolayer_wte2_helic` -mentions-> `observable:transport`: Magnetic proximity and nonreciprocal current switching in a monolayer WTe2 helical edge is relevant to observable:transport.
+- `paper:moire_flat_chern_bands_and_correlated_quantum_anomalous_hall_states_generated_by` -mentions-> `observable:transport`: Moiré flat Chern bands and correlated quantum anomalous Hall states generated by spin-orbit couplings in twisted homobilayer MoS2 is relevant to observable:transport.
+- `paper:moire_heterostructures_as_a_condensed_matter_quantum_simulator` -mentions-> `observable:transport`: Moiré heterostructures as a condensed-matter quantum simulator is relevant to observable:transport.
+- `paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu` -mentions-> `observable:transport`: Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides is relevant to observable:transport.
+- `paper:observation_of_dissipationless_fractional_chern_insulator` -mentions-> `observable:transport`: Observation of dissipationless fractional Chern insulator is relevant to observable:transport.
+- `paper:observation_of_fractionally_quantized_anomalous_hall_effect` -mentions-> `observable:transport`: Observation of Fractionally Quantized Anomalous Hall Effect is relevant to observable:transport.
+- `paper:observation_of_integer_and_fractional_quantum_anomalous_hall_effects_in_twisted` -mentions-> `observable:transport`: Observation of Integer and Fractional Quantum Anomalous Hall Effects in Twisted Bilayer MoTe2 is relevant to observable:transport.
+- `paper:observation_of_single_electron_transport_and_charging_on_individual_point_defect` -mentions-> `observable:transport`: Observation of Single-Electron Transport and Charging on Individual Point Defects in Atomically Thin WSe2 is relevant to observable:transport.
+- `paper:quantum_criticality_in_twisted_transition_metal_dichalcogenides` -mentions-> `observable:transport`: Quantum criticality in twisted transition metal dichalcogenides is relevant to observable:transport.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer` -mentions-> `observable:transport`: Signatures of Fractional Quantum Anomalous Hall States in Twisted MoTe2 Bilayer is relevant to observable:transport.
+- `paper:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2` -mentions-> `observable:transport`: Signatures of fractional quantum anomalous Hall states in twisted MoTe2 is relevant to observable:transport.
+- `paper:spontaneous_fractional_chern_insulators_in_transition_metal_dichalcogenide_moire` -mentions-> `observable:transport`: Spontaneous fractional Chern insulators in transition metal dichalcogenide moiré superlattices is relevant to observable:transport.
+- `paper:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2` -mentions-> `observable:transport`: Thermodynamic evidence of fractional Chern insulator in moire MoTe2 is relevant to observable:transport.
+- `paper:valley_splitting_and_valley_dependent_inter_landau_level_optical_transitions_in` -mentions-> `observable:transport`: Valley-splitting and valley-dependent inter-Landau-level optical transitions in monolayer MoS2 quantum Hall systems is relevant to observable:transport.
+- `paper:vapor_transport_growth_of_high_optical_quality_wse2_monolayers` -mentions-> `observable:transport`: Vapor Transport Growth of High Optical Quality WSe2 Monolayers is relevant to observable:transport.
+- `claim:promoted_2602_mote2_wse2_consecutive_tpts` -measured_by-> `observable:transport`: Magnetotransport is one of the core measurements defining the consecutive phase transitions.
+- `claim:promoted_2603_twist_angle_evolution_to_valley_degenerate_sc` -measured_by-> `observable:transport`: The phase evolution is reported from a systematic transport study across twist angles.

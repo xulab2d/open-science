@@ -1,0 +1,6 @@
+# MATLAB-facing Python tools for this workstation.
+# Requires MATLAB R2025b installed at /Applications/MATLAB_R2025b.app.
+
+/Applications/MATLAB_R2025b.app/extern/engines/python
+matlab_kernel
+jupyter-matlab-proxy

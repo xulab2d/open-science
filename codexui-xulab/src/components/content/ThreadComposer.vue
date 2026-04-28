@@ -1206,6 +1206,10 @@ function createPastedImageName(file: File): string {
   return `pasted-image-${timestamp}.${ext}`
 }
 
+function toLocalImagePreviewUrl(path: string): string {
+  return `/codex-local-image?path=${encodeURIComponent(path)}`
+}
+
 function createPastedTextFileName(): string {
   const now = new Date()
   const timestamp = [
@@ -1227,35 +1231,22 @@ function ensureFileName(file: File): File {
   })
 }
 
-function readFileAsDataUrl(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        resolve(reader.result)
-        return
-      }
-      reject(new Error('Image read returned an unsupported result'))
-    }
-    reader.onerror = () => {
-      reject(reader.error ?? new Error('Image read failed'))
-    }
-    reader.readAsDataURL(file)
-  })
-}
-
 async function attachImageFile(file: File, sessionToken: number): Promise<void> {
   if (!beginAttachmentWork(sessionToken)) return
   try {
     const normalizedFile = ensureFileName(file)
-    const dataUrl = await readFileAsDataUrl(normalizedFile)
+    const serverPath = await uploadFile(normalizedFile)
     if (sessionToken !== attachmentSessionToken) return
+    if (!serverPath) {
+      recordAttachmentBatchResult('failure')
+      return
+    }
     selectedImages.value = [
       ...selectedImages.value,
       {
         id: createAttachmentId(),
         name: normalizedFile.name,
-        url: dataUrl,
+        url: toLocalImagePreviewUrl(serverPath),
       },
     ]
     recordAttachmentBatchResult('success')
@@ -1311,28 +1302,7 @@ function resetDragState(): void {
 }
 
 function addFiles(files: FileList | null): void {
-  if (!files || files.length === 0) return
-  const generation = draftGeneration.value
-  for (const file of Array.from(files)) {
-    if (isImageFile(file)) {
-      const reader = new FileReader()
-      reader.onload = () => {
-        if (generation !== draftGeneration.value) return
-        if (typeof reader.result !== 'string') return
-        selectedImages.value.push({
-          id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-          name: file.name,
-          url: reader.result,
-        })
-      }
-      reader.readAsDataURL(file)
-    } else {
-      void uploadFile(file).then((serverPath) => {
-        if (generation !== draftGeneration.value) return
-        if (serverPath) addFileAttachment(serverPath)
-      }).catch(() => {})
-    }
-  }
+  attachIncomingFiles(files)
 }
 
 function hasFilePayload(dataTransfer: DataTransfer | null): boolean {
@@ -1783,7 +1753,8 @@ watch(
 }
 
 .thread-composer-shell {
-  @apply relative rounded-2xl border border-zinc-300 bg-white p-2 sm:p-3 shadow-sm;
+  @apply relative rounded-lg border border-zinc-300 bg-white p-2 sm:p-3 shadow-sm;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
 }
 
 .thread-composer-shell--drag-active {

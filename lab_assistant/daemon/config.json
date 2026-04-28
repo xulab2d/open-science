@@ -1,0 +1,116 @@
+{
+  "scan_interval_minutes": 30,
+  "sync_grace_mode": true,
+  "max_files_per_root": 20000,
+  "max_report_items": 80,
+  "roots": [
+    {
+      "name": "Shuai MT43",
+      "project_id": "shuai_mt43",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Shuai-MT43-DR911",
+      "active": true
+    },
+    {
+      "name": "A5 dot",
+      "project_id": "a5_dot",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry",
+      "active": true
+    },
+    {
+      "name": "D93 Run2",
+      "project_id": "d93_run2",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_Yifan_D93_Run2_attodry522",
+      "active": true
+    },
+    {
+      "name": "B79",
+      "project_id": "b79",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/WJL_Zengde_B79_Attodry911",
+      "active": true
+    },
+    {
+      "name": "C7",
+      "project_id": "c7",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_WJL_C7_Attodry911",
+      "active": true
+    },
+    {
+      "name": "D88",
+      "project_id": "d88",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/courtney_christiano_D88_1+1+1_AAA_4deg_attodry911",
+      "active": true
+    }
+  ],
+  "ignore_names": [
+    ".DS_Store",
+    ".Spotlight-V100",
+    ".TemporaryItems",
+    ".Trashes",
+    ".fseventsd",
+    "__pycache__",
+    ".ipynb_checkpoints"
+  ],
+  "ignore_suffixes": [
+    ".tmp",
+    ".temp",
+    ".lock",
+    ".download",
+    ".icloud",
+    ".part",
+    ".crdownload"
+  ],
+  "high_value_suffixes": [
+    ".csv",
+    ".dat",
+    ".h5",
+    ".hdf5",
+    ".ipynb",
+    ".json",
+    ".m",
+    ".mat",
+    ".md",
+    ".npy",
+    ".npz",
+    ".ppt",
+    ".pptx",
+    ".py",
+    ".txt",
+    ".xlsx"
+  ],
+  "medium_value_suffixes": [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".pdf",
+    ".tif",
+    ".tiff"
+  ],
+  "high_value_terms": [
+    "analysis",
+    "curie",
+    "fit",
+    "gfactor",
+    "hysteresis",
+    "landau",
+    "peak",
+    "pl",
+    "plot",
+    "processed",
+    "rmcd",
+    "summary",
+    "sweep",
+    "twist"
+  ],
+  "low_value_terms": [
+    "cache",
+    "preview",
+    "thumbnail",
+    "thumbs"
+  ],
+  "analysis_trigger": {
+    "min_high_value_changes": 3,
+    "min_total_changes": 25,
+    "sync_backfill_total_changes": 300,
+    "sync_backfill_project_count": 4
+  }
+}

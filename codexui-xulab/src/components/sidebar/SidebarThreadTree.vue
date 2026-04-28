@@ -1636,7 +1636,7 @@ onBeforeUnmount(() => {
 }
 
 .project-header-row {
-  @apply hover:bg-zinc-200 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400;
+  @apply hover:bg-teal-50 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400;
 }
 
 .project-main-button {
@@ -1660,7 +1660,7 @@ onBeforeUnmount(() => {
 }
 
 .project-title {
-  @apply text-sm font-normal text-zinc-700 truncate select-none;
+  @apply text-sm font-medium text-zinc-800 truncate select-none;
 }
 
 .project-menu-wrap {
@@ -1734,7 +1734,7 @@ onBeforeUnmount(() => {
 }
 
 .thread-row {
-  @apply hover:bg-zinc-200;
+  @apply hover:bg-teal-50;
 }
 
 .thread-row[data-menu-open='true'] {
@@ -1840,7 +1840,8 @@ onBeforeUnmount(() => {
 }
 
 .thread-row[data-active='true'] {
-  @apply bg-zinc-200;
+  @apply bg-teal-50;
+  box-shadow: inset 3px 0 0 rgb(13 148 136);
 }
 
 .thread-row:hover .thread-pin-button,

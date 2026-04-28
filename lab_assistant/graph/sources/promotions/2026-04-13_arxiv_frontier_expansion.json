@@ -1,0 +1,813 @@
+{
+  "date": "2026-04-13",
+  "purpose": "Promote newly ingested arXiv frontier papers into useful MoTe2-centered graph structure with explicit claims, mechanisms, and open questions.",
+  "node_updates": [
+    {
+      "id": "paper:arxiv_2506_00110v2",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; useful for the superconducting neighborhood of the nu=-2/3 FCI."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2506.00110",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2508_19063v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; establishes all-optical control of spin-valley and Chern order in twisted MoTe2."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19063",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2508_19602v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; overlaps the optical-control story but adds domain-wall writing and bistate cycling."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19602",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2602_15466v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; important electric-field phase-transition paper in the MoTe2/WSe2 moire platform."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2603_16374v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; extends the phase diagram into a larger-angle reconstructed Chern-insulator regime."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16374",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2603_16412v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; key twist-angle phase-evolution paper linking FQAH/CFL regimes to valley-degenerate superconductivity."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    },
+    {
+      "id": "paper:arxiv_2603_20370v1",
+      "confidence": "medium",
+      "metadata": {
+        "curated": true,
+        "curation_note": "Promoted after arXiv abstract review; useful theory link between magnon topology, displacement field, and Tc in moire Chern ferromagnets."
+      },
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.20370",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "material:mote2_wse2_moire_heterobilayer",
+      "type": "MaterialSystem",
+      "label": "angle-aligned MoTe2/WSe2 moire heterobilayer",
+      "aliases": [
+        "MoTe2/WSe2 heterobilayer",
+        "moire MoTe2/WSe2"
+      ],
+      "summary": "Moire heterobilayer platform where displacement field tunes Mott, QAH, and antiferromagnetic valley-coherent states at fixed filling.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "mechanism:optical_spin_valley_switching",
+      "type": "Mechanism",
+      "label": "optical spin-valley switching",
+      "aliases": [
+        "all-optical spin-valley reversal",
+        "non-thermal optical switching"
+      ],
+      "summary": "Resonant circularly polarized optical pumping can reverse the spin-valley orientation of correlated MoTe2 Chern ferromagnets without an applied magnetic field.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19063",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "mechanism:magnon_topology",
+      "type": "Mechanism",
+      "label": "topological magnon spectrum",
+      "aliases": [
+        "magnon topology",
+        "topological collective spin excitations"
+      ],
+      "summary": "The topology and gap of low-energy magnon bands can strongly affect magnetic stability and transition temperature in moire Chern ferromagnets.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.20370",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "phenomenon:valley_degenerate_superconductivity",
+      "type": "Phenomenon",
+      "label": "valley-degenerate superconductivity",
+      "aliases": [
+        "valley-unpolarized superconductivity",
+        "large-angle superconductivity in tMoTe2"
+      ],
+      "summary": "Superconductivity emerging at larger twist angle in twisted bilayer MoTe2 after suppression of the small-angle valley-polarized fractional-topology regime.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "phenomenon:reconstructed_chern_insulator",
+      "type": "Phenomenon",
+      "label": "reconstructed Chern insulator",
+      "aliases": [
+        "large-angle Chern insulator",
+        "moderately correlated Chern insulator"
+      ],
+      "summary": "Chern-insulating state in a larger-angle twisted MoTe2 regime where bandwidth is enhanced and the usual small-angle fractional hierarchy is reconstructed.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16374",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "phenomenon:composite_fermi_liquid",
+      "type": "Phenomenon",
+      "label": "composite Fermi liquid",
+      "aliases": [
+        "CFL",
+        "anomalous composite Fermi liquid"
+      ],
+      "summary": "Compressible correlated metallic state expected near fractional Chern regimes and explicitly reported as a candidate half-filling phase in twisted bilayer MoTe2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2506_doped_fci_holon_metal",
+      "type": "Claim",
+      "label": "Doping the nu=-2/3 FCI can yield a holon metal, charge-density wave, and chiral superconductor rather than a simple large-FS Fermi liquid.",
+      "aliases": [
+        "doped FCI holon metal",
+        "normal state near nu=-2/3 superconductivity"
+      ],
+      "summary": "The 2025 arXiv theory frames superconductivity adjacent to the nu=-2/3 FQAH state in twisted MoTe2 as emerging from a strongly correlated doped-FCI problem, not just from a conventional large-Fermi-surface metal.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2506.00110",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "question:promoted_2506_normal_state_adjacent_minus_two_thirds_sc",
+      "type": "OpenQuestion",
+      "label": "What is the normal state adjacent to the nu=-2/3 superconducting neighborhood in twisted MoTe2?",
+      "aliases": [
+        "nu=-2/3 normal-state question",
+        "large Fermi surface versus correlated metal"
+      ],
+      "summary": "The theoretical arXiv paper makes explicit that the proximate normal state is still unresolved: it may be a conventional Fermi liquid, a low-carrier-density correlated metal, or something more directly inherited from the doped FCI.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2506.00110",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2508_optical_control_chern_order",
+      "type": "Claim",
+      "label": "Circularly polarized light can non-thermally reverse spin-valley order and switch Chern order in twisted MoTe2 at zero field.",
+      "aliases": [
+        "all-optical Chern-order control",
+        "non-thermal switching in tMoTe2"
+      ],
+      "summary": "The 2025 arXiv report says resonant excitation of the attractive polaron transition dynamically reverses the spin-valley orientation of correlated MoTe2 phases, giving direct optical control of a topological order parameter at zero magnetic field.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19063",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2508_optical_switching_domain_walls",
+      "type": "Claim",
+      "label": "Optical switching of integer and fractional Chern ferromagnets enables bistate cycling and domain-wall writing in twisted MoTe2.",
+      "aliases": [
+        "optical Chern-ferromagnet writing",
+        "domain-wall writing in tMoTe2"
+      ],
+      "summary": "The companion 2025 arXiv paper reports zero-field optical switching of integer and fractional Chern ferromagnets with low pump power, plus magnetic bistate cycling and spatially resolved writing of ferromagnetic domain walls.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19602",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "type": "Claim",
+      "label": "At nu=1, MoTe2/WSe2 shows two displacement-field-driven topological phase transitions between frustrated, QAH-Mott, and valley-coherent antiferromagnetic insulators.",
+      "aliases": [
+        "consecutive topological phase transitions",
+        "MoTe2/WSe2 displacement-field phase sequence"
+      ],
+      "summary": "The 2026 arXiv report says increasing displacement field drives an angle-aligned MoTe2/WSe2 moire heterobilayer from a geometrically frustrated Mott insulator to a ferromagnetic QAH Mott insulator and then to an antiferromagnetic valley-coherent Mott state, with the first transition occurring without an observed charge-gap closure.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2603_large_angle_reconstructed_chern",
+      "type": "Claim",
+      "label": "Around 4.54 degrees, twisted bilayer MoTe2 hosts reconstructed C=1 insulators and a field-induced nu=-2/3 FCI.",
+      "aliases": [
+        "large-angle reconstructed Chern regime",
+        "4.54 degree tMoTe2 phase diagram"
+      ],
+      "summary": "The 2026 arXiv report extends tMoTe2 into a moderately correlated larger-angle regime, finding C=1 insulators at nu=-1, -0.53, and -1/2, plus a magnetic-field-induced fractional Chern insulator near nu=-2/3 accompanied by an insulator-metal transition.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16374",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2603_twist_angle_evolution_to_valley_degenerate_sc",
+      "type": "Claim",
+      "label": "Increasing twist angle drives twisted bilayer MoTe2 from valley-polarized fractional topology into valley-degenerate superconductivity.",
+      "aliases": [
+        "twist-angle evolution to superconductivity",
+        "fractional topology to valley-degenerate SC"
+      ],
+      "summary": "The 2026 arXiv transport study reports an evolution across 3.8 to 5.78 degrees from Jain-sequence FQAH states and related valley-polarized phases at smaller angle to a larger-angle superconducting regime adjacent to correlated insulators and resembling twisted bilayer WSe2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2603_half_filling_anomalous_cfl",
+      "type": "Claim",
+      "label": "Small-angle devices show an anomalous composite Fermi liquid signature near half filling alongside Jain-sequence FQAH states.",
+      "aliases": [
+        "nu_h=1/2 anomalous CFL",
+        "half-filling CFL in tMoTe2"
+      ],
+      "summary": "The same 2026 twist-angle paper says that at relatively small twist angle the partially filled Chern band hosts Jain-sequence FQAH states together with an anomalous composite Fermi liquid candidate near moire hole filling nu_h=1/2.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "claim:promoted_2603_magnon_topology_enhances_tc",
+      "type": "Claim",
+      "label": "Displacement-field-tuned magnon topology can strongly enhance Tc in moire Chern ferromagnets at nu=-1.",
+      "aliases": [
+        "magnon topology and Tc",
+        "order-of-magnitude Tc enhancement"
+      ],
+      "summary": "The 2026 arXiv theory argues that the magnon spectrum undergoes a topological transition with displacement field and that the quantum anomalous Hall phase can support an order-of-magnitude larger magnetic transition temperature than a topologically trivial correlated insulator.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.20370",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:paper_arxiv_2506_00110v2_supports_promoted_2506_doped_fci_holon_metal",
+      "source": "paper:arxiv_2506_00110v2",
+      "target": "claim:promoted_2506_doped_fci_holon_metal",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted doped-FCI holon-metal/chiral-superconductor claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2506.00110",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2506_doped_fci_mentions_chiral_sc",
+      "source": "claim:promoted_2506_doped_fci_holon_metal",
+      "target": "phenomenon:chiral_superconductivity",
+      "relation": "mentions",
+      "claim": "The doped-FCI theory explicitly connects to a chiral superconducting outcome.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2506.00110",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:question_2506_open_for_2504_chiral_sc_claim",
+      "source": "question:promoted_2506_normal_state_adjacent_minus_two_thirds_sc",
+      "target": "claim:promoted_2504_chiral_superconductivity_signatures",
+      "relation": "open_question_for",
+      "claim": "The doped-FCI theory makes the proximate normal state an explicit unresolved question for interpreting the superconducting regime.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2506.00110",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2508_19063v1_supports_promoted_2508_optical_control",
+      "source": "paper:arxiv_2508_19063v1",
+      "target": "claim:promoted_2508_optical_control_chern_order",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted all-optical control of Chern order claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19063",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:optical_spin_valley_switching_explains_2508_control_claim",
+      "source": "mechanism:optical_spin_valley_switching",
+      "target": "claim:promoted_2508_optical_control_chern_order",
+      "relation": "explains",
+      "claim": "Resonant optical spin-valley switching explains the reported reversal of correlated Chern order.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19063",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2508_control_mentions_moire_magnetism",
+      "source": "claim:promoted_2508_optical_control_chern_order",
+      "target": "phenomenon:moire_magnetism",
+      "relation": "mentions",
+      "claim": "The optical-control claim is about switching a correlated magnetic/spin-valley state.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19063",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2508_control_mentions_valley_chern",
+      "source": "claim:promoted_2508_optical_control_chern_order",
+      "target": "concept:valley_chern_number",
+      "relation": "mentions",
+      "claim": "The optical-control claim is explicitly framed as switching a Chern-number-carrying spin-valley configuration.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19063",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2508_19602v1_supports_promoted_2508_domain_walls",
+      "source": "paper:arxiv_2508_19602v1",
+      "target": "claim:promoted_2508_optical_switching_domain_walls",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted optical switching, bistate cycling, and domain-wall writing claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19602",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2508_domain_walls_mentions_fqah",
+      "source": "claim:promoted_2508_optical_switching_domain_walls",
+      "target": "phenomenon:fqah",
+      "relation": "mentions",
+      "claim": "The domain-wall-writing result includes fractional Chern ferromagnet states, not just integer ones.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2508.19602",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2602_15466v1_supports_promoted_2602_tpts",
+      "source": "paper:arxiv_2602_15466v1",
+      "target": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted consecutive topological phase-transition claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2602_tpts_measured_by_rmcd",
+      "source": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "target": "observable:rmcd",
+      "relation": "measured_by",
+      "claim": "Layer-resolved MCD/RMCD-type magneto-optics are part of the phase-diagram evidence chain.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2602_tpts_measured_by_transport",
+      "source": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "target": "observable:transport",
+      "relation": "measured_by",
+      "claim": "Magnetotransport is one of the core measurements defining the consecutive phase transitions.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2602_tpts_measured_by_compressibility",
+      "source": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "target": "observable:compressibility",
+      "relation": "measured_by",
+      "claim": "Compressibility is part of the joint evidence for the field-driven phase sequence.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2602_tpts_mentions_displacement_field",
+      "source": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "target": "concept:displacement_field",
+      "relation": "mentions",
+      "claim": "The phase sequence is explicitly driven by out-of-plane displacement field.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2602_tpts_mentions_mote2_wse2_platform",
+      "source": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "target": "material:mote2_wse2_moire_heterobilayer",
+      "relation": "mentions",
+      "claim": "The consecutive phase transitions are reported in angle-aligned MoTe2/WSe2 moire heterobilayers.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2602.15466",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2603_16374v1_supports_promoted_2603_large_angle_reconstructed_chern",
+      "source": "paper:arxiv_2603_16374v1",
+      "target": "claim:promoted_2603_large_angle_reconstructed_chern",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted large-angle reconstructed Chern-insulator claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16374",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_large_angle_mentions_reconstructed_chern",
+      "source": "claim:promoted_2603_large_angle_reconstructed_chern",
+      "target": "phenomenon:reconstructed_chern_insulator",
+      "relation": "mentions",
+      "claim": "The claim introduces a reconstructed Chern-insulating regime at larger twist angle.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16374",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:reconstructed_chern_analogous_to_fqah",
+      "source": "phenomenon:reconstructed_chern_insulator",
+      "target": "phenomenon:fqah",
+      "relation": "analogous_to",
+      "claim": "The reconstructed Chern regime broadens the family of topological phases connected to the canonical small-angle FQAH story without being identical to it.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16374",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2603_16412v1_supports_promoted_2603_twist_angle_evolution_sc",
+      "source": "paper:arxiv_2603_16412v1",
+      "target": "claim:promoted_2603_twist_angle_evolution_to_valley_degenerate_sc",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted twist-angle evolution into valley-degenerate superconductivity claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2603_16412v1_supports_promoted_2603_half_filling_cfl",
+      "source": "paper:arxiv_2603_16412v1",
+      "target": "claim:promoted_2603_half_filling_anomalous_cfl",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted anomalous composite-Fermi-liquid half-filling claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_twist_angle_mentions_valley_degenerate_sc",
+      "source": "claim:promoted_2603_twist_angle_evolution_to_valley_degenerate_sc",
+      "target": "phenomenon:valley_degenerate_superconductivity",
+      "relation": "mentions",
+      "claim": "The claim is specifically about the large-angle valley-degenerate superconducting regime.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_twist_angle_mentions_fqah",
+      "source": "claim:promoted_2603_twist_angle_evolution_to_valley_degenerate_sc",
+      "target": "phenomenon:fqah",
+      "relation": "mentions",
+      "claim": "The evolution starts from the small-angle fractional topological/FQAH regime before reaching superconductivity.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_twist_angle_measured_by_transport",
+      "source": "claim:promoted_2603_twist_angle_evolution_to_valley_degenerate_sc",
+      "target": "observable:transport",
+      "relation": "measured_by",
+      "claim": "The phase evolution is reported from a systematic transport study across twist angles.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_cfl_mentions_composite_fermi_liquid",
+      "source": "claim:promoted_2603_half_filling_anomalous_cfl",
+      "target": "phenomenon:composite_fermi_liquid",
+      "relation": "mentions",
+      "claim": "The half-filling claim explicitly introduces a composite-Fermi-liquid candidate.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_twist_angle_qualifies_2504_chiral_sc",
+      "source": "claim:promoted_2603_twist_angle_evolution_to_valley_degenerate_sc",
+      "target": "claim:promoted_2504_chiral_superconductivity_signatures",
+      "relation": "qualifies_claim",
+      "claim": "The new transport phase diagram suggests that superconductivity in twisted MoTe2 is not exhausted by a single valley-polarized or chiral framing; larger-angle devices access a valley-degenerate regime.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.16412",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:paper_arxiv_2603_20370v1_supports_promoted_2603_magnon_tc",
+      "source": "paper:arxiv_2603_20370v1",
+      "target": "claim:promoted_2603_magnon_topology_enhances_tc",
+      "relation": "supports_claim",
+      "claim": "The paper supports the promoted magnon-topology/Tc claim.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.20370",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:magnon_topology_explains_2603_magnon_tc_claim",
+      "source": "mechanism:magnon_topology",
+      "target": "claim:promoted_2603_magnon_topology_enhances_tc",
+      "relation": "explains",
+      "claim": "The topology and gap of the magnon bands explain the strong change in magnetic transition temperature across the phase boundary.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.20370",
+          "method": "Codex curation inference from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_magnon_tc_mentions_displacement_field",
+      "source": "claim:promoted_2603_magnon_topology_enhances_tc",
+      "target": "concept:displacement_field",
+      "relation": "mentions",
+      "claim": "The reported magnon transition and Tc enhancement are displacement-field tuned.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.20370",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    },
+    {
+      "id": "edge:promoted_2603_magnon_tc_mentions_moire_magnetism",
+      "source": "claim:promoted_2603_magnon_topology_enhances_tc",
+      "target": "phenomenon:moire_magnetism",
+      "relation": "mentions",
+      "claim": "The theory is about the stability of magnetic order in moire Chern ferromagnets.",
+      "provenance": [
+        {
+          "source": "https://arxiv.org/abs/2603.20370",
+          "method": "Codex curation pass from arXiv abstract"
+        }
+      ],
+      "confidence": "medium",
+      "updated": "2026-04-13"
+    }
+  ]
+}

@@ -31,9 +31,8 @@
               <span class="cmd-status">{{ commandGroupSummaryStatus(message) }}</span>
             </button>
             <div
-              v-if="getGroupedCommandsForLatest(message).length > 0"
-              class="cmd-group-wrap"
-              :class="{ 'cmd-group-visible': isCommandGroupExpanded(message) }"
+              v-if="getGroupedCommandsForLatest(message).length > 0 && isCommandGroupExpanded(message)"
+              class="cmd-group-wrap cmd-group-visible"
             >
               <div class="cmd-group-inner">
                 <div
@@ -58,8 +57,8 @@
                     <span class="cmd-status">{{ commandStatusLabel(cmd) }}</span>
                   </button>
                   <div
-                    class="cmd-output-wrap"
-                    :class="{ 'cmd-output-visible': isCommandExpanded(cmd) }"
+                    v-if="isCommandExpanded(cmd)"
+                    class="cmd-output-wrap cmd-output-visible"
                   >
                     <div class="cmd-output-inner">
                       <pre
@@ -90,8 +89,8 @@
                 <span class="cmd-status">{{ commandStatusLabel(message) }}</span>
               </button>
               <div
-                class="cmd-output-wrap"
-                :class="{ 'cmd-output-visible': isCommandExpanded(message) }"
+                v-if="isCommandExpanded(message)"
+                class="cmd-output-wrap cmd-output-visible"
               >
                 <div class="cmd-output-inner">
                   <pre
@@ -244,8 +243,8 @@
                         <span class="cmd-status">{{ commandStatusLabel(cmd) }}</span>
                       </button>
                       <div
-                        class="cmd-output-wrap"
-                        :class="{ 'cmd-output-visible': isCommandExpanded(cmd) }"
+                        v-if="isCommandExpanded(cmd)"
+                        class="cmd-output-wrap cmd-output-visible"
                       >
                         <div class="cmd-output-inner">
                           <pre
@@ -309,6 +308,12 @@
                         >
                           {{ segment.value }}
                         </a>
+                        <span
+                          v-else-if="segment.kind === 'math'"
+                          class="message-inline-math"
+                          :class="{ 'message-inline-math-display': segment.displayMode }"
+                          v-html="renderMathAsHtml(segment.value, segment.displayMode)"
+                        ></span>
                         <code v-else class="message-inline-code">{{ segment.value }}</code>
                       </template>
                     </p>
@@ -343,6 +348,12 @@
                         >
                           {{ segment.value }}
                         </a>
+                        <span
+                          v-else-if="segment.kind === 'math'"
+                          class="message-inline-math"
+                          :class="{ 'message-inline-math-display': segment.displayMode }"
+                          v-html="renderMathAsHtml(segment.value, segment.displayMode)"
+                        ></span>
                         <code v-else class="message-inline-code">{{ segment.value }}</code>
                       </template>
                     </component>
@@ -372,6 +383,12 @@
                         >
                           {{ segment.value }}
                         </a>
+                        <span
+                          v-else-if="segment.kind === 'math'"
+                          class="message-inline-math"
+                          :class="{ 'message-inline-math-display': segment.displayMode }"
+                          v-html="renderMathAsHtml(segment.value, segment.displayMode)"
+                        ></span>
                         <code v-else class="message-inline-code">{{ segment.value }}</code>
                       </template>
                     </blockquote>
@@ -409,6 +426,12 @@
                             >
                               {{ segment.value }}
                             </a>
+                            <span
+                              v-else-if="segment.kind === 'math'"
+                              class="message-inline-math"
+                              :class="{ 'message-inline-math-display': segment.displayMode }"
+                              v-html="renderMathAsHtml(segment.value, segment.displayMode)"
+                            ></span>
                             <code v-else class="message-inline-code">{{ segment.value }}</code>
                           </template>
                         </div>
@@ -458,6 +481,12 @@
                                 >
                                   {{ segment.value }}
                                 </a>
+                                <span
+                                  v-else-if="segment.kind === 'math'"
+                                  class="message-inline-math"
+                                  :class="{ 'message-inline-math-display': segment.displayMode }"
+                                  v-html="renderMathAsHtml(segment.value, segment.displayMode)"
+                                ></span>
                                 <code v-else class="message-inline-code">{{ segment.value }}</code>
                               </template>
                             </th>
@@ -496,6 +525,12 @@
                                 >
                                   {{ segment.value }}
                                 </a>
+                                <span
+                                  v-else-if="segment.kind === 'math'"
+                                  class="message-inline-math"
+                                  :class="{ 'message-inline-math-display': segment.displayMode }"
+                                  v-html="renderMathAsHtml(segment.value, segment.displayMode)"
+                                ></span>
                                 <code v-else class="message-inline-code">{{ segment.value }}</code>
                               </template>
                             </td>
@@ -813,6 +848,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { ThreadScrollState, UiFileChange, UiLiveOverlay, UiMessage, UiPlanStep, UiServerRequest } from '../../types/codex'
 import { useMobile } from '../../composables/useMobile'
+import { renderMathToHtml, splitTextByMathSegments } from '../../utils/mathRendering'
 
 import IconTablerArrowBackUp from '../icons/IconTablerArrowBackUp.vue'
 import IconTablerArrowUp from '../icons/IconTablerArrowUp.vue'
@@ -1194,6 +1230,7 @@ type InlineSegment =
   | { kind: 'bold'; value: string }
   | { kind: 'italic'; value: string }
   | { kind: 'strikethrough'; value: string }
+  | { kind: 'math'; value: string; displayMode: boolean }
   | { kind: 'code'; value: string }
   | { kind: 'url'; value: string; href: string }
   | { kind: 'file'; value: string; path: string; displayPath: string; downloadName: string }
@@ -1291,8 +1328,8 @@ function isFilePath(value: string): boolean {
   const looksLikeRelative = value.startsWith('./') || value.startsWith('../') || value.startsWith('~/')
   if (looksLikeUnixAbsolute || looksLikeWindowsAbsolute || looksLikeRelative) return true
 
-  // Bare relative paths should look like actual path segments, not arbitrary prose containing "/".
-  return /^[A-Za-z0-9._@() -]+(?:[\\/][A-Za-z0-9._@() -]+)+$/u.test(value)
+  // Bare relative paths should be strict enough to avoid turning ordinary prose into links.
+  return /^[A-Za-z0-9._@()+-]+(?:[\\/][A-Za-z0-9._@()+-]+)+(?:#L\d+(?:C\d+)?|:\d+(?::\d+)?)?$/u.test(value)
 }
 
 function getBasename(pathValue: string): string {
@@ -2031,7 +2068,7 @@ function rollbackResponse(anchorMessageId: string): void {
 
 function splitPlainTextByLinks(text: string): InlineSegment[] {
   const segments: InlineSegment[] = []
-  const pattern = /https?:\/\/[^\s<>"'`，。；：！？、()[\]{}「」『』《》]+|file:\/\/[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|(?:[A-Za-z]:[\\/]|~\/|\.{1,2}\/)[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|(?<![\p{L}\p{N}_-])\/[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|[A-Za-z0-9._@() -]+(?:[\\/][A-Za-z0-9._@() -]+)+(?:#L\d+(?:C\d+)?|:\d+(?::\d+)?)?/gu
+  const pattern = /https?:\/\/[^\s<>"'`，。；：！？、()[\]{}「」『』《》]+|file:\/\/[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|(?:[A-Za-z]:[\\/]|~\/|\.{1,2}\/)[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|(?<![\p{L}\p{N}_-])\/[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|[A-Za-z0-9._@()+-]+(?:[\\/][A-Za-z0-9._@()+-]+)+(?:#L\d+(?:C\d+)?|:\d+(?::\d+)?)?/gu
   let cursor = 0
 
   for (const match of text.matchAll(pattern)) {
@@ -2191,6 +2228,22 @@ function applyInlineMarkdownMarkers(segments: InlineSegment[]): InlineSegment[] 
   return next
 }
 
+function splitNonCodeInlineSegments(text: string): InlineSegment[] {
+  const next: InlineSegment[] = []
+  for (const segment of splitTextByMathSegments(text)) {
+    if (segment.kind === 'text') {
+      next.push(...splitTextByFileUrls(segment.value))
+      continue
+    }
+    next.push({
+      kind: 'math',
+      value: segment.value,
+      displayMode: segment.displayMode,
+    })
+  }
+  return next
+}
+
 function splitTextByFileUrls(text: string): InlineSegment[] {
   const segments: InlineSegment[] = []
   let cursor = 0
@@ -2289,14 +2342,7 @@ function splitTextByFileUrls(text: string): InlineSegment[] {
 }
 
 function parseInlineSegments(text: string): InlineSegment[] {
-  if (text.includes('](')) {
-    const linkFirstSegments = splitTextByFileUrls(text)
-    if (linkFirstSegments.some((segment) => segment.kind === 'file' || segment.kind === 'url')) {
-      return linkFirstSegments
-    }
-  }
-
-  if (!text.includes('`')) return splitTextByFileUrls(text)
+  if (!text.includes('`')) return splitNonCodeInlineSegments(text)
 
   const segments: InlineSegment[] = []
   let cursor = 0
@@ -2338,7 +2384,7 @@ function parseInlineSegments(text: string): InlineSegment[] {
     }
 
     if (cursor > textStart) {
-      segments.push(...splitTextByFileUrls(text.slice(textStart, cursor)))
+      segments.push(...splitNonCodeInlineSegments(text.slice(textStart, cursor)))
     }
 
     const token = text.slice(cursor + openLength, closingStart)
@@ -2397,10 +2443,14 @@ function parseInlineSegments(text: string): InlineSegment[] {
   }
 
   if (textStart < text.length) {
-    segments.push(...splitTextByFileUrls(text.slice(textStart)))
+    segments.push(...splitNonCodeInlineSegments(text.slice(textStart)))
   }
 
   return segments
+}
+
+function renderMathAsHtml(value: string, displayMode = false): string {
+  return renderMathToHtml(value, displayMode)
 }
 
 function toRenderableImageUrl(value: string): string {
@@ -3202,6 +3252,9 @@ function renderInlineSegmentsAsHtml(text: string): string {
       }
       if (segment.kind === 'url') {
         return `<a class="message-file-link" href="${escapeHtml(segment.href)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(segment.href)}">${escapeHtml(segment.value)}</a>`
+      }
+      if (segment.kind === 'math') {
+        return `<span class="message-inline-math${segment.displayMode ? ' message-inline-math-display' : ''}">${renderMathAsHtml(segment.value, segment.displayMode)}</span>`
       }
       return `<code class="message-inline-code">${escapeHtml(segment.value)}</code>`
     })
@@ -4213,7 +4266,7 @@ onBeforeUnmount(() => {
 }
 
 .plan-card {
-  @apply flex max-w-[min(var(--chat-card-max,76ch),100%)] flex-col gap-3 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-slate-900;
+  @apply flex max-w-[min(var(--chat-card-max,76ch),100%)] flex-col gap-3 rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 text-slate-900;
 }
 
 .plan-card-header {
@@ -4500,6 +4553,38 @@ onBeforeUnmount(() => {
   @apply rounded-md border border-slate-200 bg-slate-100/60 px-1.5 py-0.5 text-[0.875em] leading-[1.4] text-slate-900 font-mono;
 }
 
+.message-inline-math {
+  @apply inline-flex max-w-full align-middle text-slate-900;
+}
+
+.message-inline-math-display {
+  @apply block my-2 w-full overflow-x-auto;
+}
+
+.message-inline-math :deep(.katex) {
+  font-size: 1.02em;
+}
+
+:global(:root.dark) .message-inline-math {
+  @apply text-zinc-100;
+}
+
+:global(:root.dark) .message-inline-math :deep(.katex),
+:global(:root.dark) .message-inline-math :deep(.katex *) {
+  color: rgb(244 244 245);
+}
+
+.message-inline-math-display :deep(.katex-display) {
+  @apply my-0 overflow-x-auto overflow-y-hidden py-1;
+}
+
+.message-card[data-role='user'] .message-text,
+.message-card[data-role='user'] .message-inline-math,
+.message-card[data-role='user'] .message-inline-math :deep(.katex),
+.message-card[data-role='user'] .message-inline-math :deep(.katex *) {
+  color: rgb(250 250 250);
+}
+
 .message-code-block {
   @apply overflow-hidden rounded-xl border border-slate-200 bg-slate-950 text-slate-100;
 }
@@ -4542,7 +4627,8 @@ onBeforeUnmount(() => {
 }
 
 .message-card[data-role='user'] {
-  @apply rounded-2xl bg-slate-200 px-4 py-3 max-w-[min(560px,100%)];
+  @apply rounded-lg bg-teal-50 px-4 py-3 max-w-[min(560px,100%)];
+  box-shadow: inset 0 0 0 1px rgba(13, 148, 136, 0.16);
   width: fit-content;
   margin-left: auto;
   align-self: flex-end;

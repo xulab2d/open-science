@@ -1,16 +1,19 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import 'katex/dist/katex.min.css'
 import './style.css'
 
 console.log('Welcome to codexui. npm: https://www.npmjs.com/package/@nervmor/codexui')
 
 createApp(App).use(router).mount('#app')
 
-if ('serviceWorker' in navigator && import.meta.env.PROD) {
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch((error) => {
-      console.error('Service worker registration failed.', error)
-    })
+    navigator.serviceWorker.getRegistrations()
+      .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+      .catch((error) => {
+        console.error('Service worker cleanup failed.', error)
+      })
   })
 }

@@ -247,13 +247,144 @@
             <div class="content-grid content-grid-home">
               <div class="new-thread-empty">
                 <p class="new-thread-hero">OpenScience</p>
-                <p class="new-thread-folder-selected" :title="newThreadCwd">
-                  Default workspace: {{ newThreadCwd }}
+                <p class="new-thread-subtitle">
+                  Choose project context for the conversation, or review the current project notes and daily lab summary.
                 </p>
-                <p class="new-thread-runtime-help">
-                  OpenScience always starts in the shared OpenScience workspace.
-                </p>
+
+                <section class="lab-home-panel" aria-label="Lab summaries and project context">
+                  <div class="lab-panel-heading">
+                    <div>
+                      <p class="lab-panel-title">Lab context</p>
+                      <p class="lab-panel-description">Project notes and daily summaries from the OpenScience workspace.</p>
+                    </div>
+                    <button
+                      class="lab-panel-open"
+                      type="button"
+                      :disabled="!activeLabDocument"
+                      @click="isLabReaderOpen = true"
+                    >
+                      Open reader
+                    </button>
+                  </div>
+                  <div class="lab-home-controls">
+                    <div class="lab-home-control-copy">
+                      <label class="lab-project-select-label" for="lab-project-select">Conversation context</label>
+                      <p class="lab-project-select-help">Only affects newly started conversations.</p>
+                    </div>
+                    <div class="lab-project-select-wrap">
+                      <select id="lab-project-select" v-model="selectedHomeProjectId" class="lab-project-select">
+                        <option value="">General OpenScience context</option>
+                        <option v-for="project in openScienceSurfaces.runningProjects" :key="project.id" :value="project.id">
+                          {{ project.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="lab-tabs-row">
+                    <span class="lab-tabs-label">Browse</span>
+                    <div class="lab-home-tabs" role="tablist" aria-label="Lab summary views">
+                      <button
+                        v-for="tab in labHomeTabs"
+                        :key="tab.id"
+                        class="lab-home-tab"
+                        :class="{ 'is-active': activeLabHomeTab === tab.id }"
+                        type="button"
+                        role="tab"
+                        :aria-selected="activeLabHomeTab === tab.id"
+                        @click="activeLabHomeTab = tab.id"
+                      >
+                        {{ tab.label }}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="lab-home-summary"
+                    :class="{ 'is-single-document': !activeLabDocumentList.length }"
+                  >
+                    <aside v-if="activeLabHomeTab === 'running'" class="lab-summary-list" aria-label="Running projects">
+                      <button
+                        v-for="project in openScienceSurfaces.runningProjects"
+                        :key="project.id"
+                        class="lab-summary-list-item"
+                        :class="{ 'is-active': activeSummaryProjectId === project.id }"
+                        type="button"
+                        @click="activeSummaryProjectId = project.id"
+                      >
+                        <span>{{ project.name }}</span>
+                        <small>{{ project.id }}</small>
+                      </button>
+                    </aside>
+                    <aside v-else-if="activeLabHomeTab === 'past' && activeLabDocumentList.length" class="lab-summary-list" aria-label="Past projects">
+                      <button
+                        v-for="document in openScienceSurfaces.pastProjects"
+                        :key="document.id"
+                        class="lab-summary-list-item"
+                        :class="{ 'is-active': activePastProjectId === document.id }"
+                        type="button"
+                        @click="activePastProjectId = document.id"
+                      >
+                        <span>{{ document.title }}</span>
+                        <small>{{ document.id }}</small>
+                      </button>
+                    </aside>
+
+                    <article class="lab-summary-document">
+                      <div v-if="activeLabHomeTab === 'daily' && openScienceSurfaces.dailySummaries.length > 1" class="lab-summary-history">
+                        <label class="lab-summary-history-label" for="daily-summary-select">Daily summary</label>
+                        <select id="daily-summary-select" v-model="activeDailySummaryId" class="lab-summary-history-select">
+                          <option
+                            v-for="document in openScienceSurfaces.dailySummaries"
+                            :key="document.id"
+                            :value="document.id"
+                          >
+                            {{ document.title }}
+                          </option>
+                        </select>
+                      </div>
+                      <div v-if="activeLabDocument" class="lab-summary-document-header">
+                        <div class="lab-summary-document-title">
+                          <span>{{ activeLabDocument.title }}</span>
+                          <small class="lab-summary-document-path" :title="activeLabDocument.path">
+                            {{ activeLabDocument.path }}
+                          </small>
+                        </div>
+                        <small v-if="activeLabDocument.updatedAtIso">{{ formatLabDocumentDate(activeLabDocument.updatedAtIso) }}</small>
+                      </div>
+                      <div v-if="isLoadingOpenScienceSurfaces" class="lab-summary-empty">Loading lab summaries...</div>
+                      <div v-else-if="openScienceSurfaceError" class="lab-summary-empty">{{ openScienceSurfaceError }}</div>
+                      <div v-else-if="activeLabDocument" class="lab-markdown" v-html="renderLabMarkdown(activeLabDocument.markdown)" />
+                      <div v-else class="lab-summary-empty">{{ activeLabEmptyMessage }}</div>
+                    </article>
+                  </div>
+                </section>
+
+                <div v-if="selectedHomeProject" class="new-thread-project-context">
+                  New conversations will include project context for {{ selectedHomeProject.name }}.
+                </div>
               </div>
+
+              <Teleport to="body">
+                <div v-if="isLabReaderOpen" class="lab-reader-backdrop" @click="isLabReaderOpen = false">
+                  <section class="lab-reader" role="dialog" aria-modal="true" aria-label="Lab summary reader" @click.stop>
+                    <header class="lab-reader-header">
+                      <div>
+                        <p class="lab-reader-kicker">Lab summary</p>
+                        <h2>{{ activeLabDocument?.title ?? 'Summary' }}</h2>
+                        <p v-if="activeLabDocument" class="lab-reader-source" :title="activeLabDocument.path">
+                          {{ activeLabDocument.path }}
+                        </p>
+                      </div>
+                      <button class="lab-reader-close" type="button" @click="isLabReaderOpen = false">Close</button>
+                    </header>
+                    <div class="lab-reader-body">
+                      <div v-if="activeLabDocument" class="lab-markdown" v-html="renderLabMarkdown(activeLabDocument.markdown)" />
+                      <div v-else class="lab-summary-empty">{{ activeLabEmptyMessage }}</div>
+                    </div>
+                  </section>
+                </div>
+              </Teleport>
 
               <div class="composer-with-queue">
                 <ThreadComposer ref="homeThreadComposerRef" :active-thread-id="composerThreadContextId"
@@ -353,9 +484,11 @@ import IconTablerSettings from './components/icons/IconTablerSettings.vue'
 import IconTablerX from './components/icons/IconTablerX.vue'
 import { useDesktopState } from './composables/useDesktopState'
 import { useMobile } from './composables/useMobile'
+import { renderMathToHtml, splitTextByMathSegments } from './utils/mathRendering'
 import {
   configureTelegramBot,
   getAccounts,
+  getOpenScienceSurfaces,
   getTelegramStatus,
   removeAccount,
   refreshAccountsFromAuth,
@@ -364,7 +497,7 @@ import {
 } from './api/codexGateway'
 import type { ReasoningEffort, SpeedMode, ThreadScrollState, UiAccountEntry, UiRateLimitWindow, UiServerRequest, UiServerRequestReply, UiThreadTokenUsage } from './types/codex'
 import type { ComposerDraftPayload, ThreadComposerExposed } from './components/content/ThreadComposer.vue'
-import type { TelegramStatus } from './api/codexGateway'
+import type { OpenScienceProjectSummary, OpenScienceSurfaceDocument, OpenScienceSurfaces, TelegramStatus } from './api/codexGateway'
 
 const ThreadConversation = defineAsyncComponent(() => import('./components/content/ThreadConversation.vue'))
 const SkillsHub = defineAsyncComponent(() => import('./components/content/SkillsHub.vue'))
@@ -384,6 +517,7 @@ const SETTINGS_HELP = {
 } as const
 
 type ChatWidthMode = 'standard' | 'wide' | 'extra-wide'
+type LabHomeTabId = 'running' | 'past' | 'daily'
 
 type ChatWidthPreset = {
   label: string
@@ -512,6 +646,12 @@ const WHISPER_LANGUAGES: Record<string, string> = {
   yue: 'cantonese',
 }
 
+const labHomeTabs: Array<{ id: LabHomeTabId; label: string }> = [
+  { id: 'running', label: 'Running projects' },
+  { id: 'past', label: 'Past projects' },
+  { id: 'daily', label: 'Daily summary' },
+]
+
 const {
   projectGroups,
   projectDisplayNameById,
@@ -618,6 +758,21 @@ const telegramStatus = ref<TelegramStatus>({
 const mobileHiddenAtMs = ref<number | null>(null)
 const mobileResumeReloadTriggered = ref(false)
 const mobileResumeSyncInProgress = ref(false)
+const activeLabHomeTab = ref<LabHomeTabId>('running')
+const selectedHomeProjectId = ref('')
+const activeSummaryProjectId = ref('')
+const activePastProjectId = ref('')
+const activeDailySummaryId = ref('')
+const openScienceSurfaces = ref<OpenScienceSurfaces>({
+  runningProjects: [],
+  runningProjectDocs: [],
+  pastProjects: [],
+  dailySummaries: [],
+  dailySummary: null,
+})
+const isLoadingOpenScienceSurfaces = ref(false)
+const openScienceSurfaceError = ref('')
+const isLabReaderOpen = ref(false)
 let accountStatePollTimer: number | null = null
 let isAccountStatePollInFlight = false
 
@@ -758,6 +913,49 @@ const telegramStatusText = computed(() => {
   const error = telegramStatus.value.lastError ? `, error: ${telegramStatus.value.lastError}` : ''
   return `${base}, ${mapped}${error}`
 })
+const selectedHomeProject = computed<OpenScienceProjectSummary | null>(() => (
+  openScienceSurfaces.value.runningProjects.find((project) => project.id === selectedHomeProjectId.value) ?? null
+))
+const activeSummaryProjectDocument = computed<OpenScienceSurfaceDocument | null>(() => {
+  const docs = openScienceSurfaces.value.runningProjectDocs
+  const activeId = activeSummaryProjectId.value || selectedHomeProjectId.value || docs[0]?.id || ''
+  return docs.find((document) => document.id === activeId) ?? docs[0] ?? null
+})
+const activePastProjectDocument = computed<OpenScienceSurfaceDocument | null>(() => {
+  const docs = openScienceSurfaces.value.pastProjects
+  const activeId = activePastProjectId.value || docs[0]?.id || ''
+  return docs.find((document) => document.id === activeId) ?? docs[0] ?? null
+})
+const activeDailySummaryDocument = computed<OpenScienceSurfaceDocument | null>(() => {
+  const docs = openScienceSurfaces.value.dailySummaries
+  const activeId = activeDailySummaryId.value || openScienceSurfaces.value.dailySummary?.id || docs[0]?.id || ''
+  return docs.find((document) => document.id === activeId) ?? openScienceSurfaces.value.dailySummary ?? docs[0] ?? null
+})
+const activeLabDocumentList = computed<OpenScienceSurfaceDocument[]>(() => {
+  if (activeLabHomeTab.value === 'running') return openScienceSurfaces.value.runningProjectDocs
+  if (activeLabHomeTab.value === 'past') return openScienceSurfaces.value.pastProjects
+  return []
+})
+const activeLabDocument = computed<OpenScienceSurfaceDocument | null>(() => {
+  if (activeLabHomeTab.value === 'running') return activeSummaryProjectDocument.value
+  if (activeLabHomeTab.value === 'daily') return activeDailySummaryDocument.value
+  return activePastProjectDocument.value
+})
+const activeLabEmptyMessage = computed(() => {
+  if (activeLabHomeTab.value === 'daily') return 'No daily overview has been generated yet.'
+  if (activeLabHomeTab.value === 'past') return 'Past-project summaries will appear here as they are promoted.'
+  return 'No running-project summaries were found.'
+})
+function formatLabDocumentDate(value: string): string {
+  const timestamp = Date.parse(value)
+  if (!Number.isFinite(timestamp)) return ''
+  return new Intl.DateTimeFormat(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  }).format(new Date(timestamp))
+}
 
 onMounted(() => {
   window.addEventListener('keydown', onWindowKeyDown)
@@ -768,6 +966,7 @@ onMounted(() => {
   darkModeMediaQuery?.addEventListener('change', applyDarkMode)
   void initialize()
   void refreshTelegramStatus()
+  void loadOpenScienceSurfaces()
 })
 
 onUnmounted(() => {
@@ -809,6 +1008,13 @@ watch(sidebarSearchQuery, (value) => {
         serverMatchedThreadIds.value = null
       })
   }, 220)
+})
+
+watch(selectedHomeProjectId, (projectId) => {
+  if (!projectId) return
+  if (openScienceSurfaces.value.runningProjectDocs.some((document) => document.id === projectId)) {
+    activeSummaryProjectId.value = projectId
+  }
 })
 
 watch(accounts, () => {
@@ -1609,6 +1815,168 @@ function onSelectCollaborationMode(mode: 'default' | 'plan'): void {
   setSelectedCollaborationMode(mode)
 }
 
+async function loadOpenScienceSurfaces(): Promise<void> {
+  isLoadingOpenScienceSurfaces.value = true
+  openScienceSurfaceError.value = ''
+  try {
+    const surfaces = await getOpenScienceSurfaces()
+    openScienceSurfaces.value = surfaces
+    if (!selectedHomeProjectId.value && surfaces.runningProjects.length > 0) {
+      selectedHomeProjectId.value = ''
+    }
+    if (!activeSummaryProjectId.value && surfaces.runningProjectDocs.length > 0) {
+      activeSummaryProjectId.value = surfaces.runningProjectDocs[0].id
+    }
+    if (!activePastProjectId.value && surfaces.pastProjects.length > 0) {
+      activePastProjectId.value = surfaces.pastProjects[0].id
+    }
+    if (!activeDailySummaryId.value && surfaces.dailySummaries.length > 0) {
+      activeDailySummaryId.value = surfaces.dailySummaries[0].id
+    }
+  } catch (error) {
+    openScienceSurfaceError.value = error instanceof Error ? error.message : 'Failed to load lab summaries.'
+  } finally {
+    isLoadingOpenScienceSurfaces.value = false
+  }
+}
+
+function escapeLabHtml(value: string): string {
+  return value
+    .replace(/&/gu, '&amp;')
+    .replace(/</gu, '&lt;')
+    .replace(/>/gu, '&gt;')
+    .replace(/"/gu, '&quot;')
+    .replace(/'/gu, '&#39;')
+}
+
+function normalizeLabMarkdownImageUrl(rawUrl: string): string {
+  const url = rawUrl.trim()
+  if (url.startsWith('file://')) return `/codex-local-image?path=${encodeURIComponent(url.replace(/^file:\/\//u, ''))}`
+  if (url.startsWith('/Volumes/') || url.startsWith('/Users/')) return `/codex-local-image?path=${encodeURIComponent(url)}`
+  if (/^https?:\/\//u.test(url) || url.startsWith('/')) return url
+  return url
+}
+
+function normalizeLabMarkdownLinkUrl(rawUrl: string): string {
+  const url = rawUrl.trim()
+  if (/^https?:\/\//u.test(url) || url.startsWith('#') || url.startsWith('/')) return url
+  return '#'
+}
+
+function createLabPlaceholder(kind: 'CODE' | 'MATH', index: number): string {
+  return `@@OPENSCIENCE_${kind}_${String(index)}@@`
+}
+
+function restoreLabPlaceholders(text: string, kind: 'CODE' | 'MATH', placeholders: string[]): string {
+  let restored = text
+  placeholders.forEach((html, index) => {
+    restored = restored.split(createLabPlaceholder(kind, index)).join(html)
+  })
+  return restored
+}
+
+function renderLabInlineMarkdown(value: string): string {
+  const codePlaceholders: string[] = []
+  let text = value.replace(/`([^`]+)`/gu, (_match, code: string) => {
+    const token = createLabPlaceholder('CODE', codePlaceholders.length)
+    codePlaceholders.push(`<code>${escapeLabHtml(code)}</code>`)
+    return token
+  })
+
+  const mathPlaceholders: string[] = []
+  const mathSegments = splitTextByMathSegments(text)
+  if (mathSegments.some((segment) => segment.kind === 'math')) {
+    text = mathSegments
+      .map((segment) => {
+        if (segment.kind === 'text') return segment.value
+        const token = createLabPlaceholder('MATH', mathPlaceholders.length)
+        mathPlaceholders.push(renderMathToHtml(segment.value, segment.displayMode))
+        return token
+      })
+      .join('')
+  }
+
+  text = escapeLabHtml(text)
+  text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/gu, (_match, alt: string, url: string) => (
+    `<img class="lab-markdown-image" src="${escapeLabHtml(normalizeLabMarkdownImageUrl(url))}" alt="${escapeLabHtml(alt)}" loading="lazy">`
+  ))
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/gu, (_match, label: string, url: string) => {
+    const normalizedUrl = normalizeLabMarkdownLinkUrl(url)
+    const safeUrl = escapeLabHtml(normalizedUrl)
+    const target = /^https?:\/\//u.test(normalizedUrl) ? ' target="_blank" rel="noreferrer"' : ''
+    return `<a href="${safeUrl}"${target}>${escapeLabHtml(label)}</a>`
+  })
+  text = text.replace(/\*\*([^*]+)\*\*/gu, '<strong>$1</strong>')
+  text = restoreLabPlaceholders(text, 'CODE', codePlaceholders)
+  return restoreLabPlaceholders(text, 'MATH', mathPlaceholders)
+}
+
+function renderLabMarkdown(markdown: string): string {
+  const lines = markdown.replace(/\r/gu, '').split('\n')
+  const html: string[] = []
+  let inList = false
+  let inCode = false
+  let codeLines: string[] = []
+
+  const closeList = () => {
+    if (!inList) return
+    html.push('</ul>')
+    inList = false
+  }
+
+  for (const line of lines) {
+    const codeFence = line.match(/^```([A-Za-z0-9_-]*)\s*$/u)
+    if (codeFence) {
+      if (inCode) {
+        html.push(`<pre><code>${escapeLabHtml(codeLines.join('\n'))}</code></pre>`)
+        codeLines = []
+        inCode = false
+      } else {
+        closeList()
+        inCode = true
+      }
+      continue
+    }
+
+    if (inCode) {
+      codeLines.push(line)
+      continue
+    }
+
+    if (!line.trim()) {
+      closeList()
+      continue
+    }
+
+    const heading = line.match(/^(#{1,4})\s+(.+)$/u)
+    if (heading) {
+      closeList()
+      const level = heading[1]?.length ?? 2
+      html.push(`<h${level}>${renderLabInlineMarkdown(heading[2] ?? '')}</h${level}>`)
+      continue
+    }
+
+    const bullet = line.match(/^\s*[-*]\s+(.+)$/u)
+    if (bullet) {
+      if (!inList) {
+        html.push('<ul>')
+        inList = true
+      }
+      html.push(`<li>${renderLabInlineMarkdown(bullet[1] ?? '')}</li>`)
+      continue
+    }
+
+    closeList()
+    html.push(`<p>${renderLabInlineMarkdown(line)}</p>`)
+  }
+
+  closeList()
+  if (inCode) {
+    html.push(`<pre><code>${escapeLabHtml(codeLines.join('\n'))}</code></pre>`)
+  }
+  return html.join('')
+}
+
 async function initialize(): Promise<void> {
   await router.isReady()
 
@@ -1719,11 +2087,15 @@ watch(
 )
 
 
-watch(isMobile, (mobile) => {
-  if (mobile && !isSidebarCollapsed.value) {
-    setSidebarCollapsed(true)
-  }
-})
+watch(
+  isMobile,
+  (mobile) => {
+    if (mobile && !isSidebarCollapsed.value) {
+      setSidebarCollapsed(true)
+    }
+  },
+  { immediate: true },
+)
 
 async function submitFirstMessageForNewThread(
   text: string,
@@ -1733,7 +2105,7 @@ async function submitFirstMessageForNewThread(
 ): Promise<void> {
   try {
     const targetCwd = newThreadCwd.value.trim() || DEFAULT_OPENSCIENCE_WORKSPACE
-    const threadId = await sendMessageToNewThread(text, targetCwd, imageUrls, skills, fileAttachments)
+    const threadId = await sendMessageToNewThread(text, targetCwd, imageUrls, skills, fileAttachments, selectedHomeProjectId.value)
     if (!threadId) return
     await router.replace({ name: 'thread', params: { threadId } })
     scheduleMobileConversationJumpToLatest()
@@ -1748,6 +2120,10 @@ async function submitFirstMessageForNewThread(
 
 .sidebar-root {
   @apply h-full flex flex-col select-none;
+  background:
+    linear-gradient(180deg, rgba(12, 148, 136, 0.08), transparent 18rem),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.05), transparent 55%),
+    rgb(244 246 245);
 }
 
 .sidebar-root input,
@@ -1760,7 +2136,11 @@ async function submitFirstMessageForNewThread(
 }
 
 .content-root {
-  @apply h-full min-h-0 min-w-0 w-full flex flex-col overflow-y-hidden overflow-x-hidden bg-white;
+  @apply h-full min-h-0 min-w-0 w-full flex flex-col overflow-y-hidden overflow-x-hidden;
+  background:
+    radial-gradient(circle at 20% 12%, rgba(20, 184, 166, 0.12), transparent 23rem),
+    radial-gradient(circle at 85% 18%, rgba(225, 29, 72, 0.08), transparent 19rem),
+    linear-gradient(180deg, rgb(248 250 249), rgb(255 255 255) 35%);
 }
 
 .sidebar-thread-controls-host {
@@ -1800,11 +2180,11 @@ async function submitFirstMessageForNewThread(
 }
 
 .sidebar-skills-link {
-  @apply mx-2 flex items-center rounded-lg border-0 bg-transparent px-2 py-1.5 text-sm text-zinc-600 transition hover:bg-zinc-200 hover:text-zinc-900 cursor-pointer;
+  @apply mx-2 flex items-center rounded-lg border border-transparent bg-transparent px-2 py-1.5 text-sm text-zinc-700 transition hover:border-teal-200 hover:bg-teal-50 hover:text-zinc-950 cursor-pointer;
 }
 
 .sidebar-skills-link.is-active {
-  @apply bg-zinc-200 text-zinc-900 font-medium;
+  @apply border-teal-200 bg-teal-50 text-zinc-950 font-medium;
 }
 
 .sidebar-thread-controls-header-host {
@@ -1827,6 +2207,7 @@ async function submitFirstMessageForNewThread(
 
 .content-grid-home {
   @apply overflow-y-auto;
+  scrollbar-gutter: stable;
 }
 
 .content-thread {
@@ -1838,11 +2219,316 @@ async function submitFirstMessageForNewThread(
 }
 
 .new-thread-empty {
-  @apply flex-1 min-h-0 flex flex-col items-center justify-center gap-0.5 px-3 sm:px-6;
+  @apply flex-1 min-h-0 flex flex-col items-center justify-start gap-1.5 px-3 py-2 sm:px-6 text-center;
+}
+
+.new-thread-kicker {
+  @apply m-0 text-xs font-semibold uppercase text-teal-700;
+  letter-spacing: 0;
 }
 
 .new-thread-hero {
-  @apply m-0 text-2xl sm:text-[2.5rem] font-normal leading-[1.05] text-zinc-900;
+  @apply m-0 text-3xl sm:text-[2.5rem] font-semibold leading-[1.05] text-zinc-950;
+}
+
+.new-thread-subtitle {
+  @apply m-0 max-w-2xl text-xs leading-5 text-zinc-600;
+}
+
+.lab-home-panel {
+  @apply mt-2 flex w-full max-w-5xl flex-1 min-h-0 flex-col overflow-hidden rounded-lg border border-zinc-200 bg-white/92 text-left shadow-sm;
+}
+
+.lab-panel-heading {
+  @apply flex flex-col gap-2 border-b border-zinc-200 px-3 py-2 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.lab-panel-title {
+  @apply m-0 text-xs font-semibold text-zinc-950;
+}
+
+.lab-panel-description {
+  @apply m-0 mt-0.5 text-[11px] leading-4 text-zinc-500;
+}
+
+.lab-panel-open {
+  @apply inline-flex h-7 shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white px-2.5 text-xs font-medium text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-50 disabled:cursor-default disabled:opacity-50;
+}
+
+.lab-home-controls {
+  @apply flex flex-col gap-1.5 border-b border-zinc-200 px-3 py-2 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.lab-home-control-copy {
+  @apply min-w-0;
+}
+
+.lab-project-select-label {
+  @apply block text-[11px] font-semibold uppercase text-zinc-500;
+  letter-spacing: 0;
+}
+
+.lab-project-select-help {
+  @apply m-0 mt-0.5 text-[11px] text-zinc-500;
+}
+
+.lab-project-select-wrap {
+  @apply min-w-0;
+}
+
+.lab-project-select {
+  @apply h-8 w-full min-w-0 rounded-md border border-zinc-300 bg-white px-2 text-xs text-zinc-900 outline-none transition focus:border-teal-500 sm:min-w-64;
+}
+
+.lab-tabs-row {
+  @apply flex flex-col gap-1.5 border-b border-zinc-200 px-3 py-1.5 sm:flex-row sm:items-center;
+}
+
+.lab-tabs-label {
+  @apply px-1 text-[11px] font-semibold uppercase text-zinc-500;
+  letter-spacing: 0;
+}
+
+.lab-home-tabs {
+  @apply flex gap-1;
+}
+
+.lab-home-tab {
+  @apply rounded-md border border-transparent bg-transparent px-2.5 py-1 text-xs font-medium text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-950;
+}
+
+.lab-home-tab.is-active {
+  @apply border-teal-200 bg-teal-50 text-teal-800;
+}
+
+.lab-home-summary {
+  @apply grid flex-1 min-h-0 grid-cols-1 overflow-hidden sm:grid-cols-[15rem_minmax(0,1fr)];
+}
+
+.lab-home-summary.is-single-document {
+  @apply grid-cols-1;
+}
+
+.lab-summary-list {
+  @apply flex max-h-40 min-h-0 flex-col gap-1 overflow-y-auto border-b border-zinc-200 p-2 sm:max-h-none sm:border-b-0 sm:border-r;
+}
+
+.lab-summary-list-item {
+  @apply flex flex-col items-start rounded-md border border-transparent bg-transparent px-2 py-2 text-left text-sm text-zinc-700 transition hover:bg-zinc-100;
+}
+
+.lab-summary-list-item.is-active {
+  @apply border-teal-200 bg-teal-50 text-zinc-950;
+}
+
+.lab-summary-list-item small {
+  @apply mt-0.5 text-xs text-zinc-500;
+}
+
+.lab-summary-document {
+  @apply h-full min-h-0 overflow-y-auto px-5 py-4 pb-12;
+}
+
+.lab-summary-history {
+  @apply mb-3 flex flex-col gap-1 rounded-md border border-teal-900/40 bg-zinc-950 px-3 py-2 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.lab-summary-history-label {
+  @apply text-xs font-semibold uppercase text-teal-200;
+  letter-spacing: 0;
+}
+
+.lab-summary-history-select {
+  @apply h-8 min-w-0 rounded-md border border-teal-800 bg-zinc-900 px-2 text-sm text-zinc-100 outline-none transition focus:border-teal-300 sm:w-56;
+}
+
+.lab-summary-document-header {
+  @apply mb-3 flex flex-wrap items-baseline justify-between gap-2 border-b border-zinc-200 pb-2;
+}
+
+.lab-summary-document-title {
+  @apply min-w-0 flex-1;
+}
+
+.lab-summary-document-header span {
+  @apply text-sm font-semibold text-zinc-950;
+}
+
+.lab-summary-document-path {
+  @apply mt-0.5 block max-w-full truncate font-mono text-[11px] text-zinc-500;
+}
+
+.lab-summary-document-header small {
+  @apply text-xs text-zinc-500;
+}
+
+.lab-summary-empty {
+  @apply text-sm leading-6 text-zinc-500;
+}
+
+.lab-markdown {
+  @apply max-w-none text-sm leading-6 text-zinc-700;
+}
+
+.lab-markdown :deep(h1),
+.lab-markdown :deep(h2),
+.lab-markdown :deep(h3),
+.lab-markdown :deep(h4) {
+  @apply mb-2 mt-4 font-semibold leading-tight text-zinc-950;
+}
+
+.lab-markdown :deep(h1) {
+  @apply mt-0 text-2xl;
+}
+
+.lab-markdown :deep(h2) {
+  @apply text-xl;
+}
+
+.lab-markdown :deep(h3) {
+  @apply text-base;
+}
+
+.lab-markdown :deep(p) {
+  @apply my-2;
+}
+
+.lab-markdown :deep(ul) {
+  @apply my-2 list-disc pl-5;
+}
+
+.lab-markdown :deep(li) {
+  @apply my-1;
+}
+
+.lab-markdown :deep(a) {
+  @apply text-teal-700 underline underline-offset-2;
+}
+
+.lab-markdown :deep(code) {
+  @apply rounded border border-zinc-200 bg-zinc-100 px-1 py-0.5 font-mono text-[0.9em] text-zinc-900;
+}
+
+.lab-markdown :deep(pre) {
+  @apply my-3 overflow-x-auto rounded-lg border border-zinc-200 bg-zinc-950 px-3 py-2 text-zinc-100;
+}
+
+.lab-markdown :deep(pre code) {
+  @apply border-0 bg-transparent p-0 text-zinc-100;
+}
+
+.lab-markdown :deep(.lab-markdown-image) {
+  @apply my-3 max-h-80 max-w-full rounded-md border border-zinc-200 object-contain;
+}
+
+.lab-markdown :deep(.katex) {
+  font-size: 1.02em;
+}
+
+.lab-markdown :deep(.katex-display) {
+  @apply my-3 overflow-x-auto overflow-y-hidden py-1;
+}
+
+:global(:root.dark) .lab-markdown {
+  @apply text-zinc-200;
+}
+
+:global(:root.dark) .lab-markdown :deep(h1),
+:global(:root.dark) .lab-markdown :deep(h2),
+:global(:root.dark) .lab-markdown :deep(h3),
+:global(:root.dark) .lab-markdown :deep(h4) {
+  @apply text-zinc-50;
+}
+
+:global(:root.dark) .lab-markdown :deep(.katex),
+:global(:root.dark) .lab-markdown :deep(.katex *) {
+  color: rgb(244 244 245);
+}
+
+.new-thread-project-context {
+  @apply mt-2 rounded-md border border-teal-200 bg-teal-50 px-3 py-2 text-xs text-teal-800;
+}
+
+.lab-reader-backdrop {
+  @apply fixed inset-0 z-50 flex items-stretch justify-center bg-black/45 p-3 sm:p-6;
+}
+
+.lab-reader {
+  @apply flex h-full w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-2xl;
+}
+
+.lab-reader-header {
+  @apply flex shrink-0 items-start justify-between gap-4 border-b border-zinc-200 px-5 py-4;
+}
+
+.lab-reader-kicker {
+  @apply m-0 text-xs font-semibold uppercase text-teal-700;
+  letter-spacing: 0;
+}
+
+.lab-reader-header h2 {
+  @apply m-0 mt-1 text-xl font-semibold text-zinc-950;
+}
+
+.lab-reader-source {
+  @apply m-0 mt-1 max-w-[72vw] truncate font-mono text-xs text-zinc-500;
+}
+
+.lab-reader-close {
+  @apply inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white px-3 text-sm font-medium text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-50;
+}
+
+.lab-reader-body {
+  @apply min-h-0 flex-1 overflow-y-auto px-5 py-4 pb-10 sm:px-8;
+}
+
+@media (max-width: 640px) {
+  .new-thread-empty {
+    @apply justify-start py-4;
+  }
+
+  .lab-home-panel {
+    @apply mt-3;
+  }
+
+  .lab-home-tabs {
+    @apply overflow-x-auto;
+  }
+
+  .lab-home-tab {
+    @apply shrink-0;
+  }
+
+  .lab-home-summary {
+    min-height: 0;
+  }
+}
+
+@media (max-height: 820px) {
+  .new-thread-empty {
+    @apply gap-1.5 py-2;
+  }
+
+  .new-thread-subtitle {
+    @apply text-xs leading-5;
+  }
+
+  .lab-home-panel {
+    @apply mt-3;
+  }
+
+  .lab-panel-heading,
+  .lab-home-controls {
+    @apply px-4 py-2.5;
+  }
+
+  .lab-tabs-row {
+    @apply py-1.5;
+  }
+
+  .lab-home-summary {
+    min-height: 0;
+  }
 }
 
 .new-thread-folder-dropdown {
@@ -1859,10 +2545,6 @@ async function submitFirstMessageForNewThread(
 
 .new-thread-folder-dropdown :deep(.composer-dropdown-chevron) {
   @apply h-4 w-4 sm:h-5 sm:w-5 mt-0;
-}
-
-.new-thread-folder-selected {
-  @apply mt-2 mb-0 max-w-3xl text-center text-xs text-zinc-500 break-all;
 }
 
 .new-thread-folder-actions {
@@ -2044,10 +2726,6 @@ async function submitFirstMessageForNewThread(
 
 .new-thread-branch-select-help {
   @apply mt-1 mb-0 text-xs text-zinc-500;
-}
-
-.new-thread-runtime-help {
-  @apply mt-2 mb-0 max-w-3xl text-center text-xs text-zinc-500;
 }
 
 .new-thread-trending {

@@ -119,6 +119,36 @@ type OpenScienceContextBundleResponse = {
   error?: string
 }
 
+export type OpenScienceProjectSummary = {
+  id: string
+  name: string
+  path: string
+  active: boolean
+  summaryPath: string
+}
+
+export type OpenScienceSurfaceDocument = {
+  id: string
+  title: string
+  kind: 'running-project' | 'past-project' | 'daily-summary'
+  path: string
+  updatedAtIso: string | null
+  markdown: string
+}
+
+export type OpenScienceSurfaces = {
+  runningProjects: OpenScienceProjectSummary[]
+  runningProjectDocs: OpenScienceSurfaceDocument[]
+  pastProjects: OpenScienceSurfaceDocument[]
+  dailySummaries: OpenScienceSurfaceDocument[]
+  dailySummary: OpenScienceSurfaceDocument | null
+}
+
+type OpenScienceSurfacesResponse = {
+  data?: OpenScienceSurfaces
+  error?: string
+}
+
 
 
 export type ThreadSearchResult = {
@@ -1041,6 +1071,35 @@ export async function forkThread(
 
 export type FileAttachmentParam = { label: string; path: string; fsPath: string }
 
+function extractLocalImagePath(imageUrl: string): string | null {
+  const normalizedUrl = imageUrl.trim()
+  if (!normalizedUrl) return null
+
+  if (normalizedUrl.startsWith('/codex-local-image?')) {
+    try {
+      const url = new URL(normalizedUrl, window.location.origin)
+      const path = url.searchParams.get('path')?.trim() ?? ''
+      return path || null
+    } catch {
+      return null
+    }
+  }
+
+  if (normalizedUrl.startsWith('file://')) {
+    try {
+      return decodeURIComponent(normalizedUrl.replace(/^file:\/\//u, ''))
+    } catch {
+      return normalizedUrl.replace(/^file:\/\//u, '')
+    }
+  }
+
+  if (normalizedUrl.startsWith('/Volumes/') || normalizedUrl.startsWith('/Users/')) {
+    return normalizedUrl
+  }
+
+  return null
+}
+
 function buildTextWithAttachments(
   prompt: string,
   files: FileAttachmentParam[],
@@ -1105,8 +1164,12 @@ async function resolveCollaborationModeSettings(
   throw new Error(`${mode === 'plan' ? 'Plan' : 'Default'} mode requires an available model. Wait for models to load and try again.`)
 }
 
-async function fetchOpenScienceDeveloperInstructions(): Promise<string> {
-  const response = await fetch('/codex-api/openscience/context-bundle')
+async function fetchOpenScienceDeveloperInstructions(projectId = ''): Promise<string> {
+  const params = new URLSearchParams()
+  const normalizedProjectId = projectId.trim()
+  if (normalizedProjectId) params.set('projectId', normalizedProjectId)
+  const query = params.toString()
+  const response = await fetch(`/codex-api/openscience/context-bundle${query ? `?${query}` : ''}`)
   let payload: OpenScienceContextBundleResponse | null = null
   try {
     payload = await response.json() as OpenScienceContextBundleResponse
@@ -1122,12 +1185,37 @@ async function fetchOpenScienceDeveloperInstructions(): Promise<string> {
   return typeof bundle === 'string' ? bundle.trim() : ''
 }
 
-async function getOpenScienceDeveloperInstructions(): Promise<string> {
+async function getOpenScienceDeveloperInstructions(projectId = ''): Promise<string> {
+  if (projectId.trim()) {
+    return fetchOpenScienceDeveloperInstructions(projectId).catch(() => '')
+  }
   if (!openScienceDeveloperInstructionsPromise) {
     openScienceDeveloperInstructionsPromise = fetchOpenScienceDeveloperInstructions()
       .catch(() => '')
   }
   return openScienceDeveloperInstructionsPromise
+}
+
+export async function getOpenScienceSurfaces(): Promise<OpenScienceSurfaces> {
+  const response = await fetch('/codex-api/openscience/surfaces')
+  let payload: OpenScienceSurfacesResponse | null = null
+  try {
+    payload = await response.json() as OpenScienceSurfacesResponse
+  } catch {
+    payload = null
+  }
+
+  if (!response.ok) {
+    throw new Error(payload?.error || `HTTP ${response.status}`)
+  }
+
+  return {
+    runningProjects: Array.isArray(payload?.data?.runningProjects) ? payload.data.runningProjects : [],
+    runningProjectDocs: Array.isArray(payload?.data?.runningProjectDocs) ? payload.data.runningProjectDocs : [],
+    pastProjects: Array.isArray(payload?.data?.pastProjects) ? payload.data.pastProjects : [],
+    dailySummaries: Array.isArray(payload?.data?.dailySummaries) ? payload.data.dailySummaries : [],
+    dailySummary: payload?.data?.dailySummary ?? null,
+  }
 }
 
 export async function startThreadTurn(
@@ -1139,19 +1227,27 @@ export async function startThreadTurn(
   skills?: Array<{ name: string; path: string }>,
   fileAttachments: FileAttachmentParam[] = [],
   collaborationMode?: CollaborationModeKind,
+  projectId?: string,
 ): Promise<string> {
   try {
     const normalizedModel = model?.trim() ?? ''
-    const developerInstructions = await getOpenScienceDeveloperInstructions()
+    const developerInstructions = await getOpenScienceDeveloperInstructions(projectId)
     const finalText = buildTextWithAttachments(text, fileAttachments)
     const input: Array<Record<string, unknown>> = [{ type: 'text', text: finalText }]
     for (const imageUrl of imageUrls) {
       const normalizedUrl = imageUrl.trim()
       if (!normalizedUrl) continue
+      const localImagePath = extractLocalImagePath(normalizedUrl)
+      if (localImagePath) {
+        input.push({
+          type: 'localImage',
+          path: localImagePath,
+        })
+        continue
+      }
       input.push({
         type: 'image',
         url: normalizedUrl,
-        image_url: normalizedUrl,
       })
     }
     if (skills) {
