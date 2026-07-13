@@ -1,0 +1,218 @@
+{
+  "first_relevant_rank": 1,
+  "forbidden_retrieval_hits": [],
+  "hits": [
+    {
+      "confidence": "medium",
+      "edge_count": 0,
+      "id": "project:a5_dot",
+      "label": "A5 dot",
+      "provenance": [
+        {
+          "method": "deterministic deck ingest",
+          "source": "lab summary deck extraction"
+        }
+      ],
+      "score": 28,
+      "summary": "AAtA dot optical project with PL dispersion and peak-tracking analyses.",
+      "type": "Project"
+    },
+    {
+      "confidence": "high",
+      "edge_count": 3,
+      "id": "claim:optical_probes_primary_evidence",
+      "label": "optical probes can be primary evidence for correlated states",
+      "provenance": [
+        {
+          "method": "Codex seed from existing synthesis",
+          "source": "lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md"
+        },
+        {
+          "method": "Codex seed from existing synthesis",
+          "source": "lab_assistant/knowledge/syntheses/optical_readout_of_correlated_states.md"
+        }
+      ],
+      "score": 23,
+      "summary": "For Xu Lab-style moir\u00e9 work, PL, RMCD, MOKE, and pump-probe measurements should be treated as potentially state-sensitive primary evidence, not merely support for transport.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:semiconductor_moire_materials_semiconductor_moire_materials_should_be_viewed_as_a_unified_field",
+      "label": "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41565-022-01165-6"
+        }
+      ],
+      "score": 19,
+      "summary": "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states Use for: the best compact field review when orienting someone new to modern TMD moire physics",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 2,
+      "id": "claim:promoted_2602_minus_one_third_topological_pl_dispersion",
+      "label": "The nu=-1/3 PL spectrum disperses with out-of-plane magnetic field, supporting a nontrivial topological interpretation.",
+      "provenance": [
+        {
+          "method": "Codex curation pass from arXiv abstract",
+          "source": "https://arxiv.org/abs/2602.04561"
+        }
+      ],
+      "score": 18,
+      "summary": "The optical -1/3 FQAH report states that PL spectra at nu=-1/3 disperse with increasing out-of-plane magnetic field and that exact-diagonalization calculations support a topologically nontrivial interpretation.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:signatures_of_moire_trapped_valley_excitons_in_mose2_wse2_heterobilayers_interlayer_excitons_can",
+      "label": "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_excitons_and_optics.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-019-0957-1"
+        }
+      ],
+      "score": 18,
+      "summary": "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures Use for: the basic idea that moir\u00e9 structure can discretize and localize optical excitations",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:moire_excitons_from_programmable_quantum_emitter_arrays_to_spin_orbit_coupled_artificial_lattice",
+      "label": "moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_valley_and_exciton_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://arxiv.org/abs/1710.07015"
+        }
+      ],
+      "score": 17,
+      "summary": "moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton Use for: conceptual bridge from early interlayer-exciton work to modern moire-exciton and correlated-optics interpretation",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 3,
+      "id": "claim:promoted_deck_c5_fractional_features_and_dots",
+      "label": "C5 deck treats bilayer trion fractional features and hBN-hole dot staircases as actionable optical signals.",
+      "provenance": [
+        {
+          "method": "Codex curation pass over extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/933634713410bb59.json#slides-5-18"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB&WJL_C5_Attodry911/WJL&CWB_C5_Attodry911.pptx"
+        }
+      ],
+      "score": 16,
+      "summary": "The C5 deck reports clear bilayer trion emission with visible fractional features, many fractions below -1/2, dot-like spectra in hBN holes, a staircase at B=1.2 T, and dispersion that needs better data near 3.1 degrees.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 2,
+      "id": "claim:deck_d6568f72573117f7_slide_14_again_similar_d_field_spectrum_for_the_trions_however_th",
+      "label": "Again, similar D-field spectrum for the trions, however there are some interesting things going on in the exciton spectrum.",
+      "provenance": [
+        {
+          "method": "extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/d6568f72573117f7.json"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D2_ScanningPL/CWB_D2_ScanningPL.pptx"
+        },
+        {
+          "method": "salient line extraction",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/d6568f72573117f7.json#slide-14"
+        }
+      ],
+      "score": 16,
+      "summary": "Deck-derived claim from CWB D2 ScanningPL, slide 14: Again, similar D-field spectrum for the trions, however there are some interesting things going on in the exciton spectrum.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 2,
+      "id": "claim:deck_d6568f72573117f7_slide_17_at_positive_doping_you_can_very_clearly_see_a_hybridized",
+      "label": "At positive doping, you can very clearly see a hybridized layer region for the exciton.",
+      "provenance": [
+        {
+          "method": "extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/d6568f72573117f7.json"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D2_ScanningPL/CWB_D2_ScanningPL.pptx"
+        },
+        {
+          "method": "salient line extraction",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/d6568f72573117f7.json#slide-17"
+        }
+      ],
+      "score": 16,
+      "summary": "Deck-derived claim from CWB D2 ScanningPL, slide 17: At positive doping, you can very clearly see a hybridized layer region for the exciton.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "label": "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://arxiv.org/abs/2508.18639"
+        }
+      ],
+      "score": 16,
+      "summary": "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe Use for: the next-step logic where PL helicity and optical drive can manipulate correlated topology directly",
+      "type": "Claim"
+    }
+  ],
+  "latency_ms": 44.51841703848913,
+  "matched_evidence_groups": [
+    0,
+    1
+  ],
+  "missed_evidence_groups": [],
+  "mrr": 1.0,
+  "ndcg_at_k": 0.8772153153380493,
+  "precision_at_k": 0.2,
+  "recall_at_k": 1.0,
+  "top_hit_labels": [
+    "A5 dot",
+    "optical probes can be primary evidence for correlated states",
+    "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+    "The nu=-1/3 PL spectrum disperses with out-of-plane magnetic field, supporting a nontrivial topological interpretation.",
+    "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures",
+    "moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton",
+    "C5 deck treats bilayer trion fractional features and hBN-hole dot staircases as actionable optical signals.",
+    "Again, similar D-field spectrum for the trions, however there are some interesting things going on in the exciton spectrum.",
+    "At positive doping, you can very clearly see a hybridized layer region for the exciton.",
+    "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe"
+  ]
+}

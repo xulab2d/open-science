@@ -1,0 +1,244 @@
+{
+  "first_relevant_rank": 1,
+  "forbidden_retrieval_hits": [],
+  "hits": [
+    {
+      "confidence": "medium",
+      "edge_count": 4,
+      "id": "paper:optical_control_of_integer_and_fractional_chern_insulators",
+      "label": "Optical control of integer and fractional Chern insulators",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://arxiv.org/abs/2508.18639"
+        }
+      ],
+      "score": 93,
+      "summary": "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe Use for: the next-step logic where PL helicity and optical drive can manipulate correlated topology directly",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "label": "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://arxiv.org/abs/2508.18639"
+        }
+      ],
+      "score": 93,
+      "summary": "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe Use for: the next-step logic where PL helicity and optical drive can manipulate correlated topology directly",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "label": "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-023-06289-w"
+        }
+      ],
+      "score": 78,
+      "summary": "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2 the paper highlights strong signatures near `nu = -1, -2/3, -3/5` Use for: the main optical bridge between PL/RMCD observables and correlated topological phases",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "label": "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-023-06452-3"
+        }
+      ],
+      "score": 59,
+      "summary": "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states Use for: arguments that need more than transport",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 2,
+      "id": "claim:promoted_2508_optical_switching_domain_walls",
+      "label": "Optical switching of integer and fractional Chern ferromagnets enables bistate cycling and domain-wall writing in twisted MoTe2.",
+      "provenance": [
+        {
+          "method": "Codex curation pass from arXiv abstract",
+          "source": "https://arxiv.org/abs/2508.19602"
+        }
+      ],
+      "score": 56,
+      "summary": "The companion 2025 arXiv paper reports zero-field optical switching of integer and fractional Chern ferromagnets with low pump power, plus magnetic bistate cycling and spatially resolved writing of ferromagnetic domain walls.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 4,
+      "id": "paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator",
+      "label": "Local probe of bulk and edge states in a fractional Chern insulator",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/abs/2404.07157"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://arxiv.org/abs/2404.07157"
+        }
+      ],
+      "score": 50,
+      "summary": "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport Use for: local-versus-bulk evidence and any discussion of edge reconstruction or spatial inhomogeneity",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 0,
+      "id": "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_trion_pl_can_act_as_a_fi",
+      "label": "trion PL can act as a filling-sensitive probe of integer and fractional topological states",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_excitons_and_optics.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-023-06289-w"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        }
+      ],
+      "score": 48,
+      "summary": "trion PL can act as a filling-sensitive probe of integer and fractional topological states Use for: the bridge between exciton/trion spectroscopy and correlated-electron physics",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "label": "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://arxiv.org/abs/2404.07157"
+        }
+      ],
+      "score": 46,
+      "summary": "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport Use for: local-versus-bulk evidence and any discussion of edge reconstruction or spatial inhomogeneity",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 5,
+      "id": "paper:observation_of_integer_and_fractional_quantum_anomalous_hall_effects_in_twisted",
+      "label": "Observation of Integer and Fractional Quantum Anomalous Hall Effects in Twisted Bilayer MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://journals.aps.org/prx/abstract/10.1103/PhysRevX.13.031037"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        },
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1146/annurev-conmatphys-031524-071133"
+        }
+      ],
+      "score": 45,
+      "summary": "independent transport confirmation of IQAH and near-quantized FQAH, with electric-field-driven transitions Use for: independent confirmation and device-to-device robustness",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:direct_magnetic_imaging_of_fractional_chern_insulators_in_twisted_mote2_with_a_superconducting_s",
+      "label": "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-024-08153-x"
+        }
+      ],
+      "score": 45,
+      "summary": "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states Use for: when a transport or optical anomaly might actually be a real-space inhomogeneity problem",
+      "type": "Claim"
+    }
+  ],
+  "latency_ms": 43.754582991823554,
+  "matched_evidence_groups": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "missed_evidence_groups": [],
+  "mrr": 1.0,
+  "ndcg_at_k": 1.0,
+  "precision_at_k": 0.6,
+  "recall_at_k": 1.0,
+  "top_hit_labels": [
+    "Optical control of integer and fractional Chern insulators",
+    "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+    "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+    "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+    "Optical switching of integer and fractional Chern ferromagnets enables bistate cycling and domain-wall writing in twisted MoTe2.",
+    "Local probe of bulk and edge states in a fractional Chern insulator",
+    "trion PL can act as a filling-sensitive probe of integer and fractional topological states",
+    "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+    "Observation of Integer and Fractional Quantum Anomalous Hall Effects in Twisted Bilayer MoTe2",
+    "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states"
+  ]
+}

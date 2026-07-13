@@ -1,0 +1,209 @@
+{
+  "answer_latency_ms": 17629.542500013486,
+  "answer_metrics": {
+    "atomic_claim_count": 12,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 7,
+    "citation_hits": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 17,
+        "sentence": "Transport**: strongest direct evidence for a fractional Chern/QAHE response when it shows fractional Hall conductance with insulating longitudinal behavior; related transport evidence is noted for fractional QSH states in twisted MoTe2 (`claim:promoted_2402_fqsh_nu3_edge_conductance`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "It rules out an ordinary trivial insulator or simple metal as the sole explanation, but by itself may not prove the response is a homogeneous bulk phase.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 20,
+        "sentence": "Compressibility / thermodynamics**: bulk incompressibility is high-value evidence because local compressibility plus magneto-optics is described as \u201cbulk evidence for integer and fractional Chern states\u201d (`claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m`; `lab_assistant/knowledge/papers/transport_and_thermodynamics.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "It rules out a merely conductive edge/channel network and supports a gapped many-body bulk state.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 17,
+        "sentence": "Local probe**: local probes can resolve both bulk and edge structure rather than relying only on global transport (`paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator`; `claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 5,
+        "sentence": "They rule out spatial inhomogeneity, edge-only artifacts, and unresolved phase separation as sufficient explanations.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 18,
+        "sentence": "Optical / RMCD / PL**: trion PL and RMCD are filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2, with reported signatures near fractional fillings (`claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 5,
+        "sentence": "They rule out a purely transport-contact artifact and track magnetism/valley polarization, but are indirect for fractional topology.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 13,
+        "sentence": "Optical control / pump response**: optical pumping can act as an active control knob for integer and fractional Chern states (`claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 5,
+        "sentence": "It supports coupling to the order parameter, but alone does not establish a quantized topological state.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 11,
+        "sentence": "RMCD/PL/optical** are important supporting probes because they identify filling-dependent magneto-optical structure, but they should not outrank bulk gap and quantized response.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 4,
+        "sentence": "Therefore the ranking is a synthesis from the provided claim nodes, not a claim about any one experiment\u2019s complete evidentiary record.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "matched_must_cite_like": [
+      "paper:",
+      "claim:"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.6666666666666666,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/fci_evidence_hierarchy/run_003/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17893,
+    "context_pack_id": "82393ba3f7e4f93924177bbf2759d5f025cccbc51a486cb05f1c6a42e3dd4de9",
+    "context_precision": 0.887107282695518,
+    "context_recall": 1.0,
+    "excluded_count": 11,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_node": 6,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 28.064250014722347,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "missed_evidence_groups": [],
+    "token_estimate": 4474
+  },
+  "context_path": "raw/tasks/fci_evidence_hierarchy/run_003/context.md",
+  "evaluator_note": "Tests multi-hop synthesis and evidence hierarchy.",
+  "expected_behavior": "answer",
+  "family": "multi_hop",
+  "id": "fci_evidence_hierarchy",
+  "judge": {
+    "actionability": 3,
+    "answer_relevance": 4,
+    "citation_quality": 3,
+    "context_relevance": 4,
+    "critical_errors": [],
+    "faithfulness": 3,
+    "missing_key_points": [
+      "Did not clearly separate thermodynamics from compressibility as its own evidence type despite the question listing both.",
+      "Introduced optical control / pump response as a separate ranked category instead of ranking thermodynamics.",
+      "Cited at least one claim ID not present in the supplied context: claim:promoted_2402_fqsh_nu3_edge_conductance.",
+      "Some 'rules out' statements are broader than the supplied context directly supports."
+    ],
+    "scientific_correctness": 4,
+    "summary": "The answer addresses the evidence hierarchy and includes transport, compressibility, local probes, and optical/RMCD/PL, with useful caveats that optical probes are indirect. However, it conflates thermodynamics with compressibility and replaces the requested fifth category with optical control. Several claims, especially transport quantization and what each probe rules out, are scientifically plausible but not well supported by the provided context. Citations are mostly specific claim IDs, but one cited claim is absent from the context and several citations are attached to claims that go beyond the evidence provided.",
+    "uncertainty_calibration": 4,
+    "unsupported_claims_count": 4
+  },
+  "judge_latency_ms": 12605.759708036203,
+  "judge_path": "raw/tasks/fci_evidence_hierarchy/run_003/judge.json",
+  "judge_returncode": 0,
+  "question": "Rank evidence types for a fractional Chern insulator and explain what each rules out: transport, compressibility, local probe, optical/RMCD/PL, and thermodynamics.",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 43.209124996792525,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+      "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+      "Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2",
+      "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators",
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "Thermodynamic evidence of fractional Chern insulator in moire MoTe2",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "at least some twisted-MoTe2 devices now reach a dissipationless fractional-Chern-insulator regime rather than only near-quantized transport",
+      "Optical control of integer and fractional Chern insulators"
+    ]
+  },
+  "run_id": "fci_evidence_hierarchy__run_003",
+  "run_index": 3,
+  "scores": {
+    "answer_deterministic_score": 0.9444444444444444,
+    "context_score": 0.943553641347759,
+    "judge_score": 0.7142857142857143,
+    "overall_score": 0.9005709500194794,
+    "retrieval_score": 1.0
+  },
+  "task_type": "synthesis"
+}

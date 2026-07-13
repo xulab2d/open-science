@@ -1,0 +1,39 @@
+{
+  "chars": 10804,
+  "context_pack_id": "62e78be84e9026bfa6ab65923fe75e96194a47d88a945a488acee9a87bf3d7a6",
+  "context_precision": 0.9583333333333334,
+  "context_recall": 0.5,
+  "context_refs": [
+    "context/projects/",
+    "context/projects/active_projects.md",
+    "knowledge/projects/",
+    "knowledge/projects/current_projects_2026_07_07.md",
+    "lab_assistant/context/projects/active_projects.md",
+    "lab_assistant/core/directives.md",
+    "lab_assistant/core/identity.md",
+    "lab_assistant/core/preferences.md",
+    "lab_assistant/daemon/reports/pulse_2026-04-10_161950_PDT.md",
+    "lab_assistant/daemon/reports/pulse_2026-04-10_162004_PDT.md",
+    "lab_assistant/knowledge/projects/README.md",
+    "lab_assistant/skills/background-cataloguing.md",
+    "skill:background-cataloguing",
+    "skill_metadata:background-cataloguing",
+    "skills/background-cataloguing.yaml"
+  ],
+  "excluded_count": 4530,
+  "item_count": 9,
+  "kind_counts": {
+    "core": 3,
+    "daemon_report": 2,
+    "project_summary": 2,
+    "skill": 2
+  },
+  "latency_ms": 259.1740000061691,
+  "matched_evidence_groups": [
+    1
+  ],
+  "missed_evidence_groups": [
+    0
+  ],
+  "token_estimate": 2701
+}

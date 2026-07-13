@@ -769,15 +769,133 @@ def run_task(task: HardTask, output_dir: Path, top_k: int, char_budget: int, tim
     return row
 
 
+def run_task_repeat(
+    task: HardTask,
+    output_dir: Path,
+    top_k: int,
+    char_budget: int,
+    timeout_s: int,
+    schema_path: Path,
+    run_index: int,
+    repeats: int,
+) -> dict[str, Any]:
+    """Run one task once, storing artifacts under a repeat-specific directory."""
+    if repeats <= 1:
+        return run_task(task, output_dir, top_k, char_budget, timeout_s, schema_path)
+
+    slug = task_slug(task.id)
+    task_dir = output_dir / "raw" / "tasks" / slug / f"run_{run_index:03d}"
+    task_dir.mkdir(parents=True, exist_ok=True)
+
+    retrieval = retrieval_metrics(task, top_k)
+    context, context_markdown, _pack = context_metrics(task, char_budget)
+    (task_dir / "context.md").write_text(context_markdown, encoding="utf-8")
+    write_json(task_dir / "retrieval.json", retrieval)
+    write_json(task_dir / "context.json", {k: v for k, v in context.items() if k != "items"})
+
+    answer_path = task_dir / "answer.md"
+    answer_stdout = task_dir / "answer.stdout.txt"
+    answer_stderr = task_dir / "answer.stderr.txt"
+    returncode, answer_latency_ms, stdout, stderr = codex_exec(
+        answer_prompt(task, context_markdown),
+        answer_path,
+        timeout_s=timeout_s,
+    )
+    answer_stdout.write_text(stdout, encoding="utf-8")
+    answer_stderr.write_text(stderr, encoding="utf-8")
+    answer = answer_path.read_text(encoding="utf-8", errors="replace") if answer_path.exists() else stdout
+    answer_metrics = deterministic_answer_metrics(task, answer, context_markdown, set(context["context_refs"]))
+
+    judge_path = task_dir / "judge.json"
+    judge_stdout = task_dir / "judge.stdout.txt"
+    judge_stderr = task_dir / "judge.stderr.txt"
+    judge_returncode, judge_latency_ms, judge_out, judge_err = codex_exec(
+        judge_prompt(task, context_markdown, answer),
+        judge_path,
+        timeout_s=timeout_s,
+        schema_path=schema_path,
+    )
+    judge_stdout.write_text(judge_out, encoding="utf-8")
+    judge_stderr.write_text(judge_err, encoding="utf-8")
+    judge = parse_judge(judge_path, judge_out)
+    scores = compute_scores(
+        {
+            "retrieval": retrieval,
+            "context": context,
+            "answer_metrics": answer_metrics,
+            "judge": judge,
+        }
+    )
+
+    row = {
+        "id": task.id,
+        "run_index": run_index,
+        "run_id": f"{task.id}__run_{run_index:03d}",
+        "family": task.family,
+        "task_type": task.task_type,
+        "question": task.question,
+        "expected_behavior": task.expected_behavior,
+        "evaluator_note": task.evaluator_note,
+        "retrieval": {k: v for k, v in retrieval.items() if k != "hits"},
+        "context": {k: v for k, v in context.items() if k not in {"items", "context_refs"}},
+        "answer_metrics": answer_metrics,
+        "judge": judge,
+        "scores": scores,
+        "answer_returncode": returncode,
+        "judge_returncode": judge_returncode,
+        "answer_latency_ms": answer_latency_ms,
+        "judge_latency_ms": judge_latency_ms,
+        "answer_path": str(answer_path.relative_to(output_dir)),
+        "judge_path": str(judge_path.relative_to(output_dir)),
+        "context_path": str((task_dir / "context.md").relative_to(output_dir)),
+    }
+    write_json(task_dir / "record.json", row)
+    return row
+
+
+def mean_stats(values: list[float]) -> dict[str, float | None]:
+    if not values:
+        return {"mean": None, "median": None, "std": None, "ci95": None, "min": None, "max": None}
+    std = statistics.stdev(values) if len(values) > 1 else 0.0
+    ci95 = 1.96 * std / math.sqrt(len(values)) if len(values) > 1 else 0.0
+    return {
+        "mean": statistics.mean(values),
+        "median": statistics.median(values),
+        "std": std,
+        "ci95": ci95,
+        "min": min(values),
+        "max": max(values),
+    }
+
+
+def failure_flags(row: dict[str, Any]) -> dict[str, bool]:
+    return {
+        "retrieval_miss": row["retrieval"]["recall_at_k"] < 1,
+        "hard_negative_leak": bool(row["retrieval"]["forbidden_retrieval_hits"]),
+        "context_miss": row["context"]["context_recall"] < 1,
+        "answer_concept_miss": row["answer_metrics"]["required_concept_coverage"] < 1,
+        "bad_abstention_or_caution": not row["answer_metrics"]["behavior_ok"],
+        "weak_citation_precision_proxy": row["answer_metrics"]["citation_precision_proxy"] < 0.8,
+        "judge_faithfulness_under_4": row["judge"].get("faithfulness", 1) < 4,
+        "judge_citation_under_4": row["judge"].get("citation_quality", 1) < 4,
+        "judge_critical_errors": bool(row["judge"].get("critical_errors")),
+    }
+
+
 def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     family_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    task_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         family_rows[row["family"]].append(row)
+        task_rows[row["id"]].append(row)
     score_keys = ["overall_score", "retrieval_score", "context_score", "answer_deterministic_score", "judge_score"]
     summary = {
-        "tasks": len(rows),
+        "runs": len(rows),
+        "unique_tasks": len(task_rows),
+        "repeats_per_task": {task_id: len(group) for task_id, group in sorted(task_rows.items())},
         "overall_mean": statistics.mean(row["scores"]["overall_score"] for row in rows) if rows else 0.0,
         "overall_median": statistics.median(row["scores"]["overall_score"] for row in rows) if rows else 0.0,
+        "overall": mean_stats([row["scores"]["overall_score"] for row in rows]),
         "score_means": {
             key: statistics.mean(row["scores"][key] for row in rows) if rows else 0.0
             for key in score_keys
@@ -795,7 +913,9 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
             ]
         },
         "by_family": {},
+        "by_task": {},
         "failure_counts": Counter(),
+        "failure_rates": {},
         "latency": {
             "answer_p50_s": percentile([row["answer_latency_ms"] / 1000 for row in rows], 50),
             "answer_p95_s": percentile([row["answer_latency_ms"] / 1000 for row in rows], 95),
@@ -805,29 +925,44 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
     for family, group in sorted(family_rows.items()):
         summary["by_family"][family] = {
-            "tasks": len(group),
+            "runs": len(group),
+            "unique_tasks": len({row["id"] for row in group}),
             **{key: statistics.mean(row["scores"][key] for row in group) for key in score_keys},
         }
+    for task_id, group in sorted(task_rows.items()):
+        task_failure_counts: Counter[str] = Counter()
+        for row in group:
+            for key, value in failure_flags(row).items():
+                if value:
+                    task_failure_counts[key] += 1
+        summary["by_task"][task_id] = {
+            "runs": len(group),
+            "family": group[0]["family"],
+            "task_type": group[0]["task_type"],
+            "score_stats": {key: mean_stats([row["scores"][key] for row in group]) for key in score_keys},
+            "judge_metric_stats": {
+                metric: mean_stats([float(row["judge"].get(metric, 1)) for row in group])
+                for metric in [
+                    "context_relevance",
+                    "answer_relevance",
+                    "faithfulness",
+                    "citation_quality",
+                    "scientific_correctness",
+                    "uncertainty_calibration",
+                    "actionability",
+                ]
+            },
+            "failure_counts": dict(task_failure_counts),
+            "failure_rates": {key: value / len(group) for key, value in sorted(task_failure_counts.items())},
+            "answer_latency_s": mean_stats([row["answer_latency_ms"] / 1000 for row in group]),
+            "judge_latency_s": mean_stats([row["judge_latency_ms"] / 1000 for row in group]),
+        }
     for row in rows:
-        if row["retrieval"]["recall_at_k"] < 1:
-            summary["failure_counts"]["retrieval_miss"] += 1
-        if row["retrieval"]["forbidden_retrieval_hits"]:
-            summary["failure_counts"]["hard_negative_leak"] += 1
-        if row["context"]["context_recall"] < 1:
-            summary["failure_counts"]["context_miss"] += 1
-        if row["answer_metrics"]["required_concept_coverage"] < 1:
-            summary["failure_counts"]["answer_concept_miss"] += 1
-        if not row["answer_metrics"]["behavior_ok"]:
-            summary["failure_counts"]["bad_abstention_or_caution"] += 1
-        if row["answer_metrics"]["citation_precision_proxy"] < 0.8:
-            summary["failure_counts"]["weak_citation_precision_proxy"] += 1
-        if row["judge"].get("faithfulness", 1) < 4:
-            summary["failure_counts"]["judge_faithfulness_under_4"] += 1
-        if row["judge"].get("citation_quality", 1) < 4:
-            summary["failure_counts"]["judge_citation_under_4"] += 1
-        if row["judge"].get("critical_errors"):
-            summary["failure_counts"]["judge_critical_errors"] += 1
+        for key, value in failure_flags(row).items():
+            if value:
+                summary["failure_counts"][key] += 1
     summary["failure_counts"] = dict(summary["failure_counts"])
+    summary["failure_rates"] = {key: value / len(rows) for key, value in summary["failure_counts"].items()} if rows else {}
     return summary
 
 
@@ -852,16 +987,38 @@ def make_plots(output_dir: Path, rows: list[dict[str, Any]], summary: dict[str, 
     if plt is None:
         return
     plot_dir = output_dir / "plots"
-    labels = [row["id"].replace("_", "\n") for row in rows]
-    plot_bar(
-        plot_dir / "overall_quality_by_task.png",
-        labels,
-        [row["scores"]["overall_score"] for row in rows],
-        "Hard RAG Quality Score by Task",
-        "score (0-1)",
-        (0, 1.0),
-        "#3969ac",
+    task_ids = list(summary["by_task"].keys())
+    task_labels = [task_id.replace("_", "\n") for task_id in task_ids]
+    means = [summary["by_task"][task_id]["score_stats"]["overall_score"]["mean"] for task_id in task_ids]
+    cis = [summary["by_task"][task_id]["score_stats"]["overall_score"]["ci95"] for task_id in task_ids]
+    fig, ax = plt.subplots(figsize=(max(9.5, len(task_ids) * 0.78), 5.0))
+    ax.bar(task_labels, means, yerr=cis, color="#3969ac", capsize=3)
+    ax.set_title("Hard RAG Quality Score by Task")
+    ax.set_ylabel("mean score (0-1), 95% CI")
+    ax.set_ylim(0, 1.0)
+    ax.grid(axis="y", alpha=0.22)
+    ax.tick_params(axis="x", rotation=35, labelsize=8)
+    fig.tight_layout()
+    fig.savefig(plot_dir / "overall_quality_by_task.png", dpi=220)
+    plt.close(fig)
+
+    grouped_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        grouped_rows[row["id"]].append(row)
+    fig, ax = plt.subplots(figsize=(max(9.5, len(task_ids) * 0.78), 5.0))
+    ax.boxplot(
+        [[row["scores"]["overall_score"] for row in grouped_rows[task_id]] for task_id in task_ids],
+        tick_labels=task_labels,
+        showfliers=False,
     )
+    ax.set_title("Hard RAG Quality Score Distribution by Task")
+    ax.set_ylabel("score (0-1)")
+    ax.set_ylim(0, 1.0)
+    ax.grid(axis="y", alpha=0.22)
+    ax.tick_params(axis="x", rotation=35, labelsize=8)
+    fig.tight_layout()
+    fig.savefig(plot_dir / "overall_quality_distribution_by_task.png", dpi=220)
+    plt.close(fig)
 
     layer_labels = ["retrieval", "context", "answer", "judge"]
     layer_values = [
@@ -889,16 +1046,19 @@ def make_plots(output_dir: Path, rows: list[dict[str, Any]], summary: dict[str, 
         "uncertainty_calibration",
         "actionability",
     ]
-    fig, ax = plt.subplots(figsize=(9.6, max(5, len(rows) * 0.42)))
-    matrix = [[float(row["judge"].get(metric, 1)) for metric in judge_metrics] for row in rows]
+    fig, ax = plt.subplots(figsize=(9.6, max(5, len(task_ids) * 0.42)))
+    matrix = [
+        [summary["by_task"][task_id]["judge_metric_stats"][metric]["mean"] for metric in judge_metrics]
+        for task_id in task_ids
+    ]
     cmap = LinearSegmentedColormap.from_list("quality", ["#cc503e", "#f1d36b", "#4b8f8c"])
     im = ax.imshow(matrix, vmin=1, vmax=5, cmap=cmap, aspect="auto")
     ax.set_xticks(range(len(judge_metrics)), [metric.replace("_", "\n") for metric in judge_metrics], fontsize=8)
-    ax.set_yticks(range(len(rows)), [row["id"] for row in rows], fontsize=8)
-    ax.set_title("LLM Judge Scores by Task")
+    ax.set_yticks(range(len(task_ids)), task_ids, fontsize=8)
+    ax.set_title("Mean LLM Judge Scores by Task")
     for y, row_vals in enumerate(matrix):
         for x, value in enumerate(row_vals):
-            ax.text(x, y, f"{value:.0f}", ha="center", va="center", fontsize=7, color="black")
+            ax.text(x, y, f"{value:.1f}", ha="center", va="center", fontsize=7, color="black")
     fig.colorbar(im, ax=ax, label="judge score (1-5)")
     fig.tight_layout()
     fig.savefig(plot_dir / "judge_metric_heatmap.png", dpi=220)
@@ -909,22 +1069,41 @@ def make_plots(output_dir: Path, rows: list[dict[str, Any]], summary: dict[str, 
         plot_dir / "failure_taxonomy.png",
         list(failure_counts.keys()),
         [float(value) for value in failure_counts.values()],
-        "Failure Taxonomy Across Hard Tasks",
-        "task count",
+        "Failure Taxonomy Across Hard Runs",
+        "run count",
         None,
         "#cc503e",
     )
+
+    failure_keys = sorted(summary["failure_counts"])
+    if failure_keys:
+        fig, ax = plt.subplots(figsize=(max(9.5, len(task_ids) * 0.8), max(4.8, len(failure_keys) * 0.36)))
+        matrix = [
+            [summary["by_task"][task_id]["failure_rates"].get(key, 0.0) for key in failure_keys]
+            for task_id in task_ids
+        ]
+        cmap = LinearSegmentedColormap.from_list("failures", ["#f7f7f7", "#f1d36b", "#cc503e"])
+        im = ax.imshow(matrix, vmin=0, vmax=1, cmap=cmap, aspect="auto")
+        ax.set_xticks(range(len(failure_keys)), [key.replace("_", "\n") for key in failure_keys], fontsize=7)
+        ax.set_yticks(range(len(task_ids)), task_ids, fontsize=8)
+        ax.set_title("Failure Rate by Task")
+        for y, row_vals in enumerate(matrix):
+            for x, value in enumerate(row_vals):
+                if value:
+                    ax.text(x, y, f"{value:.0%}", ha="center", va="center", fontsize=7, color="black")
+        fig.colorbar(im, ax=ax, label="failure rate")
+        fig.tight_layout()
+        fig.savefig(plot_dir / "failure_rate_by_task.png", dpi=220)
+        plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(8.0, 4.8))
     ax.scatter(
         [row["context"]["context_recall"] for row in rows],
         [float(row["judge"].get("faithfulness", 1)) / 5.0 for row in rows],
-        s=70,
+        s=42,
         color="#3969ac",
-        alpha=0.82,
+        alpha=0.42,
     )
-    for row in rows:
-        ax.annotate(row["id"].split("_")[0], (row["context"]["context_recall"], float(row["judge"].get("faithfulness", 1)) / 5.0), fontsize=7)
     ax.set_xlabel("context recall")
     ax.set_ylabel("judge faithfulness (0-1)")
     ax.set_title("Context Recall vs Answer Faithfulness")
@@ -935,23 +1114,68 @@ def make_plots(output_dir: Path, rows: list[dict[str, Any]], summary: dict[str, 
     fig.savefig(plot_dir / "context_recall_vs_faithfulness.png", dpi=220)
     plt.close(fig)
 
-    fig, ax = plt.subplots(figsize=(9.0, 4.8))
-    x = range(len(rows))
-    ax.bar(x, [row["answer_latency_ms"] / 1000 for row in rows], label="answer", color="#3969ac")
-    ax.bar(
-        x,
-        [row["judge_latency_ms"] / 1000 for row in rows],
-        bottom=[row["answer_latency_ms"] / 1000 for row in rows],
-        label="judge",
-        color="#cc503e",
-    )
-    ax.set_xticks(list(x), [row["id"].replace("_", "\n") for row in rows], rotation=35, fontsize=7)
+    fig, ax = plt.subplots(figsize=(max(9.5, len(task_ids) * 0.78), 5.0))
+    positions = []
+    data = []
+    labels = []
+    for idx, task_id in enumerate(task_ids, start=1):
+        positions.extend([idx * 3 - 1, idx * 3])
+        data.extend(
+            [
+                [row["answer_latency_ms"] / 1000 for row in grouped_rows[task_id]],
+                [row["judge_latency_ms"] / 1000 for row in grouped_rows[task_id]],
+            ]
+        )
+        labels.extend(["answer", "judge"])
+    bp = ax.boxplot(data, positions=positions, widths=0.7, patch_artist=True, showfliers=False)
+    for patch, label in zip(bp["boxes"], labels):
+        patch.set_facecolor("#3969ac" if label == "answer" else "#cc503e")
+        patch.set_alpha(0.75)
+    ax.set_xticks([idx * 3 - 0.5 for idx in range(1, len(task_ids) + 1)], task_labels, rotation=35, fontsize=7)
     ax.set_ylabel("seconds")
-    ax.set_title("Codex Generation + Judge Latency")
-    ax.legend()
+    ax.set_title("Codex Answer and Judge Latency by Task")
     ax.grid(axis="y", alpha=0.22)
     fig.tight_layout()
     fig.savefig(plot_dir / "answer_judge_latency.png", dpi=220)
+    plt.close(fig)
+
+    score_keys = ["retrieval_score", "context_score", "answer_deterministic_score", "judge_score"]
+    fig, ax = plt.subplots(figsize=(max(9.5, len(task_ids) * 0.8), 5.4))
+    x = range(len(task_ids))
+    width = 0.18
+    colors = ["#3969ac", "#4b8f8c", "#f1d36b", "#cc503e"]
+    for offset, (score_key, color) in enumerate(zip(score_keys, colors)):
+        ax.bar(
+            [val + (offset - 1.5) * width for val in x],
+            [summary["by_task"][task_id]["score_stats"][score_key]["mean"] for task_id in task_ids],
+            width=width,
+            label=score_key.replace("_score", ""),
+            color=color,
+        )
+    ax.set_xticks(list(x), task_labels, rotation=35, fontsize=7)
+    ax.set_ylabel("mean score (0-1)")
+    ax.set_ylim(0, 1.0)
+    ax.set_title("Pipeline Layer Scores by Task")
+    ax.legend(fontsize=8, ncol=2)
+    ax.grid(axis="y", alpha=0.22)
+    fig.tight_layout()
+    fig.savefig(plot_dir / "pipeline_layer_scores_by_task.png", dpi=220)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(8.0, 4.8))
+    ax.hist(
+        [row["scores"]["overall_score"] for row in rows],
+        bins=12,
+        color="#3969ac",
+        alpha=0.82,
+        edgecolor="white",
+    )
+    ax.set_xlabel("overall score")
+    ax.set_ylabel("run count")
+    ax.set_title("Overall Score Distribution Across Runs")
+    ax.grid(axis="y", alpha=0.22)
+    fig.tight_layout()
+    fig.savefig(plot_dir / "overall_score_histogram.png", dpi=220)
     plt.close(fig)
 
 
@@ -977,8 +1201,8 @@ def write_reports(output_dir: Path, rows: list[dict[str, Any]], summary: dict[st
         [
             "",
             "## Executive Summary",
-            f"- Hard tasks run: {summary['tasks']}",
-            f"- Overall mean score: {summary['overall_mean']:.3f}",
+            f"- Hard benchmark runs: {summary['runs']} total across {summary['unique_tasks']} unique tasks.",
+            f"- Overall mean score: {summary['overall_mean']:.3f} +/- {summary['overall']['ci95']:.3f} 95% CI.",
             f"- Retrieval score: {summary['score_means']['retrieval_score']:.3f}",
             f"- Context score: {summary['score_means']['context_score']:.3f}",
             f"- Deterministic answer score: {summary['score_means']['answer_deterministic_score']:.3f}",
@@ -996,31 +1220,56 @@ def write_reports(output_dir: Path, rows: list[dict[str, Any]], summary: dict[st
         lines.append(f"- `{key}`: {value:.2f}/5")
     lines.extend(["", "## Scores By Family"])
     for family, stats in summary["by_family"].items():
-        lines.append(f"- `{family}` ({stats['tasks']} tasks): overall {stats['overall_score']:.3f}, retrieval {stats['retrieval_score']:.3f}, context {stats['context_score']:.3f}, answer {stats['answer_deterministic_score']:.3f}, judge {stats['judge_score']:.3f}")
+        lines.append(f"- `{family}` ({stats['runs']} runs, {stats['unique_tasks']} tasks): overall {stats['overall_score']:.3f}, retrieval {stats['retrieval_score']:.3f}, context {stats['context_score']:.3f}, answer {stats['answer_deterministic_score']:.3f}, judge {stats['judge_score']:.3f}")
     lines.extend(["", "## Failure Taxonomy"])
     for key, value in sorted(summary["failure_counts"].items()):
-        lines.append(f"- `{key}`: {value}/{summary['tasks']} tasks")
-    lines.extend(["", "## Per-Task Findings"])
+        lines.append(f"- `{key}`: {value}/{summary['runs']} runs ({value / summary['runs']:.1%})")
+    lines.extend(["", "## Per-Task Aggregate Findings"])
+    grouped_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
-        judge = row["judge"]
-        lines.append(f"### {row['id']}")
-        lines.append(f"- Overall: {row['scores']['overall_score']:.3f}; retrieval {row['scores']['retrieval_score']:.3f}; context {row['scores']['context_score']:.3f}; answer {row['scores']['answer_deterministic_score']:.3f}; judge {row['scores']['judge_score']:.3f}")
-        lines.append(f"- Retrieval missed groups: {row['retrieval']['missed_evidence_groups']}; hard negatives: {row['retrieval']['forbidden_retrieval_hits']}")
-        lines.append(f"- Context recall/precision: {row['context']['context_recall']:.3f}/{row['context']['context_precision']:.3f}")
-        lines.append(f"- Answer concept coverage: {row['answer_metrics']['required_concept_coverage']:.3f}; behavior ok: {row['answer_metrics']['behavior_ok']}; citation precision proxy: {row['answer_metrics']['citation_precision_proxy']:.3f}")
-        lines.append(f"- Judge: faithfulness {judge.get('faithfulness')}/5, citation {judge.get('citation_quality')}/5, uncertainty {judge.get('uncertainty_calibration')}/5. {judge.get('summary', '')}")
-        if judge.get("critical_errors"):
-            lines.append(f"- Critical errors: {judge['critical_errors']}")
-        lines.append(f"- Answer: `{row['answer_path']}`")
+        grouped_rows[row["id"]].append(row)
+    for task_id, stats in summary["by_task"].items():
+        worst = min(grouped_rows[task_id], key=lambda row: row["scores"]["overall_score"])
+        best = max(grouped_rows[task_id], key=lambda row: row["scores"]["overall_score"])
+        overall = stats["score_stats"]["overall_score"]
+        retrieval = stats["score_stats"]["retrieval_score"]
+        context = stats["score_stats"]["context_score"]
+        answer_score = stats["score_stats"]["answer_deterministic_score"]
+        judge_score = stats["score_stats"]["judge_score"]
+        lines.append(f"### {task_id}")
+        lines.append(
+            f"- Overall: {overall['mean']:.3f} +/- {overall['ci95']:.3f} 95% CI "
+            f"(min {overall['min']:.3f}, max {overall['max']:.3f}, n={stats['runs']})."
+        )
+        lines.append(
+            f"- Layers: retrieval {retrieval['mean']:.3f}, context {context['mean']:.3f}, "
+            f"answer {answer_score['mean']:.3f}, judge {judge_score['mean']:.3f}."
+        )
+        if stats["failure_rates"]:
+            failures = ", ".join(f"{key} {value:.0%}" for key, value in sorted(stats["failure_rates"].items()))
+            lines.append(f"- Failure rates: {failures}.")
+        else:
+            lines.append("- Failure rates: none under current flags.")
+        lines.append(
+            f"- Judge means: faithfulness {stats['judge_metric_stats']['faithfulness']['mean']:.2f}/5, "
+            f"citation {stats['judge_metric_stats']['citation_quality']['mean']:.2f}/5, "
+            f"uncertainty {stats['judge_metric_stats']['uncertainty_calibration']['mean']:.2f}/5."
+        )
+        lines.append(f"- Worst run: `{worst.get('run_id', worst['id'])}` score {worst['scores']['overall_score']:.3f}; answer `{worst['answer_path']}`.")
+        lines.append(f"- Best run: `{best.get('run_id', best['id'])}` score {best['scores']['overall_score']:.3f}; answer `{best['answer_path']}`.")
         lines.append("")
     lines.extend(
         [
             "## Presentation Plots",
             "- `plots/overall_quality_by_task.png`",
+            "- `plots/overall_quality_distribution_by_task.png`",
             "- `plots/pipeline_layer_scores.png`",
+            "- `plots/pipeline_layer_scores_by_task.png`",
             "- `plots/judge_metric_heatmap.png`",
             "- `plots/failure_taxonomy.png`",
+            "- `plots/failure_rate_by_task.png`",
             "- `plots/context_recall_vs_faithfulness.png`",
+            "- `plots/overall_score_histogram.png`",
             "- `plots/answer_judge_latency.png`",
         ]
     )
@@ -1031,7 +1280,7 @@ def write_reports(output_dir: Path, rows: list[dict[str, Any]], summary: dict[st
         "",
         "## Slide 1: Evaluation Design",
         "- Literature-inspired axes: retrieval ranking, context relevance/recall, faithfulness, citation support, abstention.",
-        "- 10 hard local scientific tasks spanning project context, hard negatives, multi-hop synthesis, freshness, and abstention.",
+        f"- {summary['runs']} answer-level runs across {summary['unique_tasks']} hard local scientific tasks spanning project context, hard negatives, multi-hop synthesis, freshness, and abstention.",
         "",
         "## Slide 2: Overall Pipeline Scores",
         "- Use `plots/pipeline_layer_scores.png`.",
@@ -1039,21 +1288,26 @@ def write_reports(output_dir: Path, rows: list[dict[str, Any]], summary: dict[st
         "",
         "## Slide 3: Task-Level Scorecard",
         "- Use `plots/overall_quality_by_task.png`.",
+        "- Use error bars to show run-to-run variability.",
+        "",
+        "## Slide 4: Score Distributions",
+        "- Use `plots/overall_quality_distribution_by_task.png` and `plots/overall_score_histogram.png`.",
         "- Highlight low-scoring tasks as concrete weak spots.",
         "",
-        "## Slide 4: Judge Heatmap",
+        "## Slide 5: Judge Heatmap",
         "- Use `plots/judge_metric_heatmap.png`.",
         "- Discuss faithfulness/citation/uncertainty rather than only hit rate.",
         "",
-        "## Slide 5: Failure Taxonomy",
+        "## Slide 6: Failure Taxonomy",
         "- Use `plots/failure_taxonomy.png`.",
+        "- Use `plots/failure_rate_by_task.png` for task-specific reliability.",
         "- Prioritize fixes by count and scientific risk.",
         "",
-        "## Slide 6: Context Recall vs Faithfulness",
+        "## Slide 7: Context Recall vs Faithfulness",
         "- Use `plots/context_recall_vs_faithfulness.png`.",
         "- Diagnose whether poor answers come from retrieval/context or answer synthesis.",
         "",
-        "## Slide 7: Recommendations",
+        "## Slide 8: Recommendations",
         "- Unify graph search and context-pack search.",
         "- Add negative filtering and project-aware routing.",
         "- Add citation-support grading and abstention tests to CI.",
@@ -1073,6 +1327,8 @@ def flat_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for row in rows:
         flat = {
             "id": row["id"],
+            "run_id": row.get("run_id", row["id"]),
+            "run_index": row.get("run_index", 0),
             "family": row["family"],
             "task_type": row["task_type"],
             "expected_behavior": row["expected_behavior"],
@@ -1109,6 +1365,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--char-budget", type=int, default=18000)
     parser.add_argument("--timeout-s", type=int, default=360)
     parser.add_argument("--max-tasks", type=int, default=len(TASKS))
+    parser.add_argument("--repeats", type=int, default=1, help="Number of answer/judge repeats per selected task.")
     return parser.parse_args()
 
 
@@ -1132,6 +1389,7 @@ def main() -> int:
         "top_k": args.top_k,
         "char_budget": args.char_budget,
         "max_tasks": args.max_tasks,
+        "repeats": args.repeats,
         "literature_notes": LITERATURE_NOTES,
         "git_head": subprocess.run(["git", "rev-parse", "HEAD"], cwd=PACKAGE_ROOT, capture_output=True, text=True).stdout.strip(),
         "git_status_short": subprocess.run(["git", "status", "--short"], cwd=PACKAGE_ROOT, capture_output=True, text=True).stdout,
@@ -1140,9 +1398,27 @@ def main() -> int:
 
     rows: list[dict[str, Any]] = []
     selected_tasks = list(TASKS[: args.max_tasks])
-    for index, task in enumerate(selected_tasks, start=1):
-        print(f"[{index}/{len(selected_tasks)}] {task.id}", flush=True)
-        rows.append(run_task(task, output_dir, args.top_k, args.char_budget, args.timeout_s, schema_path))
+    total_runs = len(selected_tasks) * args.repeats
+    run_number = 0
+    for task_index, task in enumerate(selected_tasks, start=1):
+        for repeat_index in range(args.repeats):
+            run_number += 1
+            print(
+                f"[{run_number}/{total_runs}] {task.id} repeat {repeat_index + 1}/{args.repeats}",
+                flush=True,
+            )
+            rows.append(
+                run_task_repeat(
+                    task,
+                    output_dir,
+                    args.top_k,
+                    args.char_budget,
+                    args.timeout_s,
+                    schema_path,
+                    run_index=repeat_index,
+                    repeats=args.repeats,
+                )
+            )
         write_jsonl(output_dir / "raw" / "partial_records.jsonl", rows)
 
     summary = summarize(rows)
@@ -1153,7 +1429,8 @@ def main() -> int:
     write_reports(output_dir, rows, summary)
 
     print(f"output: {output_dir}")
-    print(f"overall mean: {summary['overall_mean']:.3f}")
+    print(f"runs: {summary['runs']} across {summary['unique_tasks']} tasks")
+    print(f"overall mean: {summary['overall_mean']:.3f} +/- {summary['overall']['ci95']:.3f} 95% CI")
     print(f"report: {output_dir / 'reports' / 'hard_quality_report.md'}")
     return 0
 

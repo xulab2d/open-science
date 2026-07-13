@@ -1,0 +1,212 @@
+{
+  "answer_latency_ms": 29248.620790953282,
+  "answer_metrics": {
+    "atomic_claim_count": 13,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 6,
+    "citation_hits": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:promoted_2402_fqsh_nu3_edge_conductance",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 16,
+        "sentence": "Transport**: strongest direct topological evidence when it shows fractional anomalous/Hall or edge conductance behavior; context cites transport evidence for fractional QSH at `nu=3` with edge conductance and zero anomalous Hall response (`claim:promoted_2402_fqsh_nu3_edge_conductance`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 7,
+        "sentence": "It rules out a simple trivial insulator or featureless metal, but by itself does not rule out contact/edge/percolation or spatial-inhomogeneity interpretations.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "Thermodynamics / compressibility**: bulk evidence that the state is incompressible at the relevant filling.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 20,
+        "sentence": "The context explicitly says local compressibility plus magneto-optics gives **bulk evidence** for integer and fractional Chern states (`claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m`; `lab_assistant/knowledge/papers/transport_and_thermodynamics.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 5,
+        "sentence": "This rules out a purely transport-only artifact and helps distinguish a genuine bulk gap from edge/contact-dominated signals.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 5,
+        "sentence": "Local probe**: spatially resolved confirmation of bulk and edge structure.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 16,
+        "sentence": "The context says local probes can resolve both bulk and edge states rather than relying only on global transport (`paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator`; `claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 7,
+        "sentence": "This rules out interpretations based on uncontrolled spatial inhomogeneity, edge reconstruction alone, or sample-averaged ambiguity.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 4,
+        "sentence": "Optical / RMCD / PL**: filling-sensitive optical evidence.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 15,
+        "sentence": "Trion PL and RMCD are described as probes of integer and fractional Chern states, with signatures near `nu = -1, -2/3, -3/5` (`claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 7,
+        "sentence": "These rule out a phase-blind filling assignment and support magnetic/valley-correlated order, but are not by themselves proof of quantized topology.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 17,
+        "sentence": "Transport establishes the topological response; compressibility/thermodynamics establish that the relevant filling is a bulk incompressible phase; local probes test whether the bulk/edge picture is spatially real; optical probes help assign filling, magnetism, and valley/correlation signatures.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 4,
+        "sentence": "So the ranking above is a synthesis from the provided claims, not a claim that any single cited experiment fully satisfies every criterion for an FCI.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "matched_must_cite_like": [
+      "paper:",
+      "claim:"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.6666666666666666,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/fci_evidence_hierarchy/run_000/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17893,
+    "context_pack_id": "82393ba3f7e4f93924177bbf2759d5f025cccbc51a486cb05f1c6a42e3dd4de9",
+    "context_precision": 0.887107282695518,
+    "context_recall": 1.0,
+    "excluded_count": 11,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_node": 6,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 23.57049996498972,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "missed_evidence_groups": [],
+    "token_estimate": 4474
+  },
+  "context_path": "raw/tasks/fci_evidence_hierarchy/run_000/context.md",
+  "evaluator_note": "Tests multi-hop synthesis and evidence hierarchy.",
+  "expected_behavior": "answer",
+  "family": "multi_hop",
+  "id": "fci_evidence_hierarchy",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 5,
+    "citation_quality": 4,
+    "context_relevance": 4,
+    "critical_errors": [],
+    "faithfulness": 4,
+    "missing_key_points": [
+      "The answer partially conflates thermodynamics and compressibility despite the question listing them separately; it ranks 'thermodynamics / compressibility' together rather than clearly explaining both categories.",
+      "It does not explicitly discuss thermodynamics beyond compressibility, e.g. entropy, magnetization, heat capacity, or gap thermodynamics, and what those would rule out.",
+      "The requested five categories include both compressibility and thermodynamics, but the answer provides only four ranked entries."
+    ],
+    "scientific_correctness": 4,
+    "summary": "Strong answer overall: it directly ranks the evidence classes, explains the main failure modes each rules out, and includes appropriate caveats that optical/RMCD/PL are correlative rather than standalone proof. It is mostly faithful to the supplied context and uses citations tied to specific claims. Main weakness is combining thermodynamics with compressibility, leaving thermodynamics underdeveloped as a separate evidence type.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 2
+  },
+  "judge_latency_ms": 9670.840042002965,
+  "judge_path": "raw/tasks/fci_evidence_hierarchy/run_000/judge.json",
+  "judge_returncode": 0,
+  "question": "Rank evidence types for a fractional Chern insulator and explain what each rules out: transport, compressibility, local probe, optical/RMCD/PL, and thermodynamics.",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 26.08183299889788,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+      "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+      "Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2",
+      "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators",
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "Thermodynamic evidence of fractional Chern insulator in moire MoTe2",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "at least some twisted-MoTe2 devices now reach a dissipationless fractional-Chern-insulator regime rather than only near-quantized transport",
+      "Optical control of integer and fractional Chern insulators"
+    ]
+  },
+  "run_id": "fci_evidence_hierarchy__run_000",
+  "run_index": 0,
+  "scores": {
+    "answer_deterministic_score": 0.9444444444444444,
+    "context_score": 0.943553641347759,
+    "judge_score": 0.8571428571428572,
+    "overall_score": 0.9362852357337652,
+    "retrieval_score": 1.0
+  },
+  "task_type": "synthesis"
+}

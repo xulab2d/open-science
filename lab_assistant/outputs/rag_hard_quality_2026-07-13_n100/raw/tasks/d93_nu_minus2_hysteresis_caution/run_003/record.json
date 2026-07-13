@@ -1,0 +1,145 @@
+{
+  "answer_latency_ms": 9879.370791022666,
+  "answer_metrics": {
+    "atomic_claim_count": 4,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 4,
+    "citation_hits": [
+      "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "edge:promoted_d93_vminus2_feature_needs_followup_no_hysteresis",
+      "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+      "question:promoted_d93_vminus2_rmcd_no_hysteresis"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "edge:promoted_d93_vminus2_feature_needs_followup_no_hysteresis",
+      "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+      "question:promoted_d93_vminus2_rmcd_no_hysteresis"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 23,
+        "sentence": "The linked follow-up question explicitly frames the feature as unresolved: `question:promoted_d93_vminus2_rmcd_no_hysteresis` says the deck suggests checking wavelength sensitivity, spot selection outside contacts, and closer phase-diagram mapping before interpreting it as robust hysteresis.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 14,
+        "sentence": "The graph edge `edge:promoted_d93_vminus2_feature_needs_followup_no_hysteresis` states that the D93 feature is scientifically interesting but unresolved because hysteresis was not robust.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 10,
+        "sentence": "A cautious statement would be: D93 shows a near-`nu=-2` RMCD/saturation-like feature with D-field dependence, but local evidence does not establish robust hysteresis.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 4,
+        "sentence": "The supplied evidence supports follow-up, not a settled robust-state claim.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      1,
+      2
+    ],
+    "matched_must_cite_like": [
+      "question:promoted_d93",
+      "claim:promoted_deck_d93",
+      "D93"
+    ],
+    "missed_concept_groups": [
+      0
+    ],
+    "must_cite_like_coverage": 1.0,
+    "required_concept_coverage": 0.6666666666666666
+  },
+  "answer_path": "raw/tasks/d93_nu_minus2_hysteresis_caution/run_003/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 15780,
+    "context_pack_id": "cfeedce4209f91868ff269335d6a031f7d2dce0e4db38edc476091c91a1eccb1",
+    "context_precision": 0.18571428571428572,
+    "context_recall": 1.0,
+    "excluded_count": 0,
+    "item_count": 15,
+    "kind_counts": {
+      "core": 3,
+      "graph_edge": 2,
+      "graph_node": 7,
+      "knowledge_index": 1,
+      "skill": 2
+    },
+    "latency_ms": 23.077999998349696,
+    "matched_evidence_groups": [
+      0,
+      1
+    ],
+    "missed_evidence_groups": [],
+    "token_estimate": 3945
+  },
+  "context_path": "raw/tasks/d93_nu_minus2_hysteresis_caution/run_003/context.md",
+  "evaluator_note": "High score requires caution, not just retrieval of D93.",
+  "expected_behavior": "caution",
+  "family": "uncertainty",
+  "id": "d93_nu_minus2_hysteresis_caution",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 5,
+    "citation_quality": 5,
+    "context_relevance": 5,
+    "critical_errors": [],
+    "faithfulness": 5,
+    "missing_key_points": [],
+    "scientific_correctness": 5,
+    "summary": "The answer correctly takes a cautious stance: D93 has a near-nu=-2 RMCD/saturation-like feature, but the supplied context says hysteresis is not clear/robust and follow-up is needed. Claims are well supported and tied to the relevant graph node, edge, and deck provenance.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 0
+  },
+  "judge_latency_ms": 8105.4085830110125,
+  "judge_path": "raw/tasks/d93_nu_minus2_hysteresis_caution/run_003/judge.json",
+  "judge_returncode": 0,
+  "question": "Do we have enough local evidence to claim D93 has a robust hysteretic nu=-2 magnetic state?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 40.97025003284216,
+    "matched_evidence_groups": [
+      0,
+      1
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 0.9197207891481876,
+    "precision_at_k": 0.2,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "Why does D93 show near-nu=-2 magnetic/saturation contrast without robust hysteresis?",
+      "coupling monolayer WTe2 to CrI3 gaps and reprograms the helical edge through magnetic proximity, producing a very large nonreciprocal current set by the CrI3 magnetic state",
+      "D93 Run2 deck reports a near-nu=-2 RMCD magnetic/saturation feature that strengthens with displacement field but lacks clear hysteresis.",
+      "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "We see polarization swapping in the dual gate that seems to have some D-field dependence. Need to better optimize this position to remove bilayer signal and do a D-field hysteresis check.",
+      "local optical spectroscopy and nanoSQUID magnetometry map a robust magnetic phase diagram across multiple twist angles",
+      "There seems to be a small D-field hysteresis around D = 0. Not large enough to claim ferroelectricity. Could be a gating issue.",
+      "What is the normal state adjacent to the nu=-2/3 superconducting neighborhood in twisted MoTe2?"
+    ]
+  },
+  "run_id": "d93_nu_minus2_hysteresis_caution__run_003",
+  "run_index": 3,
+  "scores": {
+    "answer_deterministic_score": 0.9444444444444444,
+    "context_score": 0.5928571428571429,
+    "judge_score": 0.9714285714285714,
+    "overall_score": 0.833168579139949,
+    "retrieval_score": 0.8239441578296375
+  },
+  "task_type": "claim_lookup"
+}

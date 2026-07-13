@@ -1,0 +1,165 @@
+{
+  "answer_latency_ms": 15994.2371660145,
+  "answer_metrics": {
+    "atomic_claim_count": 6,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 6,
+    "citation_hits": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+    ],
+    "citation_precision_proxy": 0.5,
+    "citations": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:promoted_2504_chiral_superconductivity_signatures",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md",
+      "paper:arxiv_2504_06972v1",
+      "paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 33,
+        "sentence": "The reliable nearby lab context is about fractional Chern states and probes, not superconductivity: optical PL/RMCD signatures near `nu = -1, -2/3, -3/5` are medium-confidence (`claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc`, `lab_assistant/knowledge/papers/xu_group_recent_moire_states.md`), and local probes can resolve bulk/edge FCI structure (`claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot`, same paper shelf).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 2,
+        "sentence": "It should be treated as a discovery lead, not lab knowledge.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 19,
+        "sentence": "Before promotion, source-reading must include the arXiv paper itself, not just metadata; the associated competing-ground-states record; and comparison against established Xu-lab FCI evidence/probe context in `lab_assistant/knowledge/papers/xu_group_recent_moire_states.md`.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 10,
+        "sentence": "Required checks: what superconducting observable is actually reported, whether it is adjacent to or coexisting with fractional Chern states, whether the evidence is transport/local/optical/theory, and whether alternative competing orders are addressed.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "No abstract, data, figures, numeric values, or source claims from `arxiv_2504_06972v1` are supplied.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "Promotion should wait until the source is read and rewritten into a provenance-backed claim with confidence, scope, and caveats.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2
+    ],
+    "matched_must_cite_like": [
+      "paper:arxiv",
+      "claim:"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.6666666666666666,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/low_conf_superconductivity_arxiv/run_007/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17788,
+    "context_pack_id": "a9c330f2f0d8ef31ee6c0536bada00bad145af24aef2c1a02ae388e8e44ff2ab",
+    "context_precision": 0.4326665618332285,
+    "context_recall": 0.6666666666666666,
+    "excluded_count": 8,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_edge": 1,
+      "graph_node": 5,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 28.378125047311187,
+    "matched_evidence_groups": [
+      1,
+      2
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "token_estimate": 4447
+  },
+  "context_path": "raw/tasks/low_conf_superconductivity_arxiv/run_007/context.md",
+  "evaluator_note": "Tests freshness, low-confidence handling, and promotion discipline.",
+  "expected_behavior": "caution",
+  "family": "freshness",
+  "id": "low_conf_superconductivity_arxiv",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 4,
+    "citation_quality": 2,
+    "context_relevance": 2,
+    "critical_errors": [
+      "Claims that the supplied context identifies `claim:promoted_2504_chiral_superconductivity_signatures`, `paper:arxiv_2504_06972v1`, and an `Excluded: budget` status, but those items are not present in the provided context.",
+      "Selects a specific promotion target despite the supplied context not containing the underlying superconductivity arXiv lead or its evidence."
+    ],
+    "faithfulness": 2,
+    "missing_key_points": [
+      "Should have more clearly abstained: the retrieved context does not provide enough evidence to name any superconductivity-near-FCI arXiv lead as worth promotion.",
+      "Should state that promotion requires reading the actual arXiv/source paper before creating lab knowledge, and that current status remains low-confidence and uncertain."
+    ],
+    "scientific_correctness": 3,
+    "summary": "The answer is appropriately cautious and gives sensible source-reading checks, but it fabricates or relies on unavailable context for the named lead. The provided context mainly supports general promotion discipline and nearby FCI probe knowledge, not a specific superconductivity arXiv candidate.",
+    "uncertainty_calibration": 4,
+    "unsupported_claims_count": 3
+  },
+  "judge_latency_ms": 18642.988083011005,
+  "judge_path": "raw/tasks/low_conf_superconductivity_arxiv/run_007/judge.json",
+  "judge_returncode": 0,
+  "question": "Which low-confidence arXiv leads on superconductivity near fractional Chern states are worth promotion, and what source-reading is required before treating them as lab knowledge?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 45.08145898580551,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states",
+      "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+      "Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2",
+      "Optical control of integer and fractional Chern insulators",
+      "Twisted MoTe2 superconductivity near an anomalous Hall metal and FCI regime is argued to be chiral.",
+      "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators"
+    ]
+  },
+  "run_id": "low_conf_superconductivity_arxiv__run_007",
+  "run_index": 7,
+  "scores": {
+    "answer_deterministic_score": 0.8611111111111112,
+    "context_score": 0.5496666142499476,
+    "judge_score": 0.6,
+    "overall_score": 0.7526944313402647,
+    "retrieval_score": 1.0
+  },
+  "task_type": "synthesis"
+}

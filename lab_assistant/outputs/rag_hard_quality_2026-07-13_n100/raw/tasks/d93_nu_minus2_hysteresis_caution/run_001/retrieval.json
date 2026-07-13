@@ -1,0 +1,230 @@
+{
+  "first_relevant_rank": 1,
+  "forbidden_retrieval_hits": [],
+  "hits": [
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "question:promoted_d93_vminus2_rmcd_no_hysteresis",
+      "label": "Why does D93 show near-nu=-2 magnetic/saturation contrast without robust hysteresis?",
+      "provenance": [
+        {
+          "method": "Codex curation inference from extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22"
+        }
+      ],
+      "score": 31,
+      "summary": "The deck suggests checking wavelength sensitivity, spot selection outside contacts, and closer phase-diagram mapping before interpreting the feature as a robust hysteretic magnetic state.",
+      "type": "OpenQuestion"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:magnetic_proximity_and_nonreciprocal_current_switching_in_a_monolayer_wte2_helical_edge_coupling",
+      "label": "coupling monolayer WTe2 to CrI3 gaps and reprograms the helical edge through magnetic proximity, producing a very large nonreciprocal current set by the CrI3 magnetic state",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_wte2_and_topological_edges.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41563-020-0620-0"
+        }
+      ],
+      "score": 23,
+      "summary": "coupling monolayer WTe2 to CrI3 gaps and reprograms the helical edge through magnetic proximity, producing a very large nonreciprocal current set by the CrI3 magnetic state Use for: heterostructure proximity logic, magnetically controlled edge transport, and any discussion of edge-state manipulation by neighboring order parameters",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 4,
+      "id": "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+      "label": "D93 Run2 deck reports a near-nu=-2 RMCD magnetic/saturation feature that strengthens with displacement field but lacks clear hysteresis.",
+      "provenance": [
+        {
+          "method": "Codex curation pass over extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_Yifan_D93_Run2_attodry522/CWB_Yifan_D93_Run2_attodry522.pptx"
+        }
+      ],
+      "score": 22,
+      "summary": "Slides 18-22 of the D93 Run2 deck report a possible magnetic feature near nu=-2 and n=-9.8, increasing distinctness with D field and saturation-like diagonal structure, while still noting no clear hysteresis at nu=-2 after signal optimization.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "claim:deck_4a63cc42aaa1cbc5_slide_10_weijie_originally_attributed_the_features_to_bad_contact",
+      "label": "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "provenance": [
+        {
+          "method": "extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/4a63cc42aaa1cbc5.json"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D16_ScanningPL/CWB_D16_ScanningPL.pptx"
+        },
+        {
+          "method": "salient line extraction",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/4a63cc42aaa1cbc5.json#slide-10"
+        }
+      ],
+      "score": 21,
+      "summary": "Deck-derived claim from CWB D16 ScanningPL, slide 10: Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "type": "Claim"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "claim:deck_9bd7a398708e7b66_slide_10_weijie_originally_attributed_the_features_to_bad_contact",
+      "label": "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "provenance": [
+        {
+          "method": "extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/9bd7a398708e7b66.json"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D19_attodry911/CWB_D16_ScanningPL.pptx"
+        },
+        {
+          "method": "salient line extraction",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/9bd7a398708e7b66.json#slide-10"
+        }
+      ],
+      "score": 21,
+      "summary": "Deck-derived claim from CWB D16 ScanningPL, slide 10: Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "type": "Claim"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "claim:deck_da0726772225a12e_slide_10_weijie_originally_attributed_the_features_to_bad_contact",
+      "label": "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "provenance": [
+        {
+          "method": "extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/da0726772225a12e.json"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D16_attodry911/CWB_D16_ScanningPL.pptx"
+        },
+        {
+          "method": "salient line extraction",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/da0726772225a12e.json#slide-10"
+        }
+      ],
+      "score": 21,
+      "summary": "Deck-derived claim from CWB D16 ScanningPL, slide 10: Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+      "type": "Claim"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "claim:deck_8d3f501aa323b164_slide_35_we_see_polarization_swapping_in_the_dual_gate_that_seems",
+      "label": "We see polarization swapping in the dual gate that seems to have some D-field dependence. Need to better optimize this position to remove bilayer signal and do a D-field hysteresis check.",
+      "provenance": [
+        {
+          "method": "extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D6_Attodry911/CWB_D6_Attodry911.pptx"
+        },
+        {
+          "method": "salient line extraction",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slide-35"
+        }
+      ],
+      "score": 21,
+      "summary": "Deck-derived claim from CWB D6 Attodry911, slide 35: We see polarization swapping in the dual gate that seems to have some D-field dependence. Need to better optimize this position to remove bilayer signal and do a D-field hysteresis check.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:universal_magnetic_phases_in_twisted_bilayer_mote2_local_optical_spectroscopy_and_nanosquid_magn",
+      "label": "local optical spectroscopy and nanoSQUID magnetometry map a robust magnetic phase diagram across multiple twist angles",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://doi.org/10.1021/acs.nanolett.5c04751"
+        }
+      ],
+      "score": 21,
+      "summary": "local optical spectroscopy and nanoSQUID magnetometry map a robust magnetic phase diagram across multiple twist angles the paper reports spontaneous ferromagnetism at `nu = -1` and `nu = -3` from about `2.1` to `3.7` degrees, with an extra `nu = -5` ferromagnetic state at `2.1` degrees Use for: deciding which magnetic features look universal versus device-specific",
+      "type": "Claim"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "claim:deck_8d3f501aa323b164_slide_36_there_seems_to_be_a_small_d_field_hysteresis_around_d_0",
+      "label": "There seems to be a small D-field hysteresis around D = 0. Not large enough to claim ferroelectricity. Could be a gating issue.",
+      "provenance": [
+        {
+          "method": "extracted deck text",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json"
+        },
+        {
+          "method": "original deck path",
+          "source": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D6_Attodry911/CWB_D6_Attodry911.pptx"
+        },
+        {
+          "method": "salient line extraction",
+          "source": "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slide-36"
+        }
+      ],
+      "score": 20,
+      "summary": "Deck-derived claim from CWB D6 Attodry911, slide 36: There seems to be a small D-field hysteresis around D = 0. Not large enough to claim ferroelectricity. Could be a gating issue.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "question:promoted_2506_normal_state_adjacent_minus_two_thirds_sc",
+      "label": "What is the normal state adjacent to the nu=-2/3 superconducting neighborhood in twisted MoTe2?",
+      "provenance": [
+        {
+          "method": "Codex curation inference from arXiv abstract",
+          "source": "https://arxiv.org/abs/2506.00110"
+        }
+      ],
+      "score": 18,
+      "summary": "The theoretical arXiv paper makes explicit that the proximate normal state is still unresolved: it may be a conventional Fermi liquid, a low-carrier-density correlated metal, or something more directly inherited from the doped FCI.",
+      "type": "OpenQuestion"
+    }
+  ],
+  "latency_ms": 28.761084016878158,
+  "matched_evidence_groups": [
+    0,
+    1
+  ],
+  "missed_evidence_groups": [],
+  "mrr": 1.0,
+  "ndcg_at_k": 0.9197207891481876,
+  "precision_at_k": 0.2,
+  "recall_at_k": 1.0,
+  "top_hit_labels": [
+    "Why does D93 show near-nu=-2 magnetic/saturation contrast without robust hysteresis?",
+    "coupling monolayer WTe2 to CrI3 gaps and reprograms the helical edge through magnetic proximity, producing a very large nonreciprocal current set by the CrI3 magnetic state",
+    "D93 Run2 deck reports a near-nu=-2 RMCD magnetic/saturation feature that strengthens with displacement field but lacks clear hysteresis.",
+    "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+    "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+    "Weijie originally attributed the features to bad contacts, but that seems unlikely to be the case in this sample since we have 8 Pt contacts",
+    "We see polarization swapping in the dual gate that seems to have some D-field dependence. Need to better optimize this position to remove bilayer signal and do a D-field hysteresis check.",
+    "local optical spectroscopy and nanoSQUID magnetometry map a robust magnetic phase diagram across multiple twist angles",
+    "There seems to be a small D-field hysteresis around D = 0. Not large enough to claim ferroelectricity. Could be a gating issue.",
+    "What is the normal state adjacent to the nu=-2/3 superconducting neighborhood in twisted MoTe2?"
+  ]
+}

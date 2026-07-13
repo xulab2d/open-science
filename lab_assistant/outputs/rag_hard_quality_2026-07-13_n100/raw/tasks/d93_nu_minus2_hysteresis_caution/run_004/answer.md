@@ -1,0 +1,8 @@
+**Observation**  
+Local graph evidence says D93 Run2 shows a near-`nu=-2` RMCD magnetic/saturation feature that strengthens with displacement field, with “saturation-like diagonal structure” [claim:promoted_deck_d93_vminus2_magnetic_feature_dfield]. However, the same claim explicitly notes “no clear hysteresis at `nu=-2` after signal optimization” [claim:promoted_deck_d93_vminus2_magnetic_feature_dfield]. A linked open question says the feature remains unresolved and suggests wavelength sensitivity checks, spot selection outside contacts, and closer phase-diagram mapping before interpreting it as robust hysteretic magnetism [question:promoted_d93_vminus2_rmcd_no_hysteresis; edge:promoted_d93_vminus2_feature_needs_followup_no_hysteresis].
+
+**Inference**  
+No. Based on the supplied local context, we do **not** have enough evidence to claim D93 has a robust hysteretic `nu=-2` magnetic state. The evidence supports a more cautious statement: D93 has a possible near-`nu=-2` RMCD magnetic/saturation-like feature with D-field dependence, but hysteresis is not clearly established.
+
+**Uncertainty**  
+The context is deck-derived and curated at medium confidence, not a full raw-data review [lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22]. The supplied context does not include raw hysteresis loops, repeatability across positions/wavelengths, field-sweep controls, or contact/artifact exclusion, so robustness cannot be claimed locally.

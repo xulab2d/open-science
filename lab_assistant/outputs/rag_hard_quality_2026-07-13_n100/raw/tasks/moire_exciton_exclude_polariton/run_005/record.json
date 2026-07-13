@@ -1,0 +1,194 @@
+{
+  "answer_latency_ms": 15569.518792035524,
+  "answer_metrics": {
+    "atomic_claim_count": 5,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 8,
+    "citation_hits": [
+      "lab_assistant/knowledge/papers/moire_excitons_and_optics.md",
+      "lab_assistant/knowledge/papers/moire_tmote2.md",
+      "lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md",
+      "paper:arxiv_2602_04561v1",
+      "paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu",
+      "paper:separation_of_the_valley_exciton_polariton_in_two_dimensional_semiconductors_wit",
+      "paper:signatures_of_fractional_charges_via_anyon_trions_in_twisted_mote2"
+    ],
+    "citation_precision_proxy": 0.875,
+    "citations": [
+      "lab_assistant/knowledge/papers/moire_excitons_and_optics.md",
+      "lab_assistant/knowledge/papers/moire_tmote2.md",
+      "lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md",
+      "lab_assistant/knowledge/syntheses/optical_readout_of_correlated_states.md",
+      "paper:arxiv_2602_04561v1",
+      "paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu",
+      "paper:separation_of_the_valley_exciton_polariton_in_two_dimensional_semiconductors_wit",
+      "paper:signatures_of_fractional_charges_via_anyon_trions_in_twisted_mote2"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 21,
+        "sentence": "`paper:arxiv_2602_04561v1`     Title: \u201cOptical signatures of -1/3 fractional quantum anomalous Hall state in twisted MoTe2\u201d     Why: optical PL/RMCD detection in twisted MoTe2; graph neighborhood includes observables `pl` and `rmcd` in excluded budget notes.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 30,
+        "sentence": "Useful local entry points:  - `lab_assistant/knowledge/papers/moire_excitons_and_optics.md` - `lab_assistant/knowledge/papers/moire_tmote2.md` - `lab_assistant/knowledge/syntheses/optical_readout_of_correlated_states.md` - `lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md`  Explicit exclusions from the supplied context:  - `paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu`     Exclude: exciton-polariton transport in MoSe2 waveguides, no supplied evidence of moire trapping.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 12,
+        "sentence": "`paper:separation_of_the_valley_exciton_polariton_in_two_dimensional_semiconductors_wit`     Exclude: valley exciton-polariton / photonic crystal paper, no supplied evidence of moire trapping.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 18,
+        "sentence": "The -1/3 FQAH optical paper is also relevant as a moire optical-signature reference, though the supplied summary emphasizes PL/RMCD phase detection rather than moire exciton trapping specifically (`paper:arxiv_2602_04561v1`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 10,
+        "sentence": "Based only on supplied context, I would not include the polariton or waveguide papers unless another local source explicitly links them to moire trapping.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [
+      "Nano-optical imaging of the tailored exciton-polariton transport"
+    ],
+    "matched_concept_groups": [
+      0,
+      1,
+      2
+    ],
+    "matched_must_cite_like": [
+      "paper:",
+      "knowledge/papers/moire_excitons_and_optics.md"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 1.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/moire_exciton_exclude_polariton/run_005/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17942,
+    "context_pack_id": "ec525f73050f10c714b6c15573a9d2610e975d681fbbe30a9c602402549b9a84",
+    "context_precision": 0.24444444444444444,
+    "context_recall": 0.5,
+    "excluded_count": 14,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_edge": 2,
+      "graph_node": 5,
+      "knowledge_index": 2,
+      "paper_note": 1,
+      "skill": 4
+    },
+    "latency_ms": 27.244083990808576,
+    "matched_evidence_groups": [
+      0
+    ],
+    "missed_evidence_groups": [
+      1
+    ],
+    "token_estimate": 4486
+  },
+  "context_path": "raw/tasks/moire_exciton_exclude_polariton/run_005/context.md",
+  "evaluator_note": "Tests negative retrieval and citation discipline.",
+  "expected_behavior": "answer",
+  "family": "hard_negative",
+  "id": "moire_exciton_exclude_polariton",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 4,
+    "citation_quality": 2,
+    "context_relevance": 3,
+    "critical_errors": [
+      "Includes a forbidden answer term: \"Nano-optical imaging of the tailored exciton-polariton transport\".",
+      "Introduces `paper:signatures_of_fractional_charges_via_anyon_trions_in_twisted_mote2` as the strongest hit even though that paper is not present in the supplied context.",
+      "Claims graph-neighborhood support for PL/RMCD and \u201cexcluded budget notes\u201d without supplied evidence."
+    ],
+    "faithfulness": 2,
+    "missing_key_points": [
+      "Should have avoided naming the forbidden polariton paper title verbatim while still excluding the distractor by ID/category.",
+      "Should have limited key references to papers actually present in the supplied context, or clearly abstained due to missing contents of `moire_excitons_and_optics.md`.",
+      "Needed tighter citation discipline tying each recommendation to supplied context snippets."
+    ],
+    "scientific_correctness": 3,
+    "summary": "The answer mostly addresses the lookup task and correctly recognizes that polariton/waveguide papers should be excluded absent moire trapping evidence. However, it violates the forbidden-term constraint and relies on an unsupported anyon-trion reference as the strongest candidate. The caveat at the end helps, but the unsupported citation and over-specific claims substantially weaken faithfulness and citation quality.",
+    "uncertainty_calibration": 3,
+    "unsupported_claims_count": 3
+  },
+  "judge_latency_ms": 14398.664583044592,
+  "judge_path": "raw/tasks/moire_exciton_exclude_polariton/run_005/judge.json",
+  "judge_returncode": 0,
+  "question": "Find the key local references for moire exciton optical signatures, but exclude exciton-polariton or waveguide papers unless they directly address moire trapping.",
+  "retrieval": {
+    "first_relevant_rank": 7,
+    "forbidden_retrieval_hits": [
+      {
+        "id": "paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu",
+        "label": "Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides",
+        "rank": 1,
+        "term": "polariton"
+      },
+      {
+        "id": "paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu",
+        "label": "Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides",
+        "rank": 1,
+        "term": "waveguide"
+      },
+      {
+        "id": "paper:separation_of_the_valley_exciton_polariton_in_two_dimensional_semiconductors_wit",
+        "label": "Separation of the valley exciton-polariton in two-dimensional semiconductors with an anisotropic photonic crystal",
+        "rank": 2,
+        "term": "polariton"
+      },
+      {
+        "id": "paper:metasurface_integrated_monolayer_exciton_polariton",
+        "label": "Metasurface Integrated Monolayer Exciton Polariton",
+        "rank": 3,
+        "term": "polariton"
+      }
+    ],
+    "latency_ms": 32.89345797384158,
+    "matched_evidence_groups": [
+      1
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "mrr": 0.14285714285714285,
+    "ndcg_at_k": 0.20438239758848611,
+    "precision_at_k": 0.1,
+    "recall_at_k": 0.5,
+    "top_hit_labels": [
+      "Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides",
+      "Separation of the valley exciton-polariton in two-dimensional semiconductors with an anisotropic photonic crystal",
+      "Metasurface Integrated Monolayer Exciton Polariton",
+      "Optical signatures of -1/3 fractional quantum anomalous Hall state in twisted MoTe2",
+      "Evidence of the fractional quantum spin Hall effect in moire MoTe2",
+      "Programming Correlated Magnetic States via Gate Controlled Moire Geometry",
+      "Signatures of moir\u00e9-trapped valley excitons in MoSe2/WSe2 heterobilayers",
+      "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2",
+      "Dynamic Optical Tuning of Interlayer Interactions in the Transition Metal Dichalcogenides",
+      "Evidence for equilibrium excitons and exciton condensation in monolayer WTe2"
+    ]
+  },
+  "run_id": "moire_exciton_exclude_polariton__run_005",
+  "run_index": 5,
+  "scores": {
+    "answer_deterministic_score": 0.8125,
+    "context_score": 0.37222222222222223,
+    "judge_score": 0.6,
+    "overall_score": 0.493542532577837,
+    "retrieval_score": 0.1894479080891258
+  },
+  "task_type": "paper_lookup"
+}

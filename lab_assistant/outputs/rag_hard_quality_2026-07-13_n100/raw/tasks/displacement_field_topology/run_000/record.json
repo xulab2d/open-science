@@ -1,0 +1,189 @@
+{
+  "answer_latency_ms": 24997.342499962542,
+  "answer_metrics": {
+    "atomic_claim_count": 9,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 6,
+    "citation_hits": [
+      "claim:band_topology_hubbard_model_heisenberg_model_and_dzyaloshinskii_moriya_interaction_in_twisted_bi",
+      "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md",
+      "paper:band_topology_hubbard_model_heisenberg_model_and_dzyaloshinskii_moriya_interacti"
+    ],
+    "citation_precision_proxy": 0.6666666666666666,
+    "citations": [
+      "claim:band_topology_hubbard_model_heisenberg_model_and_dzyaloshinskii_moriya_interaction_in_twisted_bi",
+      "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "edge:promoted_2602_tpts_measured_by_compressibility",
+      "edge:promoted_2602_tpts_measured_by_rmcd",
+      "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md",
+      "paper:band_topology_hubbard_model_heisenberg_model_and_dzyaloshinskii_moriya_interacti"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "The first transition occurs without an observed charge-gap closure.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 20,
+        "sentence": "The supplied graph also says layer potential difference can tune band topology, Mott gaps, spin-orbit terms, and effective Dzyaloshinskii-Moriya interactions in twisted TMD bilayers, specifically twisted bilayer WSe2.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 13,
+        "sentence": "Named observables in the context for the MoTe2/WSe2 transition include compressibility and RMCD, via excluded graph edges `edge:promoted_2602_tpts_measured_by_compressibility` and `edge:promoted_2602_tpts_measured_by_rmcd`.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 9,
+        "sentence": "This inference is supported indirectly by the layer-potential/topology claim in twisted WSe2 and the observed D-field sequence in MoTe2/WSe2.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 9,
+        "sentence": "Observable distinctions, using only context-supported or term-implied logic:  - QAH regime: ferromagnetic Chern/Mott state; should show anomalous Hall response and finite RMCD from spin-valley polarization.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 10,
+        "sentence": "AFM valley-coherent regime: insulating state with antiferromagnetic order and inter-valley coherence; RMCD should be reduced or sign-compensated compared with ferromagnetic QAH, while compressibility still indicates a Mott gap.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 12,
+        "sentence": "Valley-coherent regime: distinguished from simple valley-polarized QAH by coherence between valleys rather than net valley polarization; optical/RMCD contrast alone may not fully identify it without phase-sensitive or magnetic-order information.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 12,
+        "sentence": "Trivial/frustrated Mott regime: insulating/compressibility gap without QAH topology or robust ferromagnetic RMCD signature; in the cited sequence it precedes the QAH phase at lower displacement field.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 13,
+        "sentence": "It supports the MoTe2/WSe2 D-field sequence and names compressibility/RMCD as probes, but it is insufficient to give numeric phase boundaries or a definitive observable table for twisted MoTe2 displacement-field tuning.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "matched_must_cite_like": [
+      "claim:",
+      "paper:",
+      "observable:"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 1.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/displacement_field_topology/run_000/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17990,
+    "context_pack_id": "1b7c7f604f1d1f09932564bdda8d06cc89e4237544f147816d3aefeb65cec90b",
+    "context_precision": 0.36863553113553116,
+    "context_recall": 1.0,
+    "excluded_count": 17,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_edge": 1,
+      "graph_node": 5,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 33.3116669789888,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "missed_evidence_groups": [],
+    "token_estimate": 4498
+  },
+  "context_path": "raw/tasks/displacement_field_topology/run_000/context.md",
+  "evaluator_note": "Tests mechanism + observable synthesis.",
+  "expected_behavior": "answer",
+  "family": "multi_hop",
+  "id": "displacement_field_topology",
+  "judge": {
+    "actionability": 3,
+    "answer_relevance": 4,
+    "citation_quality": 3,
+    "context_relevance": 3,
+    "critical_errors": [],
+    "faithfulness": 4,
+    "missing_key_points": [
+      "Does not address PL, despite PL being a required observable concept.",
+      "Transport observables are only implied through anomalous Hall response and not explicitly tied to transport, quantization, hysteresis, or insulating behavior from context.",
+      "Does not clearly distinguish all four regimes in an integrated observable table or matrix.",
+      "References RMCD/compressibility edges that are not visibly included in the supplied context excerpt, weakening citation verifiability."
+    ],
+    "scientific_correctness": 4,
+    "summary": "The answer captures the main displacement-field sequence for MoTe2/WSe2 and appropriately separates observation, inference, and uncertainty. It is reasonably faithful and cautious, but incomplete on the required observable synthesis: PL is absent, transport is underdeveloped, and some citations are graph IDs or edge IDs that are not fully supported by the supplied visible context. Overall it is partially strong but misses required concepts and concrete distinctions.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 2
+  },
+  "judge_latency_ms": 16517.95241702348,
+  "judge_path": "raw/tasks/displacement_field_topology/run_000/judge.json",
+  "judge_returncode": 0,
+  "question": "How does displacement field tune topology in MoTe2/WSe2 or twisted MoTe2 systems, and which observables distinguish QAH, AFM, valley-coherent, and trivial regimes?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 40.91124999104068,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 0.7,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "At nu=1, MoTe2/WSe2 shows two displacement-field-driven topological phase transitions between frustrated, QAH-Mott, and valley-coherent antiferromagnetic insulators.",
+      "an applied layer potential difference can tune band topology, Mott gaps, spin-orbit terms, and effective Dzyaloshinskii-Moriya interactions in twisted bilayer WSe2",
+      "Band topology, Hubbard model, Heisenberg model, and Dzyaloshinskii-Moriya interaction in twisted bilayer WSe2",
+      "transport, trion PL, and RMCD together support zero-field FQAH states in twisted MoTe2",
+      "Microscopic signatures of topology in twisted MoTe2",
+      "Regarding the existence of abelian fractional topological insulators in twisted MoTe2 and related systems",
+      "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "Circularly polarized light can non-thermally reverse spin-valley order and switch Chern order in twisted MoTe2 at zero field.",
+      "Hidden states and dynamics of fractional fillings in twisted MoTe2 bilayers"
+    ]
+  },
+  "run_id": "displacement_field_topology__run_000",
+  "run_index": 0,
+  "scores": {
+    "answer_deterministic_score": 0.9444444444444444,
+    "context_score": 0.6843177655677656,
+    "judge_score": 0.7428571428571429,
+    "overall_score": 0.8279048382173382,
+    "retrieval_score": 0.94
+  },
+  "task_type": "synthesis"
+}

@@ -1,0 +1,301 @@
+{
+  "first_relevant_rank": null,
+  "forbidden_retrieval_hits": [],
+  "hits": [
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "paper:ferromagnetism_near_room_temperature_in_the_cleavable_van_der_waals_crystal_fe5g",
+      "label": "Ferromagnetism Near Room Temperature in the Cleavable van der Waals Crystal Fe5GeTe2",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://pubs.acs.org/doi/10.1021/acsnano.8b09660"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1021/acsnano.8b09660"
+        }
+      ],
+      "score": 24,
+      "summary": "Official Xu Group publication (2019). Topics: vdw_magnetism.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 19,
+      "id": "paper:observation_of_ferromagnetic_phase_in_the_second_moire_band_of_twisted_mote2",
+      "label": "Observation of ferromagnetic phase in the second moir\u00e9 band of twisted MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41467-025-59691-5"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        },
+        {
+          "method": "arxiv metadata ingest:twisted_bilayer_mote2_phase_evolution",
+          "source": "http://arxiv.org/abs/2407.13674v1"
+        },
+        {
+          "method": "arxiv metadata ingest:twisted_mote2_superconducting_neighborhood",
+          "source": "http://arxiv.org/abs/2407.13674v1"
+        }
+      ],
+      "score": 22,
+      "summary": "independent evidence for second-band ferromagnetism tuned by density and displacement field Curie temperature near `3.5 K` around filling `2.58` Use for: confirming second-band ferromagnetism is not a one-off result",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 2,
+      "id": "paper:theory_of_tunable_flux_lattices_in_the_homobilayer_moire_of_twisted_and_uniforml",
+      "label": "Theory of tunable flux lattices in the homobilayer moir\u00e9 of twisted and uniformly strained transition metal dichalcogenides",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://link.aps.org/doi/10.1103/PhysRevMaterials.4.094002"
+        }
+      ],
+      "score": 21,
+      "summary": "twisted or strained TMD homobilayers can realize tunable moire flux lattices and engineer band topology through layer-pseudospin texture Use for: topology and gauge-field control in twisted TMD homobilayers before the experimental FQAH era",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 19,
+      "id": "paper:interplay_between_topology_and_correlations_in_the_second_moire_band_of_twisted",
+      "label": "Interplay between topology and correlations in the second moir\u00e9 band of twisted bilayer MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41567-025-02803-1"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        },
+        {
+          "method": "arxiv metadata ingest:twisted_bilayer_mote2_phase_evolution",
+          "source": "http://arxiv.org/abs/2406.09687v2"
+        },
+        {
+          "method": "arxiv metadata ingest:twisted_mote2_multiband_and_multilayer",
+          "source": "http://arxiv.org/abs/2406.09687v2"
+        }
+      ],
+      "score": 20,
+      "summary": "the second moir\u00e9 band hosts its own ferromagnetism, field-driven Chern behavior, and unusual magnetotransport around `2.2-2.7` holes per moir\u00e9 cell, the paper reports large out-of-plane negative magnetoresistance and approximate `1/T` scaling Use for: higher-band anomalies",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 3,
+      "id": "paper:excitons_in_the_fractional_quantum_hall_effect",
+      "label": "Excitons in the fractional quantum Hall effect",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_excitons_and_optics.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-024-08274-3"
+        }
+      ],
+      "score": 19,
+      "summary": "even outside moir\u00e9 TMDs, excitonic probes can resolve strongly correlated topological fluids Use for: broader context that optical access to fractional many-body physics is becoming a serious measurement mode, not a niche curiosity",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 3,
+      "id": "paper:layered_antiferromagnetism_induces_large_negative_magnetoresistance_in_the_van_d",
+      "label": "Layered Antiferromagnetism Induces Large Negative Magnetoresistance in the van der Waals Semiconductor CrSBr",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Telford%2C+E+J"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Dismukes%2C+A+H"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Lee%2C+K"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Cheng%2C+M"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Wieteska%2C+A"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Bartholomew%2C+A+K"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Chen%2C+Y"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Xu%2C+X"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Pasupathy%2C+A+N"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Zhu%2C+X"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Dean%2C+C+R"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/search/cond-mat?searchtype=author&amp;query=Roy%2C+X"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1002/adma.202003240"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/abs/2005.06110"
+        }
+      ],
+      "score": 18,
+      "summary": "Official Xu Group publication (2020). Topics: vdw_magnetism.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "paper:magnetic_order_and_symmetry_in_the_2d_semiconductor_crsbr",
+      "label": "Magnetic Order and Symmetry in the 2D Semiconductor CrSBr",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1021/acs.nanolett.1c00219"
+        }
+      ],
+      "score": 18,
+      "summary": "Official Xu Group publication (2021). Venue hint: Nano Letters. Topics: vdw_magnetism.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:coupled_spin_and_valley_physics_in_monolayers_of_mos2_and_other_group_vi_dichalcogenides_spin_an",
+      "label": "spin and valley are locked together in monolayer TMDs, which is why circular polarization can address valleys selectively in the first place",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_valley_and_exciton_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "http://depts.washington.edu/xulab/wordpress/wp-content/uploads/2012/03/Coupled-Spin-Valley-Physics-Xu.pdf"
+        }
+      ],
+      "score": 18,
+      "summary": "spin and valley are locked together in monolayer TMDs, which is why circular polarization can address valleys selectively in the first place Use for: baseline logic behind valley-selective optics, polarization-resolved PL, and field-induced valley splitting",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:strongly_correlated_electrons_and_hybrid_excitons_in_a_moire_heterostructure_moire_heterostructu",
+      "label": "moire heterostructures can host strongly correlated electrons and hybrid excitons in the same device, with optical spectroscopy remaining sensitive to the electronic state",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-020-2191-2"
+        }
+      ],
+      "score": 18,
+      "summary": "moire heterostructures can host strongly correlated electrons and hybrid excitons in the same device, with optical spectroscopy remaining sensitive to the electronic state Use for: the bridge between correlated electrons and excitonic readout in semiconductor moire platforms",
+      "type": "Claim"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "paper:dynamic_optical_tuning_of_interlayer_interactions_in_the_transition_metal_dichal",
+      "label": "Dynamic Optical Tuning of Interlayer Interactions in the Transition Metal Dichalcogenides",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "http://pubs.acs.org/doi/abs/10.1021/acs.nanolett.7b03955"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1021/acs.nanolett.7b03955(2017"
+        }
+      ],
+      "score": 18,
+      "summary": "Official Xu Group publication (2017). Venue hint: Nano Letters. Topics: other_quantum_materials.",
+      "type": "Paper"
+    }
+  ],
+  "latency_ms": 42.802375042811036,
+  "matched_evidence_groups": [],
+  "missed_evidence_groups": [
+    0
+  ],
+  "mrr": 0.0,
+  "ndcg_at_k": 0.0,
+  "precision_at_k": 0.0,
+  "recall_at_k": 0.0,
+  "top_hit_labels": [
+    "Ferromagnetism Near Room Temperature in the Cleavable van der Waals Crystal Fe5GeTe2",
+    "Observation of ferromagnetic phase in the second moir\u00e9 band of twisted MoTe2",
+    "Theory of tunable flux lattices in the homobilayer moir\u00e9 of twisted and uniformly strained transition metal dichalcogenides",
+    "Interplay between topology and correlations in the second moir\u00e9 band of twisted bilayer MoTe2",
+    "Excitons in the fractional quantum Hall effect",
+    "Layered Antiferromagnetism Induces Large Negative Magnetoresistance in the van der Waals Semiconductor CrSBr",
+    "Magnetic Order and Symmetry in the 2D Semiconductor CrSBr",
+    "spin and valley are locked together in monolayer TMDs, which is why circular polarization can address valleys selectively in the first place",
+    "moire heterostructures can host strongly correlated electrons and hybrid excitons in the same device, with optical spectroscopy remaining sensitive to the electronic state",
+    "Dynamic Optical Tuning of Interlayer Interactions in the Transition Metal Dichalcogenides"
+  ]
+}

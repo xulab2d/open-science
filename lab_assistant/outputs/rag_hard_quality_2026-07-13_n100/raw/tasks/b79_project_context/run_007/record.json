@@ -1,0 +1,142 @@
+{
+  "answer_latency_ms": 17638.459708017763,
+  "answer_metrics": {
+    "atomic_claim_count": 4,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 4,
+    "citation_hits": [
+      "context/projects/",
+      "knowledge/projects/",
+      "knowledge/projects/current_projects_2026_07_07.md",
+      "lab_assistant/context/projects/active_projects.md"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "context/projects/",
+      "knowledge/projects/",
+      "knowledge/projects/current_projects_2026_07_07.md",
+      "lab_assistant/context/projects/active_projects.md"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 15,
+        "sentence": "It says project-specific questions should first load the project\u2019s `context/projects/` and `knowledge/projects/` notes, with active roots mapped from [lab_assistant/context/projects/active_projects.md](lab_assistant/context/projects/active_projects.md) and evidence details from `knowledge/projects/current_projects_2026_07_07.md` as referenced there.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 21,
+        "sentence": "For measurement routing, the cataloguing skill says to look for \u201cemergent hysteresis/RMCD/PL features, displacement-field trends, peak splitting, anomalous contrast, or contradictions with prior project understanding\u201d before interpretation [skill:background-cataloguing].",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 16,
+        "sentence": "The relevant observables to check are RMCD and PL features together with gate/displacement-field dependence, hysteresis, peak shifts or splitting, contrast/sign changes, and consistency with prior B79 project understanding.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "Any B79-specific scientific claim would require the missing B79 project files or NAS-backed project snapshot.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "matched_must_cite_like": [],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/b79_project_context/run_007/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 10804,
+    "context_pack_id": "62e78be84e9026bfa6ab65923fe75e96194a47d88a945a488acee9a87bf3d7a6",
+    "context_precision": 0.9583333333333334,
+    "context_recall": 0.5,
+    "excluded_count": 4530,
+    "item_count": 9,
+    "kind_counts": {
+      "core": 3,
+      "daemon_report": 2,
+      "project_summary": 2,
+      "skill": 2
+    },
+    "latency_ms": 260.05662500392646,
+    "matched_evidence_groups": [
+      1
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "token_estimate": 2701
+  },
+  "context_path": "raw/tasks/b79_project_context/run_007/context.md",
+  "evaluator_note": "Tests whether project-specific routing survives common optical keywords.",
+  "expected_behavior": "answer",
+  "family": "project_context",
+  "id": "b79_project_context",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 5,
+    "citation_quality": 3,
+    "context_relevance": 3,
+    "critical_errors": [],
+    "faithfulness": 5,
+    "missing_key_points": [],
+    "scientific_correctness": 5,
+    "summary": "The answer correctly identifies that B79-specific context is not visible in the supplied pack and appropriately routes the user to local project context under context/projects and knowledge/projects before answering RMCD/PL questions. It includes the required B79, RMCD, and PL concepts and gives defensible observables from the cataloguing skill. Citations are somewhat weak because one file citation is broad and one is a skill label rather than a precise source location, but the claims are supported and uncertainty is well calibrated.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 0
+  },
+  "judge_latency_ms": 11600.268791953567,
+  "judge_path": "raw/tasks/b79_project_context/run_007/judge.json",
+  "judge_returncode": 0,
+  "question": "For B79, what local project context and measurement observables should be consulted before answering RMCD/PL questions?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 45.55887501919642,
+    "matched_evidence_groups": [
+      1
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 0.6,
+    "recall_at_k": 0.5,
+    "top_hit_labels": [
+      "PL and RMCD optically detect a fragile nu=-1/3 FQAH state in twisted MoTe2.",
+      "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+      "optical probes can be primary evidence for correlated states",
+      "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2",
+      "moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "transport, trion PL, and RMCD together support zero-field FQAH states in twisted MoTe2",
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "correlated interlayer exciton insulating behavior can emerge in a moire-coupled semiconductor heterostructure and be resolved optically",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport"
+    ]
+  },
+  "run_id": "b79_project_context__run_007",
+  "run_index": 7,
+  "scores": {
+    "answer_deterministic_score": 0.8333333333333334,
+    "context_score": 0.7291666666666667,
+    "judge_score": 0.8571428571428571,
+    "overall_score": 0.8099107142857143,
+    "retrieval_score": 0.82
+  },
+  "task_type": "project_status"
+}

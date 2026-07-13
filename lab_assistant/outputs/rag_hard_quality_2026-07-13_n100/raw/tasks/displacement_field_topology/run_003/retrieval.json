@@ -1,0 +1,229 @@
+{
+  "first_relevant_rank": 1,
+  "forbidden_retrieval_hits": [],
+  "hits": [
+    {
+      "confidence": "medium",
+      "edge_count": 6,
+      "id": "claim:promoted_2602_mote2_wse2_consecutive_tpts",
+      "label": "At nu=1, MoTe2/WSe2 shows two displacement-field-driven topological phase transitions between frustrated, QAH-Mott, and valley-coherent antiferromagnetic insulators.",
+      "provenance": [
+        {
+          "method": "Codex curation pass from arXiv abstract",
+          "source": "https://arxiv.org/abs/2602.15466"
+        }
+      ],
+      "score": 68,
+      "summary": "The 2026 arXiv report says increasing displacement field drives an angle-aligned MoTe2/WSe2 moire heterobilayer from a geometrically frustrated Mott insulator to a ferromagnetic QAH Mott insulator and then to an antiferromagnetic valley-coherent Mott state, with the first transition occurring without an observed charge-gap closure.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:band_topology_hubbard_model_heisenberg_model_and_dzyaloshinskii_moriya_interaction_in_twisted_bi",
+      "label": "an applied layer potential difference can tune band topology, Mott gaps, spin-orbit terms, and effective Dzyaloshinskii-Moriya interactions in twisted bilayer WSe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.2.033087"
+        }
+      ],
+      "score": 45,
+      "summary": "an applied layer potential difference can tune band topology, Mott gaps, spin-orbit terms, and effective Dzyaloshinskii-Moriya interactions in twisted bilayer WSe2 Use for: direct pre-2023 theory link between displacement field and correlated or topological phase control in twisted TMD homobilayers",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 4,
+      "id": "paper:band_topology_hubbard_model_heisenberg_model_and_dzyaloshinskii_moriya_interacti",
+      "label": "Band topology, Hubbard model, Heisenberg model, and Dzyaloshinskii-Moriya interaction in twisted bilayer WSe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.2.033087"
+        }
+      ],
+      "score": 41,
+      "summary": "an applied layer potential difference can tune band topology, Mott gaps, spin-orbit terms, and effective Dzyaloshinskii-Moriya interactions in twisted bilayer WSe2 Use for: direct pre-2023 theory link between displacement field and correlated or topological phase control in twisted TMD homobilayers",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_transport_trion_pl_and_r",
+      "label": "transport, trion PL, and RMCD together support zero-field FQAH states in twisted MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-023-06289-w"
+        }
+      ],
+      "score": 39,
+      "summary": "transport, trion PL, and RMCD together support zero-field FQAH states in twisted MoTe2 strong states near `nu = -1, -2/3, -3/5` Use for: optical plus magnetic sensing of topological states",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 2,
+      "id": "paper:microscopic_signatures_of_topology_in_twisted_mote2",
+      "label": "Microscopic signatures of topology in twisted MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41567-025-02877-x"
+        }
+      ],
+      "score": 37,
+      "summary": "STM/STS resolves local signatures of topological wavefunction texture Use for: microscopic intuition about why the bands are topological",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "paper:regarding_the_existence_of_abelian_fractional_topological_insulators_in_twisted",
+      "label": "Regarding the existence of abelian fractional topological insulators in twisted MoTe2 and related systems",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1038/s42005-025-02483-6"
+        }
+      ],
+      "score": 36,
+      "summary": "Official Xu Group publication (2026). Venue hint: Communications Physics. Topics: moire_tmote2, topological_quantum_materials.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:direct_magnetic_imaging_of_fractional_chern_insulators_in_twisted_mote2_with_a_superconducting_s",
+      "label": "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-024-08153-x"
+        }
+      ],
+      "score": 35,
+      "summary": "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states Use for: when a transport or optical anomaly might actually be a real-space inhomogeneity problem",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "label": "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-023-06289-w"
+        }
+      ],
+      "score": 35,
+      "summary": "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2 the paper highlights strong signatures near `nu = -1, -2/3, -3/5` Use for: the main optical bridge between PL/RMCD observables and correlated topological phases",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 4,
+      "id": "claim:promoted_2508_optical_control_chern_order",
+      "label": "Circularly polarized light can non-thermally reverse spin-valley order and switch Chern order in twisted MoTe2 at zero field.",
+      "provenance": [
+        {
+          "method": "Codex curation pass from arXiv abstract",
+          "source": "https://arxiv.org/abs/2508.19063"
+        }
+      ],
+      "score": 34,
+      "summary": "The 2025 arXiv report says resonant excitation of the attractive polaron transition dynamically reverses the spin-valley orientation of correlated MoTe2 phases, giving direct optical control of a topological order parameter at zero magnetic field.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 4,
+      "id": "paper:hidden_states_and_dynamics_of_fractional_fillings_in_twisted_mote2_bilayers",
+      "label": "Hidden states and dynamics of fractional fillings in twisted MoTe2 bilayers",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_excitons_and_optics.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-025-08954-8"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/abs/2502.21153"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1038/s41586-025-08954-8"
+        }
+      ],
+      "score": 34,
+      "summary": "ultrafast optical spectroscopy reveals many hidden fractional states invisible in static transport nearly 20 hidden states and two melting timescales, about `2-4 ps` and `180-270 ps` Use for: optical nonequilibrium or hidden-state interpretation",
+      "type": "Paper"
+    }
+  ],
+  "latency_ms": 43.983374955132604,
+  "matched_evidence_groups": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "missed_evidence_groups": [],
+  "mrr": 1.0,
+  "ndcg_at_k": 1.0,
+  "precision_at_k": 0.7,
+  "recall_at_k": 1.0,
+  "top_hit_labels": [
+    "At nu=1, MoTe2/WSe2 shows two displacement-field-driven topological phase transitions between frustrated, QAH-Mott, and valley-coherent antiferromagnetic insulators.",
+    "an applied layer potential difference can tune band topology, Mott gaps, spin-orbit terms, and effective Dzyaloshinskii-Moriya interactions in twisted bilayer WSe2",
+    "Band topology, Hubbard model, Heisenberg model, and Dzyaloshinskii-Moriya interaction in twisted bilayer WSe2",
+    "transport, trion PL, and RMCD together support zero-field FQAH states in twisted MoTe2",
+    "Microscopic signatures of topology in twisted MoTe2",
+    "Regarding the existence of abelian fractional topological insulators in twisted MoTe2 and related systems",
+    "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states",
+    "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+    "Circularly polarized light can non-thermally reverse spin-valley order and switch Chern order in twisted MoTe2 at zero field.",
+    "Hidden states and dynamics of fractional fillings in twisted MoTe2 bilayers"
+  ]
+}

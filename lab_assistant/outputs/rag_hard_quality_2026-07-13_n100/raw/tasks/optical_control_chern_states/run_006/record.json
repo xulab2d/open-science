@@ -1,0 +1,169 @@
+{
+  "answer_latency_ms": 13832.48841704335,
+  "answer_metrics": {
+    "atomic_claim_count": 6,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 7,
+    "citation_hits": [
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:promoted_2508_optical_switching_domain_walls",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md",
+      "paper:optical_control_of_integer_and_fractional_chern_insulators"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:promoted_2508_optical_switching_domain_walls",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md",
+      "paper:optical_control_of_integer_and_fractional_chern_insulators"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": false,
+        "overlap": 11,
+        "sentence": "It also says local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states, i.e.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 17,
+        "sentence": "optical response is part of an evidence stack rather than only transport (`claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m`; `lab_assistant/knowledge/papers/transport_and_thermodynamics.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 23,
+        "sentence": "Active optical control: the net separately records that optical pumping is now used as an active control knob for integer and fractional Chern states, not just a passive probe (`claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as`; `paper:optical_control_of_integer_and_fractional_chern_insulators`; `lab_assistant/knowledge/papers/xu_group_recent_moire_states.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 24,
+        "sentence": "A related promoted claim says zero-field optical switching of integer and fractional Chern ferromagnets enables magnetic bistate cycling and spatially resolved ferromagnetic domain-wall writing in twisted MoTe2 (`claim:promoted_2508_optical_switching_domain_walls`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 9,
+        "sentence": "The active-control claims imply a shift from \u201clight as readout\u201d to \u201clight as a state-preparation and patterning knob,\u201d especially where helicity/drive can switch bistability or write domain structures.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 14,
+        "sentence": "Confidence on the main active-control claim is marked medium, and the domain-wall switching claim is from a 2025 arXiv abstract curation pass, so the net supports the distinction but not a detailed mechanistic or quantitative account.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "matched_must_cite_like": [
+      "paper:optical_control",
+      "claim:optical",
+      "claim:promoted"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 1.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/optical_control_chern_states/run_006/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17971,
+    "context_pack_id": "9d42d512e044f35b684d0cfefa0f91ebf4d4b9cc1fa5ad980bb9c1e2927d3f94",
+    "context_precision": 0.8799013603110242,
+    "context_recall": 1.0,
+    "excluded_count": 11,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_node": 6,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 25.458791002165526,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "missed_evidence_groups": [],
+    "token_estimate": 4493
+  },
+  "context_path": "raw/tasks/optical_control_chern_states/run_006/context.md",
+  "evaluator_note": "Tests whether the answer separates probing from manipulation.",
+  "expected_behavior": "answer",
+  "family": "multi_hop",
+  "id": "optical_control_chern_states",
+  "judge": {
+    "actionability": 3,
+    "answer_relevance": 5,
+    "citation_quality": 3,
+    "context_relevance": 5,
+    "critical_errors": [
+      "Introduces unsupported claims not present in the supplied context, including local compressibility/magneto-optics bulk evidence and zero-field optical switching/domain-wall writing.",
+      "Cites claim IDs and paper shelves that are not included in the supplied context for some assertions, weakening provenance fidelity."
+    ],
+    "faithfulness": 3,
+    "missing_key_points": [],
+    "scientific_correctness": 4,
+    "summary": "The answer directly addresses the question and clearly separates passive optical probes (PL/RMCD) from active optical control (optical pumping). It includes the required integer/fractional Chern-state framing and appropriately notes uncertainty about mechanisms and parameters. However, it overreaches beyond the supplied context by adding thermodynamic/local compressibility evidence and promoted optical switching/domain-wall claims that are not in the provided evidence.",
+    "uncertainty_calibration": 4,
+    "unsupported_claims_count": 2
+  },
+  "judge_latency_ms": 11762.32862501638,
+  "judge_path": "raw/tasks/optical_control_chern_states/run_006/judge.json",
+  "judge_returncode": 0,
+  "question": "Summarize what the local knowledge net says about optical control of integer and fractional Chern states. Distinguish passive optical probes from active optical control.",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 55.09054096182808,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 0.6,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "Optical control of integer and fractional Chern insulators",
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+      "Optical switching of integer and fractional Chern ferromagnets enables bistate cycling and domain-wall writing in twisted MoTe2.",
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "trion PL can act as a filling-sensitive probe of integer and fractional topological states",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+      "Observation of Integer and Fractional Quantum Anomalous Hall Effects in Twisted Bilayer MoTe2",
+      "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states"
+    ]
+  },
+  "run_id": "optical_control_chern_states__run_006",
+  "run_index": 6,
+  "scores": {
+    "answer_deterministic_score": 1.0,
+    "context_score": 0.9399506801555121,
+    "judge_score": 0.7714285714285715,
+    "overall_score": 0.9078448128960209,
+    "retrieval_score": 0.92
+  },
+  "task_type": "synthesis"
+}

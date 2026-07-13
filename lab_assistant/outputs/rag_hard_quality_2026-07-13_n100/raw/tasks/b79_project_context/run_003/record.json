@@ -1,0 +1,144 @@
+{
+  "answer_latency_ms": 14716.899457969703,
+  "answer_metrics": {
+    "atomic_claim_count": 4,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 5,
+    "citation_hits": [
+      "lab_assistant/context/projects/",
+      "lab_assistant/context/projects/active_projects.md",
+      "lab_assistant/knowledge/projects/",
+      "lab_assistant/knowledge/projects/README.md",
+      "lab_assistant/knowledge/projects/current_projects_2026_07_07.md"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "lab_assistant/context/projects/",
+      "lab_assistant/context/projects/active_projects.md",
+      "lab_assistant/knowledge/projects/",
+      "lab_assistant/knowledge/projects/README.md",
+      "lab_assistant/knowledge/projects/current_projects_2026_07_07.md"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 12,
+        "sentence": "Project-specific routing should first consult local project files under `lab_assistant/context/projects/` and `lab_assistant/knowledge/projects/`, per the \u201cProject context first\u201d directive (`lab_assistant/core/directives.md`; `lab_assistant/knowledge/projects/README.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 24,
+        "sentence": "Relevant local registries to check before answering are: - `lab_assistant/context/projects/active_projects.md` - `lab_assistant/knowledge/projects/current_projects_2026_07_07.md` if available from the project snapshot - compact daemon/catalog reports only if they contain B79 activity, starting from `lab_assistant/daemon/reports/` (`skill:background-cataloguing`)  **Inference**  For B79 RMCD/PL questions, the answer should be routed through B79\u2019s local project context first, not through generic RMCD/PL knowledge.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 21,
+        "sentence": "Measurement observables to consult include RMCD, PL, hysteresis, displacement-field trends, peak splitting, anomalous contrast, and any project-specific sweeps or processed plots (`skill:background-cataloguing`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 3,
+        "sentence": "Any B79-specific scientific claim would require additional local project context not present here.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "matched_must_cite_like": [],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/b79_project_context/run_003/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 10804,
+    "context_pack_id": "62e78be84e9026bfa6ab65923fe75e96194a47d88a945a488acee9a87bf3d7a6",
+    "context_precision": 0.9583333333333334,
+    "context_recall": 0.5,
+    "excluded_count": 4530,
+    "item_count": 9,
+    "kind_counts": {
+      "core": 3,
+      "daemon_report": 2,
+      "project_summary": 2,
+      "skill": 2
+    },
+    "latency_ms": 261.8677090504207,
+    "matched_evidence_groups": [
+      1
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "token_estimate": 2701
+  },
+  "context_path": "raw/tasks/b79_project_context/run_003/context.md",
+  "evaluator_note": "Tests whether project-specific routing survives common optical keywords.",
+  "expected_behavior": "answer",
+  "family": "project_context",
+  "id": "b79_project_context",
+  "judge": {
+    "actionability": 5,
+    "answer_relevance": 5,
+    "citation_quality": 4,
+    "context_relevance": 4,
+    "critical_errors": [],
+    "faithfulness": 5,
+    "missing_key_points": [],
+    "scientific_correctness": 5,
+    "summary": "Strong answer. It correctly identifies that B79-specific local project context is absent from the supplied pack, routes RMCD/PL questions through local project context first, names context/projects and knowledge/projects locations, and lists supported observables from the background-cataloguing guidance. Citations are useful file-level references but not very granular.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 0
+  },
+  "judge_latency_ms": 9132.862375001423,
+  "judge_path": "raw/tasks/b79_project_context/run_003/judge.json",
+  "judge_returncode": 0,
+  "question": "For B79, what local project context and measurement observables should be consulted before answering RMCD/PL questions?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 19.955666037276387,
+    "matched_evidence_groups": [
+      1
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 0.6,
+    "recall_at_k": 0.5,
+    "top_hit_labels": [
+      "PL and RMCD optically detect a fragile nu=-1/3 FQAH state in twisted MoTe2.",
+      "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+      "optical probes can be primary evidence for correlated states",
+      "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2",
+      "moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "transport, trion PL, and RMCD together support zero-field FQAH states in twisted MoTe2",
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "correlated interlayer exciton insulating behavior can emerge in a moire-coupled semiconductor heterostructure and be resolved optically",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport"
+    ]
+  },
+  "run_id": "b79_project_context__run_003",
+  "run_index": 3,
+  "scores": {
+    "answer_deterministic_score": 0.8333333333333334,
+    "context_score": 0.7291666666666667,
+    "judge_score": 0.9428571428571428,
+    "overall_score": 0.8313392857142857,
+    "retrieval_score": 0.82
+  },
+  "task_type": "project_status"
+}

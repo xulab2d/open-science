@@ -1,0 +1,197 @@
+{
+  "answer_latency_ms": 18842.954709019978,
+  "answer_metrics": {
+    "atomic_claim_count": 11,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 7,
+    "citation_hits": [
+      "claim:observation_of_fractionally_quantized_anomalous_hall_effect_direct_hall_plateau_evidence_for_iqa",
+      "claim:optical_probes_primary_evidence",
+      "claim:promoted_2304_fqah_streda_optical_mcd",
+      "claim:signatures_of_moire_trapped_valley_excitons_in_mose2_wse2_heterobilayers_interlayer_excitons_can",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_compressibility_plus_magneto",
+      "paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif"
+    ],
+    "citation_precision_proxy": 0.8571428571428571,
+    "citations": [
+      "claim:observation_of_fractionally_quantized_anomalous_hall_effect_direct_hall_plateau_evidence_for_iqa",
+      "claim:optical_probes_primary_evidence",
+      "claim:promoted_2304_fqah_streda_optical_mcd",
+      "claim:promoted_2602_optical_minus_one_third_fqah",
+      "claim:signatures_of_moire_trapped_valley_excitons_in_mose2_wse2_heterobilayers_interlayer_excitons_can",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_compressibility_plus_magneto",
+      "paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 26,
+        "sentence": "What is available says optical probes such as PL, RMCD, MOKE, and pump-probe can be primary state-sensitive evidence in moire systems (`claim:optical_probes_primary_evidence`), and that MCD/trion PL have been used to support zero-field FQAH-like states at other fillings via magnetic response and Streda-like Landau-fan shifts (`claim:promoted_2304_fqah_streda_optical_mcd`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 15,
+        "sentence": "Transport Hall plateaus remain the strongest direct evidence for IQAH/FQAH when available (`claim:observation_of_fractionally_quantized_anomalous_hall_effect_direct_hall_plateau_evidence_for_iqa`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 10,
+        "sentence": "Ordinary valley/spin polarization or ferromagnetism without fractional Hall topology.**      RMCD/MOKE contrast can indicate time-reversal breaking, but not by itself fractional Hall conductance.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 17,
+        "sentence": "Separation requires a quantized or Streda-consistent response tied to the filling, ideally with transport Hall data or bulk compressibility plus magneto-optics (`claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_compressibility_plus_magneto`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 17,
+        "sentence": "Moir\u00e9 exciton/trion spectral shifts unrelated to an electronic FQAH ground state.**      Moir\u00e9 potentials can trap excitons and produce strong valley-selective optical signatures (`claim:signatures_of_moire_trapped_valley_excitons_in_mose2_wse2_heterobilayers_interlayer_excitons_can`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 4,
+        "sentence": "Separation requires showing the optical anomaly tracks electronic filling and incompressibility, not just exciton resonance structure, disorder-localized emitters, or optical selection-rule changes.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 18,
+        "sentence": "Competing magnetic/correlated phases, including AFM or non-topological insulating states.**      The context notes competing FCI and antiferromagnetic ground states in moire MoTe2, with electric-field sensitivity (`paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 11,
+        "sentence": "Separation requires displacement-field, magnetic-field, and density dependence showing behavior expected for a fractional Chern state rather than an AFM or trivial correlated insulator.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 4,
+        "sentence": "Device/measurement artifacts.**      Likely artifacts include hysteresis from charge traps, optical heating, strain/disorder inhomogeneity, gate cross-talk, or reflectance/PL background changes masquerading as circular dichroism.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 6,
+        "sentence": "These are not specifically documented in the supplied context, so this is a generic experimental-control inference rather than a sourced claim.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 9,
+        "sentence": "The decisive evidence would be co-registered optical contrast, incompressibility, and Hall/Streda-consistent fractional Chern response at exactly `nu=-1/3`; without those, an optical topological interpretation should remain provisional.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "matched_must_cite_like": [
+      "claim:promoted_2602",
+      "paper:",
+      "claim:"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 1.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/minus_one_third_interpretation/run_007/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17846,
+    "context_pack_id": "3a94316429105d1b3d2f5e061a950fcd6cbdafebcf6c494191e167026dcec680",
+    "context_precision": 0.8715026161979944,
+    "context_recall": 0.6666666666666666,
+    "excluded_count": 10,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_node": 6,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 28.838541998993605,
+    "matched_evidence_groups": [
+      1,
+      2
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "token_estimate": 4462
+  },
+  "context_path": "raw/tasks/minus_one_third_interpretation/run_007/context.md",
+  "evaluator_note": "Tests uncertainty around optical topological interpretation.",
+  "expected_behavior": "caution",
+  "family": "uncertainty",
+  "id": "minus_one_third_interpretation",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 5,
+    "citation_quality": 3,
+    "context_relevance": 3,
+    "critical_errors": [],
+    "faithfulness": 3,
+    "missing_key_points": [
+      "Did not explicitly mention CDW as a competing interpretation, despite rubric requiring artifact/inhomogeneity/CDW/trivial alternatives.",
+      "Cited or invoked sources/nodes not present in the supplied context, including `claim:thermodynamic_evidence...`, `paper:evidence_of_competing...`, and the statement that `claim:promoted_2602_optical_minus_one_third_fqah` was explicitly excluded."
+    ],
+    "scientific_correctness": 4,
+    "summary": "The answer is appropriately cautious, addresses nu=-1/3 optical FQAH interpretation, mentions PL/RMCD, artifacts, inhomogeneity, trivial/non-topological alternatives, and gives useful separating evidence such as transport, Streda-like response, filling dependence, incompressibility, and controls. However, the supplied context only partially supports this level of detail, and the answer cites nodes not included in the context. It also misses CDW explicitly.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 4
+  },
+  "judge_latency_ms": 13549.210333032534,
+  "judge_path": "raw/tasks/minus_one_third_interpretation/run_007/judge.json",
+  "judge_returncode": 0,
+  "question": "For nu=-1/3 optical FQAH signatures, what competing interpretations or artifacts should be considered, and what evidence would separate them?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 44.530542043503374,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 0.7,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "optical probes can be primary evidence for correlated states",
+      "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures",
+      "PL and RMCD optically detect a fragile nu=-1/3 FQAH state in twisted MoTe2.",
+      "Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2",
+      "MCD and trion PL support zero-field FQAH states in 3.7 degree twisted MoTe2 at nu=-2/3 and -3/5.",
+      "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+      "direct Hall-plateau evidence for IQAH and FQAH in twisted bilayer MoTe2",
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators",
+      "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2"
+    ]
+  },
+  "run_id": "minus_one_third_interpretation__run_007",
+  "run_index": 7,
+  "scores": {
+    "answer_deterministic_score": 0.9761904761904762,
+    "context_score": 0.7690846414323305,
+    "judge_score": 0.7714285714285715,
+    "overall_score": 0.8641759222628445,
+    "retrieval_score": 0.94
+  },
+  "task_type": "synthesis"
+}

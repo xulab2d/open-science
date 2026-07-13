@@ -1,0 +1,73 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "actionability": {
+      "maximum": 5,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "answer_relevance": {
+      "maximum": 5,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "citation_quality": {
+      "maximum": 5,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "context_relevance": {
+      "maximum": 5,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "critical_errors": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "faithfulness": {
+      "maximum": 5,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "missing_key_points": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "scientific_correctness": {
+      "maximum": 5,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "uncertainty_calibration": {
+      "maximum": 5,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "unsupported_claims_count": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "context_relevance",
+    "answer_relevance",
+    "faithfulness",
+    "citation_quality",
+    "scientific_correctness",
+    "uncertainty_calibration",
+    "actionability",
+    "unsupported_claims_count",
+    "critical_errors",
+    "missing_key_points",
+    "summary"
+  ],
+  "type": "object"
+}

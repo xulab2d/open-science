@@ -1,0 +1,129 @@
+{
+  "answer_latency_ms": 11152.12695900118,
+  "answer_metrics": {
+    "atomic_claim_count": 3,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 2,
+    "citation_hits": [
+      "lab_assistant/context/projects/active_projects.md",
+      "lab_assistant/knowledge/projects/current_projects_2026_07_07.md"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "lab_assistant/context/projects/active_projects.md",
+      "lab_assistant/knowledge/projects/current_projects_2026_07_07.md"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": false,
+        "overlap": 16,
+        "sentence": "The relevant project entry is `Zengde/Weijie A5 AAtA dot`, described as involving dot PL, PLE, filling-dependent branches, polarization, power/wavelength dependence, and optical-control-style measurements.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 11,
+        "sentence": "Its NAS root is `/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry` [lab_assistant/context/projects/active_projects.md].",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 8,
+        "sentence": "This should be done before pulling in global moire-paper context, because the directive is \u201cProject context first\u201d for selected projects [lab_assistant/core/directives.md].",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2
+    ],
+    "matched_must_cite_like": [],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/a5_dot_project_context/run_000/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 10804,
+    "context_pack_id": "e1c98a8e29a52d67e9132cc2822e0aa72235ace35013a9235f512f4aa82af456",
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "excluded_count": 4530,
+    "item_count": 9,
+    "kind_counts": {
+      "core": 3,
+      "daemon_report": 2,
+      "project_summary": 2,
+      "skill": 2
+    },
+    "latency_ms": 267.147250007838,
+    "matched_evidence_groups": [],
+    "missed_evidence_groups": [
+      0,
+      1
+    ],
+    "token_estimate": 2701
+  },
+  "context_path": "raw/tasks/a5_dot_project_context/run_000/context.md",
+  "evaluator_note": "Tests project-context retrieval rather than global moire paper retrieval.",
+  "expected_behavior": "answer",
+  "family": "project_context",
+  "id": "a5_dot_project_context",
+  "judge": {
+    "actionability": 5,
+    "answer_relevance": 5,
+    "citation_quality": 4,
+    "context_relevance": 5,
+    "critical_errors": [],
+    "faithfulness": 5,
+    "missing_key_points": [],
+    "scientific_correctness": 5,
+    "summary": "The answer correctly identifies that A5 dot project-local context should be loaded first, specifically context/projects/active_projects.md, knowledge/projects/current_projects_2026_07_07.md, and high-signal A5 NAS-root materials before interpreting PL dispersion or peak tracking. It appropriately avoids global moire-paper context and notes the limitation that exact A5 files are not present in the supplied context. Citations are useful but file-level and one citation label is slightly awkward/malformed.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 0
+  },
+  "judge_latency_ms": 10969.636416994035,
+  "judge_path": "raw/tasks/a5_dot_project_context/run_000/judge.json",
+  "judge_returncode": 0,
+  "question": "For the A5 dot optical project, what local context should be loaded before interpreting PL dispersion or peak-tracking analysis?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 42.31779201654717,
+    "matched_evidence_groups": [
+      0,
+      1
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 0.8772153153380493,
+    "precision_at_k": 0.2,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "A5 dot",
+      "optical probes can be primary evidence for correlated states",
+      "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+      "The nu=-1/3 PL spectrum disperses with out-of-plane magnetic field, supporting a nontrivial topological interpretation.",
+      "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures",
+      "moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton",
+      "C5 deck treats bilayer trion fractional features and hBN-hole dot staircases as actionable optical signals.",
+      "Again, similar D-field spectrum for the trions, however there are some interesting things going on in the exciton spectrum.",
+      "At positive doping, you can very clearly see a hybridized layer region for the exciton.",
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe"
+    ]
+  },
+  "run_id": "a5_dot_project_context__run_000",
+  "run_index": 0,
+  "scores": {
+    "answer_deterministic_score": 0.8333333333333334,
+    "context_score": 0.0,
+    "judge_score": 0.9714285714285714,
+    "overall_score": 0.6550512419573786,
+    "retrieval_score": 0.8154430630676098
+  },
+  "task_type": "project_status"
+}

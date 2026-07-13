@@ -1,0 +1,172 @@
+{
+  "answer_latency_ms": 12785.155582998414,
+  "answer_metrics": {
+    "atomic_claim_count": 7,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 7,
+    "citation_hits": [
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:promoted_2508_optical_switching_domain_walls",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md",
+      "paper:optical_control_of_integer_and_fractional_chern_insulators"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:promoted_2508_optical_switching_domain_walls",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m",
+      "lab_assistant/knowledge/papers/transport_and_thermodynamics.md",
+      "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md",
+      "paper:optical_control_of_integer_and_fractional_chern_insulators"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 26,
+        "sentence": "Passive optical probes:** trion PL and RMCD are described as filling-sensitive readouts of integer and fractional Chern states, with highlighted signatures near `nu = -1, -2/3, -3/5` (`claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc`; provenance: `lab_assistant/knowledge/papers/xu_group_recent_moire_states.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 19,
+        "sentence": "Magneto-optics also appears as part of bulk evidence when combined with local compressibility (`claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m`; provenance: `lab_assistant/knowledge/papers/transport_and_thermodynamics.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 25,
+        "sentence": "Active optical control:** optical pumping is explicitly described as an active control knob for integer and fractional Chern states, not merely a probe (`claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as`; `paper:optical_control_of_integer_and_fractional_chern_insulators`; provenance: `lab_assistant/knowledge/papers/xu_group_recent_moire_states.md`, arXiv `2508.18639`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 19,
+        "sentence": "A related claim says zero-field optical switching can cycle magnetic bistates and write ferromagnetic domain walls in integer and fractional Chern ferromagnets in twisted MoTe2 (`claim:promoted_2508_optical_switching_domain_walls`; arXiv `2508.19602`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 9,
+        "sentence": "PL/RMCD report on valley/spin/magnetic/topological order as observables, while optical pumping is framed as a way to change the Chern-ferromagnetic state itself.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 14,
+        "sentence": "The important distinction is causality: passive probes read out filling- and magnetization-sensitive signatures; active optical control uses light as a drive that can switch or write magnetic/topological configurations.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 18,
+        "sentence": "The graph claims are marked medium confidence, and the 2025 optical-control/switching items appear to rely on paper-shelf or arXiv-level provenance rather than detailed curated notes.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "matched_must_cite_like": [
+      "paper:optical_control",
+      "claim:optical",
+      "claim:promoted"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 1.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/optical_control_chern_states/run_000/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17971,
+    "context_pack_id": "9d42d512e044f35b684d0cfefa0f91ebf4d4b9cc1fa5ad980bb9c1e2927d3f94",
+    "context_precision": 0.8799013603110242,
+    "context_recall": 1.0,
+    "excluded_count": 11,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_node": 6,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 27.407791989389807,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "missed_evidence_groups": [],
+    "token_estimate": 4493
+  },
+  "context_path": "raw/tasks/optical_control_chern_states/run_000/context.md",
+  "evaluator_note": "Tests whether the answer separates probing from manipulation.",
+  "expected_behavior": "answer",
+  "family": "multi_hop",
+  "id": "optical_control_chern_states",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 5,
+    "citation_quality": 4,
+    "context_relevance": 5,
+    "critical_errors": [],
+    "faithfulness": 4,
+    "missing_key_points": [],
+    "scientific_correctness": 4,
+    "summary": "Strong answer that clearly separates passive PL/RMCD probes from active optical pumping/control and covers integer and fractional Chern states. Main issue is inclusion of extra claims about thermodynamic evidence and optical switching/domain-wall writing that are not supported by the supplied context, even if plausibly related. Caveats are good and appropriately note missing experimental details and medium-confidence provenance.",
+    "uncertainty_calibration": 4,
+    "unsupported_claims_count": 2
+  },
+  "judge_latency_ms": 11291.209708026145,
+  "judge_path": "raw/tasks/optical_control_chern_states/run_000/judge.json",
+  "judge_returncode": 0,
+  "question": "Summarize what the local knowledge net says about optical control of integer and fractional Chern states. Distinguish passive optical probes from active optical control.",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 39.74937502061948,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 1.0,
+    "precision_at_k": 0.6,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "Optical control of integer and fractional Chern insulators",
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+      "Optical switching of integer and fractional Chern ferromagnets enables bistate cycling and domain-wall writing in twisted MoTe2.",
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "trion PL can act as a filling-sensitive probe of integer and fractional topological states",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+      "Observation of Integer and Fractional Quantum Anomalous Hall Effects in Twisted Bilayer MoTe2",
+      "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states"
+    ]
+  },
+  "run_id": "optical_control_chern_states__run_000",
+  "run_index": 0,
+  "scores": {
+    "answer_deterministic_score": 1.0,
+    "context_score": 0.9399506801555121,
+    "judge_score": 0.8571428571428572,
+    "overall_score": 0.9292733843245924,
+    "retrieval_score": 0.92
+  },
+  "task_type": "synthesis"
+}

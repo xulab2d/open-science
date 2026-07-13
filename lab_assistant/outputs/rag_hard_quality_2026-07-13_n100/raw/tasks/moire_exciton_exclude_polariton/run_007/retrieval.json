@@ -1,0 +1,292 @@
+{
+  "first_relevant_rank": 7,
+  "forbidden_retrieval_hits": [
+    {
+      "id": "paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu",
+      "label": "Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides",
+      "rank": 1,
+      "term": "polariton"
+    },
+    {
+      "id": "paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu",
+      "label": "Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides",
+      "rank": 1,
+      "term": "waveguide"
+    },
+    {
+      "id": "paper:separation_of_the_valley_exciton_polariton_in_two_dimensional_semiconductors_wit",
+      "label": "Separation of the valley exciton-polariton in two-dimensional semiconductors with an anisotropic photonic crystal",
+      "rank": 2,
+      "term": "polariton"
+    },
+    {
+      "id": "paper:metasurface_integrated_monolayer_exciton_polariton",
+      "label": "Metasurface Integrated Monolayer Exciton Polariton",
+      "rank": 3,
+      "term": "polariton"
+    }
+  ],
+  "hits": [
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "paper:nano_optical_imaging_of_the_tailored_exciton_polariton_transport_in_mose2_wavegu",
+      "label": "Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "http://www.nature.com/nphoton/journal/vaop/ncurrent/full/nphoton.2017.65.html"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1038/nphoton.2017.65"
+        }
+      ],
+      "score": 30,
+      "summary": "Official Xu Group publication (2017). Venue hint: Nature. Topics: valley_exciton_optics.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "paper:separation_of_the_valley_exciton_polariton_in_two_dimensional_semiconductors_wit",
+      "label": "Separation of the valley exciton-polariton in two-dimensional semiconductors with an anisotropic photonic crystal",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://journals.aps.org/prb/abstract/10.1103/PhysRevB.101.245418"
+        }
+      ],
+      "score": 24,
+      "summary": "Official Xu Group publication (2020). Topics: valley_exciton_optics, strain_and_devices.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "paper:metasurface_integrated_monolayer_exciton_polariton",
+      "label": "Metasurface Integrated Monolayer Exciton Polariton",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://pubs.acs.org/doi/10.1021/acs.nanolett.0c01624"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1021/acs.nanolett.0c01624"
+        }
+      ],
+      "score": 18,
+      "summary": "Official Xu Group publication (2020). Venue hint: Nano Letters. Topics: valley_exciton_optics.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 11,
+      "id": "paper:arxiv_2602_04561v1",
+      "label": "Optical signatures of -1/3 fractional quantum anomalous Hall state in twisted MoTe2",
+      "provenance": [
+        {
+          "method": "arxiv metadata ingest:twisted_mote2_fractional_chern",
+          "source": "http://arxiv.org/abs/2602.04561v1"
+        },
+        {
+          "method": "arxiv metadata ingest:twisted_mote2_optical_rmcd",
+          "source": "http://arxiv.org/abs/2602.04561v1"
+        },
+        {
+          "method": "Codex curation pass from arXiv abstract",
+          "source": "https://arxiv.org/abs/2602.04561"
+        },
+        {
+          "method": "arxiv metadata ingest:twisted_mote2_fractional_topology",
+          "source": "http://arxiv.org/abs/2602.04561v1"
+        },
+        {
+          "method": "arxiv metadata ingest:twisted_mote2_optics_magnetooptics",
+          "source": "http://arxiv.org/abs/2602.04561v1"
+        }
+      ],
+      "score": 16,
+      "summary": "The discovery of fractional charge excitations in new platforms offers crucial insights into strongly correlated quantum phases. While a range of fractional quantum anomalous Hall (FQAH) states have recently been observed in two-dimensional twisted moire systems, the theoretically anticipated filling factor v = -1/3 FQAH state has remained elusive, with debates centering on its nature of charge density wave or a topological Chern insulator. Here, we report the optical detection of a v = -1/3 FQAH state in twisted MoTe2 bilayers. Using photoluminescence (PL) and reflective magnetic circular dichroism (RMCD) techniques, we identify ferromagnetic states at filling factors v = -1, -2/3, and -1/3...",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 8,
+      "id": "paper:evidence_of_the_fractional_quantum_spin_hall_effect_in_moire_mote2",
+      "label": "Evidence of the fractional quantum spin Hall effect in moire MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-024-07214-5"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        }
+      ],
+      "score": 14,
+      "summary": "twisted MoTe2 also accesses fractional QSH physics, not just ferromagnetic FQAH at `nu = 3`, each edge contributes `3e^2/2h` Use for: time-reversal-related fractional topology",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 6,
+      "id": "paper:programming_correlated_magnetic_states_via_gate_controlled_moire_geometry",
+      "label": "Programming Correlated Magnetic States via Gate Controlled Moire Geometry",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.science.org/doi/full/10.1126/science.adg4268"
+        }
+      ],
+      "score": 12,
+      "summary": "displacement field can reprogram the effective moire geometry and switch the correlated magnetic ground state Use for: the key argument that `D` is a Hamiltonian knob, not a secondary nuisance axis",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 2,
+      "id": "paper:signatures_of_moire_trapped_valley_excitons_in_mose2_wse2_heterobilayers",
+      "label": "Signatures of moir\u00e9-trapped valley excitons in MoSe2/WSe2 heterobilayers",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_excitons_and_optics.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-019-0957-1"
+        },
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://www.nature.com/articles/s41586-019-0957-1"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://arxiv.org/abs/1809.04562"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1038/s41586-019-0957-1"
+        }
+      ],
+      "score": 12,
+      "summary": "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures Use for: the basic idea that moir\u00e9 structure can discretize and localize optical excitations",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "paper:spectral_evidence_for_local_moment_ferromagnetism_in_van_der_waals_metals_fe3gat",
+      "label": "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        }
+      ],
+      "score": 12,
+      "summary": "Official Xu Group publication (2024). Topics: vdw_magnetism.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "paper:dynamic_optical_tuning_of_interlayer_interactions_in_the_transition_metal_dichal",
+      "label": "Dynamic Optical Tuning of Interlayer Interactions in the Transition Metal Dichalcogenides",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "http://pubs.acs.org/doi/abs/10.1021/acs.nanolett.7b03955"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1021/acs.nanolett.7b03955(2017"
+        }
+      ],
+      "score": 12,
+      "summary": "Official Xu Group publication (2017). Venue hint: Nano Letters. Topics: other_quantum_materials.",
+      "type": "Paper"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 1,
+      "id": "paper:evidence_for_equilibrium_excitons_and_exciton_condensation_in_monolayer_wte2",
+      "label": "Evidence for equilibrium excitons and exciton condensation in monolayer WTe2",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://rdcu.be/cDLUN"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://www.nature.com/articles/s41567-021-01466-y"
+        },
+        {
+          "method": "official publication link",
+          "source": "https://doi.org/10.1038/s41567-021-01427-5"
+        }
+      ],
+      "score": 12,
+      "summary": "Official Xu Group publication (2022). Venue hint: Nature. Topics: valley_exciton_optics, topological_quantum_materials.",
+      "type": "Paper"
+    }
+  ],
+  "latency_ms": 33.414707984775305,
+  "matched_evidence_groups": [
+    1
+  ],
+  "missed_evidence_groups": [
+    0
+  ],
+  "mrr": 0.14285714285714285,
+  "ndcg_at_k": 0.20438239758848611,
+  "precision_at_k": 0.1,
+  "recall_at_k": 0.5,
+  "top_hit_labels": [
+    "Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides",
+    "Separation of the valley exciton-polariton in two-dimensional semiconductors with an anisotropic photonic crystal",
+    "Metasurface Integrated Monolayer Exciton Polariton",
+    "Optical signatures of -1/3 fractional quantum anomalous Hall state in twisted MoTe2",
+    "Evidence of the fractional quantum spin Hall effect in moire MoTe2",
+    "Programming Correlated Magnetic States via Gate Controlled Moire Geometry",
+    "Signatures of moir\u00e9-trapped valley excitons in MoSe2/WSe2 heterobilayers",
+    "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2",
+    "Dynamic Optical Tuning of Interlayer Interactions in the Transition Metal Dichalcogenides",
+    "Evidence for equilibrium excitons and exciton condensation in monolayer WTe2"
+  ]
+}

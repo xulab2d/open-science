@@ -1,0 +1,13 @@
+**Observation**
+
+Passive optical probes: the net says trion PL and RMCD are filling-sensitive optical readouts of integer and fractional Chern states in twisted MoTe2, with reported signatures near `nu = -1, -2/3, -3/5` (`claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc`; `lab_assistant/knowledge/papers/xu_group_recent_moire_states.md`). It also notes that local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states, i.e. optical/magneto-optical data are part of the evidence stack rather than necessarily a control knob (`claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_local_compressibility_plus_m`; `lab_assistant/knowledge/papers/transport_and_thermodynamics.md`).
+
+Active optical control: a newer claim/paper entry says optical pumping is being used as an active control knob for integer and fractional Chern states, not only as a passive probe (`claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as`; `paper:optical_control_of_integer_and_fractional_chern_insulators`; `lab_assistant/knowledge/papers/xu_group_recent_moire_states.md`). A related promoted claim says zero-field optical switching of integer and fractional Chern ferromagnets enables magnetic bistate cycling and spatially resolved ferromagnetic domain-wall writing in twisted MoTe2 (`claim:promoted_2508_optical_switching_domain_walls`).
+
+**Inference**
+
+The knowledge net separates two optical roles. In the passive-probe role, PL/RMCD/magneto-optics diagnose filling, magnetization, or bulk topological order; they support identification of integer and fractional Chern phases but are not themselves described as changing the phase. In the active-control role, optical pumping or helicity-dependent optical drive is treated as a manipulation channel that can switch Chern ferromagnetic states and write domain structures, moving optics from readout into state control (`claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as`; `claim:promoted_2508_optical_switching_domain_walls`).
+
+**Uncertainty**
+
+The supplied context does not include detailed mechanisms, pump parameters, switching thresholds, timescales, or microscopic selection rules. The active-control claims are marked medium confidence and appear to rely on recent/preprint-level entries, so the net supports the distinction but not a quantitative account of how robust or universal the optical control is.

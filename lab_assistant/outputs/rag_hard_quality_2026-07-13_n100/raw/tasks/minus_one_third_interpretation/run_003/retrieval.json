@@ -1,0 +1,219 @@
+{
+  "first_relevant_rank": 1,
+  "forbidden_retrieval_hits": [],
+  "hits": [
+    {
+      "confidence": "high",
+      "edge_count": 3,
+      "id": "claim:optical_probes_primary_evidence",
+      "label": "optical probes can be primary evidence for correlated states",
+      "provenance": [
+        {
+          "method": "Codex seed from existing synthesis",
+          "source": "lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md"
+        },
+        {
+          "method": "Codex seed from existing synthesis",
+          "source": "lab_assistant/knowledge/syntheses/optical_readout_of_correlated_states.md"
+        }
+      ],
+      "score": 28,
+      "summary": "For Xu Lab-style moir\u00e9 work, PL, RMCD, MOKE, and pump-probe measurements should be treated as potentially state-sensitive primary evidence, not merely support for transport.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:signatures_of_moire_trapped_valley_excitons_in_mose2_wse2_heterobilayers_interlayer_excitons_can",
+      "label": "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_excitons_and_optics.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-019-0957-1"
+        }
+      ],
+      "score": 24,
+      "summary": "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures Use for: the basic idea that moir\u00e9 structure can discretize and localize optical excitations",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 5,
+      "id": "claim:promoted_2602_optical_minus_one_third_fqah",
+      "label": "PL and RMCD optically detect a fragile nu=-1/3 FQAH state in twisted MoTe2.",
+      "provenance": [
+        {
+          "method": "Codex curation pass from arXiv abstract",
+          "source": "https://arxiv.org/abs/2602.04561"
+        }
+      ],
+      "score": 23,
+      "summary": "The 2026 arXiv/PRL report says PL and RMCD identify ferromagnetic states at nu=-1, -2/3, and -1/3, with Curie temperatures about 11 K, 3.5 K, and 2.4 K; the nu=-1/3 state has a narrower electric-field range and lower temperature scale.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 10,
+      "id": "paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif",
+      "label": "Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41467-026-71479-9"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        }
+      ],
+      "score": 22,
+      "summary": "antiferromagnetic and FCI ground states can compete in intermediate-angle devices, with electric field switching between regimes Use for: interpreting weak zero-field magnetic signals or strong displacement-field sensitivity",
+      "type": "Paper"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 4,
+      "id": "claim:promoted_2304_fqah_streda_optical_mcd",
+      "label": "MCD and trion PL support zero-field FQAH states in 3.7 degree twisted MoTe2 at nu=-2/3 and -3/5.",
+      "provenance": [
+        {
+          "method": "Codex curation pass from arXiv abstract",
+          "source": "https://arxiv.org/abs/2304.08470"
+        }
+      ],
+      "score": 22,
+      "summary": "The arXiv/Nature report states that MCD reveals robust ferromagnetic fractional states and trion PL Landau-fan shifts at nu=-2/3 and -3/5 matching Streda dispersions for fractionally quantized Hall conductance; nu=-1 behaves as a C=-1 QAH state.",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:semiconductor_moire_materials_semiconductor_moire_materials_should_be_viewed_as_a_unified_field",
+      "label": "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/semiconductor_moire_foundations.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41565-022-01165-6"
+        }
+      ],
+      "score": 22,
+      "summary": "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states Use for: the best compact field review when orienting someone new to modern TMD moire physics",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 0,
+      "id": "claim:observation_of_fractionally_quantized_anomalous_hall_effect_direct_hall_plateau_evidence_for_iqa",
+      "label": "direct Hall-plateau evidence for IQAH and FQAH in twisted bilayer MoTe2",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-023-06536-0"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        }
+      ],
+      "score": 21,
+      "summary": "direct Hall-plateau evidence for IQAH and FQAH in twisted bilayer MoTe2 plateaus near `h/e^2`, `3h/2e^2`, and `5h/3e^2` Use for: strongest direct-transport phrasing",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 1,
+      "id": "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "label": "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://arxiv.org/abs/2508.18639"
+        }
+      ],
+      "score": 20,
+      "summary": "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe Use for: the next-step logic where PL helicity and optical drive can manipulate correlated topology directly",
+      "type": "Claim"
+    },
+    {
+      "confidence": "medium",
+      "edge_count": 0,
+      "id": "claim:thermodynamic_evidence_of_fractional_chern_insulator_in_moire_mote2_compressibility_plus_magneto",
+      "label": "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators",
+      "provenance": [
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/moire_tmote2.md"
+        },
+        {
+          "method": "source link from paper shelf",
+          "source": "https://www.nature.com/articles/s41586-023-06452-3"
+        },
+        {
+          "method": "deterministic paper-shelf ingest",
+          "source": "lab_assistant/knowledge/papers/transport_and_thermodynamics.md"
+        }
+      ],
+      "score": 20,
+      "summary": "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators incompressible, time-reversal-breaking states near `nu = 1` and `2/3` Use for: thermodynamic or bulk arguments",
+      "type": "Claim"
+    },
+    {
+      "confidence": "low",
+      "edge_count": 2,
+      "id": "paper:spectral_evidence_for_local_moment_ferromagnetism_in_van_der_waals_metals_fe3gat",
+      "label": "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2",
+      "provenance": [
+        {
+          "method": "official xu group publications ingest",
+          "source": "https://sites.google.com/uw.edu/xulab/publications"
+        }
+      ],
+      "score": 18,
+      "summary": "Official Xu Group publication (2024). Topics: vdw_magnetism.",
+      "type": "Paper"
+    }
+  ],
+  "latency_ms": 44.09041703911498,
+  "matched_evidence_groups": [
+    0,
+    1,
+    2
+  ],
+  "missed_evidence_groups": [],
+  "mrr": 1.0,
+  "ndcg_at_k": 1.0,
+  "precision_at_k": 0.7,
+  "recall_at_k": 1.0,
+  "top_hit_labels": [
+    "optical probes can be primary evidence for correlated states",
+    "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures",
+    "PL and RMCD optically detect a fragile nu=-1/3 FQAH state in twisted MoTe2.",
+    "Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2",
+    "MCD and trion PL support zero-field FQAH states in 3.7 degree twisted MoTe2 at nu=-2/3 and -3/5.",
+    "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+    "direct Hall-plateau evidence for IQAH and FQAH in twisted bilayer MoTe2",
+    "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+    "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators",
+    "Spectral Evidence for Local-Moment Ferromagnetism in van der Waals Metals Fe3GaTe2 and Fe3GeTe2"
+  ]
+}
