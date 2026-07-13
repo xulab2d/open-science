@@ -1,0 +1,21 @@
+{
+  "skill_id": "scientific-synthesis",
+  "version": "1.0.0",
+  "purpose": "Generate, critique, and structure scientific hypotheses from grounded claims and contradictions.",
+  "inputs": [
+    {"name": "query", "type": "string"},
+    {"name": "supporting_claims", "type": "list"},
+    {"name": "contradicting_claims", "type": "list"}
+  ],
+  "outputs": [
+    {"name": "hypothesis", "type": "HypothesisObject"},
+    {"name": "memory_mutation", "type": "proposal"}
+  ],
+  "task_types": ["synthesis", "hypothesis_generation"],
+  "latency_budget_ms": 5000,
+  "context_max_chars": 2200,
+  "eval_suites": ["synthesis"],
+  "target_metrics": ["groundedness", "falsifiability", "actionability", "provenance_completeness"],
+  "failure_modes": ["hypothesis is prose blob", "no falsifying observation", "contradictions omitted", "direct graph insertion without mutation record"],
+  "promotion_policy": "Promote synthesis prompt changes only when rubric scores improve and provenance completeness stays high."
+}

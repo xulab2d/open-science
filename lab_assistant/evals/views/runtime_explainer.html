@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenScience Runtime Explainer</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --paper: #ffffff;
+      --ink: #111827;
+      --muted: #4b5563;
+      --line: #d7dce6;
+      --blue: #2563eb;
+      --soft-blue: #eff6ff;
+      --soft-yellow: #fffbeb;
+      --yellow: #b45309;
+      --green: #047857;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    main { max-width: 1220px; margin: 0 auto; padding: 34px 24px 60px; }
+    header, section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 24px;
+      margin: 18px 0;
+    }
+    h1 { margin: 0 0 10px; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 24px; letter-spacing: 0; }
+    h3 { margin: 18px 0 8px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .lead { max-width: 960px; color: var(--muted); font-size: 17px; }
+    .callout {
+      border-left: 4px solid var(--blue);
+      background: var(--soft-blue);
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 14px 0;
+    }
+    .warning {
+      border-left: 4px solid var(--yellow);
+      background: var(--soft-yellow);
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 14px 0;
+    }
+    .status-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: var(--muted);
+      background: #fff;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .pill strong { color: var(--ink); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+    }
+    .card-label { color: var(--muted); font-size: 13px; }
+    .card-value { font-size: 25px; font-weight: 750; margin: 3px 0 5px; }
+    .card-note { color: var(--muted); font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; vertical-align: top; }
+    th { background: #fafbfc; color: var(--muted); font-weight: 700; }
+    code {
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 12px;
+    }
+    .visual {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      overflow: auto;
+      background: #fff;
+      margin-top: 12px;
+    }
+    .visual svg { display: block; width: 100%; height: auto; min-width: 680px; }
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 16px;
+    }
+    details.fixture-details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 14px 0;
+      background: #fff;
+    }
+    details.fixture-details summary {
+      cursor: pointer;
+      font-weight: 750;
+      font-size: 16px;
+    }
+    .fixture-table th:nth-child(1) { width: 16%; }
+    .fixture-table th:nth-child(2) { width: 18%; }
+    .fixture-table th:nth-child(3) { width: 27%; }
+    .fixture-table th:nth-child(4) { width: 17%; }
+    .fixture-table th:nth-child(5) { width: 22%; }
+    .pass { color: var(--green); font-weight: 700; }
+    .muted-small { color: var(--muted); font-size: 12px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    .commands {
+      background: #101827;
+      color: #f9fafb;
+      border-radius: 8px;
+      padding: 14px;
+      overflow: auto;
+      font-size: 13px;
+    }
+    @media (max-width: 760px) {
+      main { padding: 18px 12px 42px; }
+      header, section { padding: 16px; }
+      .two-col { grid-template-columns: 1fr; }
+      .visual svg { min-width: 560px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>OpenScience Runtime Explainer</h1>
+    <p class="lead">This is not just a dashboard. It explains what the system is trying to do, what machinery now exists, what the current tests actually check, what those tests say, and how to monitor whether the assistant is genuinely learning the lab’s science and context.</p>
+    <div class="status-row">
+      <span class="pill"><strong>27/27</strong> smoke fixtures passed</span>
+      <span class="pill"><strong>0.923</strong> recall@5</span>
+      <span class="pill"><strong>0.481</strong> precision@5</span>
+      <span class="pill"><strong>1.000</strong> context stability</span>
+      <span class="pill"><strong>9.0/19.4 ms</strong> p50/p95 local latency</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>What The System Is Here To Do</h2>
+    <div class="callout">
+      <p>The goal is a provenance-aware scientific assistant that can retrieve lab and literature context, compile only the context needed for a task, preserve what happened as replayable trajectory data, propose improvements as candidates, and promote only changes that improve measured behavior without protected regressions.</p>
+      <p>The current implementation is the measurement and safety substrate. It does not yet make the assistant scientifically autonomous. It makes future learning inspectable: what was retrieved, why it was included, what changed, whether it helped, and what regressed.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Machinery Now In Place</h2>
+    <div class="visual">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1030" height="280" viewBox="0 0 1030 280" role="img" aria-label="Runtime closed-loop architecture">
+      <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2563eb"/></marker></defs>
+      <rect width="1030" height="280" fill="#ffffff"/>
+      <text x="30" y="35" font-family="Arial" font-size="19" font-weight="700" fill="#111827">Closed-loop runtime machinery</text>
+      <line x1="158" y1="99" x2="198" y2="99" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="326" y1="99" x2="366" y2="99" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="494" y1="99" x2="534" y2="99" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="662" y1="99" x2="702" y2="99" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="766" y1="126" x2="430" y2="190" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="494" y1="217" x2="534" y2="217" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="662" y1="217" x2="702" y2="217" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="830" y1="217" x2="870" y2="217" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><line x1="934" y1="190" x2="598" y2="126" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/>
+      <rect x="30" y="72" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="94" y="104" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">User / task</text><rect x="198" y="72" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="262" y="104" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Memory snapshot</text><rect x="366" y="72" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="430" y="104" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Context compiler</text><rect x="534" y="72" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="598" y="104" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Graph + skills</text><rect x="702" y="72" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="766" y="104" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Answer / action</text><rect x="366" y="190" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="430" y="222" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Trajectory</text><rect x="534" y="190" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="598" y="222" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Eval harness</text><rect x="702" y="190" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="766" y="222" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Candidate archive</text><rect x="870" y="190" width="128" height="54" rx="7" fill="#ffffff" stroke="#cbd5e1"/><text x="934" y="222" text-anchor="middle" font-family="Arial" font-size="13" fill="#111827">Promote / reject</text>
+      <text x="366" y="262" font-family="Arial" font-size="12" fill="#4b5563">The loop is only trustworthy if trajectories, evals, candidate decisions, and memory snapshots stay linked.</text>
+    </svg>
+    </div>
+    <table><thead><tr><th>Component</th><th>What it does</th><th>Why it matters</th></tr></thead><tbody><tr><td>Trajectory store</td><td>Records what task was attempted, which memory/context snapshot was used, which context pack was compiled, what steps ran, and what scores were attached.</td><td>This is the substrate for replay, debugging, and future optimization.</td></tr><tr><td>Dynamic context compiler</td><td>Chooses compact context by task type instead of loading all canonical files. It records why each item was included or excluded.</td><td>This makes context selection measurable and repeatable.</td></tr><tr><td>Belief/fact graph</td><td>Keeps JSONL as source of truth while adding optional scientific status fields and task-aware search routes.</td><td>This separates papers, claims, hypotheses, evidence, contradictions, and observables.</td></tr><tr><td>Candidate archive</td><td>Creates proposed changes with lineage, target metrics, protected metrics, attached evals, and promote/reject decisions.</td><td>This follows the archive-plus-evaluation pattern instead of direct self-editing.</td></tr><tr><td>Eval harness</td><td>Runs structured fixtures and writes JSONL results, summary JSON, comparison output, and reports.</td><td>This turns runtime changes into measurable deltas rather than anecdotes.</td></tr><tr><td>Structured synthesis scaffold</td><td>Generates hypothesis objects with claims, contradictions, prediction, minimal test, falsifier, risks, confidence, and provenance.</td><td>This is the first step toward generate -&gt; critique -&gt; evolve loops, but not the full loop yet.</td></tr></tbody></table>
+  </section>
+
+  <section>
+    <h2>How This Maps To The Recommendations</h2>
+    <p>The implementation listened to the recommendations in the sense that it created the hooks for archive, trajectory, routed memory, and measured skills. Several recommendations are only partial, and that should be visible rather than hidden.</p>
+    <table><thead><tr><th>Recommendation</th><th>Current status</th><th>Implemented</th><th>Still missing</th></tr></thead><tbody><tr><td>Darwin Godel Machine / AlphaEvolve style archive + empirical eval</td><td>Partially implemented</td><td>Candidate records, attached eval results, promote/reject decisions, protected-regression comparison.</td><td>No isolated worktree patch runner or automatic promotion gate yet.</td></tr><tr><td>Co-Scientist / AI Scientist generate -&gt; critique -&gt; evolve</td><td>Scaffold only</td><td>Structured hypothesis object and rubric exist.</td><td>No real multi-round generation, critique, ranking, or evolution loop yet.</td></tr><tr><td>Mem0 / Zep / Graphiti selective temporal memory</td><td>Partially implemented</td><td>Task-routed context packs, provenance, graph status fields, memory snapshot hashes.</td><td>No temporal consolidation daemon or stale-fact monitoring dashboard yet.</td></tr><tr><td>DSPy / GEPA measurable skills</td><td>Partially implemented</td><td>Skill YAML metadata with task types, inputs/outputs, latency budgets, eval suites.</td><td>No prompt optimizer or skill variant search loop yet.</td></tr><tr><td>tau-bench trajectory evaluation</td><td>Initial implementation</td><td>Trajectory schema records context choices, steps, outputs, mutations, scores; replay evals exist.</td><td>Production assistant calls are not yet fully instrumented step by step.</td></tr></tbody></table>
+  </section>
+
+  <section>
+    <h2>Current Metrics At A Glance</h2>
+    <div class="grid">
+        <article class="card">
+          <div class="card-label">Pass rate</div>
+          <div class="card-value">1.000</div>
+          <div class="card-note">All smoke fixtures pass; not proof of scientific correctness.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Retrieval recall@5</div>
+          <div class="card-value">0.923</div>
+          <div class="card-note">Expected evidence usually appears in top results.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">MRR</div>
+          <div class="card-value">0.887</div>
+          <div class="card-note">First expected hit is usually early.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Precision@5</div>
+          <div class="card-value">0.481</div>
+          <div class="card-note">Weakest retrieval metric; broad context remains noisy.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Provenance coverage</div>
+          <div class="card-value">1.000</div>
+          <div class="card-note">Fixture hits carry provenance metadata.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Context stability</div>
+          <div class="card-value">1.000</div>
+          <div class="card-note">Deterministic context pack IDs under same snapshot.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Replay Jaccard</div>
+          <div class="card-value">1.000</div>
+          <div class="card-note">Replayed context item set matches original.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Latency p50/p95</div>
+          <div class="card-value">9.0/19.4 ms</div>
+          <div class="card-note">Local deterministic runs only.</div>
+        </article>
+        </div>
+    <div class="two-col">
+      <div class="visual"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="378" viewBox="0 0 900 378">
+<rect width="900" height="378" fill="#ffffff"/>
+<text x="28.0" y="34.0" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#111827">Eval Suite Pass Rates</text>
+<text x="28.0" y="58.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#4b5563">27/27 tasks passed, pass rate 1.000</text>
+<text x="220.0" y="78.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#4b5563">0</text>
+<text x="736.0" y="78.0" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#4b5563">100%</text>
+<line x1="220" y1="84" x2="760" y2="84" stroke="#e5e7eb" stroke-width="1"/>
+<text x="28.0" y="104.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">context_pack</text>
+<rect x="220.0" y="89.0" width="540.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="220.0" y="89.0" width="540.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="778.0" y="104.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">5/5</text>
+<text x="28.0" y="146.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">memory_write</text>
+<rect x="220.0" y="131.0" width="540.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="220.0" y="131.0" width="540.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="778.0" y="146.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">3/3</text>
+<text x="28.0" y="188.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">paper_lookup</text>
+<rect x="220.0" y="173.0" width="540.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="220.0" y="173.0" width="540.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="778.0" y="188.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">5/5</text>
+<text x="28.0" y="230.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">replay</text>
+<rect x="220.0" y="215.0" width="540.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="220.0" y="215.0" width="540.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="778.0" y="230.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">3/3</text>
+<text x="28.0" y="272.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">retrieval</text>
+<rect x="220.0" y="257.0" width="540.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="220.0" y="257.0" width="540.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="778.0" y="272.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">8/8</text>
+<text x="28.0" y="314.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">synthesis</text>
+<rect x="220.0" y="299.0" width="540.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="220.0" y="299.0" width="540.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="778.0" y="314.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">3/3</text>
+</svg>
+</div>
+      <div class="visual"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430">
+<rect width="900" height="430" fill="#ffffff"/>
+<text x="28.0" y="34.0" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#111827">Runtime Quality Metrics</text>
+<text x="28.0" y="58.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#4b5563">Bars are normalized to each metric scale; synthesis uses a 0-5 rubric.</text>
+<text x="28.0" y="100.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">retrieval recall@5</text>
+<rect x="250.0" y="86.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="86.0" width="433.8" height="17.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="100.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">0.923</text>
+<text x="28.0" y="138.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">retrieval MRR</text>
+<rect x="250.0" y="124.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="124.0" width="417.0" height="17.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="138.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">0.887</text>
+<text x="28.0" y="176.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">precision@5</text>
+<rect x="250.0" y="162.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="162.0" width="226.0" height="17.0" rx="3" fill="#dc2626"/>
+<text x="738.0" y="176.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">0.481</text>
+<text x="28.0" y="214.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">provenance coverage</text>
+<rect x="250.0" y="200.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="200.0" width="470.0" height="17.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="214.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">1.000</text>
+<text x="28.0" y="252.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">context relevance</text>
+<rect x="250.0" y="238.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="238.0" width="470.0" height="17.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="252.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">1.000</text>
+<text x="28.0" y="290.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">context hash stability</text>
+<rect x="250.0" y="276.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="276.0" width="470.0" height="17.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="290.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">1.000</text>
+<text x="28.0" y="328.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">replay hash match</text>
+<rect x="250.0" y="314.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="314.0" width="470.0" height="17.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="328.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">1.000</text>
+<text x="28.0" y="366.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">synthesis score</text>
+<rect x="250.0" y="352.0" width="470.0" height="17.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="352.0" width="429.7" height="17.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="366.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">4.57/5</text>
+</svg>
+</div>
+      <div class="visual"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="336" viewBox="0 0 900 336">
+<rect width="900" height="336" fill="#ffffff"/>
+<text x="28.0" y="34.0" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#111827">Latency Snapshot</text>
+<text x="28.0" y="58.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#4b5563">Milliseconds from deterministic eval runs; small timing drift is expected.</text>
+<text x="28.0" y="102.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">overall p50</text>
+<rect x="250.0" y="87.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="87.0" width="97.9" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="102.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">9.0 ms</text>
+<text x="28.0" y="144.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">overall p95</text>
+<rect x="250.0" y="129.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="129.0" width="211.1" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="144.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">19.4 ms</text>
+<text x="28.0" y="186.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">overall mean</text>
+<rect x="250.0" y="171.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="171.0" width="139.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="186.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">12.8 ms</text>
+<text x="28.0" y="228.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">graph search mean</text>
+<rect x="250.0" y="213.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="213.0" width="108.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="228.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">9.9 ms</text>
+<text x="28.0" y="270.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">context compile mean</text>
+<rect x="250.0" y="255.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="255.0" width="470.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="270.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">43.2 ms</text>
+</svg>
+</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What The Metrics Mean</h2>
+    <table><thead><tr><th>Metric</th><th>Definition and trust boundary</th></tr></thead><tbody><tr><td><strong>recall@5</strong></td><td>Fraction of expected fixture labels/IDs found in the top 5 retrieved items. High means the expected evidence is present.</td></tr><tr><td><strong>precision@5</strong></td><td>Fraction of top 5 retrieved items that match expected labels/IDs. Low values mean retrieval is broad or noisy.</td></tr><tr><td><strong>MRR</strong></td><td>Mean reciprocal rank of the first relevant result. 1.0 means the first hit matched the expectation.</td></tr><tr><td><strong>provenance coverage</strong></td><td>Fraction of retrieved eval hits carrying provenance metadata.</td></tr><tr><td><strong>low-confidence unsupported use</strong></td><td>Fraction of low-confidence hits without provenance. Lower is better.</td></tr><tr><td><strong>context relevance</strong></td><td>Coverage of required fixture paths, item IDs, and item kinds in a context pack.</td></tr><tr><td><strong>context hash stability</strong></td><td>Whether the same task and snapshot produce the same context_pack_id.</td></tr><tr><td><strong>retrieved-item Jaccard</strong></td><td>Overlap between original and replayed context item IDs.</td></tr><tr><td><strong>invalid mutation rate</strong></td><td>Whether a memory mutation failed the candidate/provenance gate. For the missing-candidate fixture, failure is expected.</td></tr><tr><td><strong>synthesis score</strong></td><td>Mean deterministic rubric score across groundedness, falsifiability, mechanism clarity, contradiction awareness, novelty, actionability, and provenance.</td></tr></tbody></table>
+    <div class="warning">
+      <p>The pass rate is not a claim that the assistant is scientifically reliable. It means the new runtime loops are measurable and currently satisfy a small set of explicit fixtures. The weakest aggregate signal is precision@5 = 0.481, which means retrieval often brings broad related material along with the expected hit.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Test Transparency</h2>
+    <p>Each row below shows the fixture contract, threshold, and observed result. This is the part that should make the tests less of a black box.</p>
+
+    <details class="fixture-details" open>
+      <summary>context_pack: 5 fixtures</summary>
+      <p>Task-routed context compilation: does each task include required skills, graph items, and project/knowledge files inside budget?</p>
+      <table class="fixture-table">
+        <thead>
+          <tr><th>Fixture</th><th>Task/query</th><th>Expected contract</th><th>Thresholds</th><th>Observed result</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><code>context_paper_lookup_001</code></td>
+              <td>moire exciton optical signatures</td>
+              <td>paths: lab_assistant/knowledge/INDEX.md, lab_assistant/skills/reference-retrieval.md | item IDs: skill_metadata:reference-retrieval | kinds: graph_node</td>
+              <td>char_budget=14000, required_coverage_min=1.0, max_chars=14000, irrelevant_rate_max=0.0</td>
+              <td><span class="pass">True</span><br>context_relevance=1, context_chars=13939, context_hash_stability=1, latency_ms=18<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>context_claim_lookup_001</code></td>
+              <td>RMCD hysteresis magnetic transition</td>
+              <td>paths: lab_assistant/graph/README.md, lab_assistant/skills/fact-graph.md | item IDs: skill_metadata:fact-graph | kinds: graph_node, graph_edge</td>
+              <td>char_budget=12000, required_coverage_min=1.0, max_chars=12000, irrelevant_rate_max=0.0</td>
+              <td><span class="pass">True</span><br>context_relevance=1, context_chars=11997, context_hash_stability=1, latency_ms=15<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>context_synthesis_001</code></td>
+              <td>optical readout of correlated moire states</td>
+              <td>paths: lab_assistant/knowledge/INDEX.md, lab_assistant/skills/scientific-synthesis.md | item IDs: skill_metadata:scientific-synthesis | kinds: graph_node</td>
+              <td>char_budget=16000, required_coverage_min=1.0, max_chars=16000, irrelevant_rate_max=0.0</td>
+              <td><span class="pass">True</span><br>context_relevance=1, context_chars=15850, context_hash_stability=1, latency_ms=20<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>context_memory_update_001</code></td>
+              <td>record a corrected plotting convention with provenance</td>
+              <td>paths: lab_assistant/improvements/README.md, lab_assistant/memory/review_log.md, lab_assistant/skills/knowledge-maintenance.md | item IDs: skill_metadata:knowledge-maintenance | kinds: core</td>
+              <td>char_budget=12000, required_coverage_min=1.0, max_chars=12000, irrelevant_rate_max=0.0</td>
+              <td><span class="pass">True</span><br>context_relevance=1, context_chars=11888, context_hash_stability=1, latency_ms=14<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>context_project_status_001</code></td>
+              <td>what changed in active tMoTe2 projects</td>
+              <td>paths: lab_assistant/context/projects/active_projects.md, lab_assistant/knowledge/projects/README.md | item IDs: skill_metadata:background-cataloguing | kinds: project_summary</td>
+              <td>char_budget=12000, required_coverage_min=1.0, max_chars=12000, irrelevant_rate_max=0.0</td>
+              <td><span class="pass">True</span><br>context_relevance=1, context_chars=9343, context_hash_stability=1, latency_ms=149<br><span class="muted-small"></span></td>
+            </tr>
+            </tbody>
+      </table>
+    </details>
+
+
+    <details class="fixture-details" open>
+      <summary>memory_write: 3 fixtures</summary>
+      <p>Candidate-gated durable memory: are proposed mutations linked to candidates, decisions, and provenance warnings?</p>
+      <table class="fixture-table">
+        <thead>
+          <tr><th>Fixture</th><th>Task/query</th><th>Expected contract</th><th>Thresholds</th><th>Observed result</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><code>memory_write_candidate_valid_001</code></td>
+              <td>Candidate-gated memory proposals improve provenance completeness.</td>
+              <td>valid mutation: True</td>
+              <td>none</td>
+              <td><span class="pass">True</span><br>invalid_mutation_rate=0, provenance_completeness=1, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>memory_write_reject_missing_candidate_001</code></td>
+              <td>Direct durable memory edits without candidates should be warned or blocked.</td>
+              <td>valid mutation: False</td>
+              <td>none</td>
+              <td><span class="pass">True</span><br>invalid_mutation_rate=1, provenance_completeness=0, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>memory_write_contradiction_link_001</code></td>
+              <td>Memory updates that change scientific status should link contradictions.</td>
+              <td>valid mutation: True</td>
+              <td>none</td>
+              <td><span class="pass">True</span><br>invalid_mutation_rate=0, provenance_completeness=1, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+            </tbody>
+      </table>
+    </details>
+
+
+    <details class="fixture-details" open>
+      <summary>paper_lookup: 5 fixtures</summary>
+      <p>Paper-first retrieval: can paper queries return Paper nodes before falling back to linked claims?</p>
+      <table class="fixture-table">
+        <thead>
+          <tr><th>Fixture</th><th>Task/query</th><th>Expected contract</th><th>Thresholds</th><th>Observed result</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><code>paper_lookup_moire_exciton_001</code></td>
+              <td>moire exciton optical signatures</td>
+              <td>retrieve any: label contains &quot;Moire excitons&quot;; label contains &quot;Signatures of moiré-trapped valley excitons&quot; | types: Paper</td>
+              <td>k=8, recall_at_k_min=0.5, mrr_min=0.1, precision_at_k_min=0.1, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.25, mrr=0.2, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=11<br><span class="muted-small">Top hits: Paper: Optical signatures of -1/3 fractional quantum anomalous Hall state in twisted MoTe2 / Paper: Nano-optical imaging of the tailored exciton-polariton transport in MoSe2 waveguides / Paper: Nano-optical imaging of exciton polaritons inside WSe2 waveguides</span></td>
+            </tr>
+
+            <tr>
+              <td><code>paper_lookup_magnetic_proximity_001</code></td>
+              <td>magnetic proximity wse2 cri3</td>
+              <td>retrieve any: label contains &quot;Valley Manipulation by Optically Tuning the Magnetic Proximity Effect&quot;; label contains &quot;Magnetic Proximity&quot; | types: Paper</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.1, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.6, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=11<br><span class="muted-small">Top hits: Paper: Valley Manipulation by Optically Tuning the Magnetic Proximity Effect in WSe2/CrI3 Heterostructures / Paper: Magnetic proximity and nonreciprocal current switching in a monolayer WTe2 helical edge / Paper: Layer-Resolved Magnetic Proximity Effect in van der Waals Heterostructures</span></td>
+            </tr>
+
+            <tr>
+              <td><code>paper_lookup_bilayer_cri3_001</code></td>
+              <td>gate control bilayer cri3 magnetism</td>
+              <td>retrieve any: label contains &quot;Electrical control of 2D magnetism in bilayer CrI3&quot; | types: Paper</td>
+              <td>k=5, recall_at_k_min=1.0, mrr_min=0.2, precision_at_k_min=0.1, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.2, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=11<br><span class="muted-small">Top hits: Paper: Electrical control of 2D magnetism in bilayer CrI3 / Paper: Stacking-Dependent Magnetism in Bilayer CrI3 / Paper: Giant and nonreciprocal second harmonic generation from layered antiferromagnetism in bilayer CrI3</span></td>
+            </tr>
+
+            <tr>
+              <td><code>paper_lookup_interlayer_exciton_001</code></td>
+              <td>interlayer exciton mose2 wse2</td>
+              <td>retrieve any: label contains &quot;Observation of Long-Lived Interlayer Excitons&quot;; label contains &quot;Correlated interlayer exciton insulator&quot; | types: Paper</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.1, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.4, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=11<br><span class="muted-small">Top hits: Paper: Observation of Long-Lived Interlayer Excitons in Monolayer MoSe2-WSe2 Heterostructures / Paper: Correlated interlayer exciton insulator in heterostructures of monolayer WSe2 and moiré WS2/WSe2 / Paper: Coherent exciton-exciton interactions and exciton dynamics in a MoSe2-WSe2 heterostructure</span></td>
+            </tr>
+
+            <tr>
+              <td><code>paper_lookup_wte2_edge_001</code></td>
+              <td>edge conduction monolayer wte2</td>
+              <td>retrieve any: label contains &quot;Edge conduction in monolayer WTe2&quot;; label contains &quot;Imaging Quantum Spin Hall Edges&quot; | types: Paper</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.1, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.4, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=11<br><span class="muted-small">Top hits: Paper: Edge conduction in monolayer WTe2 / Paper: Magnetic proximity and nonreciprocal current switching in a monolayer WTe2 helical edge / Paper: Imaging Quantum Spin Hall Edges in Monolayer WTe2</span></td>
+            </tr>
+            </tbody>
+      </table>
+    </details>
+
+
+    <details class="fixture-details" open>
+      <summary>replay: 3 fixtures</summary>
+      <p>Repeatability: does a recorded task rebuild the same context pack and item set on the same memory snapshot?</p>
+      <table class="fixture-table">
+        <thead>
+          <tr><th>Fixture</th><th>Task/query</th><th>Expected contract</th><th>Thresholds</th><th>Observed result</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><code>replay_claim_lookup_001</code></td>
+              <td>RMCD hysteresis magnetic transition</td>
+              <td>same context pack: True</td>
+              <td>jaccard_min=1.0</td>
+              <td><span class="pass">True</span><br>retrieved_item_jaccard=1, replay_context_hash_match=1, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>replay_paper_lookup_001</code></td>
+              <td>moire exciton optical signatures</td>
+              <td>same context pack: True</td>
+              <td>jaccard_min=1.0</td>
+              <td><span class="pass">True</span><br>retrieved_item_jaccard=1, replay_context_hash_match=1, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>replay_memory_update_001</code></td>
+              <td>record a corrected plotting convention with provenance</td>
+              <td>same context pack: True</td>
+              <td>jaccard_min=1.0</td>
+              <td><span class="pass">True</span><br>retrieved_item_jaccard=1, replay_context_hash_match=1, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+            </tbody>
+      </table>
+    </details>
+
+
+    <details class="fixture-details" open>
+      <summary>retrieval: 8 fixtures</summary>
+      <p>Claim lookup over the fact graph: can the route retrieve expected claim-like records with provenance?</p>
+      <table class="fixture-table">
+        <thead>
+          <tr><th>Fixture</th><th>Task/query</th><th>Expected contract</th><th>Thresholds</th><th>Observed result</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><code>retrieval_fractional_chern_optical_control_001</code></td>
+              <td>fractional Chern optical control</td>
+              <td>retrieve any: label contains &quot;optical pumping&quot;; label contains &quot;fractional Chern&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=1, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=10<br><span class="muted-small">Top hits: Claim: optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe / Claim: Optical switching of integer and fractional Chern ferromagnets enables bistate cycling and domain-wall writing in twisted MoTe2. / Claim: local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states</span></td>
+            </tr>
+
+            <tr>
+              <td><code>retrieval_rmcd_hysteresis_001</code></td>
+              <td>RMCD hysteresis magnetic transition</td>
+              <td>retrieve any: label contains &quot;RMCD&quot;; label contains &quot;hysteresis&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.8, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=9<br><span class="muted-small">Top hits: Claim: D93 Run2 deck reports a near-nu=-2 RMCD magnetic/saturation feature that strengthens with displacement field but lacks clear hysteresis. / Claim: moderate strain can reversibly drive a magnetic phase transition in a van der Waals magnet / OpenQuestion: Why does D93 show near-nu=-2 magnetic/saturation contrast without robust hysteresis?</span></td>
+            </tr>
+
+            <tr>
+              <td><code>retrieval_moire_exciton_claim_001</code></td>
+              <td>moire exciton optical signatures</td>
+              <td>retrieve any: label contains &quot;moiré potential&quot;; label contains &quot;moire excitons&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.4, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=9<br><span class="muted-small">Top hits: Claim: interlayer excitons can be trapped by the moiré potential and inherit strong valley-selective optical signatures / Claim: moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton / Claim: correlated interlayer exciton insulating behavior can emerge in a moire-coupled semiconductor heterostructure and be resolved optically</span></td>
+            </tr>
+
+            <tr>
+              <td><code>retrieval_second_moire_band_001</code></td>
+              <td>second moire band ferromagnetism</td>
+              <td>retrieve any: label contains &quot;second moiré band&quot;; label contains &quot;ferromagnetic&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=0.5, precision_at_5=0.2, mrr=0.333, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=9<br><span class="muted-small">Top hits: Claim: second-band ferromagnetism is independently observed and controlled by density and displacement field / Claim: independent evidence for second-band ferromagnetism tuned by density and displacement field / Claim: the second moiré band hosts its own ferromagnetism, field-driven Chern behavior, and unusual magnetotransport</span></td>
+            </tr>
+
+            <tr>
+              <td><code>retrieval_hubbard_wse2_001</code></td>
+              <td>field tunable twisted WSe2 bilayer Hubbard model electric field</td>
+              <td>retrieve any: label contains &quot;field-tunable bilayer Hubbard&quot;; label contains &quot;electric field&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.2, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=9<br><span class="muted-small">Top hits: Claim: twisted AB WSe2 realizes a field-tunable bilayer Hubbard model with excitonic, charge-transfer, magnetic, and layer-selective insulating regimes / Claim: WSe2/WS2 moire heterobilayers experimentally realize tunable Hubbard-model physics with doping-controlled correlated insulating behavior / Claim: an applied layer potential difference can tune band topology, Mott gaps, spin-orbit terms, and effective Dzyaloshinskii-Moriya interactions in twisted bilayer WSe2</span></td>
+            </tr>
+
+            <tr>
+              <td><code>retrieval_magnetic_proximity_001</code></td>
+              <td>magnetic proximity wse2 cri3 valley optical</td>
+              <td>retrieve any: label contains &quot;magnetic proximity&quot;; label contains &quot;WSe2&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.6, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=9<br><span class="muted-small">Top hits: Claim: optical spectroscopy can resolve and tune magnetic proximity effects in WSe2/CrI3 / Claim: coupling monolayer WTe2 to CrI3 gaps and reprograms the helical edge through magnetic proximity, producing a very large nonreciprocal current set by the CrI3 magnetic state / Mechanism: magnetic proximity effect</span></td>
+            </tr>
+
+            <tr>
+              <td><code>retrieval_edge_wte2_001</code></td>
+              <td>edge conduction monolayer WTe2 helical edge</td>
+              <td>retrieve any: label contains &quot;edge conduction&quot;; label contains &quot;helical edge&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=0.5, precision_at_5=0.6, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=10<br><span class="muted-small">Top hits: Claim: coupling monolayer WTe2 to CrI3 gaps and reprograms the helical edge through magnetic proximity, producing a very large nonreciprocal current set by the CrI3 magnetic state / Claim: monolayer WTe2 develops an insulating bulk while its edges remain conducting below about `100 K`, consistent with a 2D topological-insulator edge mode / Claim: electrostatic doping can drive monolayer WTe2 from a quantum-spin-Hall regime into superconductivity</span></td>
+            </tr>
+
+            <tr>
+              <td><code>retrieval_compressibility_fci_001</code></td>
+              <td>fractional Chern insulator local probe bulk edge compressibility</td>
+              <td>retrieve any: label contains &quot;local probe&quot;; label contains &quot;bulk evidence&quot; | types: Claim</td>
+              <td>k=5, recall_at_k_min=0.5, mrr_min=0.2, precision_at_k_min=0.2, max_latency_ms=3000, require_provenance=True</td>
+              <td><span class="pass">True</span><br>retrieval_recall_at_5=1, precision_at_5=0.6, mrr=1, provenance_coverage=1, low_confidence_unsupported_use=0, latency_ms=9<br><span class="muted-small">Top hits: Claim: local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport / Claim: local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states / Claim: at least some twisted-MoTe2 devices now reach a dissipationless fractional-Chern-insulator regime rather than only near-quantized transport</span></td>
+            </tr>
+            </tbody>
+      </table>
+    </details>
+
+
+    <details class="fixture-details" open>
+      <summary>synthesis: 3 fixtures</summary>
+      <p>Structured hypothesis scaffold: does hypothesis generation produce required fields and pass a deterministic rubric?</p>
+      <table class="fixture-table">
+        <thead>
+          <tr><th>Fixture</th><th>Task/query</th><th>Expected contract</th><th>Thresholds</th><th>Observed result</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><code>synthesis_optical_readout_001</code></td>
+              <td>optical readout of correlated moire states</td>
+              <td>rubric/threshold fixture</td>
+              <td>mean_score_min=3.0, provenance_completeness_min=2.0</td>
+              <td><span class="pass">True</span><br>provenance_completeness=5, synthesis_mean_score=4.57, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>synthesis_rmcd_hysteresis_001</code></td>
+              <td>RMCD hysteresis magnetic transition</td>
+              <td>rubric/threshold fixture</td>
+              <td>mean_score_min=3.0, provenance_completeness_min=2.0</td>
+              <td><span class="pass">True</span><br>provenance_completeness=5, synthesis_mean_score=4.57, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+
+            <tr>
+              <td><code>synthesis_gate_control_001</code></td>
+              <td>displacement field control of magnetic ground states</td>
+              <td>rubric/threshold fixture</td>
+              <td>mean_score_min=3.0, provenance_completeness_min=2.0</td>
+              <td><span class="pass">True</span><br>provenance_completeness=5, synthesis_mean_score=4.57, latency_ms=0<br><span class="muted-small"></span></td>
+            </tr>
+            </tbody>
+      </table>
+    </details>
+
+  </section>
+
+  <section>
+    <h2>What The Tests Say</h2>
+    <div class="callout">
+      <p><strong>Supported by current tests:</strong> the runtime can build deterministic context packs, replay context choices, route paper lookup differently from claim lookup, enforce candidate/provenance checks for memory proposals, and emit machine-readable metrics.</p>
+      <p><strong>Not supported yet:</strong> robust scientific correctness, generalization to unseen lab questions, large-scale retrieval quality, temporal staleness handling, or real candidate self-improvement in isolated worktrees.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Current Limitations</h2>
+    <ul><li>The current fixtures are smoke tests, not a trusted scientific benchmark. Several thresholds are intentionally permissive.</li><li>The benchmark can be overfit because fixtures are local, visible, and small.</li><li>Retrieval is lexical plus task-aware filtering; there is no BM25/FTS index, vector baseline, or large-graph benchmark yet.</li><li>Context relevance checks required paths, item IDs, and item kinds, but not every included token&#x27;s scientific utility.</li><li>Synthesis scoring validates structure and provenance behavior, not scientific novelty or correctness.</li><li>Candidate records exist, but candidate patches are not applied and tested in isolated worktrees.</li><li>The trajectory runtime is used by evals and CLIs, but not yet automatically around every production assistant action.</li><li>Latency measurements are local deterministic timings, not NAS-scale or LLM-in-the-loop timings.</li></ul>
+  </section>
+
+  <section>
+    <h2>How To Monitor Learning And Efficacy</h2>
+    <p>An adaptable lab assistant needs longitudinal monitoring, not one-time pass/fail tests. These are the progress signals that should be tracked as it learns the lab corpus and context.</p>
+    <table><thead><tr><th>Monitor</th><th>Signal to track</th><th>What it tells us</th></tr></thead><tbody><tr><td><strong>Knowledge coverage</strong></td><td>Track graph nodes/edges by type, confidence, status, project, source type, and last_validated_at.</td><td>Shows whether the assistant is actually learning the lab corpus rather than only accumulating files.</td></tr><tr><td><strong>Retrieval quality over time</strong></td><td>Maintain a growing benchmark from real lab questions; report recall@k, MRR, precision@k, provenance coverage, and contradiction awareness.</td><td>Shows whether retrieval improves as memory grows or becomes noisier.</td></tr><tr><td><strong>Context efficiency</strong></td><td>Track context chars/tokens, required-evidence coverage, excluded-relevant count, and irrelevant item rate by task type.</td><td>Shows whether dynamic context compilation is getting leaner without losing evidence.</td></tr><tr><td><strong>Memory mutation quality</strong></td><td>Track proposed, promoted, rejected, duplicate, contradicted, stale, and unprovenanced mutations.</td><td>Shows whether self-improvement is selective and evidence-backed.</td></tr><tr><td><strong>User correction loop</strong></td><td>Record corrections, repeated misses, re-asks, and accepted answers as trajectory-linked feedback.</td><td>Shows whether the system is reducing repeated failures and capturing preferences durably.</td></tr><tr><td><strong>Scientific synthesis utility</strong></td><td>Track hypotheses generated, critiqued, refined, linked to evidence, tested, supported, weakened, or rejected.</td><td>Shows whether hypothesis machinery leads to testable progress rather than prose generation.</td></tr><tr><td><strong>Project freshness</strong></td><td>Track project summaries, daemon reports, owner clarifications, and graph claims by freshness/staleness.</td><td>Shows when the assistant is operating on old project context.</td></tr><tr><td><strong>Regression protection</strong></td><td>Run baseline-vs-candidate comparisons on protected suites before promoting retrieval policy, skills, graph schema, or memory rules.</td><td>Shows whether learning improves target metrics without damaging core behavior.</td></tr></tbody></table>
+  </section>
+
+  <section>
+    <h2>Stress Tests To Add Next</h2>
+    <table><thead><tr><th>Stress test</th><th>Test design</th><th>Why it matters</th></tr></thead><tbody><tr><td><strong>Holdout lab questions</strong></td><td>Create a blind set from real Slack/OpenScience questions not used while tuning policies.</td><td>Prevents fixture overfitting.</td></tr><tr><td><strong>Ambiguous shorthand</strong></td><td>Queries like D, PL, A5, C7, B79, hysteresis, 2s, v=-2, and filling.</td><td>Tests routing and project disambiguation under realistic lab language.</td></tr><tr><td><strong>Contradicted-memory retrieval</strong></td><td>Queries where supported, contested, and deprecated claims all match lexically.</td><td>Tests whether status and provenance affect final context and answer framing.</td></tr><tr><td><strong>Context budget squeeze</strong></td><td>Run same tasks at 3k, 6k, 12k, and 24k character budgets.</td><td>Tests whether essential evidence survives direct/Slack-sized contexts.</td></tr><tr><td><strong>Large synthetic graph</strong></td><td>Scale JSONL graph by 10x and 100x with distractor nodes/edges.</td><td>Tests latency and ranking robustness.</td></tr><tr><td><strong>Noisy low-confidence deck claims</strong></td><td>Add plausible but weak automatically extracted deck claims.</td><td>Tests low-confidence unsupported-use controls.</td></tr><tr><td><strong>Bad candidate patch</strong></td><td>Deliberately change retrieval routing to generic all-node search.</td><td>Tests whether protected metrics reject a harmful self-improvement candidate.</td></tr><tr><td><strong>Stale project summary</strong></td><td>Inject old project status that conflicts with a newer daemon report.</td><td>Tests temporal memory and stale-fact handling.</td></tr><tr><td><strong>Human correction replay</strong></td><td>Use a lab-member correction as a trajectory, then verify future similar tasks avoid the same mistake.</td><td>Tests whether feedback becomes durable behavior.</td></tr></tbody></table>
+  </section>
+
+  <section>
+    <h2>Reproduce</h2>
+    <pre class="commands">python3 lab_assistant/evals/run_evals.py --suite all --output lab_assistant/evals/results/latest.jsonl
+python3 lab_assistant/evals/render_summary_assets.py --summary lab_assistant/evals/results/summary.json --output-dir lab_assistant/evals/views
+python3 lab_assistant/evals/render_runtime_explainer.py --results lab_assistant/evals/results/latest.jsonl --summary lab_assistant/evals/results/summary.json --output lab_assistant/evals/views/runtime_explainer.html</pre>
+  </section>
+</main>
+</body>
+</html>

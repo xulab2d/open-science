@@ -4,6 +4,11 @@ Purpose:
 - Track where OpenScience should look when improving plot style and project-specific visualization conventions.
 - Keep this as a reference map, not a bulky image archive.
 
+Machine-readable code index:
+- `knowledge/canon/plot_code_index.md`
+- `knowledge/canon/plot_code_index.json`
+- Refresh with `python3 scripts/index_plot_code.py` after adding reusable plotting scripts.
+
 Primary reference decks:
 - `/Volumes/Xu Lab/OpenScience/Summaries/PPT/Shuai_MT43_DR911/Overnight_Shuai_MT43_DR911_SweepB_2026-03-04.pptx`
 - `/Volumes/Xu Lab/OpenScience/Summaries/PPT/Zengde_A5_dot1dispersion/ZDS_spot3dotdispersion_scan1_OpenScience_v4_5x2.pptx`

@@ -1,0 +1,71 @@
+[
+  {
+    "id": "paper_lookup_moire_exciton_001",
+    "task_type": "paper_lookup",
+    "query": "moire exciton optical signatures",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "Moire excitons"},
+        {"label_contains": "Signatures of moiré-trapped valley excitons"}
+      ],
+      "must_retrieve_types": ["Paper"],
+      "forbidden": []
+    },
+    "metrics": {"k": 8, "recall_at_k_min": 0.5, "mrr_min": 0.1, "precision_at_k_min": 0.1, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "paper_lookup_magnetic_proximity_001",
+    "task_type": "paper_lookup",
+    "query": "magnetic proximity wse2 cri3",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "Valley Manipulation by Optically Tuning the Magnetic Proximity Effect"},
+        {"label_contains": "Magnetic Proximity"}
+      ],
+      "must_retrieve_types": ["Paper"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.1, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "paper_lookup_bilayer_cri3_001",
+    "task_type": "paper_lookup",
+    "query": "gate control bilayer cri3 magnetism",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "Electrical control of 2D magnetism in bilayer CrI3"}
+      ],
+      "must_retrieve_types": ["Paper"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 1.0, "mrr_min": 0.2, "precision_at_k_min": 0.1, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "paper_lookup_interlayer_exciton_001",
+    "task_type": "paper_lookup",
+    "query": "interlayer exciton mose2 wse2",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "Observation of Long-Lived Interlayer Excitons"},
+        {"label_contains": "Correlated interlayer exciton insulator"}
+      ],
+      "must_retrieve_types": ["Paper"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.1, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "paper_lookup_wte2_edge_001",
+    "task_type": "paper_lookup",
+    "query": "edge conduction monolayer wte2",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "Edge conduction in monolayer WTe2"},
+        {"label_contains": "Imaging Quantum Spin Hall Edges"}
+      ],
+      "must_retrieve_types": ["Paper"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.1, "max_latency_ms": 3000, "require_provenance": true}
+  }
+]

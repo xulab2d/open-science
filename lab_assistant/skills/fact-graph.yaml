@@ -1,0 +1,20 @@
+{
+  "skill_id": "fact-graph",
+  "version": "1.0.0",
+  "purpose": "Retrieve provenance-backed subject-matter claims, papers, mechanisms, contradictions, and graph neighborhoods.",
+  "inputs": [
+    {"name": "topic", "type": "string"},
+    {"name": "task_type", "type": "string"}
+  ],
+  "outputs": [
+    {"name": "ranked_nodes", "type": "list"},
+    {"name": "neighborhood", "type": "graph_context"}
+  ],
+  "task_types": ["claim_lookup", "paper_lookup", "synthesis", "hypothesis_generation", "memory_update"],
+  "latency_budget_ms": 3000,
+  "context_max_chars": 2600,
+  "eval_suites": ["retrieval", "paper_lookup"],
+  "target_metrics": ["retrieval_recall_at_5", "mrr", "provenance_coverage"],
+  "failure_modes": ["generic all-node search used for paper lookup", "low-confidence claim used without provenance", "neighborhood omitted for mechanism questions"],
+  "promotion_policy": "Promote retrieval-policy changes only when target retrieval metrics improve and protected paper precision/replay stability do not regress."
+}

@@ -2,6 +2,24 @@
 
 Status: active project summary. Owners: Zengde She and Weijie Li.
 
+## Broad Overview
+
+A5 is an AAtA-dot tMoTe2 PL/PLE spectroscopy project on the old Attodry. The main physics target is localized or dot-like optical structure that evolves with filling, displacement field, magnetic field, polarization, excitation wavelength, and power.
+
+The project should be treated as both a spectroscopy problem and a provenance problem: peak tracking, background subtraction, gate/filling conversion, and spot labels can change the apparent story.
+
+## Recent Developments
+
+June 2026 NAS evidence is strong. The active deck `ZDS_WJL_A5_AAtA_dotPLE_and_optical_control_measure.pptx` was modified on 2026-06-15, and recent files include PLE, power dependence, wavelength-dependent optical control, lifetime, and PL dual-gate analysis.
+
+The current scientific thread is dot PL/PLE features around integer and fractional fillings, especially near `nu = -1` and `nu = -2/3`. Intermediate spectral branches are being tested with polarization, power, wavelength, and optical-control-style measurements; treat any fractional-charge or bound-state language as a working interpretation until calibrated linecuts confirm it.
+
+## Watchpoints
+
+- Keep dot1, dot3, spot, and branch labels separate unless a project deck or script ties them together.
+- Use project scripts for gate/filling conversion.
+- Do not promote peak-tracking branches to physical states without raw/processed linecut checks.
+
 ## Scientific aim
 
 A5 is a tMoTe2 AAtA-dot project on the old Attodry, centered on PL spectroscopy of dot-like or localized optical features. The working question is whether the observed spectral structures track real filling-, field-, or displacement-field-dependent physics, or whether some apparent structure is produced by peak-tracking, background subtraction, or calibration choices.

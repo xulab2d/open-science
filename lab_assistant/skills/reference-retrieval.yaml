@@ -1,0 +1,20 @@
+{
+  "skill_id": "reference-retrieval",
+  "version": "1.0.0",
+  "purpose": "Route background requests through syntheses, paper shelves, canon, and inventories in priority order.",
+  "inputs": [
+    {"name": "query", "type": "string"},
+    {"name": "needed_evidence", "type": "string"}
+  ],
+  "outputs": [
+    {"name": "source_candidates", "type": "list"},
+    {"name": "provenance_notes", "type": "list"}
+  ],
+  "task_types": ["paper_lookup", "synthesis", "claim_lookup"],
+  "latency_budget_ms": 2500,
+  "context_max_chars": 1800,
+  "eval_suites": ["paper_lookup", "retrieval"],
+  "target_metrics": ["paper_lookup_mrr", "provenance_coverage"],
+  "failure_modes": ["skips curated paper shelf", "uses inventories before syntheses when a synthesis exists"],
+  "promotion_policy": "Promote route changes when paper lookup recall/MRR improve without increasing unsupported low-confidence use."
+}

@@ -176,12 +176,34 @@
   @apply bg-zinc-900;
 }
 
-:root.dark .sidebar-skills-link {
-  @apply text-zinc-400 hover:border-teal-500/30 hover:bg-teal-500/10 hover:text-zinc-100;
+:root.dark .sidebar-person-panel {
+  @apply border-zinc-700 bg-zinc-900/75;
 }
 
-:root.dark .sidebar-skills-link.is-active {
-  @apply border-teal-500/30 bg-teal-500/10 text-zinc-100;
+:root.dark .sidebar-person-label {
+  @apply text-zinc-500;
+}
+
+:root.dark .sidebar-person-select,
+:root.dark .sidebar-person-add-input {
+  @apply border-zinc-700 bg-zinc-800 text-zinc-200 placeholder-zinc-500;
+}
+
+:root.dark .sidebar-person-add-button,
+:root.dark .sidebar-person-thread-action {
+  @apply border-zinc-700 bg-zinc-800 text-zinc-300 hover:border-zinc-600 hover:bg-zinc-700 disabled:hover:border-zinc-700 disabled:hover:bg-zinc-800;
+}
+
+:root.dark .sidebar-person-meta {
+  @apply text-zinc-500;
+}
+
+:root.dark .sidebar-person-thread-row {
+  @apply bg-zinc-800;
+}
+
+:root.dark .sidebar-person-thread-owner {
+  @apply text-zinc-400;
 }
 
 :root.dark .sidebar-search-toggle {
@@ -622,6 +644,35 @@
 :root.dark .message-card[data-role='user'] {
   @apply bg-teal-950/55;
   box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.16);
+}
+
+:root.dark .message-card[data-role='user'] .message-text,
+:root.dark .message-card[data-role='user'] .message-heading,
+:root.dark .message-card[data-role='user'] .message-bold-text,
+:root.dark .message-card[data-role='user'] .message-italic-text,
+:root.dark .message-card[data-role='user'] .message-list,
+:root.dark .message-card[data-role='user'] .message-list-item-text,
+:root.dark .message-card[data-role='user'] .message-inline-math,
+:root.dark .message-card[data-role='user'] .katex,
+:root.dark .message-card[data-role='user'] .katex * {
+  color: rgb(250 250 250) !important;
+}
+
+:root.dark .message-card[data-role='user'] .message-strikethrough-text,
+:root.dark .message-card[data-role='user'] .message-task-checkbox {
+  color: rgb(204 251 241) !important;
+}
+
+:root.dark .message-card[data-role='user'] .message-file-link {
+  color: rgb(125 211 252) !important;
+}
+
+:root.dark .message-card[data-role='user'] .message-file-link:hover {
+  color: rgb(186 230 253) !important;
+}
+
+:root.dark .message-card[data-role='user'] .message-inline-code {
+  @apply border-teal-700 bg-teal-900/70 text-zinc-100;
 }
 
 :root.dark .message-copy-button {

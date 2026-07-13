@@ -1,0 +1,19 @@
+{
+  "skill_id": "request-triage",
+  "version": "1.0.0",
+  "purpose": "Classify ambiguous lab requests and choose the concrete next action.",
+  "inputs": [
+    {"name": "request_text", "type": "string"}
+  ],
+  "outputs": [
+    {"name": "task_type", "type": "string"},
+    {"name": "next_action", "type": "string"}
+  ],
+  "task_types": ["unknown", "project_status", "memory_update", "claim_lookup"],
+  "latency_budget_ms": 1000,
+  "context_max_chars": 1600,
+  "eval_suites": ["context_pack", "memory_write"],
+  "target_metrics": ["task_success", "context_relevance"],
+  "failure_modes": ["asks for basics already in corpus", "fails to choose actionable next step"],
+  "promotion_policy": "Promote triage changes when context relevance improves and no protected task routes regress."
+}

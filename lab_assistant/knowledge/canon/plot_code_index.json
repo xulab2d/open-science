@@ -1,0 +1,328 @@
+{
+  "purpose": "plot_code_retrieval",
+  "record_count": 5,
+  "records": [
+    {
+      "axis_labels": [
+        "Evidence",
+        "displacement field",
+        "rmcd"
+      ],
+      "chars": 9803,
+      "colormaps": [],
+      "constants": {
+        "LAB_ASSISTANT_ROOT": "REPO_ROOT / 'lab_assistant'",
+        "THEMES": "{'Fractional topology': ['fractional', 'fqah', 'fci', 'fractional quantum', 'fractional chern', 'fqsh', 'anyon', 'topological insulator'], 'Optics / magneto-optics': ['optical', 'p"
+      },
+      "data_paths": [],
+      "functions": [
+        "arxiv_year_counts",
+        "load_jsonl",
+        "main",
+        "medium_curated_arxiv",
+        "parse_args",
+        "render_figures",
+        "render_markdown",
+        "theme_counts"
+      ],
+      "language": "py",
+      "libraries": [
+        "__future__",
+        "argparse",
+        "collections",
+        "fact_graph_common",
+        "json",
+        "math",
+        "matplotlib",
+        "networkx",
+        "pathlib",
+        "sys",
+        "tools"
+      ],
+      "line_count": 217,
+      "notes": [
+        "signed magnetic/contrast observable; check whether zero-centered diverging bounds are appropriate"
+      ],
+      "output_paths": [],
+      "path": "scripts/fact_graph_daily_summary.py",
+      "plot_calls": [
+        "plot"
+      ],
+      "sha256": "d684933484c8dec679439b00b7e3f7d2be1cd2048532df6b97630c8eec15c1df",
+      "tags": [
+        "displacement",
+        "energy",
+        "gate_map",
+        "pl",
+        "rmcd"
+      ]
+    },
+    {
+      "axis_labels": [
+        "02PL",
+        "B (T)",
+        "Band-summed PL (a.u.)",
+        "eV",
+        "n ($10^{12}$ cm$^{-2}$)",
+        "plots"
+      ],
+      "chars": 4735,
+      "colormaps": [
+        "magma",
+        "viridis"
+      ],
+      "constants": {
+        "DATA_DIR": "PROJECT_ROOT / 'data' / '02PL' / 'dot1dispersion'",
+        "ENERGY_MAX": "1.084",
+        "ENERGY_MIN": "1.08",
+        "FIELD_MAX": "6.8",
+        "FIELD_MIN": "3.6",
+        "OUT_DIR": "Path.cwd() / 'out' / 'plots'",
+        "PROJECT_ROOT": "Path('/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry')"
+      },
+      "data_paths": [
+        "*allrange_Bset*.mat",
+        "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry",
+        "1140c_20s.mat",
+        "data"
+      ],
+      "functions": [
+        "load_band_rows",
+        "main",
+        "plot_map",
+        "smooth_along_n"
+      ],
+      "language": "py",
+      "libraries": [
+        "__future__",
+        "matplotlib",
+        "numpy",
+        "pathlib",
+        "scipy"
+      ],
+      "line_count": 161,
+      "notes": [
+        "script emits reusable figure artifacts"
+      ],
+      "output_paths": [
+        ".pdf",
+        ".png",
+        "out",
+        "plots"
+      ],
+      "path": "scripts/plot_a5_dot1_b_vs_n.py",
+      "plot_calls": [
+        "imshow",
+        "savefig"
+      ],
+      "sha256": "ea858d5058a875236bfd4910e168f4c061589e88a3a18749c7adc08746ee1372",
+      "tags": [
+        "a5",
+        "density",
+        "energy",
+        "gate_map",
+        "magnetic_field",
+        "pl"
+      ]
+    },
+    {
+      "axis_labels": [
+        "02PL",
+        "A5 dot1 raw band sum, %.3f-%.3f eV",
+        "B (T)",
+        "Band-summed PL (a.u.)",
+        "\\nu",
+        "plots"
+      ],
+      "chars": 2264,
+      "colormaps": [
+        "turbo"
+      ],
+      "constants": {},
+      "data_paths": [
+        "*Bset*.mat",
+        "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry",
+        "1140c_20s.mat",
+        "data"
+      ],
+      "functions": [],
+      "language": "m",
+      "libraries": [
+        "matlab"
+      ],
+      "line_count": 82,
+      "notes": [
+        "uses rainbow-like colormap; treat as legacy unless project convention requires it",
+        "contains filling-axis logic; inspect conversion constants before reuse",
+        "script emits reusable figure artifacts"
+      ],
+      "output_paths": [
+        "a5_dot1_raw_band_sum_B_vs_nu.png",
+        "out",
+        "plots"
+      ],
+      "path": "scripts/quicklook_a5_dot1_raw_B_vs_nu.m",
+      "plot_calls": [
+        "imagesc",
+        "exportgraphics"
+      ],
+      "sha256": "8c8d93dba226e67d603a2a6418acb3caa5723def6a8e4f7865dc169cec9bb483",
+      "tags": [
+        "a5",
+        "density",
+        "energy",
+        "filling",
+        "gate_map",
+        "magnetic_field",
+        "pl"
+      ]
+    },
+    {
+      "axis_labels": [
+        "$\\nu$",
+        "02PL",
+        "B (T)",
+        "Band-summed PL (a.u.)",
+        "eV",
+        "plots"
+      ],
+      "chars": 3160,
+      "colormaps": [
+        "magma"
+      ],
+      "constants": {
+        "DATA_DIR": "PROJECT_ROOT / 'data' / '02PL' / 'dot1dispersion'",
+        "E_MAX": "1.084",
+        "E_MIN": "1.08",
+        "OUT_DIR": "Path.cwd() / 'out' / 'plots'",
+        "PROJECT_ROOT": "Path('/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry')"
+      },
+      "data_paths": [
+        "*Bset*.mat",
+        "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry",
+        "1140c_20s.mat",
+        "data"
+      ],
+      "functions": [
+        "main"
+      ],
+      "language": "py",
+      "libraries": [
+        "__future__",
+        "matplotlib",
+        "numpy",
+        "pathlib",
+        "scipy"
+      ],
+      "line_count": 110,
+      "notes": [
+        "contains filling-axis logic; inspect conversion constants before reuse",
+        "script emits reusable figure artifacts"
+      ],
+      "output_paths": [
+        "a5_dot1_raw_band_sum_B_vs_nu_python.pdf",
+        "a5_dot1_raw_band_sum_B_vs_nu_python.png",
+        "out",
+        "plots"
+      ],
+      "path": "scripts/quicklook_a5_dot1_raw_B_vs_nu.py",
+      "plot_calls": [
+        "imshow",
+        "savefig"
+      ],
+      "sha256": "ff13d9a8c32297447a53ca1dd08a086f1d43b3c7695e455db75992f6c9242f10",
+      "tags": [
+        "a5",
+        "density",
+        "energy",
+        "filling",
+        "gate_map",
+        "magnetic_field",
+        "pl"
+      ]
+    },
+    {
+      "axis_labels": [
+        "$D$ (V/nm)",
+        "$n$ ($10^{12}$ cm$^{-2}$)",
+        "Apply compact Xu Lab-oriented Matplotlib defaults.",
+        "Apply standard axis spine/tick treatment.",
+        "Energy (eV)",
+        "Integrated PL (a.u.)",
+        "PL intensity (a.u.)",
+        "Photon energy (eV)",
+        "Plot paired up/down magnetic-field sweeps with consistent labels.",
+        "RMCD (%)",
+        "Save a figure in review and reusable formats.",
+        "displacement",
+        "energy",
+        "filling",
+        "integrated_pl",
+        "intensity"
+      ],
+      "chars": 6910,
+      "colormaps": [
+        "RdBu_r",
+        "viridis"
+      ],
+      "constants": {
+        "LABELS": "{'energy': 'Energy (eV)', 'photon_energy': 'Photon energy (eV)', 'magnetic_field': '$B$ (T)', 'density': '$n$ ($10^{12}$ cm$^{-2}$)', 'density_cm2': '$n$ (cm$^{-2}$)', 'displacemen"
+      },
+      "data_paths": [],
+      "functions": [
+        "apply_style",
+        "axis_label",
+        "default_cmap",
+        "figure_size",
+        "infer_map_kind",
+        "plot_heatmap",
+        "plot_hysteresis",
+        "robust_limits",
+        "save_figure",
+        "style_axes"
+      ],
+      "language": "py",
+      "libraries": [
+        "__future__",
+        "matplotlib",
+        "numpy",
+        "pathlib",
+        "typing"
+      ],
+      "line_count": 217,
+      "notes": [
+        "contains filling-axis logic; inspect conversion constants before reuse",
+        "hysteresis-related plot; preserve sweep direction rather than averaging",
+        "signed magnetic/contrast observable; check whether zero-centered diverging bounds are appropriate",
+        "script emits reusable figure artifacts"
+      ],
+      "output_paths": [
+        "out"
+      ],
+      "path": "tools/plotting/openscience_plot_style.py",
+      "plot_calls": [
+        "pcolormesh",
+        "plot",
+        "scatter",
+        "savefig"
+      ],
+      "sha256": "4a3f7d14530983195380966feb45d58deff502a61450c17a501c4917603ede31",
+      "tags": [
+        "density",
+        "displacement",
+        "energy",
+        "filling",
+        "hysteresis",
+        "magnetic_field",
+        "pl",
+        "reflectance",
+        "rmcd"
+      ]
+    }
+  ],
+  "roots": [
+    "scripts",
+    "tools/plotting"
+  ],
+  "schema_version": 1
+}

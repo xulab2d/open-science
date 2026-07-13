@@ -12,6 +12,10 @@
     "Claim",
     "Evidence",
     "Contradiction",
+    "Hypothesis",
+    "Prediction",
+    "ExperimentProposal",
+    "Result",
     "OpenQuestion",
     "Interpretation",
     "Assumption",
@@ -34,6 +38,8 @@
     "has_condition",
     "supports_claim",
     "contradicts_claim",
+    "supports_hypothesis",
+    "contradicts_hypothesis",
     "qualifies_claim",
     "analogous_to",
     "similar_to",
@@ -42,8 +48,24 @@
     "open_question_for",
     "needs_followup",
     "preferred_for",
-    "derived_from"
+    "derived_from",
+    "tests",
+    "falsifies"
   ],
+  "node_optional": [
+    "status",
+    "scope",
+    "confidence_reason",
+    "supporting_evidence",
+    "contradicting_evidence",
+    "depends_on",
+    "falsified_by",
+    "testable_prediction",
+    "created_from_trajectory",
+    "promoted_by_trajectory",
+    "last_validated_at"
+  ],
+  "status_values": ["candidate", "supported", "contested", "deprecated", "tested", "rejected", "strengthened", "weakened"],
   "confidence_values": ["low", "medium", "high"],
   "provenance_required": ["source", "method"]
 }

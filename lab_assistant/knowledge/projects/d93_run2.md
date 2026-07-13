@@ -1,33 +1,25 @@
-# Project Map: D93 Run2
+# D93 Run2
 
-Project:
-- D93 Run2 work around RMCD, Curie-Weiss-style interpretation, and magnetic comparison logic.
+Status: quieter but still relevant project summary. Main people inferred from root: Christiano Wang Beach and Yifan Zhao.
 
-Local context:
-- [d93_run2.md](/Users/xulab/openscience/lab_assistant/context/projects/d93_run2.md)
-- [active_projects.md](/Users/xulab/openscience/lab_assistant/context/projects/active_projects.md)
+## Broad Overview
 
-Likely scientific center:
-- magneto-optical signatures
-- magnetic ordering and comparison across regimes
-- optical evidence versus bulk/state interpretation
+D93 Run2 is an RMCD and magneto-optical comparison project. It is useful for questions about dual-gate RMCD maps, hysteresis, Curie-Weiss-style interpretation, and how optical magnetic signatures compare across tMoTe2 devices.
 
-Start here:
-- [optical_magnetism_and_probes.md](/Users/xulab/openscience/lab_assistant/knowledge/syntheses/optical_magnetism_and_probes.md)
-- [moire_magnetism_and_competing_orders.md](/Users/xulab/openscience/lab_assistant/knowledge/syntheses/moire_magnetism_and_competing_orders.md)
-- [evidence_hierarchy_for_correlated_states.md](/Users/xulab/openscience/lab_assistant/knowledge/syntheses/evidence_hierarchy_for_correlated_states.md)
+Canonical NAS root:
+- `/Volumes/Xu Lab/tMoTe2_Measuring/CWB_Yifan_D93_Run2_attodry522`
 
-Then pull:
-- [two_d_magnetism.md](/Users/xulab/openscience/lab_assistant/knowledge/papers/two_d_magnetism.md)
-- [transport_and_thermodynamics.md](/Users/xulab/openscience/lab_assistant/knowledge/papers/transport_and_thermodynamics.md)
-- [moire_tmote2.md](/Users/xulab/openscience/lab_assistant/knowledge/papers/moire_tmote2.md)
+## Recent Developments
 
-Local lab anchors:
-- [lab_history_2d_magnets.md](/Users/xulab/openscience/lab_assistant/knowledge/canon/lab_history_2d_magnets.md)
-- [tmote2_deck_patterns.md](/Users/xulab/openscience/lab_assistant/knowledge/canon/tmote2_deck_patterns.md)
+The main high-signal D93 event surfaced in April 2026: RMCD dual-gate maps near negative filling, field-sweep hysteresis traces, and Curie-Weiss-style `1/chi` vs temperature panels at D = 0, 0.25, and 0.375 V/nm. Source artifacts are under the NAS root in `Data/PaperFigs/` and `Data/Spot 3/`.
 
-Recent evidence anchors:
-- 2026-04-11 daily catalogue review found a coherent D93 Run2 RMCD analysis batch: dual-gate RMCD maps near negative filling, field-sweep hysteresis traces, and Curie-Weiss-style `1/chi` vs temperature panels at D = 0, 0.25, and 0.375 V/nm. Source artifacts are under the NAS project root in `Data/PaperFigs/` and `Data/Spot 3/`; treat the pulse timing as "newly visible to OpenScience" rather than proof of same-day acquisition.
+The July 2026 project pulse did not show D93 as June-active. Keep D93 as a comparison and interpretation anchor, not a current headline project unless fresh files appear.
 
-Use when:
-- a request is about how D93-style magneto-optical results fit into older Xu Lab magnetic work or newer moiré-state interpretation
+## Watchpoints
+
+- Treat older pulse timing as "newly visible to OpenScience" unless file mtimes or owner context show fresh acquisition.
+- Confirm fitting windows and RMCD background handling before citing Curie-Weiss-style parameters.
+
+Useful domain anchors:
+- `/Users/xulab/openscience/lab_assistant/knowledge/syntheses/optical_magnetism_and_probes.md`
+- `/Users/xulab/openscience/lab_assistant/knowledge/syntheses/moire_magnetism_and_competing_orders.md`

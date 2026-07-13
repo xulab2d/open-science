@@ -23,6 +23,56 @@
             </button>
           </SidebarThreadControls>
 
+          <section v-if="!isSidebarCollapsed" class="sidebar-person-panel" aria-label="Conversation identity">
+            <label class="sidebar-person-label" for="sidebar-person-select">You are</label>
+            <select
+              id="sidebar-person-select"
+              class="sidebar-person-select"
+              :value="selectedPersonId"
+              @change="onSelectedPersonChange"
+            >
+              <option value="__all__">All conversations</option>
+              <option v-for="person in personProfiles" :key="person.id" :value="person.id">
+                {{ person.name }}
+              </option>
+            </select>
+            <div class="sidebar-person-add-row">
+              <input
+                v-model="personDraft"
+                class="sidebar-person-add-input"
+                type="text"
+                placeholder="Add person"
+                @keydown.enter.prevent="onAddPersonProfile"
+              />
+              <button class="sidebar-person-add-button" type="button" @click="onAddPersonProfile">Add</button>
+            </div>
+            <p class="sidebar-person-meta">
+              Showing {{ selectedPersonThreadCount }} thread{{ selectedPersonThreadCount === 1 ? '' : 's' }}
+              <span v-if="selectedPersonId !== '__all__'"> for {{ selectedPersonName }}</span>
+              <span v-if="selectedPersonId !== '__all__'">, plus unassigned threads</span>.
+            </p>
+            <div v-if="selectedThreadId" class="sidebar-person-thread-row">
+              <span class="sidebar-person-thread-owner">Open: {{ selectedThreadOwnerName }}</span>
+              <button
+                v-if="selectedPersonId !== '__all__'"
+                class="sidebar-person-thread-action"
+                type="button"
+                :disabled="isSelectedThreadOwnedBySelectedPerson"
+                @click="onClaimCurrentThread"
+              >
+                {{ isSelectedThreadOwnedBySelectedPerson ? 'Yours' : 'Claim' }}
+              </button>
+              <button
+                v-if="isSelectedThreadAssigned"
+                class="sidebar-person-thread-action"
+                type="button"
+                @click="onClearCurrentThreadOwner"
+              >
+                Unassign
+              </button>
+            </div>
+          </section>
+
           <div v-if="!isSidebarCollapsed && isSidebarSearchVisible" class="sidebar-search-bar">
             <IconTablerSearch class="sidebar-search-bar-icon" />
             <input
@@ -43,16 +93,6 @@
               <IconTablerX class="sidebar-search-clear-icon" />
             </button>
           </div>
-
-          <button
-            v-if="!isSidebarCollapsed"
-            class="sidebar-skills-link"
-            :class="{ 'is-active': isSkillsRoute }"
-            type="button"
-            @click="router.push({ name: 'skills' }); isMobile && setSidebarCollapsed(true)"
-          >
-            Capabilities
-          </button>
 
           <SidebarThreadTree :groups="projectGroups" :project-display-name-by-id="projectDisplayNameById"
             v-if="!isSidebarCollapsed"
@@ -275,7 +315,7 @@
                       <select id="lab-project-select" v-model="selectedHomeProjectId" class="lab-project-select">
                         <option value="">General OpenScience context</option>
                         <option v-for="project in openScienceSurfaces.runningProjects" :key="project.id" :value="project.id">
-                          {{ project.name }}
+                          {{ project.name }}{{ formatProjectLeadSuffix(project) }}
                         </option>
                       </select>
                     </div>
@@ -297,6 +337,15 @@
                         {{ tab.label }}
                       </button>
                     </div>
+                    <div v-if="activeLabHomeTab === 'running' && runningProjectLeadOptions.length" class="lab-lead-filter">
+                      <label class="lab-lead-filter-label" for="lab-lead-filter">Lead</label>
+                      <select id="lab-lead-filter" v-model="activeProjectLeadFilter" class="lab-lead-filter-select">
+                        <option value="">All leads</option>
+                        <option v-for="lead in runningProjectLeadOptions" :key="lead" :value="lead">
+                          {{ lead }}
+                        </option>
+                      </select>
+                    </div>
                   </div>
 
                   <div
@@ -304,16 +353,19 @@
                     :class="{ 'is-single-document': !activeLabDocumentList.length }"
                   >
                     <aside v-if="activeLabHomeTab === 'running'" class="lab-summary-list" aria-label="Running projects">
+                      <div v-if="filteredRunningProjects.length === 0" class="lab-summary-list-empty">No matching projects.</div>
                       <button
-                        v-for="project in openScienceSurfaces.runningProjects"
+                        v-for="project in filteredRunningProjects"
                         :key="project.id"
                         class="lab-summary-list-item"
-                        :class="{ 'is-active': activeSummaryProjectId === project.id }"
+                        :class="{ 'is-active': activeRunningProjectId === project.id }"
                         type="button"
                         @click="activeSummaryProjectId = project.id"
                       >
                         <span>{{ project.name }}</span>
-                        <small>{{ project.id }}</small>
+                        <small v-if="getProjectLeads(project).length">Leads: {{ formatProjectLeads(project.leads) }}</small>
+                        <small v-else>Leads: unassigned</small>
+                        <small class="lab-summary-list-id">{{ project.id }}</small>
                       </button>
                     </aside>
                     <aside v-else-if="activeLabHomeTab === 'past' && activeLabDocumentList.length" class="lab-summary-list" aria-label="Past projects">
@@ -346,6 +398,11 @@
                       <div v-if="activeLabDocument" class="lab-summary-document-header">
                         <div class="lab-summary-document-title">
                           <span>{{ activeLabDocument.title }}</span>
+                          <div v-if="activeLabProjectLeads.length" class="lab-summary-document-leads" aria-label="Project leads">
+                            <span v-for="lead in activeLabProjectLeads" :key="lead" class="lab-summary-document-lead">
+                              {{ lead }}
+                            </span>
+                          </div>
                           <small class="lab-summary-document-path" :title="activeLabDocument.path">
                             {{ activeLabDocument.path }}
                           </small>
@@ -655,6 +712,12 @@ const labHomeTabs: Array<{ id: LabHomeTabId; label: string }> = [
 const {
   projectGroups,
   projectDisplayNameById,
+  personProfiles,
+  selectedPerson,
+  selectedPersonId,
+  selectedPersonName,
+  selectedPersonThreadCount,
+  threadOwnerById,
   selectedThread,
   selectedThreadTokenUsage,
   selectedThreadScrollState,
@@ -681,6 +744,11 @@ const {
   selectThread,
   ensureThreadMessagesLoaded,
   setThreadScrollState,
+  setSelectedPersonId,
+  addPersonProfile,
+  assignThreadToSelectedPerson,
+  clearThreadOwner,
+  threadOwnerName,
   archiveThreadById,
   renameThreadById,
   sendMessageToSelectedThread,
@@ -721,6 +789,7 @@ const sidebarSearchQuery = ref('')
 const isSidebarSearchVisible = ref(false)
 const sidebarSearchInputRef = ref<HTMLInputElement | null>(null)
 const serverMatchedThreadIds = ref<string[] | null>(null)
+const personDraft = ref('')
 let threadSearchTimer: ReturnType<typeof setTimeout> | null = null
 const isSettingsOpen = ref(false)
 const isAccountsSectionCollapsed = ref(loadAccountsSectionCollapsed())
@@ -763,6 +832,7 @@ const selectedHomeProjectId = ref('')
 const activeSummaryProjectId = ref('')
 const activePastProjectId = ref('')
 const activeDailySummaryId = ref('')
+const activeProjectLeadFilter = ref('')
 const openScienceSurfaces = ref<OpenScienceSurfaces>({
   runningProjects: [],
   runningProjectDocs: [],
@@ -834,6 +904,16 @@ const composerCwd = computed(() => {
   return selectedThread.value?.cwd?.trim() ?? ''
 })
 const isSelectedThreadInProgress = computed(() => !isHomeRoute.value && selectedThread.value?.inProgress === true)
+const selectedThreadOwnerName = computed(() =>
+  selectedThreadId.value ? threadOwnerName(selectedThreadId.value) : 'Unassigned',
+)
+const selectedThreadOwnerId = computed(() =>
+  selectedThreadId.value ? threadOwnerById.value[selectedThreadId.value] ?? '' : '',
+)
+const isSelectedThreadAssigned = computed(() => selectedThreadOwnerId.value.length > 0)
+const isSelectedThreadOwnedBySelectedPerson = computed(() =>
+  selectedPerson.value !== null && selectedThreadOwnerId.value === selectedPerson.value.id,
+)
 const showThreadContextBadge = computed(() => !isHomeRoute.value && !isSkillsRoute.value && selectedThreadId.value.trim().length > 0)
 const isAccountSwitchBlocked = computed(() =>
   isSendingMessage.value ||
@@ -916,10 +996,43 @@ const telegramStatusText = computed(() => {
 const selectedHomeProject = computed<OpenScienceProjectSummary | null>(() => (
   openScienceSurfaces.value.runningProjects.find((project) => project.id === selectedHomeProjectId.value) ?? null
 ))
+const runningProjectById = computed(() => {
+  const projects = new Map<string, OpenScienceProjectSummary>()
+  for (const project of openScienceSurfaces.value.runningProjects) {
+    projects.set(project.id, project)
+  }
+  return projects
+})
+const runningProjectLeadOptions = computed(() => {
+  const leads = new Set<string>()
+  for (const project of openScienceSurfaces.value.runningProjects) {
+    for (const lead of getProjectLeads(project)) {
+      const normalized = lead.trim()
+      if (normalized) leads.add(normalized)
+    }
+  }
+  return Array.from(leads).sort((first, second) => first.localeCompare(second))
+})
+const filteredRunningProjects = computed(() => {
+  const lead = activeProjectLeadFilter.value.trim()
+  if (!lead) return openScienceSurfaces.value.runningProjects
+  return openScienceSurfaces.value.runningProjects.filter((project) => getProjectLeads(project).includes(lead))
+})
+const filteredRunningProjectIds = computed(() => new Set(filteredRunningProjects.value.map((project) => project.id)))
+const filteredRunningProjectDocs = computed(() => {
+  const ids = filteredRunningProjectIds.value
+  return openScienceSurfaces.value.runningProjectDocs.filter((document) => ids.has(document.id))
+})
 const activeSummaryProjectDocument = computed<OpenScienceSurfaceDocument | null>(() => {
-  const docs = openScienceSurfaces.value.runningProjectDocs
+  const docs = filteredRunningProjectDocs.value
   const activeId = activeSummaryProjectId.value || selectedHomeProjectId.value || docs[0]?.id || ''
   return docs.find((document) => document.id === activeId) ?? docs[0] ?? null
+})
+const activeRunningProjectId = computed(() => activeSummaryProjectDocument.value?.id ?? '')
+const activeLabProjectLeads = computed(() => {
+  if (activeLabHomeTab.value !== 'running') return []
+  const projectId = activeRunningProjectId.value
+  return projectId ? getProjectLeads(runningProjectById.value.get(projectId)) : []
 })
 const activePastProjectDocument = computed<OpenScienceSurfaceDocument | null>(() => {
   const docs = openScienceSurfaces.value.pastProjects
@@ -932,7 +1045,7 @@ const activeDailySummaryDocument = computed<OpenScienceSurfaceDocument | null>((
   return docs.find((document) => document.id === activeId) ?? openScienceSurfaces.value.dailySummary ?? docs[0] ?? null
 })
 const activeLabDocumentList = computed<OpenScienceSurfaceDocument[]>(() => {
-  if (activeLabHomeTab.value === 'running') return openScienceSurfaces.value.runningProjectDocs
+  if (activeLabHomeTab.value === 'running') return filteredRunningProjectDocs.value
   if (activeLabHomeTab.value === 'past') return openScienceSurfaces.value.pastProjects
   return []
 })
@@ -944,8 +1057,20 @@ const activeLabDocument = computed<OpenScienceSurfaceDocument | null>(() => {
 const activeLabEmptyMessage = computed(() => {
   if (activeLabHomeTab.value === 'daily') return 'No daily overview has been generated yet.'
   if (activeLabHomeTab.value === 'past') return 'Past-project summaries will appear here as they are promoted.'
+  if (activeProjectLeadFilter.value.trim()) return `No running-project summaries match ${activeProjectLeadFilter.value}.`
   return 'No running-project summaries were found.'
 })
+function getProjectLeads(project: OpenScienceProjectSummary | null | undefined): string[] {
+  return Array.isArray(project?.leads) ? project.leads : []
+}
+function formatProjectLeads(leads: string[] | undefined): string {
+  return Array.isArray(leads) ? leads.join(', ') : ''
+}
+function formatProjectLeadSuffix(project: OpenScienceProjectSummary): string {
+  const leads = getProjectLeads(project)
+  if (leads.length === 0) return ''
+  return ` - ${formatProjectLeads(leads)}`
+}
 function formatLabDocumentDate(value: string): string {
   const timestamp = Date.parse(value)
   if (!Number.isFinite(timestamp)) return ''
@@ -1017,6 +1142,17 @@ watch(selectedHomeProjectId, (projectId) => {
   }
 })
 
+watch(activeProjectLeadFilter, () => {
+  const firstProjectId = filteredRunningProjects.value[0]?.id ?? ''
+  if (!firstProjectId) {
+    activeSummaryProjectId.value = ''
+    return
+  }
+  if (!filteredRunningProjectIds.value.has(activeSummaryProjectId.value)) {
+    activeSummaryProjectId.value = firstProjectId
+  }
+})
+
 watch(accounts, () => {
   if (typeof window === 'undefined') return
   const shouldPoll = accounts.value.some((account) => account.quotaStatus === 'loading')
@@ -1075,6 +1211,26 @@ function onSidebarSearchKeydown(event: KeyboardEvent): void {
     isSidebarSearchVisible.value = false
     sidebarSearchQuery.value = ''
   }
+}
+
+function onSelectedPersonChange(event: Event): void {
+  const target = event.target as HTMLSelectElement | null
+  setSelectedPersonId(target?.value ?? '__all__')
+}
+
+function onAddPersonProfile(): void {
+  const profile = addPersonProfile(personDraft.value)
+  if (profile) {
+    personDraft.value = ''
+  }
+}
+
+function onClaimCurrentThread(): void {
+  assignThreadToSelectedPerson(selectedThreadId.value)
+}
+
+function onClearCurrentThreadOwner(): void {
+  clearThreadOwner(selectedThreadId.value)
 }
 
 function onSelectThread(threadId: string): void {
@@ -2179,12 +2335,41 @@ async function submitFirstMessageForNewThread(
   @apply w-3.5 h-3.5;
 }
 
-.sidebar-skills-link {
-  @apply mx-2 flex items-center rounded-lg border border-transparent bg-transparent px-2 py-1.5 text-sm text-zinc-700 transition hover:border-teal-200 hover:bg-teal-50 hover:text-zinc-950 cursor-pointer;
+.sidebar-person-panel {
+  @apply mx-2 rounded-lg border border-zinc-200 bg-white/85 p-2 shadow-sm flex flex-col gap-1.5;
 }
 
-.sidebar-skills-link.is-active {
-  @apply border-teal-200 bg-teal-50 text-zinc-950 font-medium;
+.sidebar-person-label {
+  @apply text-[0.68rem] uppercase tracking-wide text-zinc-500 font-semibold;
+}
+
+.sidebar-person-select {
+  @apply w-full rounded-md border border-zinc-200 bg-white px-2 py-1 text-sm text-zinc-800 outline-none transition focus:border-zinc-400;
+}
+
+.sidebar-person-add-row {
+  @apply flex items-center gap-1.5;
+}
+
+.sidebar-person-add-input {
+  @apply min-w-0 flex-1 rounded-md border border-zinc-200 bg-white px-2 py-1 text-xs text-zinc-800 placeholder-zinc-400 outline-none transition focus:border-zinc-400;
+}
+
+.sidebar-person-add-button,
+.sidebar-person-thread-action {
+  @apply rounded-md border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-100 disabled:cursor-default disabled:opacity-55 disabled:hover:border-zinc-200 disabled:hover:bg-zinc-50;
+}
+
+.sidebar-person-meta {
+  @apply m-0 text-[0.68rem] leading-snug text-zinc-500;
+}
+
+.sidebar-person-thread-row {
+  @apply flex items-center gap-1.5 rounded-md bg-zinc-50 px-2 py-1;
+}
+
+.sidebar-person-thread-owner {
+  @apply min-w-0 flex-1 truncate text-xs text-zinc-600;
 }
 
 .sidebar-thread-controls-header-host {
@@ -2301,6 +2486,19 @@ async function submitFirstMessageForNewThread(
   @apply border-teal-200 bg-teal-50 text-teal-800;
 }
 
+.lab-lead-filter {
+  @apply flex items-center gap-1.5 sm:ml-auto;
+}
+
+.lab-lead-filter-label {
+  @apply text-[11px] font-semibold uppercase text-zinc-500;
+  letter-spacing: 0;
+}
+
+.lab-lead-filter-select {
+  @apply h-8 min-w-0 rounded-md border border-zinc-300 bg-white px-2 text-xs text-zinc-900 outline-none transition focus:border-teal-500 sm:w-56;
+}
+
 .lab-home-summary {
   @apply grid flex-1 min-h-0 grid-cols-1 overflow-hidden sm:grid-cols-[15rem_minmax(0,1fr)];
 }
@@ -2323,6 +2521,14 @@ async function submitFirstMessageForNewThread(
 
 .lab-summary-list-item small {
   @apply mt-0.5 text-xs text-zinc-500;
+}
+
+.lab-summary-list-id {
+  @apply font-mono;
+}
+
+.lab-summary-list-empty {
+  @apply px-2 py-2 text-xs text-zinc-500;
 }
 
 .lab-summary-document {
@@ -2350,8 +2556,16 @@ async function submitFirstMessageForNewThread(
   @apply min-w-0 flex-1;
 }
 
-.lab-summary-document-header span {
+.lab-summary-document-title > span {
   @apply text-sm font-semibold text-zinc-950;
+}
+
+.lab-summary-document-leads {
+  @apply mt-1 flex flex-wrap gap-1;
+}
+
+.lab-summary-document-lead {
+  @apply rounded border border-teal-200 bg-teal-50 px-1.5 py-0.5 text-[11px] font-medium text-teal-800;
 }
 
 .lab-summary-document-path {

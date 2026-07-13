@@ -394,7 +394,7 @@ function listenWithFallback(server: ReturnType<typeof createServer>, startPort: 
 
       server.once('error', onError)
       server.once('listening', onListening)
-      server.listen(port, '0.0.0.0')
+      server.listen({ port, host: '::', ipv6Only: false })
     }
 
     attempt(startPort)

@@ -7,6 +7,7 @@ Verified on this machine:
 - Primary mounted share: `/Volumes/Xu Lab`
 - Main project-data root confirmed: `/Volumes/Xu Lab/tMoTe2_Measuring`
 - Main assistant-summary root confirmed: `/Volumes/Xu Lab/OpenScience/Summaries/PPT`
+- Current storage-layout map: `context/storage_layout.md`
 
 Implications:
 - File discovery skills should start from NAS-mounted paths.
@@ -19,5 +20,5 @@ Guidelines:
 - If legacy notes mention Dropbox paths, translate them into project identity and folder-pattern knowledge rather than preserving the path itself.
 
 Open items:
-- Confirm the main project-specific roots within `/Volumes/Xu Lab`.
+- Keep `context/storage_layout.md` current as project ownership and personal-folder conventions evolve.
 - Record additional mounted shares if the lab uses more than one NAS volume.

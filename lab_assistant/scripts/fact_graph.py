@@ -7,7 +7,8 @@ import argparse
 import json
 import re
 import sys
-from collections import defaultdict, deque
+import time
+from collections import Counter, defaultdict, deque
 from pathlib import Path
 from typing import Any
 
@@ -64,6 +65,22 @@ def load_graph() -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
     return nodes, edges
 
 
+def build_adjacency(edges: list[dict[str, Any]]) -> dict[str, list[tuple[str, dict[str, Any]]]]:
+    adjacency: dict[str, list[tuple[str, dict[str, Any]]]] = defaultdict(list)
+    for edge in edges:
+        adjacency[edge["source"]].append((edge["target"], edge))
+        adjacency[edge["target"]].append((edge["source"], edge))
+    return adjacency
+
+
+def degree_counts(edges: list[dict[str, Any]]) -> dict[str, int]:
+    counts: Counter[str] = Counter()
+    for edge in edges:
+        counts[edge["source"]] += 1
+        counts[edge["target"]] += 1
+    return dict(counts)
+
+
 def confidence_score(value: str) -> int:
     return {"low": 0, "medium": 1, "high": 2}.get(value, 0)
 
@@ -105,6 +122,69 @@ def search_nodes(query: str, limit: int = 8, node_types: set[str] | None = None)
     return rank_nodes(query, nodes, edges, limit=limit, node_types=node_types)
 
 
+def task_node_types(task_type: str) -> set[str] | None:
+    routes = {
+        "paper_lookup": {"Paper"},
+        "claim_lookup": {"Claim", "Hypothesis", "Evidence", "Contradiction", "OpenQuestion", "Mechanism", "Observable"},
+        "synthesis": {"Claim", "Hypothesis", "Evidence", "Contradiction", "OpenQuestion", "Paper", "Mechanism", "Observable"},
+        "hypothesis_generation": {"Claim", "Evidence", "Contradiction", "OpenQuestion", "Paper", "Mechanism", "Observable"},
+        "memory_update": {"Claim", "Convention", "Assumption", "Contradiction", "OpenQuestion"},
+        "contradiction_search": {"Contradiction", "Assumption", "OpenQuestion"},
+    }
+    return routes.get(task_type)
+
+
+def task_aware_search(query: str, task_type: str, limit: int = 8) -> list[dict[str, Any]]:
+    nodes, edges = load_graph()
+    node_types = task_node_types(task_type)
+    ranked = rank_nodes(query, nodes, edges, limit=limit, node_types=node_types)
+    if task_type == "paper_lookup" and len(ranked) < limit:
+        # Paper lookup remains paper-first, then uses linked claims only as backfill.
+        paper_ids = {node_id for _score, node_id, _node, _touching in ranked}
+        linked_claim_ids = {
+            edge["target"] if edge["source"] in paper_ids else edge["source"]
+            for edge in edges
+            if edge.get("source") in paper_ids or edge.get("target") in paper_ids
+        }
+        linked_claim_ids = {
+            node_id for node_id in linked_claim_ids if nodes.get(node_id, {}).get("type") == "Claim"
+        }
+        backfill = [
+            item
+            for item in rank_nodes(query, nodes, edges, limit=limit, node_types={"Claim"})
+            if item[1] in linked_claim_ids
+        ]
+        ranked.extend(backfill[: max(0, limit - len(ranked))])
+    results = []
+    for score, node_id, node, touching in ranked[:limit]:
+        results.append(
+            {
+                "id": node_id,
+                "type": node.get("type"),
+                "label": node.get("label"),
+                "summary": node.get("summary"),
+                "confidence": node.get("confidence"),
+                "provenance": node.get("provenance", []),
+                "score": score,
+                "edge_count": touching,
+            }
+        )
+    return results
+
+
+def search_with_metrics(query: str, task_type: str = "claim_lookup", limit: int = 8) -> dict[str, Any]:
+    started = time.perf_counter()
+    hits = task_aware_search(query, task_type=task_type, limit=limit)
+    elapsed_ms = int((time.perf_counter() - started) * 1000)
+    return {
+        "query": query,
+        "task_type": task_type,
+        "limit": limit,
+        "hits": hits,
+        "metrics": {"latency_ms": elapsed_ms, "hit_count": len(hits)},
+    }
+
+
 def rank_nodes(
     query: str,
     nodes: dict[str, dict[str, Any]],
@@ -113,13 +193,14 @@ def rank_nodes(
     node_types: set[str] | None = None,
 ) -> list[tuple[int, str, dict[str, Any], int]]:
     qtokens = tokenize(query)
+    degrees = degree_counts(edges)
     scored: list[tuple[int, str, dict[str, Any], int]] = []
     for node_id, node in nodes.items():
         if node_types is not None and node.get("type") not in node_types:
             continue
         score = score_node(query, qtokens, node)
         if score:
-            touching = sum(1 for edge in edges if edge["source"] == node_id or edge["target"] == node_id)
+            touching = degrees.get(node_id, 0)
             scored.append((score, node_id, node, touching))
 
     scored.sort(key=lambda item: (-item[0], -item[3], item[1]))
@@ -169,7 +250,15 @@ def validate() -> int:
     return 0
 
 
-def search(query: str, limit: int) -> int:
+def search(query: str, limit: int, task_type: str | None = None) -> int:
+    if task_type:
+        hits = task_aware_search(query, task_type=task_type, limit=limit)
+        for hit in hits:
+            print(f"{hit['id']}\t{hit['type']}\tscore={hit['score']}\tedges={hit['edge_count']}\t{hit['label']}")
+            print(f"  {hit['summary']}")
+        if not hits:
+            print("no matches")
+        return 0
     scored = search_nodes(query, limit=limit)
     for score, node_id, node, touching in scored:
         print(f"{node_id}\t{node['type']}\tscore={score}\tedges={touching}\t{node['label']}")
@@ -194,10 +283,7 @@ def collect_neighborhood(start: str, depth: int) -> tuple[dict[str, dict[str, An
     if start not in nodes:
         raise SystemExit(f"unknown node: {start}")
 
-    adjacency: dict[str, list[tuple[str, dict[str, Any]]]] = defaultdict(list)
-    for edge in edges:
-        adjacency[edge["source"]].append((edge["target"], edge))
-        adjacency[edge["target"]].append((edge["source"], edge))
+    adjacency = build_adjacency(edges)
 
     seen_nodes = {start}
     seen_edges: dict[str, dict[str, Any]] = {}
@@ -296,6 +382,7 @@ def parse_args() -> argparse.Namespace:
     p_search = sub.add_parser("search")
     p_search.add_argument("query")
     p_search.add_argument("--limit", type=int, default=8)
+    p_search.add_argument("--task-type", default=None)
 
     p_search_papers = sub.add_parser("search-papers")
     p_search_papers.add_argument("query")
@@ -306,6 +393,10 @@ def parse_args() -> argparse.Namespace:
     p_neighborhood.add_argument("--depth", type=int, default=1)
 
     sub.add_parser("build-views")
+    p_metrics = sub.add_parser("search-with-metrics")
+    p_metrics.add_argument("query")
+    p_metrics.add_argument("--task-type", default="claim_lookup")
+    p_metrics.add_argument("--limit", type=int, default=8)
     return parser.parse_args()
 
 
@@ -314,7 +405,7 @@ def main() -> int:
     if args.cmd == "validate":
         return validate()
     if args.cmd == "search":
-        return search(args.query, args.limit)
+        return search(args.query, args.limit, args.task_type)
     if args.cmd == "search-papers":
         return search_papers(args.query, args.limit)
     if args.cmd == "neighborhood":
@@ -322,6 +413,9 @@ def main() -> int:
         return 0
     if args.cmd == "build-views":
         return build_views()
+    if args.cmd == "search-with-metrics":
+        print(json.dumps(search_with_metrics(args.query, task_type=args.task_type, limit=args.limit), indent=2))
+        return 0
     raise SystemExit(f"unknown command: {args.cmd}")
 
 

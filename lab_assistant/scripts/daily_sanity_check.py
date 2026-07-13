@@ -41,6 +41,10 @@ def newest_json_report(reports_dir: Path) -> tuple[Path | None, dict[str, Any] |
     return None, None
 
 
+def active_roots(config: dict[str, Any]) -> list[dict[str, Any]]:
+    return [root for root in config.get("roots", []) if root.get("active") is not False]
+
+
 def recent_report_count(reports_dir: Path, since: datetime) -> int:
     count = 0
     for path in reports_dir.glob("pulse_*.json"):
@@ -75,7 +79,7 @@ def render_report(
     ]
 
     lines.append("Watched roots:")
-    for root in config.get("roots", []):
+    for root in active_roots(config):
         path = Path(root["path"])
         status = "ok" if path.exists() else "missing"
         lines.append(f"- {root['name']}: {status}, `{path}`")
@@ -153,7 +157,7 @@ def main() -> int:
     elif recent_count > 80:
         warnings.append("More than 80 pulse reports in the last 24 hours; cadence may be too aggressive.")
 
-    for root in config.get("roots", []):
+    for root in active_roots(config):
         if not Path(root["path"]).exists():
             issues.append(f"Missing watched root for {root['name']}: `{root['path']}`")
 

@@ -5,40 +5,209 @@
   "max_report_items": 80,
   "roots": [
     {
-      "name": "Shuai MT43",
+      "name": "Overview - current projects",
+      "project_id": "current_projects",
+      "path": "/Users/xulab/openscience/lab_assistant/knowledge/projects/current_projects.md",
+      "leads": [],
+      "active": false
+    },
+    {
+      "name": "MT43 - transport reference",
       "project_id": "shuai_mt43",
       "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Shuai-MT43-DR911",
+      "leads": [
+        "Shuai Yuan"
+      ],
       "active": true
     },
     {
-      "name": "A5 dot",
+      "name": "A5 - AAtA dot PL/PLE",
       "project_id": "a5_dot",
       "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry",
+      "leads": [
+        "Zengde She",
+        "Weijie Li"
+      ],
       "active": true
     },
     {
-      "name": "D93 Run2",
+      "name": "D93 - RMCD Run 2 reference",
       "project_id": "d93_run2",
       "path": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_Yifan_D93_Run2_attodry522",
+      "leads": [
+        "Christiano Wang Beach",
+        "Yifan Zhao"
+      ],
       "active": true
     },
     {
-      "name": "B79",
+      "name": "B79 - optical reference",
       "project_id": "b79",
       "path": "/Volumes/Xu Lab/tMoTe2_Measuring/WJL_Zengde_B79_Attodry911",
+      "leads": [
+        "Weijie Li",
+        "Zengde She"
+      ],
       "active": true
     },
     {
-      "name": "C7",
+      "name": "C7 - PL/reflectance reference",
       "project_id": "c7",
       "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_WJL_C7_Attodry911",
+      "leads": [
+        "Zengde She",
+        "Weijie Li"
+      ],
       "active": true
     },
     {
-      "name": "D88",
+      "name": "D88 - AAA RMCD/PL benchmark",
       "project_id": "d88",
       "path": "/Volumes/Xu Lab/tMoTe2_Measuring/courtney_christiano_D88_1+1+1_AAA_4deg_attodry911",
+      "leads": [
+        "Courtney Baier",
+        "Christiano Wang Beach",
+        "Yue Sun"
+      ],
       "active": true
+    },
+    {
+      "name": "A13 - AABB polarized reflectance",
+      "project_id": "a13_aabb",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A13_AABB_oldattodry",
+      "leads": [
+        "Zengde She",
+        "Weijie Li"
+      ],
+      "active": true
+    },
+    {
+      "name": "A18 - BAAB polarized reflectance",
+      "project_id": "a18_baab",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A18_BAAB_oldattodry",
+      "leads": [
+        "Zengde She",
+        "Weijie Li"
+      ],
+      "active": true
+    },
+    {
+      "name": "A22 - BAAB scanning PL",
+      "project_id": "a22_baab_scanningpl",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_A22_baab_ScanningPL",
+      "leads": [
+        "Zengde She"
+      ],
+      "active": true
+    },
+    {
+      "name": "MT48 - helical 1+1+1 PL/dR",
+      "project_id": "mt48_helical",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Shuai_CWB_MT48_attodry911",
+      "leads": [
+        "Shuai Yuan",
+        "Christiano Wang Beach",
+        "Weijie Li"
+      ],
+      "active": true
+    },
+    {
+      "name": "D88 Run 2 - AAA optical comparison",
+      "project_id": "d88_run2",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/courtney_christiano_D88_run2_AAA_attodry522",
+      "leads": [
+        "Courtney Baier",
+        "Christiano Wang Beach"
+      ],
+      "active": true
+    },
+    {
+      "name": "D88 Coil - domain/MCD linecuts",
+      "project_id": "d88_coil",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Yue_D88_1+1+1_AAA_4deg_Attodry522_coilmeasurement",
+      "leads": [
+        "Yue Sun"
+      ],
+      "active": true
+    },
+    {
+      "name": "D135 - 5 deg helical PL/dR",
+      "project_id": "d135_helical",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/courtney_christiano_D135_1+1+1_5deg_helical_attodry911",
+      "leads": [
+        "Courtney Baier",
+        "Christiano Wang Beach"
+      ],
+      "active": true
+    },
+    {
+      "name": "D24 - scanning PL",
+      "project_id": "d24_scanningpl",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D24_ScanningPL",
+      "leads": [
+        "Christiano Wang Beach"
+      ],
+      "active": true
+    },
+    {
+      "name": "D25 - helical AAA scanning PL",
+      "project_id": "d25_scanningpl",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/CWB_D25_ScanningPL",
+      "leads": [
+        "Christiano Wang Beach"
+      ],
+      "active": true
+    },
+    {
+      "name": "D25 Attodry911 - PL dual-gate",
+      "project_id": "christiano_wjl_d25",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Christiano_WJL_Attodry911",
+      "leads": [
+        "Christiano Wang Beach",
+        "Weijie Li"
+      ],
+      "active": true
+    },
+    {
+      "name": "AHS3 - RMCD/PL/dR",
+      "project_id": "julian_ahs3",
+      "path": "/Volumes/Xu Lab/tMoTe2_Measuring/Julian_AHS3_Attodry911",
+      "leads": [
+        "Julian Alexander Stewart"
+      ],
+      "active": true
+    },
+    {
+      "name": "MT50/MT52 - transport/PPMS",
+      "project_id": "mt50_mt52",
+      "path": "/Users/xulab/openscience/lab_assistant/knowledge/projects/mt50_mt52.md",
+      "leads": [],
+      "active": false
+    },
+    {
+      "name": "MnTe - Opticool RMCD/birefringence",
+      "project_id": "mn_te",
+      "path": "/Volumes/Xu Lab/MnTe",
+      "leads": [],
+      "active": false
+    },
+    {
+      "name": "SHG - sample survey",
+      "project_id": "shg",
+      "path": "/Volumes/Xu Lab/SHG",
+      "leads": [],
+      "active": false
+    },
+    {
+      "name": "AFM/Fab - provenance and devices",
+      "project_id": "afm_fabrication",
+      "path": "/Users/xulab/openscience/lab_assistant/knowledge/projects/afm_fabrication.md",
+      "leads": [
+        "Zengde She",
+        "Weijie Li",
+        "Naiyuan (James) Zhang"
+      ],
+      "active": false
     }
   ],
   "ignore_names": [

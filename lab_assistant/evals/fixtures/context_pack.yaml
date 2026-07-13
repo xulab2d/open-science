@@ -1,0 +1,62 @@
+[
+  {
+    "id": "context_paper_lookup_001",
+    "task_type": "paper_lookup",
+    "query": "moire exciton optical signatures",
+    "char_budget": 14000,
+    "expected": {
+      "required_paths": ["lab_assistant/knowledge/INDEX.md", "lab_assistant/skills/reference-retrieval.md"],
+      "required_item_ids": ["skill_metadata:reference-retrieval"],
+      "required_kinds": ["graph_node"]
+    },
+    "metrics": {"required_coverage_min": 1.0, "max_chars": 14000, "irrelevant_rate_max": 0.0}
+  },
+  {
+    "id": "context_claim_lookup_001",
+    "task_type": "claim_lookup",
+    "query": "RMCD hysteresis magnetic transition",
+    "char_budget": 12000,
+    "expected": {
+      "required_paths": ["lab_assistant/graph/README.md", "lab_assistant/skills/fact-graph.md"],
+      "required_item_ids": ["skill_metadata:fact-graph"],
+      "required_kinds": ["graph_node", "graph_edge"]
+    },
+    "metrics": {"required_coverage_min": 1.0, "max_chars": 12000, "irrelevant_rate_max": 0.0}
+  },
+  {
+    "id": "context_synthesis_001",
+    "task_type": "synthesis",
+    "query": "optical readout of correlated moire states",
+    "char_budget": 16000,
+    "expected": {
+      "required_paths": ["lab_assistant/knowledge/INDEX.md", "lab_assistant/skills/scientific-synthesis.md"],
+      "required_item_ids": ["skill_metadata:scientific-synthesis"],
+      "required_kinds": ["graph_node"]
+    },
+    "metrics": {"required_coverage_min": 1.0, "max_chars": 16000, "irrelevant_rate_max": 0.0}
+  },
+  {
+    "id": "context_memory_update_001",
+    "task_type": "memory_update",
+    "query": "record a corrected plotting convention with provenance",
+    "char_budget": 12000,
+    "expected": {
+      "required_paths": ["lab_assistant/improvements/README.md", "lab_assistant/memory/review_log.md", "lab_assistant/skills/knowledge-maintenance.md"],
+      "required_item_ids": ["skill_metadata:knowledge-maintenance"],
+      "required_kinds": ["core"]
+    },
+    "metrics": {"required_coverage_min": 1.0, "max_chars": 12000, "irrelevant_rate_max": 0.0}
+  },
+  {
+    "id": "context_project_status_001",
+    "task_type": "project_status",
+    "query": "what changed in active tMoTe2 projects",
+    "char_budget": 12000,
+    "expected": {
+      "required_paths": ["lab_assistant/context/projects/active_projects.md", "lab_assistant/knowledge/projects/README.md"],
+      "required_item_ids": ["skill_metadata:background-cataloguing"],
+      "required_kinds": ["project_summary"]
+    },
+    "metrics": {"required_coverage_min": 1.0, "max_chars": 12000, "irrelevant_rate_max": 0.0}
+  }
+]

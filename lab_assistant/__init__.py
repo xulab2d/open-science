@@ -1,0 +1,1 @@
+"""OpenScience lab assistant package."""

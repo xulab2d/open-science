@@ -123,6 +123,7 @@ export type OpenScienceProjectSummary = {
   id: string
   name: string
   path: string
+  leads: string[]
   active: boolean
   summaryPath: string
 }
@@ -147,6 +148,26 @@ export type OpenScienceSurfaces = {
 type OpenScienceSurfacesResponse = {
   data?: OpenScienceSurfaces
   error?: string
+}
+
+function normalizeOpenScienceProjectSummary(value: unknown): OpenScienceProjectSummary | null {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null
+  const record = value as Record<string, unknown>
+  const id = typeof record.id === 'string' ? record.id.trim() : ''
+  const name = typeof record.name === 'string' ? record.name.trim() : ''
+  if (!id || !name) return null
+  return {
+    id,
+    name,
+    path: typeof record.path === 'string' ? record.path : '',
+    leads: Array.isArray(record.leads)
+      ? record.leads
+          .map((lead) => (typeof lead === 'string' ? lead.trim() : ''))
+          .filter((lead) => lead.length > 0)
+      : [],
+    active: record.active !== false,
+    summaryPath: typeof record.summaryPath === 'string' ? record.summaryPath : '',
+  }
 }
 
 
@@ -1210,7 +1231,11 @@ export async function getOpenScienceSurfaces(): Promise<OpenScienceSurfaces> {
   }
 
   return {
-    runningProjects: Array.isArray(payload?.data?.runningProjects) ? payload.data.runningProjects : [],
+    runningProjects: Array.isArray(payload?.data?.runningProjects)
+      ? payload.data.runningProjects
+          .map((project) => normalizeOpenScienceProjectSummary(project))
+          .filter((project): project is OpenScienceProjectSummary => project !== null)
+      : [],
     runningProjectDocs: Array.isArray(payload?.data?.runningProjectDocs) ? payload.data.runningProjectDocs : [],
     pastProjects: Array.isArray(payload?.data?.pastProjects) ? payload.data.pastProjects : [],
     dailySummaries: Array.isArray(payload?.data?.dailySummaries) ? payload.data.dailySummaries : [],

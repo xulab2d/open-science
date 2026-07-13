@@ -1,23 +1,23 @@
-# Project Map: Julian AHS3
+# Julian AHS3
 
-Project:
-- AHS3 scanning-PL work centered on gate-dependent PL and dR measurements.
+Status: active project summary. Owner: Julian Alexander Stewart.
 
-Local context:
-- [julian_ahs3.md](/Users/xulab/openscience/lab_assistant/context/projects/julian_ahs3.md)
-- [active_projects.md](/Users/xulab/openscience/lab_assistant/context/projects/active_projects.md)
+## Broad Overview
 
-Likely scientific center:
-- gate-dependent PL
-- reflectance or dR gate dependence
-- optical signatures in the AHS3 device
+AHS3 is an optical and magnetic project with Attodry911 RMCD, PL, dR, dual-gate maps, spatial maps, and hysteresis measurements, plus a separate scanning-PL root with April gatedep PL/dR work.
 
-Recent evidence anchor:
-- `Julian_AHS3_ScanningPL_measure.pptx` under the canonical NAS root was modified on 2026-04-07.
-- Project-specific PL and dR files were modified on 2026-04-04 through 2026-04-08 in `1_PL_gatedep` and `2_dR_gatedep`.
-- Representative recent files include `2_scanningpl_PL_AHS3_spot7_150g1100c_hene_5uW_1s_6p5K_nsm12to12_D0.mat` and `2_scanningpl_RC_AHS3_spot7_150g750c_1sx3_6p5K_nsm12to12_D0.mat`.
-- This is enough to treat AHS3 as active rather than archival-only.
+Canonical roots:
+- `/Volumes/Xu Lab/tMoTe2_Measuring/Julian_AHS3_Attodry911`
+- `/Volumes/Xu Lab/tMoTe2_Measuring/Julian_AHS3_ScanningPL`
 
-Use when:
-- a request is about Julian's currently active optical datasets
-- a summary needs the active Julian project root before deeper review
+## Recent Developments
+
+The Attodry911 root has substantial May 2026 activity and some June files. `Julian_AHS3_Attodry911_measure.pptx` describes RMCD spatial maps, RMCD dual-gate maps, B-sweep hysteresis, PL, and dR. The scanning-PL root has April 2026 PL/dR gatedep files and `Julian_AHS3_ScanningPL_measure.pptx`.
+
+Deck text reports clear FM hysteresis at `nu = -1`, coercive fields around 100 mT near one doping, and persistent features at 0 T and 10 mT. A faint feature near `nu = -2` at negative D is flagged as interesting but not settled.
+
+## Watchpoints
+
+- Treat faint features carefully because deck notes mention electrical interference.
+- Keep Attodry911 RMCD/hysteresis and scanning-PL gatedep roots connected but not merged.
+- Confirm filling and D calibration before comparing AHS3 to D88 or D93.

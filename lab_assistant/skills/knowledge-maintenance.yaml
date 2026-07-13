@@ -1,0 +1,20 @@
+{
+  "skill_id": "knowledge-maintenance",
+  "version": "1.0.0",
+  "purpose": "Place durable scientific lessons in the smallest correct knowledge, context, or skill file.",
+  "inputs": [
+    {"name": "lesson", "type": "string"},
+    {"name": "provenance", "type": "list"}
+  ],
+  "outputs": [
+    {"name": "memory_mutation", "type": "proposal"},
+    {"name": "target_path", "type": "string"}
+  ],
+  "task_types": ["memory_update", "synthesis", "project_status"],
+  "latency_budget_ms": 2000,
+  "context_max_chars": 1800,
+  "eval_suites": ["memory_write"],
+  "target_metrics": ["provenance_completeness", "invalid_mutation_rate", "duplicate_detection_rate"],
+  "failure_modes": ["writes broad notes where a smaller file would do", "missing provenance", "direct durable edit without candidate record"],
+  "promotion_policy": "Promote memory-policy changes only when mutation validity and provenance completeness improve."
+}

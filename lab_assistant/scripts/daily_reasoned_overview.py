@@ -120,6 +120,7 @@ def write_prompt(args: argparse.Namespace) -> Path:
     watched_roots = "\n".join(
         f"- {root['name']} ({root['project_id']}): `{root['path']}`"
         for root in config.get("roots", [])
+        if root.get("active") is not False
     )
     pulse_lines = "\n".join(
         "- {timestamp}: changes={total}, high_value={high}, projects={projects}, "

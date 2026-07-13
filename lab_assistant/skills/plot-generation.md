@@ -7,19 +7,29 @@ Use when:
 
 Procedure:
 1. Identify the project and observable before plotting.
-2. Read the relevant project note and nearby project scripts if the observable, axis convention, background subtraction, or color scale is unclear.
-3. Apply `context/plotting_practices.md` and `context/plot_preferences.md`.
-4. Use `tools/plotting/openscience_plot_style.py` for Matplotlib defaults when possible.
-5. Choose axes that match the physics:
+2. Recover prior plotting conventions before making a figure:
+- read the relevant project note and nearby project scripts
+- check `context/plot_preferences.md` and `context/plotting_practices.md`
+- check `knowledge/canon/plot_code_index.md` for prior plotting implementations with matching project, observable, axis, or output style
+- if the requester or project has known preferences, use those before inventing a style
+3. If the observable, axis convention, background subtraction, or color scale is unclear, infer from project scripts, indexed plot code, and prior accepted figures before asking.
+4. Apply `context/plotting_practices.md` and `context/plot_preferences.md`.
+5. Use `tools/plotting/openscience_plot_style.py` for Matplotlib defaults when possible.
+6. Choose axes that match the physics:
 - optical gate maps: energy vs `n`, `D`, or filling
 - RMCD/magnetic maps: `B`, `n`, `D`, or filling, with signed contrast centered at zero
 - transport maps: filling, density, field, temperature, or displacement field as appropriate
-6. Choose color bounds deliberately:
+7. Choose color bounds deliberately:
 - sequential intensity: robust percentile limits, usually not raw min/max
 - signed contrast/difference: symmetric zero-centered limits
 - weak features: subtract/normalize first using project convention, then choose limits
-7. Add the minimum annotations needed to make the figure interpretable without narration.
-8. Export both editable/vector and review/raster formats when the plot may be reused.
+8. Add the minimum annotations needed to make the figure interpretable without narration.
+9. Export robust artifacts:
+- review PNG for quick inspection
+- PDF/SVG for reusable figures when appropriate
+- script/notebook path or generated code path
+- source/processed data path when it affects interpretation
+10. If the user refines the style, labels, observable, normalization, or presentation, capture the stable lesson in the narrowest appropriate canonical context so the next similar plot starts from that convention.
 
 Default quality bar:
 - Clear labels and units.

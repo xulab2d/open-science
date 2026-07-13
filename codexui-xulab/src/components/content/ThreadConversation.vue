@@ -1234,6 +1234,61 @@ type InlineSegment =
   | { kind: 'code'; value: string }
   | { kind: 'url'; value: string; href: string }
   | { kind: 'file'; value: string; path: string; displayPath: string; downloadName: string }
+const BARE_RELATIVE_PATH_ROOTS = new Set([
+  'app',
+  'assets',
+  'build',
+  'client',
+  'components',
+  'config',
+  'context',
+  'core',
+  'daemon',
+  'dist',
+  'docs',
+  'evals',
+  'graph',
+  'integrations',
+  'knowledge',
+  'lab_assistant',
+  'lib',
+  'memory',
+  'node_modules',
+  'packages',
+  'pages',
+  'plans',
+  'public',
+  'reports',
+  'runtime',
+  'scripts',
+  'server',
+  'skills',
+  'src',
+  'styles',
+  'test',
+  'tests',
+  'tools',
+  'types',
+  'utils',
+])
+const UNIX_ABSOLUTE_PATH_ROOTS = new Set([
+  'Applications',
+  'Library',
+  'Users',
+  'Volumes',
+  'bin',
+  'etc',
+  'home',
+  'media',
+  'mnt',
+  'opt',
+  'private',
+  'root',
+  'tmp',
+  'usr',
+  'var',
+  'workspace',
+])
 type TaskListItem = {
   text: string
   checked: boolean
@@ -1318,18 +1373,50 @@ type DiffViewerLine = {
   text: string
 }
 
+function looksLikeBareRelativePath(value: string): boolean {
+  const parts = value.split(/[\\/]/u)
+  if (parts.length < 2) return false
+  if (parts.some((part) => !/^[A-Za-z0-9._@()+-]+$/u.test(part))) return false
+
+  const first = parts[0] ?? ''
+  if (BARE_RELATIVE_PATH_ROOTS.has(first)) return true
+
+  const hasFileLikeSegment = parts.some((part) => (
+    part.startsWith('.') ||
+    /\.[A-Za-z0-9][A-Za-z0-9_-]*$/u.test(part)
+  ))
+  if (hasFileLikeSegment) return true
+
+  const hasLetter = parts.some((part) => /[A-Za-z]/u.test(part))
+  const hasPathSignal = parts.some((part) => /[_@()+]/u.test(part) || /\d/u.test(part))
+  return hasLetter && hasPathSignal
+}
+
+function looksLikeUnixAbsolutePath(value: string): boolean {
+  if (!value.startsWith('/')) return false
+  const parts = value.split('/').filter(Boolean)
+  if (parts.length === 0) return false
+
+  const first = parts[0] ?? ''
+  if (UNIX_ABSOLUTE_PATH_ROOTS.has(first)) return true
+  if (BARE_RELATIVE_PATH_ROOTS.has(first)) return true
+  if (first.startsWith('.') || /\.[A-Za-z0-9][A-Za-z0-9_-]*$/u.test(first)) return true
+
+  return false
+}
+
 function isFilePath(value: string): boolean {
   if (!value || /[\r\n]/u.test(value)) return false
   if (value.endsWith('/') || value.endsWith('\\')) return false
   if (/^[A-Za-z][A-Za-z0-9+.-]*:\/\//u.test(value)) return false
 
-  const looksLikeUnixAbsolute = value.startsWith('/')
+  const looksLikeUnixAbsolute = looksLikeUnixAbsolutePath(value)
   const looksLikeWindowsAbsolute = /^[A-Za-z]:[\\/]/u.test(value)
   const looksLikeRelative = value.startsWith('./') || value.startsWith('../') || value.startsWith('~/')
   if (looksLikeUnixAbsolute || looksLikeWindowsAbsolute || looksLikeRelative) return true
 
   // Bare relative paths should be strict enough to avoid turning ordinary prose into links.
-  return /^[A-Za-z0-9._@()+-]+(?:[\\/][A-Za-z0-9._@()+-]+)+(?:#L\d+(?:C\d+)?|:\d+(?::\d+)?)?$/u.test(value)
+  return looksLikeBareRelativePath(value)
 }
 
 function getBasename(pathValue: string): string {
@@ -2068,7 +2155,7 @@ function rollbackResponse(anchorMessageId: string): void {
 
 function splitPlainTextByLinks(text: string): InlineSegment[] {
   const segments: InlineSegment[] = []
-  const pattern = /https?:\/\/[^\s<>"'`，。；：！？、()[\]{}「」『』《》]+|file:\/\/[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|(?:[A-Za-z]:[\\/]|~\/|\.{1,2}\/)[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|(?<![\p{L}\p{N}_-])\/[^\n<>"'`，。；：！？、[\]{}「」『』《》]+|[A-Za-z0-9._@()+-]+(?:[\\/][A-Za-z0-9._@()+-]+)+(?:#L\d+(?:C\d+)?|:\d+(?::\d+)?)?/gu
+  const pattern = /https?:\/\/[^\s<>"'`，。；：！？、()[\]{}「」『』《》]+|file:\/\/[^\s<>"'`，。；：！？、[\]{}「」『』《》]+|(?:[A-Za-z]:[\\/]|~\/|\.{1,2}\/)[^\s<>"'`，。；：！？、[\]{}「」『』《》]+|(?<![\p{L}\p{N}_-])\/[^\s<>"'`，。；：！？、[\]{}「」『』《》]+|[A-Za-z0-9._@()+-]+(?:[\\/][A-Za-z0-9._@()+-]+)+(?:#L\d+(?:C\d+)?|:\d+(?::\d+)?)?/gu
   let cursor = 0
 
   for (const match of text.matchAll(pattern)) {
@@ -4578,13 +4665,6 @@ onBeforeUnmount(() => {
   @apply my-0 overflow-x-auto overflow-y-hidden py-1;
 }
 
-.message-card[data-role='user'] .message-text,
-.message-card[data-role='user'] .message-inline-math,
-.message-card[data-role='user'] .message-inline-math :deep(.katex),
-.message-card[data-role='user'] .message-inline-math :deep(.katex *) {
-  color: rgb(250 250 250);
-}
-
 .message-code-block {
   @apply overflow-hidden rounded-xl border border-slate-200 bg-slate-950 text-slate-100;
 }
@@ -4603,6 +4683,64 @@ onBeforeUnmount(() => {
 
 .message-file-link {
   @apply text-sm leading-relaxed text-[#0969da] no-underline hover:text-[#1f6feb] hover:underline underline-offset-2;
+}
+
+.message-card[data-role='user'] .message-text,
+.message-card[data-role='user'] .message-heading,
+.message-card[data-role='user'] .message-bold-text,
+.message-card[data-role='user'] .message-italic-text,
+.message-card[data-role='user'] .message-list,
+.message-card[data-role='user'] .message-list-item-text,
+.message-card[data-role='user'] .message-inline-math,
+.message-card[data-role='user'] .message-inline-math :deep(.katex),
+.message-card[data-role='user'] .message-inline-math :deep(.katex *) {
+  color: rgb(15 23 42);
+}
+
+.message-card[data-role='user'] .message-strikethrough-text,
+.message-card[data-role='user'] .message-task-checkbox {
+  color: rgb(71 85 105);
+}
+
+.message-card[data-role='user'] .message-file-link {
+  color: rgb(12 74 110);
+}
+
+.message-card[data-role='user'] .message-file-link:hover {
+  color: rgb(8 47 73);
+}
+
+.message-card[data-role='user'] .message-inline-code {
+  @apply border-teal-200 bg-white/75 text-slate-900;
+}
+
+:global(:root.dark) .message-card[data-role='user'] .message-text,
+:global(:root.dark) .message-card[data-role='user'] .message-heading,
+:global(:root.dark) .message-card[data-role='user'] .message-bold-text,
+:global(:root.dark) .message-card[data-role='user'] .message-italic-text,
+:global(:root.dark) .message-card[data-role='user'] .message-list,
+:global(:root.dark) .message-card[data-role='user'] .message-list-item-text,
+:global(:root.dark) .message-card[data-role='user'] .message-inline-math,
+:global(:root.dark) .message-card[data-role='user'] .message-inline-math :deep(.katex),
+:global(:root.dark) .message-card[data-role='user'] .message-inline-math :deep(.katex *) {
+  color: rgb(250 250 250) !important;
+}
+
+:global(:root.dark) .message-card[data-role='user'] .message-strikethrough-text,
+:global(:root.dark) .message-card[data-role='user'] .message-task-checkbox {
+  color: rgb(204 251 241) !important;
+}
+
+:global(:root.dark) .message-card[data-role='user'] .message-file-link {
+  color: rgb(125 211 252) !important;
+}
+
+:global(:root.dark) .message-card[data-role='user'] .message-file-link:hover {
+  color: rgb(186 230 253) !important;
+}
+
+:global(:root.dark) .message-card[data-role='user'] .message-inline-code {
+  @apply border-teal-700 bg-teal-900/70 text-zinc-100;
 }
 
 .file-link-context-menu {

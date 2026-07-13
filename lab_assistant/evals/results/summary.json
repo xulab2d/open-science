@@ -1,0 +1,78 @@
+{
+  "failed": 0,
+  "latency_ms": {
+    "count": 27,
+    "max": 253.0,
+    "p50": 9.0,
+    "p95": 19.099999999999998
+  },
+  "metrics": {
+    "actionability_mean": 4.0,
+    "context_chars_mean": 12777.0,
+    "context_compile_latency_ms_mean": 64.0,
+    "context_hash_stability_mean": 1.0,
+    "context_item_count_mean": 11.6,
+    "context_relevance_mean": 1.0,
+    "contradiction_awareness_mean": 5.0,
+    "contradiction_link_rate_mean": 0.3333333333333333,
+    "duplicate_detection_rate_mean": 0.3333333333333333,
+    "falsifiability_mean": 5.0,
+    "graph_search_latency_ms_mean": 9.923076923076923,
+    "groundedness_mean": 5.0,
+    "invalid_mutation_rate_mean": 0.3333333333333333,
+    "irrelevant_item_rate_mean": 0.0,
+    "latency_ms_mean": 16.62962962962963,
+    "low_confidence_unsupported_use_mean": 0.0,
+    "mechanism_clarity_mean": 4.0,
+    "mrr_mean": 0.8871794871794871,
+    "novelty_proxy_mean": 4.0,
+    "precision_at_5_mean": 0.4807692307692308,
+    "promotion_count_mean": 0.6666666666666666,
+    "proposed_mutation_count_mean": 1.0,
+    "provenance_completeness_mean": 2.8333333333333335,
+    "provenance_coverage_mean": 1.0,
+    "rejection_count_mean": 0.3333333333333333,
+    "replay_context_hash_match_mean": 1.0,
+    "retrieval_recall_at_5_mean": 0.9230769230769231,
+    "retrieved_item_jaccard_mean": 1.0,
+    "stale_deprecated_fact_handling_mean": 0.3333333333333333,
+    "synthesis_mean_score_mean": 4.571428571428571,
+    "token_estimate_mean": 3194.6,
+    "trajectory_schema_valid_mean": 1.0
+  },
+  "pass_rate": 1.0,
+  "passed": 27,
+  "suites": {
+    "context_pack": {
+      "failed": 0,
+      "passed": 5,
+      "tasks": 5
+    },
+    "memory_write": {
+      "failed": 0,
+      "passed": 3,
+      "tasks": 3
+    },
+    "paper_lookup": {
+      "failed": 0,
+      "passed": 5,
+      "tasks": 5
+    },
+    "replay": {
+      "failed": 0,
+      "passed": 3,
+      "tasks": 3
+    },
+    "retrieval": {
+      "failed": 0,
+      "passed": 8,
+      "tasks": 8
+    },
+    "synthesis": {
+      "failed": 0,
+      "passed": 3,
+      "tasks": 3
+    }
+  },
+  "tasks": 27
+}

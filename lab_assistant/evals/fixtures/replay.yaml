@@ -1,0 +1,23 @@
+[
+  {
+    "id": "replay_claim_lookup_001",
+    "task_type": "claim_lookup",
+    "query": "RMCD hysteresis magnetic transition",
+    "expected": {"same_context_pack_id": true},
+    "metrics": {"jaccard_min": 1.0}
+  },
+  {
+    "id": "replay_paper_lookup_001",
+    "task_type": "paper_lookup",
+    "query": "moire exciton optical signatures",
+    "expected": {"same_context_pack_id": true},
+    "metrics": {"jaccard_min": 1.0}
+  },
+  {
+    "id": "replay_memory_update_001",
+    "task_type": "memory_update",
+    "query": "record a corrected plotting convention with provenance",
+    "expected": {"same_context_pack_id": true},
+    "metrics": {"jaccard_min": 1.0}
+  }
+]

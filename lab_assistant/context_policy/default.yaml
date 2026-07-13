@@ -1,0 +1,50 @@
+{
+  "char_budgets": {
+    "direct": 3000,
+    "fast": 7000,
+    "normal": 12000,
+    "deep": 22000,
+    "self_improve": 30000
+  },
+  "legacy_always_include": "integrations/context_files.json",
+  "minimal_core": [
+    {
+      "path": "core/identity.md",
+      "kind": "core",
+      "reason": "minimal identity for lab-assistant behavior",
+      "max_chars": 1200
+    },
+    {
+      "path": "core/directives.md",
+      "kind": "core",
+      "reason": "minimal directives for science-first provenance behavior",
+      "max_chars": 1800
+    },
+    {
+      "path": "core/preferences.md",
+      "kind": "core",
+      "reason": "compact explicit preferences",
+      "max_chars": 1200
+    }
+  ],
+  "fallback_include": [
+    {
+      "path": "core/identity.md",
+      "kind": "core",
+      "reason": "fallback identity",
+      "max_chars": 1200
+    },
+    {
+      "path": "core/directives.md",
+      "kind": "core",
+      "reason": "fallback directives",
+      "max_chars": 1800
+    },
+    {
+      "path": "knowledge/INDEX.md",
+      "kind": "knowledge_index",
+      "reason": "fallback knowledge navigation",
+      "max_chars": 1400
+    }
+  ]
+}

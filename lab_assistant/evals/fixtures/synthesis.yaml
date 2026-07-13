@@ -1,0 +1,17 @@
+[
+  {
+    "id": "synthesis_optical_readout_001",
+    "query": "optical readout of correlated moire states",
+    "metrics": {"mean_score_min": 3.0, "provenance_completeness_min": 2.0}
+  },
+  {
+    "id": "synthesis_rmcd_hysteresis_001",
+    "query": "RMCD hysteresis magnetic transition",
+    "metrics": {"mean_score_min": 3.0, "provenance_completeness_min": 2.0}
+  },
+  {
+    "id": "synthesis_gate_control_001",
+    "query": "displacement field control of magnetic ground states",
+    "metrics": {"mean_score_min": 3.0, "provenance_completeness_min": 2.0}
+  }
+]

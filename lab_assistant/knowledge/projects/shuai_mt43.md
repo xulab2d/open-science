@@ -1,28 +1,25 @@
-# Project Map: Shuai MT43
+# Shuai MT43
 
-Project:
-- Transport-focused MT43 work around sweep B, `n-B` maps, and correlated-state interpretation.
+Status: quieter current-context project. Owner inferred from root: Shuai Yuan.
 
-Local context:
-- [shuai_mt43.md](/Users/xulab/openscience/lab_assistant/context/projects/shuai_mt43.md)
-- [active_projects.md](/Users/xulab/openscience/lab_assistant/context/projects/active_projects.md)
+## Broad Overview
 
-Likely scientific center:
-- moiré transport
-- filling-dependent phase structure
-- displacement-field-sensitive correlated states
+MT43 is a transport-focused tMoTe2 project centered on sweep-B, `n-B`, and displacement-field-sensitive correlated-state maps. It remains important context for filling assignments and transport language used in newer optical projects such as MT48.
 
-Start here:
-- [moire_tmote2_research_frontier.md](/Users/xulab/openscience/lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md)
-- [displacement_field_and_phase_control.md](/Users/xulab/openscience/lab_assistant/knowledge/syntheses/displacement_field_and_phase_control.md)
-- [evidence_hierarchy_for_correlated_states.md](/Users/xulab/openscience/lab_assistant/knowledge/syntheses/evidence_hierarchy_for_correlated_states.md)
+Canonical NAS root:
+- `/Volumes/Xu Lab/tMoTe2_Measuring/Shuai-MT43-DR911`
 
-Then pull:
-- [moire_tmote2.md](/Users/xulab/openscience/lab_assistant/knowledge/papers/moire_tmote2.md)
-- [transport_and_thermodynamics.md](/Users/xulab/openscience/lab_assistant/knowledge/papers/transport_and_thermodynamics.md)
+## Recent Developments
 
-Local lab anchors:
-- [tmote2_deck_patterns.md](/Users/xulab/openscience/lab_assistant/knowledge/canon/tmote2_deck_patterns.md)
+MT43 is still part of the daemon seed set, but the July 2026 NAS review did not show recent high-value activity comparable to A5/A13/A18/MT48/D88/D135. Treat it as a live reference project rather than a June-active measurement root unless new files appear.
 
-Use when:
-- a request is about MT43-specific transport anomalies, gate maps, or how current transport data fit into the broader moiré MoTe2 literature
+Its older Landau-fan and sweep-D/n-D materials are still useful when interpreting filling-dependent optical claims in current helical tMoTe2 work.
+
+## Watchpoints
+
+- Do not infer new science from sync/backfill visibility bursts.
+- Use project-specific density/filling conversions before exporting MT43 labels into optical summaries.
+
+Useful domain anchors:
+- `/Users/xulab/openscience/lab_assistant/knowledge/syntheses/moire_tmote2_research_frontier.md`
+- `/Users/xulab/openscience/lab_assistant/knowledge/syntheses/displacement_field_and_phase_control.md`

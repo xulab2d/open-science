@@ -1,0 +1,38 @@
+[
+  {
+    "id": "memory_write_candidate_valid_001",
+    "candidate_name": "memory_provenance_gate",
+    "hypothesis": "Candidate-gated memory proposals improve provenance completeness.",
+    "target_metrics": ["provenance_completeness", "invalid_mutation_rate"],
+    "protected_metrics": ["replay_stability"],
+    "with_candidate": true,
+    "decision": "promoted",
+    "target_path": "lab_assistant/context/plot_preferences.md",
+    "payload": {"note": "plot preference must cite provenance"},
+    "expected": {"valid_mutation": true}
+  },
+  {
+    "id": "memory_write_reject_missing_candidate_001",
+    "candidate_name": "direct_memory_write_block",
+    "hypothesis": "Direct durable memory edits without candidates should be warned or blocked.",
+    "target_metrics": ["invalid_mutation_rate"],
+    "protected_metrics": ["paper_lookup_precision"],
+    "with_candidate": false,
+    "decision": "rejected",
+    "target_path": "lab_assistant/skills/fact-graph.md",
+    "payload": {"note": "unsafe direct edit", "duplicate_of": "skill:fact-graph"},
+    "expected": {"valid_mutation": false}
+  },
+  {
+    "id": "memory_write_contradiction_link_001",
+    "candidate_name": "contradiction_link_gate",
+    "hypothesis": "Memory updates that change scientific status should link contradictions.",
+    "target_metrics": ["contradiction_link_rate", "provenance_completeness"],
+    "protected_metrics": ["replay_stability"],
+    "with_candidate": true,
+    "decision": "promoted",
+    "target_path": "lab_assistant/graph/nodes.jsonl",
+    "payload": {"note": "status update", "contradiction": "claim:example", "status": "deprecated"},
+    "expected": {"valid_mutation": true}
+  }
+]

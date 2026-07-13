@@ -69,13 +69,37 @@ const PROJECT_ORDER_STORAGE_KEY = 'codex-web-local.project-order.v1'
 const PROJECT_DISPLAY_NAME_STORAGE_KEY = 'codex-web-local.project-display-name.v1'
 const COLLABORATION_MODE_STORAGE_KEY = 'codex-web-local.collaboration-mode-by-context.v1'
 const LEGACY_COLLABORATION_MODE_STORAGE_KEY = 'codex-web-local.collaboration-mode.v1'
+const REASONING_EFFORT_STORAGE_KEY = 'codex-web-local.reasoning-effort-by-context.v1'
+const LEGACY_REASONING_EFFORT_STORAGE_KEY = 'codex-web-local.reasoning-effort.v1'
+const PERSON_PROFILES_STORAGE_KEY = 'codex-web-local.person-profiles.v1'
+const SELECTED_PERSON_STORAGE_KEY = 'codex-web-local.selected-person-id.v1'
+const THREAD_OWNER_STORAGE_KEY = 'codex-web-local.thread-owner-by-id.v1'
 const NEW_THREAD_COLLABORATION_MODE_CONTEXT = '__new-thread__'
+const ALL_PERSON_ID = '__all__'
 const EVENT_SYNC_DEBOUNCE_MS = 220
 const RATE_LIMIT_REFRESH_DEBOUNCE_MS = 500
 const TURN_START_FOLLOW_UP_SYNC_DELAY_MS = 3000
 const REASONING_EFFORT_OPTIONS: ReasoningEffort[] = ['none', 'minimal', 'low', 'medium', 'high', 'xhigh']
 const GLOBAL_SERVER_REQUEST_SCOPE = '__global__'
-const MODEL_FALLBACK_ID = 'gpt-5.2-codex'
+const DEFAULT_MODEL_FALLBACK_ID = 'gpt-5.2-codex'
+
+export type PersonProfile = {
+  id: string
+  name: string
+}
+
+const DEFAULT_PERSON_PROFILES: PersonProfile[] = [
+  { id: 'isaac-van-orman', name: 'Isaac Van Orman' },
+  { id: 'xiaodong-xu', name: 'Xiaodong Xu' },
+  { id: 'weijie-li', name: 'Weijie Li' },
+  { id: 'zengde-she', name: 'Zengde She' },
+  { id: 'christiano-wang-beach', name: 'Christiano Wang Beach' },
+  { id: 'shuai-yuan', name: 'Shuai Yuan' },
+  { id: 'courtney-baier', name: 'Courtney Baier' },
+  { id: 'julian-stewart', name: 'Julian Stewart' },
+  { id: 'yifan-zhao', name: 'Yifan Zhao' },
+  { id: 'guest', name: 'Guest' },
+]
 
 function loadReadStateMap(): Record<string, string> {
   if (typeof window === 'undefined') return {}
@@ -105,8 +129,100 @@ function normalizeStoredModelId(value: unknown): string {
   return typeof value === 'string' ? value.trim() : ''
 }
 
+function normalizeStoredReasoningEffort(value: unknown): ReasoningEffort | '' {
+  if (typeof value !== 'string') return ''
+  return REASONING_EFFORT_OPTIONS.includes(value as ReasoningEffort) ? value as ReasoningEffort : ''
+}
+
 function createStringKeyedRecord<T>(): Record<string, T> {
   return Object.create(null) as Record<string, T>
+}
+
+function normalizePersonName(value: unknown): string {
+  return typeof value === 'string' ? value.replace(/\s+/gu, ' ').trim() : ''
+}
+
+function slugifyPersonName(name: string): string {
+  const slug = name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/gu, '-')
+    .replace(/^-+|-+$/gu, '')
+  return slug || 'person'
+}
+
+function normalizePersonProfile(value: unknown): PersonProfile | null {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null
+  const record = value as Record<string, unknown>
+  const name = normalizePersonName(record.name)
+  const rawId = typeof record.id === 'string' ? record.id.trim() : ''
+  const id = rawId && rawId !== ALL_PERSON_ID ? slugifyPersonName(rawId) : slugifyPersonName(name)
+  if (!id || !name) return null
+  return { id, name }
+}
+
+function normalizePersonProfiles(values: unknown): PersonProfile[] {
+  const source = Array.isArray(values) ? values : DEFAULT_PERSON_PROFILES
+  const profiles: PersonProfile[] = []
+  const seen = new Set<string>()
+  for (const value of source) {
+    const profile = normalizePersonProfile(value)
+    if (!profile || seen.has(profile.id)) continue
+    seen.add(profile.id)
+    profiles.push(profile)
+  }
+  return profiles.length > 0 ? profiles : DEFAULT_PERSON_PROFILES
+}
+
+function loadPersonProfiles(): PersonProfile[] {
+  if (typeof window === 'undefined') return DEFAULT_PERSON_PROFILES
+  try {
+    const raw = window.localStorage.getItem(PERSON_PROFILES_STORAGE_KEY)
+    if (!raw) return DEFAULT_PERSON_PROFILES
+    return normalizePersonProfiles(JSON.parse(raw) as unknown)
+  } catch {
+    return DEFAULT_PERSON_PROFILES
+  }
+}
+
+function savePersonProfiles(profiles: PersonProfile[]): void {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(PERSON_PROFILES_STORAGE_KEY, JSON.stringify(normalizePersonProfiles(profiles)))
+}
+
+function loadSelectedPersonId(profiles: PersonProfile[]): string {
+  if (typeof window === 'undefined') return ALL_PERSON_ID
+  const raw = window.localStorage.getItem(SELECTED_PERSON_STORAGE_KEY)?.trim() ?? ''
+  if (raw === ALL_PERSON_ID) return ALL_PERSON_ID
+  return profiles.some((profile) => profile.id === raw) ? raw : ALL_PERSON_ID
+}
+
+function saveSelectedPersonId(personId: string): void {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(SELECTED_PERSON_STORAGE_KEY, personId || ALL_PERSON_ID)
+}
+
+function loadThreadOwnerMap(profiles: PersonProfile[]): Record<string, string> {
+  if (typeof window === 'undefined') return createStringKeyedRecord<string>()
+  try {
+    const raw = window.localStorage.getItem(THREAD_OWNER_STORAGE_KEY)
+    if (!raw) return createStringKeyedRecord<string>()
+    const parsed = JSON.parse(raw) as unknown
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return createStringKeyedRecord<string>()
+    const profileIds = new Set(profiles.map((profile) => profile.id))
+    const next = createStringKeyedRecord<string>()
+    for (const [threadId, ownerId] of Object.entries(parsed as Record<string, unknown>)) {
+      if (!threadId || typeof ownerId !== 'string' || !profileIds.has(ownerId)) continue
+      next[threadId] = ownerId
+    }
+    return next
+  } catch {
+    return createStringKeyedRecord<string>()
+  }
+}
+
+function saveThreadOwnerMap(state: Record<string, string>): void {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(THREAD_OWNER_STORAGE_KEY, JSON.stringify(state))
 }
 
 function cloneStringKeyedRecord<T>(record: Record<string, T>): Record<string, T> {
@@ -257,6 +373,123 @@ function saveSelectedCollaborationModeMap(state: Record<string, CollaborationMod
   } catch {
     // Keep in-memory mode selection working even if localStorage writes fail.
   }
+}
+
+function loadSelectedReasoningEffortMap(): Record<string, ReasoningEffort> {
+  if (typeof window === 'undefined') return createStringKeyedRecord<ReasoningEffort>()
+
+  try {
+    const raw = window.localStorage.getItem(REASONING_EFFORT_STORAGE_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw) as unknown
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        return createStringKeyedRecord<ReasoningEffort>()
+      }
+
+      const next = createStringKeyedRecord<ReasoningEffort>()
+      for (const [contextId, value] of Object.entries(parsed as Record<string, unknown>)) {
+        if (typeof contextId !== 'string' || contextId.length === 0) continue
+        const normalizedEffort = normalizeStoredReasoningEffort(value)
+        if (normalizedEffort) {
+          next[contextId] = normalizedEffort
+        }
+      }
+      return next
+    }
+  } catch {
+    // Fall back to the legacy global preference below.
+  }
+
+  const legacyEffort = normalizeStoredReasoningEffort(window.localStorage.getItem(LEGACY_REASONING_EFFORT_STORAGE_KEY))
+  const next = createStringKeyedRecord<ReasoningEffort>()
+  if (legacyEffort) {
+    next[NEW_THREAD_COLLABORATION_MODE_CONTEXT] = legacyEffort
+  }
+  return next
+}
+
+function readSelectedReasoningEffort(
+  state: Record<string, ReasoningEffort>,
+  threadId: string,
+): ReasoningEffort | '' {
+  const contextId = toThreadContextId(threadId)
+  const contextEffort = normalizeStoredReasoningEffort(state[contextId])
+  if (contextEffort) return contextEffort
+  return normalizeStoredReasoningEffort(state[NEW_THREAD_COLLABORATION_MODE_CONTEXT])
+}
+
+function saveSelectedReasoningEffortMap(state: Record<string, ReasoningEffort>): void {
+  if (typeof window === 'undefined') return
+  try {
+    if (Object.keys(state).length === 0) {
+      window.localStorage.removeItem(REASONING_EFFORT_STORAGE_KEY)
+    } else {
+      window.localStorage.setItem(REASONING_EFFORT_STORAGE_KEY, JSON.stringify(state))
+    }
+    window.localStorage.removeItem(LEGACY_REASONING_EFFORT_STORAGE_KEY)
+  } catch {
+    // Keep in-memory selection working even if localStorage writes fail.
+  }
+}
+
+type RankedFallbackModel = {
+  id: string
+  major: number
+  minor: number
+  familyRank: number
+  suffixRank: number
+}
+
+function parseRankedFallbackModel(modelId: string): RankedFallbackModel | null {
+  const trimmed = modelId.trim()
+  const match = /^gpt-(\d+)(?:\.(\d+))?(?:-(codex))?(?:-(max|mini|spark))?$/iu.exec(trimmed)
+  if (!match) return null
+
+  const major = Number.parseInt(match[1] ?? '', 10)
+  const minor = Number.parseInt(match[2] ?? '0', 10)
+  if (!Number.isFinite(major) || !Number.isFinite(minor)) return null
+
+  const family = (match[3] ?? '').toLowerCase()
+  const suffix = (match[4] ?? '').toLowerCase()
+  const familyRank = family === 'codex' ? 1 : 2
+  const suffixRank = suffix === 'max'
+    ? 3
+    : suffix === 'spark'
+      ? 2
+      : suffix === 'mini'
+        ? 0
+        : 1
+  return { id: trimmed, major, minor, familyRank, suffixRank }
+}
+
+function compareRankedFallbackModels(first: RankedFallbackModel, second: RankedFallbackModel): number {
+  if (first.major !== second.major) return second.major - first.major
+  if (first.minor !== second.minor) return second.minor - first.minor
+  if (first.familyRank !== second.familyRank) return second.familyRank - first.familyRank
+  if (first.suffixRank !== second.suffixRank) return second.suffixRank - first.suffixRank
+  return first.id.localeCompare(second.id)
+}
+
+function resolveFallbackModelId(modelIds: string[], configuredModelId = ''): string {
+  const normalizedCandidates = [...modelIds, configuredModelId]
+    .map((candidate) => candidate.trim())
+    .filter((candidate, index, all) => candidate.length > 0 && all.indexOf(candidate) === index)
+
+  const ranked = normalizedCandidates
+    .map((candidate) => parseRankedFallbackModel(candidate))
+    .filter((candidate): candidate is RankedFallbackModel => candidate !== null)
+    .sort(compareRankedFallbackModels)
+
+  if (ranked.length > 0) {
+    return ranked[0].id
+  }
+
+  const normalizedConfiguredModelId = configuredModelId.trim()
+  if (normalizedConfiguredModelId.length > 0) {
+    return normalizedConfiguredModelId
+  }
+
+  return normalizedCandidates[0] ?? DEFAULT_MODEL_FALLBACK_ID
 }
 
 function clamp(value: number, minValue: number, maxValue: number): number {
@@ -953,6 +1186,9 @@ export function useDesktopState() {
   const projectGroups = ref<UiProjectGroup[]>([])
   const sourceGroups = ref<UiProjectGroup[]>([])
   const selectedThreadId = ref(loadSelectedThreadId())
+  const personProfiles = ref<PersonProfile[]>(loadPersonProfiles())
+  const selectedPersonId = ref(loadSelectedPersonId(personProfiles.value))
+  const threadOwnerById = ref<Record<string, string>>(loadThreadOwnerMap(personProfiles.value))
   const persistedMessagesByThreadId = ref<Record<string, UiMessage[]>>({})
   const livePlanMessagesByThreadId = ref<Record<string, UiMessage[]>>({})
   const liveAgentMessagesByThreadId = ref<Record<string, UiMessage[]>>({})
@@ -990,12 +1226,18 @@ export function useDesktopState() {
     loadSelectedCollaborationModeMap(),
   )
   const selectedModelIdByContext = ref<Record<string, string>>(loadSelectedModelMap())
+  const selectedReasoningEffortByContext = ref<Record<string, ReasoningEffort>>(
+    loadSelectedReasoningEffortMap(),
+  )
   const selectedCollaborationMode = ref<CollaborationModeKind>(
     readSelectedCollaborationMode(selectedCollaborationModeByContext.value, selectedThreadId.value),
   )
   const selectedModelId = ref(readSelectedModel(selectedModelIdByContext.value, selectedThreadId.value))
-  const selectedReasoningEffort = ref<ReasoningEffort | ''>('medium')
+  const selectedReasoningEffort = ref<ReasoningEffort | ''>(
+    readSelectedReasoningEffort(selectedReasoningEffortByContext.value, selectedThreadId.value) || 'medium',
+  )
   const selectedSpeedMode = ref<SpeedMode>('standard')
+  const fallbackModelId = ref(DEFAULT_MODEL_FALLBACK_ID)
   const readStateByThreadId = ref<Record<string, string>>(loadReadStateMap())
   const scrollStateByThreadId = ref<Record<string, ThreadScrollState>>(loadThreadScrollStateMap())
   const projectOrder = ref<string[]>(loadProjectOrder())
@@ -1042,9 +1284,31 @@ export function useDesktopState() {
   const fallbackRetryInFlightThreadIds = new Set<string>()
 
 
+  const profileById = computed(() => new Map(personProfiles.value.map((profile) => [profile.id, profile])))
+  const selectedPerson = computed<PersonProfile | null>(() =>
+    selectedPersonId.value === ALL_PERSON_ID
+      ? null
+      : profileById.value.get(selectedPersonId.value) ?? null,
+  )
+  const selectedPersonName = computed(() => selectedPerson.value?.name ?? 'All conversations')
   const allThreads = computed(() => flattenThreads(projectGroups.value))
+  const visibleProjectGroups = computed<UiProjectGroup[]>(() => {
+    const personId = selectedPersonId.value
+    if (!personId || personId === ALL_PERSON_ID) return projectGroups.value
+    return projectGroups.value
+      .map((group) => ({
+        projectName: group.projectName,
+        threads: group.threads.filter((thread) => {
+          const ownerId = threadOwnerById.value[thread.id]
+          return ownerId === personId || ownerId === undefined
+        }),
+      }))
+      .filter((group) => group.threads.length > 0)
+  })
+  const visibleThreads = computed(() => flattenThreads(visibleProjectGroups.value))
+  const selectedPersonThreadCount = computed(() => visibleThreads.value.length)
   const selectedThread = computed(() =>
-    allThreads.value.find((thread) => thread.id === selectedThreadId.value) ?? null,
+    visibleThreads.value.find((thread) => thread.id === selectedThreadId.value) ?? null,
   )
   const selectedThreadScrollState = computed<ThreadScrollState | null>(
     () => scrollStateByThreadId.value[selectedThreadId.value] ?? null,
@@ -1125,8 +1389,82 @@ export function useDesktopState() {
       selectedCollaborationModeByContext.value,
       nextThreadId,
     )
+    selectedReasoningEffort.value = readSelectedReasoningEffort(
+      selectedReasoningEffortByContext.value,
+      nextThreadId,
+    ) || 'medium'
     activeReasoningItemId = ''
     shouldAutoScrollOnNextAgentEvent = false
+  }
+
+  function isKnownPersonId(personId: string): boolean {
+    return personId === ALL_PERSON_ID || personProfiles.value.some((profile) => profile.id === personId)
+  }
+
+  function firstVisibleThreadId(): string {
+    return visibleThreads.value[0]?.id ?? ''
+  }
+
+  function setSelectedPersonId(nextPersonId: string): void {
+    const normalizedPersonId = isKnownPersonId(nextPersonId) ? nextPersonId : ALL_PERSON_ID
+    if (selectedPersonId.value === normalizedPersonId) return
+    selectedPersonId.value = normalizedPersonId
+    saveSelectedPersonId(normalizedPersonId)
+
+    if (selectedThreadId.value && !visibleThreads.value.some((thread) => thread.id === selectedThreadId.value)) {
+      setSelectedThreadId(firstVisibleThreadId())
+    }
+  }
+
+  function addPersonProfile(name: string): PersonProfile | null {
+    const normalizedName = normalizePersonName(name)
+    if (!normalizedName) return null
+    const baseId = slugifyPersonName(normalizedName)
+    const existingIds = new Set(personProfiles.value.map((profile) => profile.id))
+    let nextId = baseId
+    let suffix = 2
+    while (existingIds.has(nextId)) {
+      nextId = `${baseId}-${suffix}`
+      suffix += 1
+    }
+    const profile: PersonProfile = { id: nextId, name: normalizedName }
+    personProfiles.value = [...personProfiles.value, profile]
+    savePersonProfiles(personProfiles.value)
+    setSelectedPersonId(profile.id)
+    return profile
+  }
+
+  function setThreadOwner(threadId: string, ownerId: string): void {
+    const normalizedThreadId = threadId.trim()
+    if (!normalizedThreadId) return
+    const normalizedOwnerId = ownerId.trim()
+    if (!normalizedOwnerId || normalizedOwnerId === ALL_PERSON_ID) {
+      if (!(normalizedThreadId in threadOwnerById.value)) return
+      threadOwnerById.value = omitKey(threadOwnerById.value, normalizedThreadId)
+      saveThreadOwnerMap(threadOwnerById.value)
+      return
+    }
+    if (!personProfiles.value.some((profile) => profile.id === normalizedOwnerId)) return
+    if (threadOwnerById.value[normalizedThreadId] === normalizedOwnerId) return
+    threadOwnerById.value = {
+      ...threadOwnerById.value,
+      [normalizedThreadId]: normalizedOwnerId,
+    }
+    saveThreadOwnerMap(threadOwnerById.value)
+  }
+
+  function assignThreadToSelectedPerson(threadId: string = selectedThreadId.value): void {
+    if (!selectedPerson.value) return
+    setThreadOwner(threadId, selectedPerson.value.id)
+  }
+
+  function clearThreadOwner(threadId: string = selectedThreadId.value): void {
+    setThreadOwner(threadId, '')
+  }
+
+  function threadOwnerName(threadId: string): string {
+    const ownerId = threadOwnerById.value[threadId]
+    return ownerId ? profileById.value.get(ownerId)?.name ?? 'Unknown person' : 'Unassigned'
   }
 
   function setSelectedModelId(modelId: string): void {
@@ -1208,12 +1546,13 @@ export function useDesktopState() {
   }
 
   async function applyFallbackModelSelection(threadId: string = selectedThreadId.value): Promise<void> {
+    const nextFallbackModelId = fallbackModelId.value.trim() || DEFAULT_MODEL_FALLBACK_ID
     if (threadId.trim()) {
-      setThreadModelId(threadId, MODEL_FALLBACK_ID)
+      setThreadModelId(threadId, nextFallbackModelId)
     } else {
-      setSelectedModelId(MODEL_FALLBACK_ID)
+      setSelectedModelId(nextFallbackModelId)
     }
-    ensureAvailableModelIds(MODEL_FALLBACK_ID)
+    ensureAvailableModelIds(nextFallbackModelId)
   }
 
   function setPendingTurnRequest(threadId: string, request: PendingTurnRequest): void {
@@ -1234,6 +1573,7 @@ export function useDesktopState() {
     if (fallbackRetryInFlightThreadIds.has(threadId)) return
     const pending = pendingTurnRequestByThreadId.value[threadId]
     if (!pending || pending.fallbackRetried) return
+    const nextFallbackModelId = fallbackModelId.value.trim() || DEFAULT_MODEL_FALLBACK_ID
 
     fallbackRetryInFlightThreadIds.add(threadId)
     setPendingTurnRequest(threadId, {
@@ -1261,7 +1601,7 @@ export function useDesktopState() {
       setTurnSummaryForThread(threadId, null)
       setTurnActivityForThread(threadId, {
         label: 'Thinking',
-        details: buildPendingTurnDetails(MODEL_FALLBACK_ID, pending.effort, pending.collaborationMode),
+        details: buildPendingTurnDetails(nextFallbackModelId, pending.effort, pending.collaborationMode),
       })
       setThreadInProgress(threadId, true)
 
@@ -1273,7 +1613,7 @@ export function useDesktopState() {
         threadId,
         pending.text,
         pending.imageUrls,
-        MODEL_FALLBACK_ID,
+        nextFallbackModelId,
         pending.effort || undefined,
         pending.skills.length > 0 ? pending.skills : undefined,
         pending.fileAttachments,
@@ -1304,7 +1644,22 @@ export function useDesktopState() {
     if (effort && !REASONING_EFFORT_OPTIONS.includes(effort)) {
       return
     }
-    selectedReasoningEffort.value = effort
+    const contextId = toThreadContextId(selectedThreadId.value)
+    if (effort) {
+      const nextMap = cloneStringKeyedRecord(selectedReasoningEffortByContext.value)
+      nextMap[contextId] = effort
+      selectedReasoningEffortByContext.value = nextMap
+    } else {
+      selectedReasoningEffortByContext.value = omitStringKeyedRecordKey(
+        selectedReasoningEffortByContext.value,
+        contextId,
+      )
+    }
+    selectedReasoningEffort.value = readSelectedReasoningEffort(
+      selectedReasoningEffortByContext.value,
+      selectedThreadId.value,
+    ) || 'medium'
+    saveSelectedReasoningEffortMap(selectedReasoningEffortByContext.value)
   }
 
   async function updateSelectedSpeedMode(mode: SpeedMode): Promise<void> {
@@ -1368,6 +1723,7 @@ export function useDesktopState() {
         }
       }
       availableModelIds.value = nextModelIds
+      fallbackModelId.value = resolveFallbackModelId(nextModelIds, normalizedConfiguredModelId)
 
       if (!normalizedSelectedModelId) {
         if (normalizedConfiguredModelId && nextModelIds.includes(normalizedConfiguredModelId)) {
@@ -1379,11 +1735,19 @@ export function useDesktopState() {
         }
       }
 
-      if (
-        currentConfig.reasoningEffort &&
-        REASONING_EFFORT_OPTIONS.includes(currentConfig.reasoningEffort)
-      ) {
-        selectedReasoningEffort.value = currentConfig.reasoningEffort
+      const normalizedSelectedReasoningEffort = readSelectedReasoningEffort(
+        selectedReasoningEffortByContext.value,
+        selectedThreadId.value,
+      )
+      if (!normalizedSelectedReasoningEffort) {
+        if (
+          currentConfig.reasoningEffort &&
+          REASONING_EFFORT_OPTIONS.includes(currentConfig.reasoningEffort)
+        ) {
+          setSelectedReasoningEffort(currentConfig.reasoningEffort)
+        } else {
+          selectedReasoningEffort.value = 'medium'
+        }
       }
       selectedSpeedMode.value = currentConfig.speedMode
     } catch {
@@ -1565,6 +1929,18 @@ export function useDesktopState() {
       )
       saveSelectedCollaborationModeMap(nextSelectedCollaborationModeMap)
     }
+    const nextSelectedReasoningEffortMap = pruneThreadContextStateMap(
+      selectedReasoningEffortByContext.value,
+      activeThreadIds,
+    )
+    if (nextSelectedReasoningEffortMap !== selectedReasoningEffortByContext.value) {
+      selectedReasoningEffortByContext.value = nextSelectedReasoningEffortMap
+      selectedReasoningEffort.value = readSelectedReasoningEffort(
+        nextSelectedReasoningEffortMap,
+        selectedThreadId.value,
+      ) || 'medium'
+      saveSelectedReasoningEffortMap(nextSelectedReasoningEffortMap)
+    }
     const nextReadState = pruneThreadStateMap(readStateByThreadId.value, activeThreadIds)
     if (nextReadState !== readStateByThreadId.value) {
       readStateByThreadId.value = nextReadState
@@ -1591,6 +1967,11 @@ export function useDesktopState() {
     threadTokenUsageByThreadId.value = pruneThreadStateMap(threadTokenUsageByThreadId.value, activeThreadIds)
     eventUnreadByThreadId.value = pruneThreadStateMap(eventUnreadByThreadId.value, activeThreadIds)
     inProgressById.value = pruneThreadStateMap(inProgressById.value, activeThreadIds)
+    const nextThreadOwnerMap = pruneThreadStateMap(threadOwnerById.value, activeThreadIds)
+    if (nextThreadOwnerMap !== threadOwnerById.value) {
+      threadOwnerById.value = nextThreadOwnerMap
+      saveThreadOwnerMap(nextThreadOwnerMap)
+    }
     const nextPending: Record<string, UiServerRequest[]> = {}
     for (const [threadId, requests] of Object.entries(pendingServerRequestsByThreadId.value)) {
       if (threadId === GLOBAL_SERVER_REQUEST_SCOPE || activeThreadIds.has(threadId)) {
@@ -2947,10 +3328,11 @@ export function useDesktopState() {
     const turnErrorMessage = readTurnErrorMessage(notification)
     const completedThreadId = completedTurn?.threadId ?? extractThreadIdFromNotification(notification)
     const completedThreadModelId = completedThreadId ? readModelIdForThread(completedThreadId) : ''
+    const activeFallbackModelId = fallbackModelId.value.trim() || DEFAULT_MODEL_FALLBACK_ID
     const shouldRetryWithFallback =
       Boolean(completedThreadId) &&
       Boolean(turnErrorMessage) &&
-      completedThreadModelId !== MODEL_FALLBACK_ID &&
+      completedThreadModelId !== activeFallbackModelId &&
       isUnsupportedChatGptModelError(new Error(turnErrorMessage))
     if (completedTurn) {
       const pendingTurnRequest = pendingTurnRequestByThreadId.value[completedTurn.threadId]
@@ -3006,7 +3388,7 @@ export function useDesktopState() {
         })
       }
       error.value = notificationErrorState.message
-      if (errorThreadModelId !== MODEL_FALLBACK_ID && isUnsupportedChatGptModelError(new Error(notificationErrorState.message))) {
+      if (errorThreadModelId !== activeFallbackModelId && isUnsupportedChatGptModelError(new Error(notificationErrorState.message))) {
         if (errorThreadId) {
           void retryPendingTurnWithFallback(errorThreadId)
         } else {
@@ -3282,10 +3664,11 @@ export function useDesktopState() {
       const flatThreads = flattenThreads(projectGroups.value)
       pruneThreadScopedState(flatThreads)
 
-      const currentExists = flatThreads.some((thread) => thread.id === selectedThreadId.value)
+      const visibleFlatThreads = flattenThreads(visibleProjectGroups.value)
+      const currentExists = visibleFlatThreads.some((thread) => thread.id === selectedThreadId.value)
 
       if (!currentExists) {
-        setSelectedThreadId(flatThreads[0]?.id ?? '')
+        setSelectedThreadId(visibleFlatThreads[0]?.id ?? '')
       }
     } finally {
       isLoadingThreads.value = false
@@ -3701,9 +4084,10 @@ export function useDesktopState() {
         threadId = startedThread.threadId
         setThreadModelId(threadId, startedThread.model)
       } catch (unknownError) {
-        if (selectedModel && selectedModel !== MODEL_FALLBACK_ID && isUnsupportedChatGptModelError(unknownError)) {
+        const nextFallbackModelId = fallbackModelId.value.trim() || DEFAULT_MODEL_FALLBACK_ID
+        if (selectedModel && selectedModel !== nextFallbackModelId && isUnsupportedChatGptModelError(unknownError)) {
           await applyFallbackModelSelection()
-          const fallbackThread = await startThread(targetCwd || undefined, MODEL_FALLBACK_ID)
+          const fallbackThread = await startThread(targetCwd || undefined, nextFallbackModelId)
           threadId = fallbackThread.threadId
           setThreadModelId(threadId, fallbackThread.model)
         } else {
@@ -3712,6 +4096,9 @@ export function useDesktopState() {
       }
       if (!threadId) return ''
 
+      if (selectedPerson.value) {
+        setThreadOwner(threadId, selectedPerson.value.id)
+      }
       insertOptimisticThread(threadId, targetCwd, nextText || '[Image]')
       resumedThreadById.value = {
         ...resumedThreadById.value,
@@ -3811,7 +4198,8 @@ export function useDesktopState() {
           projectId,
         )
       } catch (unknownError) {
-        if (modelId && modelId !== MODEL_FALLBACK_ID && isUnsupportedChatGptModelError(unknownError)) {
+        const nextFallbackModelId = fallbackModelId.value.trim() || DEFAULT_MODEL_FALLBACK_ID
+        if (modelId && modelId !== nextFallbackModelId && isUnsupportedChatGptModelError(unknownError)) {
           await applyFallbackModelSelection(threadId)
           setPendingTurnRequest(threadId, {
             text: normalizedText,
@@ -3826,7 +4214,7 @@ export function useDesktopState() {
             threadId,
             nextText,
             imageUrls,
-            MODEL_FALLBACK_ID,
+            nextFallbackModelId,
             reasoningEffort || undefined,
             skills.length > 0 ? skills : undefined,
             fileAttachments,
@@ -4057,9 +4445,10 @@ export function useDesktopState() {
     const flatThreads = flattenThreads(projectGroups.value)
     pruneThreadScopedState(flatThreads)
 
-    const currentExists = flatThreads.some((thread) => thread.id === selectedThreadId.value)
+    const visibleFlatThreads = flattenThreads(visibleProjectGroups.value)
+    const currentExists = visibleFlatThreads.some((thread) => thread.id === selectedThreadId.value)
     if (!currentExists) {
-      setSelectedThreadId(flatThreads[0]?.id ?? '')
+      setSelectedThreadId(visibleFlatThreads[0]?.id ?? '')
     }
 
     const removedRootPaths = new Set<string>()
@@ -4391,8 +4780,14 @@ export function useDesktopState() {
   }
 
   return {
-    projectGroups,
+    projectGroups: visibleProjectGroups,
     projectDisplayNameById,
+    personProfiles,
+    selectedPerson,
+    selectedPersonId,
+    selectedPersonName,
+    selectedPersonThreadCount,
+    threadOwnerById,
     selectedThread,
     selectedThreadTokenUsage,
     selectedThreadScrollState,
@@ -4423,6 +4818,11 @@ export function useDesktopState() {
     loadMessages,
     ensureThreadMessagesLoaded,
     setThreadScrollState,
+    setSelectedPersonId,
+    addPersonProfile,
+    assignThreadToSelectedPerson,
+    clearThreadOwner,
+    threadOwnerName,
     archiveThreadById,
     renameThreadById,
     forkThreadById,

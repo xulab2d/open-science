@@ -1,0 +1,114 @@
+[
+  {
+    "id": "retrieval_fractional_chern_optical_control_001",
+    "task_type": "claim_lookup",
+    "query": "fractional Chern optical control",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "optical pumping"},
+        {"label_contains": "fractional Chern"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "retrieval_rmcd_hysteresis_001",
+    "task_type": "claim_lookup",
+    "query": "RMCD hysteresis magnetic transition",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "RMCD"},
+        {"label_contains": "hysteresis"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "retrieval_moire_exciton_claim_001",
+    "task_type": "claim_lookup",
+    "query": "moire exciton optical signatures",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "moiré potential"},
+        {"label_contains": "moire excitons"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "retrieval_second_moire_band_001",
+    "task_type": "claim_lookup",
+    "query": "second moire band ferromagnetism",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "second moiré band"},
+        {"label_contains": "ferromagnetic"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "retrieval_hubbard_wse2_001",
+    "task_type": "claim_lookup",
+    "query": "field tunable twisted WSe2 bilayer Hubbard model electric field",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "field-tunable bilayer Hubbard"},
+        {"label_contains": "electric field"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "retrieval_magnetic_proximity_001",
+    "task_type": "claim_lookup",
+    "query": "magnetic proximity wse2 cri3 valley optical",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "magnetic proximity"},
+        {"label_contains": "WSe2"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "retrieval_edge_wte2_001",
+    "task_type": "claim_lookup",
+    "query": "edge conduction monolayer WTe2 helical edge",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "edge conduction"},
+        {"label_contains": "helical edge"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  },
+  {
+    "id": "retrieval_compressibility_fci_001",
+    "task_type": "claim_lookup",
+    "query": "fractional Chern insulator local probe bulk edge compressibility",
+    "expected": {
+      "must_retrieve_any": [
+        {"label_contains": "local probe"},
+        {"label_contains": "bulk evidence"}
+      ],
+      "must_retrieve_types": ["Claim"],
+      "forbidden": []
+    },
+    "metrics": {"k": 5, "recall_at_k_min": 0.5, "mrr_min": 0.2, "precision_at_k_min": 0.2, "max_latency_ms": 3000, "require_provenance": true}
+  }
+]

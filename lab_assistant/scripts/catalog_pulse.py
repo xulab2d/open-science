@@ -122,6 +122,10 @@ def scan_root(root_cfg: dict[str, Any], config: dict[str, Any], max_files: int) 
     return snapshot, meta
 
 
+def root_is_active(root_cfg: dict[str, Any]) -> bool:
+    return root_cfg.get("active") is not False
+
+
 def score_change(path: str, record: dict[str, Any], config: dict[str, Any], kind: str) -> tuple[int, list[str]]:
     suffix = record.get("suffix", "").lower()
     lower_path = path.lower()
@@ -233,11 +237,13 @@ def summarize(changes: list[Change], config: dict[str, Any], baseline_only: bool
 
 def scan_failed(scan_meta: list[dict[str, Any]], previous_state: dict[str, Any], new_files: dict[str, Any]) -> bool:
     existing_roots = [m for m in scan_meta if m.get("exists")]
-    errored_roots = [m for m in existing_roots if m.get("errors") and m.get("files_seen", 0) == 0]
+    errored_roots = [m for m in existing_roots if m.get("errors")]
     previous_files = previous_state.get("files", {})
     if not existing_roots:
         return True
     if len(errored_roots) == len(existing_roots):
+        return True
+    if previous_files and errored_roots and len(new_files) < int(len(previous_files) * 0.8):
         return True
     if previous_files and not new_files:
         return True
@@ -397,6 +403,8 @@ def main() -> int:
     files: dict[str, Any] = {}
     scan_meta: list[dict[str, Any]] = []
     for root_cfg in config.get("roots", []):
+        if not root_is_active(root_cfg):
+            continue
         root_snapshot, meta = scan_root(root_cfg, config, max_files)
         files.update(root_snapshot)
         scan_meta.append(meta)

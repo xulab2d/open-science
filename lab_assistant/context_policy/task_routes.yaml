@@ -1,0 +1,143 @@
+{
+  "paper_lookup": {
+    "include": [
+      {
+        "path": "knowledge/INDEX.md",
+        "kind": "knowledge_index",
+        "reason": "paper lookup starts from knowledge navigation",
+        "max_chars": 1600
+      },
+      {
+        "path": "knowledge/papers/README.md",
+        "kind": "paper_note",
+        "reason": "paper shelf conventions",
+        "max_chars": 1600
+      },
+      {
+        "path": "knowledge/canon/reference_strategy.md",
+        "kind": "knowledge_index",
+        "reason": "reference retrieval priority order",
+        "max_chars": 1800
+      }
+    ],
+    "skills": ["reference-retrieval", "fact-graph"],
+    "graph": {
+      "node_types": ["Paper"],
+      "limit": 5,
+      "include_neighbors": true,
+      "neighbor_seed_limit": 2,
+      "reason": "paper-first graph retrieval for paper lookup"
+    }
+  },
+  "claim_lookup": {
+    "include": [
+      {
+        "path": "graph/README.md",
+        "kind": "knowledge_index",
+        "reason": "fact graph interface and confidence model",
+        "max_chars": 1800
+      }
+    ],
+    "skills": ["fact-graph"],
+    "graph": {
+      "node_types": ["Claim", "Hypothesis", "Evidence", "Contradiction", "OpenQuestion", "Mechanism", "Observable"],
+      "limit": 6,
+      "include_neighbors": true,
+      "neighbor_seed_limit": 2,
+      "reason": "claim-first graph local search"
+    }
+  },
+  "synthesis": {
+    "include": [
+      {
+        "path": "knowledge/INDEX.md",
+        "kind": "knowledge_index",
+        "reason": "synthesis needs reachable paper/project notes",
+        "max_chars": 1800
+      },
+      {
+        "path": "knowledge/syntheses/README.md",
+        "kind": "knowledge_index",
+        "reason": "synthesis layer conventions",
+        "max_chars": 1600
+      }
+    ],
+    "skills": ["reference-retrieval", "fact-graph", "scientific-synthesis"],
+    "graph": {
+      "node_types": ["Claim", "Hypothesis", "Evidence", "Contradiction", "OpenQuestion", "Paper", "Mechanism", "Observable"],
+      "limit": 8,
+      "include_neighbors": true,
+      "neighbor_seed_limit": 3,
+      "reason": "synthesis route retrieves claims, contradictions, papers, and observables"
+    }
+  },
+  "hypothesis_generation": {
+    "include": [
+      {
+        "path": "knowledge/INDEX.md",
+        "kind": "knowledge_index",
+        "reason": "hypothesis generation needs knowledge navigation",
+        "max_chars": 1600
+      }
+    ],
+    "skills": ["scientific-synthesis", "fact-graph"],
+    "graph": {
+      "node_types": ["Claim", "Evidence", "Contradiction", "OpenQuestion", "Mechanism", "Observable", "Paper"],
+      "limit": 8,
+      "include_neighbors": true,
+      "neighbor_seed_limit": 3,
+      "reason": "hypothesis route retrieves grounded evidence and contradictions"
+    }
+  },
+  "project_status": {
+    "include": [
+      {
+        "path": "context/projects/active_projects.md",
+        "kind": "project_summary",
+        "reason": "active project registry",
+        "max_chars": 2200
+      },
+      {
+        "path": "knowledge/projects/README.md",
+        "kind": "project_summary",
+        "reason": "project summary conventions",
+        "max_chars": 1200
+      }
+    ],
+    "include_globs": [
+      {
+        "glob": "daemon/reports/*.md",
+        "kind": "daemon_report",
+        "reason": "newest daemon pulse reports",
+        "max_items": 2,
+        "max_chars": 2200
+      }
+    ],
+    "skills": ["background-cataloguing"],
+    "graph": {}
+  },
+  "memory_update": {
+    "include": [
+      {
+        "path": "improvements/README.md",
+        "kind": "core",
+        "reason": "candidate-gated memory mutation workflow",
+        "max_chars": 1800
+      },
+      {
+        "path": "memory/review_log.md",
+        "kind": "core",
+        "reason": "prior feedback and review loop",
+        "max_chars": 2200
+      }
+    ],
+    "skills": ["knowledge-maintenance", "request-triage"],
+    "graph": {
+      "node_types": ["Claim", "Convention", "Assumption", "Contradiction", "OpenQuestion"],
+      "limit": 4,
+      "include_neighbors": true,
+      "neighbor_seed_limit": 1,
+      "reason": "memory update route checks nearby conventions and contradictions"
+    }
+  }
+}

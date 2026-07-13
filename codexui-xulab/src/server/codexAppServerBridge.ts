@@ -107,6 +107,7 @@ type OpenScienceProjectSummary = {
   id: string
   name: string
   path: string
+  leads: string[]
   active: boolean
   summaryPath: string
 }
@@ -570,11 +571,17 @@ function normalizeOpenScienceProjectRoot(value: unknown): OpenScienceProjectSumm
   const id = typeof record.project_id === 'string' ? record.project_id.trim() : ''
   const name = typeof record.name === 'string' ? record.name.trim() : ''
   const path = typeof record.path === 'string' ? record.path.trim() : ''
+  const leads = Array.from(new Set(Array.isArray(record.leads)
+    ? record.leads
+        .map((lead) => (typeof lead === 'string' ? lead.trim() : ''))
+        .filter((lead) => lead.length > 0)
+    : []))
   if (!id || !name) return null
   return {
     id,
     name,
     path,
+    leads,
     active: record.active !== false,
     summaryPath: '',
   }

@@ -1,0 +1,20 @@
+{
+  "skill_id": "background-cataloguing",
+  "version": "1.0.0",
+  "purpose": "Review compact daemon/catalog reports and surface scientifically meaningful project activity.",
+  "inputs": [
+    {"name": "project_id", "type": "string"},
+    {"name": "report_paths", "type": "list"}
+  ],
+  "outputs": [
+    {"name": "project_status_summary", "type": "markdown"},
+    {"name": "followup_questions", "type": "list"}
+  ],
+  "task_types": ["project_status"],
+  "latency_budget_ms": 4000,
+  "context_max_chars": 1800,
+  "eval_suites": ["context_pack"],
+  "target_metrics": ["context_relevance", "daemon_report_coverage"],
+  "failure_modes": ["loads raw NAS crawl before compact report", "summarizes file churn without scientific signal"],
+  "promotion_policy": "Promote changes when project-status context packs include relevant reports with lower irrelevant-item rate."
+}

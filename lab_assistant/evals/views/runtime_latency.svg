@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="336" viewBox="0 0 900 336">
+<rect width="900" height="336" fill="#ffffff"/>
+<text x="28.0" y="34.0" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#111827">Latency Snapshot</text>
+<text x="28.0" y="58.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#4b5563">Milliseconds from deterministic eval runs; small timing drift is expected.</text>
+<text x="28.0" y="102.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">overall p50</text>
+<rect x="250.0" y="87.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="87.0" width="97.9" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="102.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">9.0 ms</text>
+<text x="28.0" y="144.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">overall p95</text>
+<rect x="250.0" y="129.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="129.0" width="211.1" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="144.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">19.4 ms</text>
+<text x="28.0" y="186.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">overall mean</text>
+<rect x="250.0" y="171.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="171.0" width="139.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="186.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">12.8 ms</text>
+<text x="28.0" y="228.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">graph search mean</text>
+<rect x="250.0" y="213.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="213.0" width="108.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="228.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">9.9 ms</text>
+<text x="28.0" y="270.0" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">context compile mean</text>
+<rect x="250.0" y="255.0" width="470.0" height="18.0" rx="3" fill="#e5e7eb"/>
+<rect x="250.0" y="255.0" width="470.0" height="18.0" rx="3" fill="#2563eb"/>
+<text x="738.0" y="270.0" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#111827">43.2 ms</text>
+</svg>
