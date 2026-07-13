@@ -1,0 +1,87 @@
+{
+  "by_family": {
+    "abstention": {
+      "answer_deterministic_score": 0.5555555555555556,
+      "context_score": 0.0,
+      "judge_score": 0.8571428571428571,
+      "overall_score": 0.4031746031746032,
+      "retrieval_score": 0.2,
+      "tasks": 1
+    },
+    "freshness": {
+      "answer_deterministic_score": 0.7063492063492063,
+      "context_score": 0.5496666142499476,
+      "judge_score": 0.8285714285714286,
+      "overall_score": 0.7711468122926456,
+      "retrieval_score": 1.0,
+      "tasks": 1
+    },
+    "hard_negative": {
+      "answer_deterministic_score": 0.8333333333333334,
+      "context_score": 0.37222222222222223,
+      "judge_score": 0.6571428571428571,
+      "overall_score": 0.5130365801968846,
+      "retrieval_score": 0.1894479080891258,
+      "tasks": 1
+    },
+    "multi_hop": {
+      "answer_deterministic_score": 0.9328703703703703,
+      "context_score": 0.8559406956903456,
+      "judge_score": 0.7714285714285715,
+      "overall_score": 0.8783932427056552,
+      "retrieval_score": 0.9533333333333334,
+      "tasks": 3
+    },
+    "project_context": {
+      "answer_deterministic_score": 0.8333333333333334,
+      "context_score": 0.36458333333333337,
+      "judge_score": 0.9142857142857144,
+      "overall_score": 0.7324809781215464,
+      "retrieval_score": 0.8177215315338049,
+      "tasks": 2
+    },
+    "uncertainty": {
+      "answer_deterministic_score": 0.9603174603174602,
+      "context_score": 0.6809708921447366,
+      "judge_score": 0.9285714285714286,
+      "overall_score": 0.8629579649871111,
+      "retrieval_score": 0.8819720789148187,
+      "tasks": 2
+    }
+  },
+  "failure_counts": {
+    "answer_concept_miss": 1,
+    "context_miss": 6,
+    "hard_negative_leak": 1,
+    "judge_citation_under_4": 6,
+    "judge_critical_errors": 2,
+    "judge_faithfulness_under_4": 2,
+    "retrieval_miss": 3,
+    "weak_citation_precision_proxy": 4
+  },
+  "judge_metric_means": {
+    "actionability": 4.0,
+    "answer_relevance": 4.7,
+    "citation_quality": 3.5,
+    "context_relevance": 4.0,
+    "faithfulness": 4.1,
+    "scientific_correctness": 4.2,
+    "uncertainty_calibration": 4.7
+  },
+  "latency": {
+    "answer_p50_s": 16.04168227102491,
+    "answer_p95_s": 22.853805237673807,
+    "judge_p50_s": 10.081308500492014,
+    "judge_p95_s": 22.96755230217532
+  },
+  "overall_mean": 0.7513415609998414,
+  "overall_median": 0.8242153159340659,
+  "score_means": {
+    "answer_deterministic_score": 0.8481150793650793,
+    "context_score": 0.5580819374499346,
+    "judge_score": 0.8342857142857143,
+    "overall_score": 0.7513415609998414,
+    "retrieval_score": 0.7648835128986373
+  },
+  "tasks": 10
+}

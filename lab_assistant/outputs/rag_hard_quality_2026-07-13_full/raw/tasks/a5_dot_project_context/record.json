@@ -1,0 +1,161 @@
+{
+  "answer_latency_ms": 12452.595875016414,
+  "answer_metrics": {
+    "atomic_claim_count": 7,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 7,
+    "citation_hits": [
+      "context/projects/",
+      "knowledge/projects/",
+      "lab_assistant/context/projects/",
+      "lab_assistant/context/projects/active_projects.md",
+      "lab_assistant/knowledge/projects/",
+      "lab_assistant/knowledge/projects/README.md",
+      "lab_assistant/knowledge/projects/current_projects_2026_07_07.md"
+    ],
+    "citation_precision_proxy": 1.0,
+    "citations": [
+      "context/projects/",
+      "knowledge/projects/",
+      "lab_assistant/context/projects/",
+      "lab_assistant/context/projects/active_projects.md",
+      "lab_assistant/knowledge/projects/",
+      "lab_assistant/knowledge/projects/README.md",
+      "lab_assistant/knowledge/projects/current_projects_2026_07_07.md"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": false,
+        "overlap": 16,
+        "sentence": "Source: `lab_assistant/core/directives.md`  Project knowledge pages are expected to contain the project\u2019s observables, nearby domain notes, paper shelves, and key local canon/context files.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 12,
+        "sentence": "Source: `lab_assistant/knowledge/projects/README.md`  **Inference**  Before interpreting PL dispersion or peak-tracking analysis for A5, the local context to load is:  1.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 4,
+        "sentence": "The A5 active-project entry in `lab_assistant/context/projects/active_projects.md`.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 5,
+        "sentence": "Any A5-specific notes under `lab_assistant/context/projects/`.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 10,
+        "sentence": "Any A5-specific project knowledge under `lab_assistant/knowledge/projects/`, especially the current-project snapshot referenced by the registry: `lab_assistant/knowledge/projects/current_projects_2026_07_07.md`.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 9,
+        "sentence": "The local NAS project root: `/Volumes/Xu Lab/tMoTe2_Measuring/Zengde_Weijie_A5_AAtA_dot_oldattodry`.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 8,
+        "sentence": "This should come before broader/global moire-paper context, because the question is about project-local interpretation of PL dispersion and peak tracking.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [],
+    "matched_concept_groups": [
+      0,
+      1,
+      2
+    ],
+    "matched_must_cite_like": [],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.0,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/a5_dot_project_context/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 10804,
+    "context_pack_id": "ac0be7a61de36352edefd72f0554df05fce9b98706d01e51c69085a181a2c9fe",
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "excluded_count": 4527,
+    "item_count": 9,
+    "kind_counts": {
+      "core": 3,
+      "daemon_report": 2,
+      "project_summary": 2,
+      "skill": 2
+    },
+    "latency_ms": 265.00045898137614,
+    "matched_evidence_groups": [],
+    "missed_evidence_groups": [
+      0,
+      1
+    ],
+    "token_estimate": 2701
+  },
+  "context_path": "raw/tasks/a5_dot_project_context/context.md",
+  "evaluator_note": "Tests project-context retrieval rather than global moire paper retrieval.",
+  "expected_behavior": "answer",
+  "family": "project_context",
+  "id": "a5_dot_project_context",
+  "judge": {
+    "actionability": 5,
+    "answer_relevance": 5,
+    "citation_quality": 4,
+    "context_relevance": 5,
+    "critical_errors": [],
+    "faithfulness": 5,
+    "missing_key_points": [],
+    "scientific_correctness": 5,
+    "summary": "The answer correctly identifies the A5 AAtA dot project, explicitly ties PL dispersion and peak-tracking interpretation to loading project-local context first, and names both context/projects and knowledge/projects plus the NAS project root. It appropriately caveats that the supplied context does not include the specific A5 note contents or analysis files. Citations are file-level rather than highly specific, but they are attached to the right claims.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 0
+  },
+  "judge_latency_ms": 9270.897416980006,
+  "judge_path": "raw/tasks/a5_dot_project_context/judge.json",
+  "judge_returncode": 0,
+  "question": "For the A5 dot optical project, what local context should be loaded before interpreting PL dispersion or peak-tracking analysis?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 42.62508300598711,
+    "matched_evidence_groups": [
+      0,
+      1
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 0.8772153153380493,
+    "precision_at_k": 0.2,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "A5 dot",
+      "optical probes can be primary evidence for correlated states",
+      "semiconductor moire materials should be viewed as a unified field spanning excitons, Hubbard-model physics, magnetism, topology, and designer many-body states",
+      "The nu=-1/3 PL spectrum disperses with out-of-plane magnetic field, supporting a nontrivial topological interpretation.",
+      "interlayer excitons can be trapped by the moir\u00e9 potential and inherit strong valley-selective optical signatures",
+      "moire potentials should be viewed as a programmable excitonic lattice, not only as a perturbation to a uniform exciton",
+      "C5 deck treats bilayer trion fractional features and hBN-hole dot staircases as actionable optical signals.",
+      "Again, similar D-field spectrum for the trions, however there are some interesting things going on in the exciton spectrum.",
+      "At positive doping, you can very clearly see a hybridized layer region for the exciton.",
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe"
+    ]
+  },
+  "scores": {
+    "answer_deterministic_score": 0.8333333333333334,
+    "context_score": 0.0,
+    "judge_score": 0.9714285714285714,
+    "overall_score": 0.6550512419573786,
+    "retrieval_score": 0.8154430630676098
+  },
+  "task_type": "project_status"
+}

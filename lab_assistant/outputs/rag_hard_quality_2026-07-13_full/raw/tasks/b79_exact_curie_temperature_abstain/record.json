@@ -1,0 +1,116 @@
+{
+  "answer_latency_ms": 9028.940332995262,
+  "answer_metrics": {
+    "atomic_claim_count": 2,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 0,
+    "citation_hits": [],
+    "citation_precision_proxy": 0.0,
+    "citations": [],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": false,
+        "overlap": 13,
+        "sentence": "The included daemon reports show no detected changes or interpreted project activity (`lab_assistant/daemon/reports/pulse_2026-04-10_161950_PDT.md`, `lab_assistant/daemon/reports/pulse_2026-04-10_162004_PDT.md`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 1,
+        "sentence": "I should not invent a numeric temperature.",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [
+      "K"
+    ],
+    "matched_concept_groups": [
+      0,
+      1
+    ],
+    "matched_must_cite_like": [
+      "B79"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.3333333333333333,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/b79_exact_curie_temperature_abstain/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 10804,
+    "context_pack_id": "a39ee7e45a7207a179cf47e9ddb3ff666e1f6a30f2f63d3670880be9f3f6ecbf",
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "excluded_count": 4527,
+    "item_count": 9,
+    "kind_counts": {
+      "core": 3,
+      "daemon_report": 2,
+      "project_summary": 2,
+      "skill": 2
+    },
+    "latency_ms": 266.2242920487188,
+    "matched_evidence_groups": [],
+    "missed_evidence_groups": [
+      0
+    ],
+    "token_estimate": 2701
+  },
+  "context_path": "raw/tasks/b79_exact_curie_temperature_abstain/context.md",
+  "evaluator_note": "High score requires abstaining from inventing a numeric temperature.",
+  "expected_behavior": "abstain",
+  "family": "abstention",
+  "id": "b79_exact_curie_temperature_abstain",
+  "judge": {
+    "actionability": 3,
+    "answer_relevance": 5,
+    "citation_quality": 4,
+    "context_relevance": 3,
+    "critical_errors": [],
+    "faithfulness": 5,
+    "missing_key_points": [],
+    "scientific_correctness": 5,
+    "summary": "The answer correctly abstains from inventing an exact value for B79, states that the supplied context lacks a local project note with that information, and avoids numeric temperature claims or forbidden unit terms. Citations are file-specific but not line-specific. The main limitation is that it gives only a minimal next action rather than a concrete follow-up search target.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 0
+  },
+  "judge_latency_ms": 25625.090209010523,
+  "judge_path": "raw/tasks/b79_exact_curie_temperature_abstain/judge.json",
+  "judge_returncode": 0,
+  "question": "What exact Curie temperature did B79 show in the latest local project notes?",
+  "retrieval": {
+    "first_relevant_rank": null,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 42.11887501878664,
+    "matched_evidence_groups": [],
+    "missed_evidence_groups": [
+      0
+    ],
+    "mrr": 0.0,
+    "ndcg_at_k": 0.0,
+    "precision_at_k": 0.0,
+    "recall_at_k": 0.0,
+    "top_hit_labels": [
+      "Ferromagnetism Near Room Temperature in the Cleavable van der Waals Crystal Fe5GeTe2",
+      "Observation of ferromagnetic phase in the second moir\u00e9 band of twisted MoTe2",
+      "Theory of tunable flux lattices in the homobilayer moir\u00e9 of twisted and uniformly strained transition metal dichalcogenides",
+      "Interplay between topology and correlations in the second moir\u00e9 band of twisted bilayer MoTe2",
+      "Excitons in the fractional quantum Hall effect",
+      "Layered Antiferromagnetism Induces Large Negative Magnetoresistance in the van der Waals Semiconductor CrSBr",
+      "Magnetic Order and Symmetry in the 2D Semiconductor CrSBr",
+      "spin and valley are locked together in monolayer TMDs, which is why circular polarization can address valleys selectively in the first place",
+      "moire heterostructures can host strongly correlated electrons and hybrid excitons in the same device, with optical spectroscopy remaining sensitive to the electronic state",
+      "Dynamic Optical Tuning of Interlayer Interactions in the Transition Metal Dichalcogenides"
+    ]
+  },
+  "scores": {
+    "answer_deterministic_score": 0.5555555555555556,
+    "context_score": 0.0,
+    "judge_score": 0.8571428571428571,
+    "overall_score": 0.4031746031746032,
+    "retrieval_score": 0.2
+  },
+  "task_type": "project_status"
+}

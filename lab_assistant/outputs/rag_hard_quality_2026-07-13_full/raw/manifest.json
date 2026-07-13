@@ -1,0 +1,49 @@
+{
+  "char_budget": 18000,
+  "created_at": "2026-07-13T05:07:19",
+  "git_head": "735c0bc220057bc4689c79de6b5747fbd01011ef",
+  "git_status_short": " M memory/project_pulse.md\n?? evals/rag_hard_quality_benchmark.py\n?? evals/rag_system_audit.py\n",
+  "literature_notes": [
+    {
+      "local_use": "separate retrieval/context quality from generation faithfulness and answer relevance",
+      "name": "RAGAS",
+      "url": "https://arxiv.org/abs/2309.15217"
+    },
+    {
+      "local_use": "ranked retrieval metrics and hard out-of-domain/alias pressure, with lexical baseline awareness",
+      "name": "BEIR",
+      "url": "https://arxiv.org/abs/2104.08663"
+    },
+    {
+      "local_use": "downstream answer quality plus provenance, not retrieval alone",
+      "name": "KILT",
+      "url": "https://arxiv.org/abs/2009.02252"
+    },
+    {
+      "local_use": "citation quality and automatic citation support checks",
+      "name": "ALCE",
+      "url": "https://arxiv.org/abs/2305.14627"
+    },
+    {
+      "local_use": "whether generated statements are attributable to identified sources",
+      "name": "AIS",
+      "url": "https://arxiv.org/abs/2112.12870"
+    },
+    {
+      "local_use": "atomic factuality framing: score supported factual claims, not just whole answers",
+      "name": "FActScore",
+      "url": "https://aclanthology.org/2023.emnlp-main.741/"
+    },
+    {
+      "local_use": "LLM-judge dimensions: context relevance, answer faithfulness, answer relevance",
+      "name": "ARES",
+      "url": "https://arxiv.org/abs/2311.09476"
+    }
+  ],
+  "max_tasks": 10,
+  "package_root": "/Users/xulab/openscience/lab_assistant",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.3.2)]",
+  "repo_root": "/Users/xulab/openscience",
+  "top_k": 10
+}

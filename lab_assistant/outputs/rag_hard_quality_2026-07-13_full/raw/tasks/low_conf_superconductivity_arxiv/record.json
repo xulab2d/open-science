@@ -1,0 +1,161 @@
+{
+  "answer_latency_ms": 15987.033832992893,
+  "answer_metrics": {
+    "atomic_claim_count": 6,
+    "atomic_support_proxy": 1.0,
+    "behavior_ok": true,
+    "citation_count": 7,
+    "citation_hits": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator"
+    ],
+    "citation_precision_proxy": 0.5714285714285714,
+    "citations": [
+      "claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot",
+      "claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as",
+      "claim:promoted_2504_chiral_superconductivity_signatures",
+      "claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc",
+      "paper:arxiv_2504_06972v1",
+      "paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif",
+      "paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator"
+    ],
+    "claim_support_proxy_rows": [
+      {
+        "has_ref": true,
+        "overlap": 16,
+        "sentence": "It also lists two likely source leads: `paper:arxiv_2504_06972v1` and `paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif`, also excluded by budget.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 29,
+        "sentence": "The established nearby lab knowledge is about fractional Chern states in twisted MoTe2: optical probes of integer/fractional Chern states via trion PL and RMCD at `nu = -1, -2/3, -3/5` (`claim:signatures_of_fractional_quantum_anomalous_hall_states_in_twisted_mote2_bilayer_trion_pl_and_rmc`), optical pumping as a control knob (`claim:optical_control_of_integer_and_fractional_chern_insulators_optical_pumping_is_now_being_used_as`), and local probing of bulk/edge FCI structure (`paper:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator`; `claim:local_probe_of_bulk_and_edge_states_in_a_fractional_chern_insulator_local_probes_can_resolve_bot`).",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 16,
+        "sentence": "They are promotion candidates because their labels suggest direct relevance to superconductivity or competing ground states near fractional Chern physics, while the surrounding graph already has medium-confidence FCI probe/context nodes.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": true,
+        "overlap": 25,
+        "sentence": "Before treating them as lab knowledge, source-reading should include the actual arXiv paper text for `paper:arxiv_2504_06972v1` and the full paper behind `paper:evidence_of_competing_ground_states_between_fractional_chern_insulator_and_antif`, with checks for: material system, filling factors, evidence for superconductivity versus competing insulating/magnetic/topological states, whether \u201cchiral superconductivity\u201d is measured or inferred, and how the claimed phase is positioned relative to fractional Chern states.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 8,
+        "sentence": "The relevant low-confidence nodes are named but not provided in detail, so I cannot state the paper title, numeric parameters, observed signatures, or whether the superconductivity evidence is strong.",
+        "supported_proxy": true
+      },
+      {
+        "has_ref": false,
+        "overlap": 18,
+        "sentence": "Treat these records as discovery leads only until the primary arXiv sources are read and rewritten with explicit provenance, consistent with the fact-graph rule that low-confidence arXiv metadata are not settled facts (`skill:fact-graph`).",
+        "supported_proxy": true
+      }
+    ],
+    "forbidden_answer_hits": [
+      "settled fact"
+    ],
+    "matched_concept_groups": [
+      0,
+      1,
+      2
+    ],
+    "matched_must_cite_like": [
+      "paper:arxiv",
+      "claim:"
+    ],
+    "missed_concept_groups": [],
+    "must_cite_like_coverage": 0.6666666666666666,
+    "required_concept_coverage": 1.0
+  },
+  "answer_path": "raw/tasks/low_conf_superconductivity_arxiv/answer.md",
+  "answer_returncode": 0,
+  "context": {
+    "chars": 17788,
+    "context_pack_id": "a9c330f2f0d8ef31ee6c0536bada00bad145af24aef2c1a02ae388e8e44ff2ab",
+    "context_precision": 0.4326665618332285,
+    "context_recall": 0.6666666666666666,
+    "excluded_count": 8,
+    "item_count": 17,
+    "kind_counts": {
+      "core": 3,
+      "graph_edge": 1,
+      "graph_node": 5,
+      "knowledge_index": 2,
+      "skill": 6
+    },
+    "latency_ms": 32.98979200189933,
+    "matched_evidence_groups": [
+      1,
+      2
+    ],
+    "missed_evidence_groups": [
+      0
+    ],
+    "token_estimate": 4447
+  },
+  "context_path": "raw/tasks/low_conf_superconductivity_arxiv/context.md",
+  "evaluator_note": "Tests freshness, low-confidence handling, and promotion discipline.",
+  "expected_behavior": "caution",
+  "family": "freshness",
+  "id": "low_conf_superconductivity_arxiv",
+  "judge": {
+    "actionability": 4,
+    "answer_relevance": 5,
+    "citation_quality": 3,
+    "context_relevance": 4,
+    "critical_errors": [],
+    "faithfulness": 4,
+    "missing_key_points": [],
+    "scientific_correctness": 4,
+    "summary": "The answer follows the required cautious posture: it identifies the relevant records as low-confidence arXiv/source-reading leads, refuses to promote them as lab knowledge from the supplied context alone, and specifies what must be read before promotion. It is mostly faithful, though it references several nodes that are not visible in the supplied context excerpt beyond the answer's own claim that they were excluded by budget, so citation specificity is only moderate. It gives useful promotion discipline and avoids forbidden terms.",
+    "uncertainty_calibration": 5,
+    "unsupported_claims_count": 1
+  },
+  "judge_latency_ms": 7929.596666013822,
+  "judge_path": "raw/tasks/low_conf_superconductivity_arxiv/judge.json",
+  "judge_returncode": 0,
+  "question": "Which low-confidence arXiv leads on superconductivity near fractional Chern states are worth promotion, and what source-reading is required before treating them as lab knowledge?",
+  "retrieval": {
+    "first_relevant_rank": 1,
+    "forbidden_retrieval_hits": [],
+    "latency_ms": 43.00420801155269,
+    "matched_evidence_groups": [
+      0,
+      1,
+      2
+    ],
+    "missed_evidence_groups": [],
+    "mrr": 1.0,
+    "ndcg_at_k": 2.1321957377868976,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "top_hit_labels": [
+      "optical pumping is now being used as an active control knob for integer and fractional Chern states, not just as a passive probe",
+      "trion PL and RMCD can act as filling-sensitive optical probes of integer and fractional Chern states in twisted MoTe2",
+      "Local probe of bulk and edge states in a fractional Chern insulator",
+      "local magnetic imaging directly resolves orbital magnetization and disorder in twisted-MoTe2 fractional Chern states",
+      "local compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern states",
+      "local probes can resolve both bulk and edge structure in a fractional Chern insulator rather than relying only on global transport",
+      "Evidence of competing ground states between fractional Chern insulator and antiferromagnetism in moire MoTe2",
+      "Optical control of integer and fractional Chern insulators",
+      "Twisted MoTe2 superconductivity near an anomalous Hall metal and FCI regime is argued to be chiral.",
+      "compressibility plus magneto-optics gives bulk evidence for integer and fractional Chern insulators"
+    ]
+  },
+  "scores": {
+    "answer_deterministic_score": 0.7063492063492063,
+    "context_score": 0.5496666142499476,
+    "judge_score": 0.8285714285714286,
+    "overall_score": 0.8277565991819905,
+    "retrieval_score": 1.2264391475573795
+  },
+  "task_type": "synthesis"
+}

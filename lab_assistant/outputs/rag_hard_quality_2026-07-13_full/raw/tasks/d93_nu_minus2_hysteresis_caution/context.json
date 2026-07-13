@@ -1,0 +1,52 @@
+{
+  "chars": 15780,
+  "context_pack_id": "cfeedce4209f91868ff269335d6a031f7d2dce0e4db38edc476091c91a1eccb1",
+  "context_precision": 0.18571428571428572,
+  "context_recall": 1.0,
+  "context_refs": [
+    "claim:deck_8d3f501aa323b164_slide_14_we_see_a_potential_fractional_state_in_one_of_the_trion",
+    "claim:deck_8d3f501aa323b164_slide_35_we_see_polarization_swapping_in_the_dual_gate_that_seems",
+    "claim:magnetic_proximity_and_nonreciprocal_current_switching_in_a_monolayer_wte2_helical_edge_coupling",
+    "claim:promoted_deck_d93_vminus2_magnetic_feature_dfield",
+    "claim:universal_magnetic_phases_in_twisted_bilayer_mote2_local_optical_spectroscopy_and_nanosquid_magn",
+    "context/projects/",
+    "edge:evidence_deck_8d3f501aa323b164_supports_claim_deck_8d3f501aa323b164_slide_35_we_see_polarization_swapping_in_the_dual_ga",
+    "edge:promoted_d93_vminus2_feature_needs_followup_no_hysteresis",
+    "evidence:deck_8d3f501aa323b164",
+    "knowledge/projects/",
+    "lab_assistant/core/directives.md",
+    "lab_assistant/core/identity.md",
+    "lab_assistant/core/preferences.md",
+    "lab_assistant/graph/README.md",
+    "lab_assistant/graph/edges.jsonl",
+    "lab_assistant/graph/nodes.jsonl",
+    "lab_assistant/knowledge/extracted/summaries_curated/408a3288187090a8.json#slides-18-22",
+    "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json",
+    "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slide-14",
+    "lab_assistant/knowledge/extracted/summaries_curated/8d3f501aa323b164.json#slide-35",
+    "lab_assistant/knowledge/papers/xu_group_recent_moire_states.md",
+    "lab_assistant/knowledge/papers/xu_group_wte2_and_topological_edges.md",
+    "lab_assistant/skills/fact-graph.md",
+    "question:promoted_d93_vminus2_rmcd_no_hysteresis",
+    "skill:fact-graph",
+    "skill_metadata:fact-graph",
+    "skills/fact-graph.md",
+    "skills/fact-graph.yaml"
+  ],
+  "excluded_count": 0,
+  "item_count": 15,
+  "kind_counts": {
+    "core": 3,
+    "graph_edge": 2,
+    "graph_node": 7,
+    "knowledge_index": 1,
+    "skill": 2
+  },
+  "latency_ms": 16.635250009130687,
+  "matched_evidence_groups": [
+    0,
+    1
+  ],
+  "missed_evidence_groups": [],
+  "token_estimate": 3945
+}
